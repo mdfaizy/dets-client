@@ -1,0 +1,40 @@
+*{
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    list-style: none;
+    
+}
+.header_content{
+display: flex;
+justify-content: space-between;
+background-color: black;
+color: white;
+font-size: 16px;
+padding: 20px;
+}
+.header_content1{
+    display: flex;
+    /* justify-content: space-between; */
+    font-size: 20px;
+    gap: 40px;
+    color: white;
+    list-style: none;
+    text-decoration: none;
+
+   }
+   .header_content1 li{
+    list-style: none;
+    text-decoration: none;
+    border: none;;
+   }
+.header_nav_text{
+gap: 20px;
+display: flex;
+color: white;
+font-size: 20px;
+}
+.login_and_signup{
+    display: flex;
+    gap: 20px;
+}
