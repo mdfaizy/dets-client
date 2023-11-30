@@ -1,13 +1,16 @@
 import { useState } from "react";
 import { Container, Row, Col, Form } from "react-bootstrap";
-
+import { useNavigate } from "react-router-dom";
 function NewAdmission() {
+  const navigate = useNavigate();
+
   const [step, setStep] = useState(1);
+  // const [emailExists, setEmailExists] = useState(false); // State to track email existence
 
   const nextStep = () => {
     setStep(step + 1);
   };
-  
+
   const prevStep = () => {
     if (step > 1) {
       setStep(step - 1);
@@ -15,82 +18,145 @@ function NewAdmission() {
   };
 
   const [formData, setFormData] = useState({
-    frist_name: "",
-    last_name: "",
-    father_name: "",
-    mother_name: "",
+    firstName: "",
+    lastName: "",
+    fatherName: "",
+    motherName: "",
+    email: "",
     date_of_birth: "",
-    email_id: "",
+    examType: "",
+    application_exam_no: "",
+    scoure_rank: "",
+    cource_name: "",
+    stream: "",
+    phone_no: "",
+    category:"",
     schoolName_10th: "",
     roll_No_10th: "",
     regisration_No_10th: "",
     board_Name_10th: "",
     year_of_passing_10th: "",
-    Upload_Your_12th_Marksheet: "",
-    rankcard: "",
-    aadhar_card_file: "",
+    persentage_10th: "",
+
     schoolName_12th: "",
     roll_No_12th: "",
     regisration_No_12th: "",
     board_Name_12th: "",
     year_of_passing_12th: "",
     persentage_12th: "",
-    Your_Residence_Certificate: "",
-    Passport_Photo_Sizes: "",
-    Signature_or_Thumb: "",
+ //file
+    rankcardFile: "",
+    aadhar_card_file: "",
+    your_Residence_Certificate: "",
+    sc_MarksheetFile: "",
+    hs_MarksheetFile:"",
+    passport_Photo_Size: "",
+    antiragging:"",
+    signature_or_Thumb: "",
   });
 
-  function changeHandler(event) {
-
-    setFormData((prev) => ({
 
 
-      ...prev,
-      [event.target.name]: event.target.value,
-
-    }));
 
 
-  }
 
-  const submitHandler = (event) => {
 
-    event.preventDefault();
-    alert("Saved Successfull - Your Data \n" + formData)
-    console.log(formData);
-    setFormData({
-      frist_name: "",
-      last_name: "",
-      father_name: "",
-      mother_name: "",
-      date_of_birth: "",
-      email_id: "",
-      schoolName_10th: "",
-      roll_No_10th: "",
-      regisration_No_10th: "",
-      board_Name_10th: "",
-      year_of_passing_10th: "",
-      Upload_Your_12th_Marksheet: "",
-      rankcard: "",
-      aadhar_card_file: "",
-      schoolName_12th: "",
-      roll_No_12th: "",
-      regisration_No_12th: "",
-      board_Name_12th: "",
-      year_of_passing_12th: "",
-      persentage_12th: "",
-      Your_Residence_Certificate: "",
-      Passport_Photo_Sizes: "",
-      Signature_or_Thumb: "",
-    })
+
+
+
+
+
+  
+  // const submitHandler = async (event) => {
+  //   event.preventDefault();
+  
+  //   const formDataObj = new FormData();
+  //   Object.entries(formData).forEach(([key, value]) => {
+  //     if (value instanceof File) {
+  //       formDataObj.append(key, value, value.name);
+  //     } else {
+  //       formDataObj.append(key, value);
+  //     }
+  //   });
+  
+  //   try {
+  //     const response = await fetch("http://localhost:8000/api/v1/newAdmission", {
+  //       method: "POST",
+  //       body: formDataObj,
+  //     });
+  
+  //     if (response.ok) {
+  //       const responseData = await response.json();
+  //       console.log(responseData);
+  //       // Assuming responseData contains updated form data, update the state accordingly if needed.
+  //       // setFormData(responseData);
+  //       navigate("/");
+  //     } else {
+  //       console.log("Form not submitted. Error status:", response.status);
+  //       // Handle the error or display a message to the user
+  //     }
+  //   } catch (error) {
+  //     console.error("Error occurred:", error);
+  //     // Handle other error cases (e.g., network errors)
+  //   }
+  // };
+  
+
+  const changeHandler = (event) => {
+    const { name, value, type, files } = event.target;
+  
+    if (type === "file") {
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: files[0], // Handle file input separately
+      }));
+    } else {
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }));
+    }
   };
-
+  
+  const submitHandler = async (event) => {
+    event.preventDefault();
+  
+    const formDataToSend = new FormData();
+  
+    // Append each form field to formDataToSend
+    for (let key in formData) {
+      formDataToSend.append(key, formData[key]);
+    }
+  
+    try {
+      const response = await fetch("http://localhost:8000/api/v1/newAdmission", {
+        method: "POST",
+        body: formDataToSend, // Send formDataToSend instead of JSON.stringify(formData)
+      });
+  
+      if (response.ok) {
+        const responseData = await response.json();
+        console.log(responseData);
+        navigate("/");
+      } else {
+        console.log("Form not submitted. Error status:", response.status);
+        // Handle the error or display a message to the user
+      }
+    } catch (error) {
+      console.error("Error occurred:", error);
+      // Handle other error cases (e.g., network errors)
+    }
+  };
+  
   return (
     <>
       <Container>
-        <Row>
+        <Row
+          className="text-white my-1 rounded-3"
+          style={{ backgroundColor: "#2A4390" }}
+        >
           <Col>
-            <h1 className="text-center pt-2">ONLINE FORM</h1>
+            <h1 className="text-center pt-2">NEW ADMISSION</h1>
             <Col>
               <Form onSubmit={submitHandler}>
                 <Row>
@@ -102,8 +168,8 @@ function NewAdmission() {
                         </Form.Label>
                         <Form.Control
                           type="text"
-                          name="frist_name"
-                          value={formData.frist_name}
+                          name="firstName"
+                          value={formData.firstName}
                           placeholder="Enter Name.."
                           onChange={changeHandler}
                         />
@@ -113,10 +179,10 @@ function NewAdmission() {
                           Last Name<span className="text-danger">*</span>
                         </Form.Label>
                         <Form.Control
-                          type="name"
-                          name="last_name"
-                          id="last_name"
-                          value={formData.last_name}
+                          type="text"
+                          name="lastName"
+                          id="lastName"
+                          value={formData.lastName}
                           placeholder="Enter Name.."
                           onChange={changeHandler}
                           className="rounded-2"
@@ -129,9 +195,9 @@ function NewAdmission() {
                         </Form.Label>
                         <Form.Control
                           type="text"
-                          name="father_name"
-                          id="father_name"
-                          value={formData.father_name}
+                          name="fatherName"
+                          id="fatherName"
+                          value={formData.fatherName}
                           placeholder="Enter Father Name..."
                           onChange={changeHandler}
                           className="rounded-2"
@@ -144,9 +210,9 @@ function NewAdmission() {
                         </Form.Label>
                         <Form.Control
                           type="text"
-                          name="mother_name"
-                          id="mother_name"
-                          value={formData.mother_name}
+                          name="motherName"
+                          id="motherName"
+                          value={formData.motherName}
                           placeholder="Enter Mother Name..."
                           onChange={changeHandler}
                           className="rounded-2"
@@ -159,9 +225,9 @@ function NewAdmission() {
                         </Form.Label>
                         <Form.Control
                           type="text"
-                          name="email_id"
-                          id="email_id"
-                          value={formData.email_id}
+                          name="email"
+                          id="email"
+                          value={formData.email}
                           placeholder="Enter email..."
                           onChange={changeHandler}
                           className="rounded-2"
@@ -183,14 +249,12 @@ function NewAdmission() {
                         />
                       </Form.Group>
 
-
-
                       <Form.Group as={Col} md="4" className="mb-3">
                         <Form.Label htmlFor="gender">
                           Exam Type<span className="text-danger">*</span>
                         </Form.Label>
                         <Form.Select
-                          id="exam-type"
+                          id="examType"
                           name="examType"
                           className="rounded-0"
                           value={formData.examType}
@@ -201,15 +265,33 @@ function NewAdmission() {
                           <option value="jelet">JElETE</option>
                         </Form.Select>
                       </Form.Group>
+                      <Form.Group as={Col} md="4" className="mb-3">
+                        <Form.Label htmlFor="category">
+                        CATEGORY<span className="text-danger">*</span>
+                        </Form.Label>
+                        <Form.Select
+                          id=" category"
+                          name="category"
+                          className="rounded-0"
+                          value={formData.category}
+                          onChange={changeHandler}
+                        >
+                          <option value="">Select Category</option>
+                          <option value="general">General</option>
+                          <option value="obc">OBCs</option>
+                          <option value="sc">SCs</option>
+                          <option value="st">STs</option>
+                        </Form.Select>
+                      </Form.Group>
                       <Form.Group as={Col} md="4">
                         <Form.Label>
                           Application No<span className="text-danger">*</span>
                         </Form.Label>
                         <Form.Control
                           type="text"
-                          name="application_exam"
-                          id="application_exam"
-                          value={formData.application_exam}
+                          name="application_exam_no"
+                          id="application_exam_no"
+                          value={formData.application_exam_no}
                           placeholder="Enater Application No..."
                           onChange={changeHandler}
                           className="rounded-2"
@@ -287,7 +369,6 @@ function NewAdmission() {
                       </Row>
                     </>
                   )}
-                 
 
                   {step === 2 && (
                     <>
@@ -341,7 +422,7 @@ function NewAdmission() {
                         <Form.Control
                           type="text"
                           name="board_Name_10th"
-                          id="board_Name"
+                          id="board_Name_10th"
                           value={formData.board_Name_10th}
                           placeholder="Enater Board Name..."
                           onChange={changeHandler}
@@ -356,7 +437,7 @@ function NewAdmission() {
                         <Form.Control
                           type="text"
                           name="year_of_passing_10th"
-                          id="year_of_passing"
+                          id="year_of_passing_10th"
                           value={formData.year_of_passing_10th}
                           placeholder="Enater Passing Year..."
                           onChange={changeHandler}
@@ -371,7 +452,7 @@ function NewAdmission() {
                         <Form.Control
                           type="text"
                           name="persentage_10th"
-                          id="persentage"
+                          id="persentage_10th"
                           value={formData.persentage_10th}
                           placeholder="Enater Persentage..."
                           onChange={changeHandler}
@@ -379,7 +460,7 @@ function NewAdmission() {
                         />
                       </Form.Group>
                       <Row className="text-center my-4">
-                        <Col >
+                        <Col>
                           <button
                             onClick={prevStep}
                             className="text-denger px-4 py-2  border-0    rounded-3"
@@ -388,10 +469,10 @@ function NewAdmission() {
                           </button>
                         </Col>
                         {/*  */}
-                        <Col className="my-4">
+                        <Col className="my-0">
                           <button
                             onClick={nextStep}
-                            className="text-denger px-4 py-2  border-0   rounded-md"
+                            className="text-denger px-4 py-2  border-0   rounded-3"
                           >
                             Next
                           </button>
@@ -403,7 +484,7 @@ function NewAdmission() {
                   {step === 3 && (
                     <>
                       <h2 className="text-xl font-semibold mb-4">
-                        Step 2: Higher Secondary
+                        Step 3: S Secondary
                       </h2>
                       <Form.Group as={Col} md="4">
                         <Form.Label>
@@ -425,7 +506,7 @@ function NewAdmission() {
                         <Form.Control
                           type="text"
                           name="roll_No_12th"
-                          id="roll_No"
+                          id="roll_No_12th"
                           value={formData.roll_No_12th}
                           placeholder="Enater Roll No..."
                           onChange={changeHandler}
@@ -439,7 +520,7 @@ function NewAdmission() {
                         <Form.Control
                           type="text"
                           name="regisration_No_12th"
-                          id="regisration_No"
+                          id="regisration_No_12th"
                           value={formData.regisration_No_12th}
                           placeholder="Enater Regisration No..."
                           onChange={changeHandler}
@@ -453,7 +534,7 @@ function NewAdmission() {
                         <Form.Control
                           type="text"
                           name="board_Name_12th"
-                          id="board_Name"
+                          id="board_Name_12th"
                           value={formData.board_Name_12th}
                           placeholder="Enater Board Name..."
                           onChange={changeHandler}
@@ -483,7 +564,7 @@ function NewAdmission() {
                         <Form.Control
                           type="text"
                           name="persentage_12th"
-                          id="persentage"
+                          id="persentage_12th"
                           value={formData.persentage_12th}
                           placeholder="Enater Persentage..."
                           onChange={changeHandler}
@@ -492,16 +573,15 @@ function NewAdmission() {
                       </Form.Group>
 
                       <Row className="text-center my-4">
-                        <Col className="my-4">
+                        <Col className="my-1">
                           <button
                             onClick={prevStep}
                             className="text-denger px-4 py-2  border-0   rounded-2"
-
                           >
                             Previous
                           </button>
                         </Col>
-                        <Col >
+                        <Col>
                           <button
                             onClick={nextStep}
                             className="text-denger px-4 py-2  border-0 rounded-2"
@@ -516,7 +596,7 @@ function NewAdmission() {
                   {step === 4 && (
                     <>
                       <h2 className="text-xl font-semibold mb-4">
-                        Step 2: Document
+                        Step 4: Document
                       </h2>
 
                       <Form.Group as={Col} md="4">
@@ -526,8 +606,7 @@ function NewAdmission() {
                         <Form.Control
                           type="file"
                           name="aadhar_card_file"
-                          id="persentage"
-                          value={formData.aadhar_card_file}
+                          id="aadhar_card_file"
                           placeholder=""
                           onChange={changeHandler}
                           className="rounded-2"
@@ -540,9 +619,8 @@ function NewAdmission() {
                         </Form.Label>
                         <Form.Control
                           type="file"
-                          name="rankcard"
+                          name="rankcardFile"
                           id="rankcard"
-                          value={formData.rankcard}
                           placeholder=""
                           onChange={changeHandler}
                           className="rounded-2"
@@ -550,14 +628,29 @@ function NewAdmission() {
                       </Form.Group>
                       <Form.Group as={Col} md="4">
                         <Form.Label>
-                          Upload Your 12th Marksheet
+                           SS Marksheet
                           <span className="text-danger">*</span>
                         </Form.Label>
                         <Form.Control
                           type="file"
-                          name="Upload_Your_12th_Marksheet"
-                          id="persentage"
-                          value={formData.Upload_Your_12th_Marksheet}
+                          name="sc_MarksheetFile"
+                          id="sc_Marksheet"
+                          placeholder=""
+                          onChange={changeHandler}
+                          className="rounded-2"
+                        />
+                      </Form.Group>
+
+
+                      <Form.Group as={Col} md="4">
+                        <Form.Label>
+                           HS Marksheet
+                          <span className="text-danger">*</span>
+                        </Form.Label>
+                        <Form.Control
+                          type="file"
+                          name="hs_MarksheetFile"
+                          id="hs_Marksheet"
                           placeholder=""
                           onChange={changeHandler}
                           className="rounded-2"
@@ -565,14 +658,30 @@ function NewAdmission() {
                       </Form.Group>
                       <Form.Group as={Col} md="4">
                         <Form.Label>
-                          Your Residence Certificate
+                        Antiragging
                           <span className="text-danger">*</span>
                         </Form.Label>
                         <Form.Control
                           type="file"
-                          name="Your_Residence_Certificate"
-                          id="Your_Residence_Certificate"
-                          value={formData.Your_Residence_Certificate}
+                          name="antiragging"
+                          id="antiragging"
+                          placeholder=""
+                          onChange={changeHandler}
+                          className="rounded-2"
+                        />
+                      </Form.Group>
+                  
+
+
+                      <Form.Group as={Col} md="4">
+                        <Form.Label>
+                           Residence Certificate
+                          <span className="text-danger">*</span>
+                        </Form.Label>
+                        <Form.Control
+                          type="file"
+                          name="your_Residence_Certificate"
+                          id="your_Residence_Certificate"
                           placeholder=""
                           onChange={changeHandler}
                           className="rounded-2"
@@ -586,15 +695,13 @@ function NewAdmission() {
                         </Form.Label>
                         <Form.Control
                           type="file"
-                          name="Passport_Photo_Size"
-                          id="Passport_Photo_Size"
-                          value={formData.Passport_Photo_Size}
+                          name="passport_Photo_Size"
+                          id="passport_Photo_Size"
                           placeholder=""
                           onChange={changeHandler}
                           className="rounded-2"
                         />
                       </Form.Group>
-
 
                       <Form.Group as={Col} md="4">
                         <Form.Label>
@@ -603,29 +710,24 @@ function NewAdmission() {
                         </Form.Label>
                         <Form.Control
                           type="file"
-                          name="Signature_or_Thumb"
-                          id="Signature_or_Thumb"
-                          value={formData.Signature_or_Thumb}
+                          name="signature_or_Thumb"
+                          id="signature_or_Thumb"
                           placeholder=""
                           onChange={changeHandler}
                           className="rounded-2"
                         />
                       </Form.Group>
-                      {/* Passport Photo Sizes
-                      Signature or Thumb
-                       */}
-
-                      <Row className="text-center my-4">
-                        <Col >
+                    
+                      <Row className="text-center my-3">
+                        <Col>
                           <button
                             onClick={prevStep}
                             className="text-denger px-4 py-2  border-0   rounded-md"
-
                           >
                             Previous
                           </button>
                         </Col>
-                        <Col className="my-4">
+                        <Col className="my-1">
                           <button
                             className="text-denger px-4 py-2  border-0   rounded-md"
                             type="submit"

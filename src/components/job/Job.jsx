@@ -1,176 +1,228 @@
 import { useState } from "react";
 import { Container, Row, Col, Form } from "react-bootstrap";
-
+import { useNavigate } from "react-router-dom";
 const Job = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    employee_name: "",
-   
-    select_company:"",
-    apply_your_company_no:"",
-    company_name:"",
-    company_city:"",
-    package_lpa:"",
-    job_role:"",
+    fullName: "",
+    companies_name: "",
+    companies_city: "",
+
+    package_lpa: "",
+    totalApplyCompanies: "",
+    noOfSelectInterview: "",
+    selectType: "",
+    companiesType: "",
+    job_role: "",
   });
 
-  function changeHandler(event) {
-    setFormData((prev) => ({
-      ...prev,
-      [event.target.name]: event.target.value,
-    }));
-  }
+  const changeHandler = (event) => {
+    const { name, value, type, files } = event.target;
+
+    if (type === "file") {
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: files[0],
+      }));
+    } else {
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }));
+    }
+  };
+
+  const submitHandler = async (event) => {
+    event.preventDefault();
+
+    const formDataToSend = new FormData();
+
+    // Append each form field to formDataToSend
+    for (let key in formData) {
+      formDataToSend.append(key, formData[key]);
+    }
+
+    try {
+      const response = await fetch("http://localhost:8000/api/v1/job", {
+        method: "POST",
+        body: formDataToSend, // Send formDataToSend instead of JSON.stringify(formData)
+      });
+
+      if (response.ok) {
+        const responseData = await response.json();
+        console.log(responseData);
+        navigate("/");
+      } else {
+        console.log("Form not submitted. Error status:", response.status);
+        // Handle the error or display a message to the user
+      }
+    } catch (error) {
+      console.error("Error occurred:", error);
+      // Handle other error cases (e.g., network errors)
+    }
+  };
 
   return (
-   <>
-        <Col className="text-center">JOB</Col>
+    <>
+      <Col className="text-center">JOB</Col>
 
-    <Container>
-      <Row>
-        <Form.Group as={Col} md="4">
-          <Form.Label>
-          Employee Name<span className="text-danger">*</span>
-          </Form.Label>
-          <Form.Control
-            type="text"
-            name=" employee_name"
-            value={formData. employee_name}
-            placeholder="Enter Employee Name.."
-            onChange={changeHandler}
-          />
-        </Form.Group>
-        {/* <Form.Group as={Col} md="4">
-          <Form.Label>
-          Select Company<span className="text-danger">*</span>
-          </Form.Label>
-          <Form.Control
-            type="name"
-            name="select_company"
-            id="select_company"
-            value={formData.select_company}
-            placeholder=""
-            onChange={changeHandler}
-            className="rounded-2"
-          />
-        </Form.Group> */}
-
-        <Form.Group as={Col} md="4">
-          <Form.Label>
-          Company Name<span className="text-danger">*</span>
-          </Form.Label>
-          <Form.Control
-            type="text"
-            name="company_name"
-            id="company_name"
-            value={formData.company_name}
-            placeholder="Enter ..."
-            onChange={changeHandler}
-            className="rounded-2"
-          />
-        </Form.Group>
-
-        <Form.Group as={Col} md="4">
-          <Form.Label>
-          company_city<span className="text-danger">*</span>
-          </Form.Label>
-          <Form.Control
-            type="text"
-            name="company_city"
-            id="company_city"
-            value={formData.company_city}
-            placeholder=""
-            onChange={changeHandler}
-            className="rounded-2"
-          />
-        </Form.Group>
-
-        <Form.Group as={Col} md="4">
-          <Form.Label>
-          Package lpa<span className="text-danger">*</span>
-          </Form.Label>
-          <Form.Control
-            type="text"
-            name="package_lpa"
-            id="package_lpa"
-            value={formData.package_lpa}
-            placeholder=""
-            onChange={changeHandler}
-            className="rounded-2"
-          />
-        </Form.Group>
-
-        <Form.Group as={Col} md="4">
-          <Form.Label>
-            JOB ROLE<span className="text-danger">*</span>
-          </Form.Label>
-          <Form.Control
-            type="date"
-            name="job_role"
-            id="job_role"
-            value={formData.job_role}
-            placeholder=""
-            onChange={changeHandler}
-            className="rounded-2"
-          />
-        </Form.Group>
-
-        <Form.Group as={Col} md="4" className="mb-3">
-          <Form.Label htmlFor="select_company">
-          Select Company <span className="text-danger">*</span>
-          </Form.Label>
-          <Form.Select
-            id="select_company"
-            name="select_company"
-            className="rounded-0"
-            value={formData.select_company}
-            onChange={changeHandler}
-          >
-            <option value="">Select Exam</option>
-            <option value="IT">IT</option>
-            <option value="EIE">EIE</option>
-          </Form.Select>
-        </Form.Group>
-        {/* <Form.Group as={Col} md="4">
-          <Form.Label>
-          Institution<span className="text-danger">*</span>
-          </Form.Label>
-          <Form.Control
-            type="text"
-            name="institution"
-            id="institution"
-            value={formData.institution}
-            placeholder="Enter Institution..."
-            onChange={changeHandler}
-            className="rounded-2"
-          />
-        </Form.Group> */}
-
-        <Form.Group as={Col} md="4">
-          <Form.Label>
-            Session<span className="text-danger">*</span>
-          </Form.Label>
-          <Form.Control
-            type="text"
-            name="session"
-            id="session"
-            value={formData.session}
-            placeholder="Enter Your Session"
-            onChange={changeHandler}
-            className="rounded-2"
-          />
-        </Form.Group>
+      <Container>
         <Row>
-          <Col md="4" className="text-center">
-            <button
-              type="sumbit"
-              className="text-denger px-4 py-2 my-4 border-0   rounded-md"
-            >
-              Next
-            </button>
+          <Col>
+            <Form onSubmit={submitHandler}>
+              <Row>
+                <Form.Group as={Col} md="4">
+                  <Form.Label>
+                    Full Name<span className="text-danger">*</span>
+                  </Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="fullName"
+                    value={formData.fullName}
+                    placeholder="Enter Full Name.."
+                    onChange={changeHandler}
+                  />
+                </Form.Group>
+
+                <Form.Group as={Col} md="4">
+                  <Form.Label>
+                    Companies Name<span className="text-danger">*</span>
+                  </Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="companies_name"
+                    id="companies_name"
+                    value={formData.companies_name}
+                    placeholder="Enter  Companies Name..."
+                    onChange={changeHandler}
+                    className="rounded-2"
+                  />
+                </Form.Group>
+
+                <Form.Group as={Col} md="4">
+                  <Form.Label>
+                    Companies City<span className="text-danger">*</span>
+                  </Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="companies_city"
+                    id="companies_city"
+                    value={formData.company_city}
+                    placeholder=""
+                    onChange={changeHandler}
+                    className="rounded-2"
+                  />
+                </Form.Group>
+
+                <Form.Group as={Col} md="4">
+                  <Form.Label>
+                    Package lpa<span className="text-danger">*</span>
+                  </Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="package_lpa"
+                    id="package_lpa"
+                    value={formData.package_lpa}
+                    placeholder=""
+                    onChange={changeHandler}
+                    className="rounded-2"
+                  />
+                </Form.Group>
+
+                <Form.Group as={Col} md="4">
+                  <Form.Label>
+                    JOB ROLE<span className="text-danger">*</span>
+                  </Form.Label>
+                  <Form.Control
+                    type="date"
+                    name="job_role"
+                    id="job_role"
+                    value={formData.job_role}
+                    placeholder=""
+                    onChange={changeHandler}
+                    className="rounded-2"
+                  />
+                </Form.Group>
+
+                <Form.Group as={Col} md="4" className="mb-3">
+                  <Form.Label htmlFor="selectType">
+                    Select Companies <span className="text-danger">*</span>
+                  </Form.Label>
+                  <Form.Select
+                    id="selectType"
+                    name="selectType"
+                    className="rounded-0"
+                    value={formData.selectType}
+                    onChange={changeHandler}
+                  >
+                    <option value="">Select Exam</option>
+                    <option value="on">On Compuse</option>
+                    <option value="Off">Off Compuse</option>
+                  </Form.Select>
+                </Form.Group>
+                <Form.Group as={Col} md="4">
+                  <Form.Label>
+                    Apply Your Total Companies
+                    <span className="text-danger">*</span>
+                  </Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="totalApplyCompanies"
+                    id="totalApplyCompanies"
+                    value={formData.totalApplyCompanies}
+                    placeholder=""
+                    onChange={changeHandler}
+                    className="rounded-2"
+                  />
+                </Form.Group>
+
+                <Form.Group as={Col} md="4">
+                  <Form.Label>
+                    No Of Select Interview<span className="text-danger">*</span>
+                  </Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="noOfSelectInterview"
+                    id="noOfSelectInterview"
+                    value={formData.noOfSelectInterview}
+                    placeholder="Enter No Of Select Interview"
+                    onChange={changeHandler}
+                    className="rounded-2"
+                  />
+                </Form.Group>
+                <Form.Group as={Col} md="4" className="mb-3">
+                  <Form.Label htmlFor="companiesType">
+                    Type Of Companies <span className="text-danger">*</span>
+                  </Form.Label>
+                  <Form.Select
+                    id="companiesType"
+                    name="companiesType"
+                    className="rounded-0"
+                    value={formData.companiesType}
+                    onChange={changeHandler}
+                  >
+                    <option value="">Select Type Of Companies</option>
+                    <option value="Service">Service-based</option>
+                    <option value="Product">Product-based</option>
+                  </Form.Select>
+                </Form.Group>
+                {/* sumbit button */}
+                <Row>
+                  <Col md="12" className="text-center">
+                    <button
+                      type="sumbit"
+                      className="text-denger px-4 py-2 my-4 border-0   rounded-md"
+                    >
+                      SUMBIT
+                    </button>
+                  </Col>
+                </Row>
+              </Row>
+            </Form>
           </Col>
         </Row>
-      </Row>
-    </Container>
-   </>
+      </Container>
+    </>
   );
 };
 

@@ -13,7 +13,7 @@ function Home() {
   return (
     <>
  
-      <Carousel data-bs-theme="dark">
+      <Carousel data-bs-theme="dark" className="">
         <Carousel.Item>
           <img
             className="d-block w-100"
@@ -50,8 +50,8 @@ function Home() {
       </Carousel>
 
       <Container>
-        <Row>
-          <Col className="">
+        <Row >
+          <Col className="my-4">
             <h1 className="text-center">YOUR PROGRAM</h1>
            
 
@@ -100,11 +100,14 @@ function Home() {
                   scientific experience{" "}
                 </span>
               </Col>
+
             </Row>
           </Col>
+          {/* <Faculty className='mb-8'/> */}
         </Row>
       </Container>
-      <Faculty/>
+    
+      
       
     </>
   );
