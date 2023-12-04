@@ -12,6 +12,8 @@ import Button from "react-bootstrap/Button";
 // import axios from "axios";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Cookies from 'js-cookie';
+
 const LoginFrom = (props) => {
   const setIsLoggedIn = props.setIsLoggedIn;
   const navigate = useNavigate();
@@ -45,7 +47,9 @@ const LoginFrom = (props) => {
       if (response.ok) {
         const responseData = await response.json(); 
         // Handle parsed JSON data
-        console.log(responseData);
+        console.log(responseData.user._id);
+        Cookies.set('user',responseData.user._id ); // Setting a cookie named 'cookieName' with value 'cookieValue' that expires in 7 days
+
         setIsLoggedIn(true);
         navigate("/");
         toast.success('Login successful', {

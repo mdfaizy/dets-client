@@ -2,7 +2,7 @@ import { FcGoogle } from "react-icons/fc";
 // import style from "./sign.module.css";
 // import Card from "react-bootstrap/Card";
 import { useState } from "react";
-import ButtonGroup from "react-bootstrap/ButtonGroup";
+// import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -14,8 +14,6 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 const SignupForm = (props) => {
   const setIsLoggedIn = props.setIsLoggedIn;
-
-  
 
   const navigate = useNavigate();
 
@@ -79,47 +77,34 @@ const SignupForm = (props) => {
   //   navigate("/");
   // };
 
-
   const submitHandler = (event) => {
     event.preventDefault();
-    
     // Check if passwords match
     if (formData.password !== formData.confirmPassword) {
-      // Handle password mismatch (optional)
       console.error("Passwords do not match");
-      // Display an error message or handle the mismatch scenario as needed
       return;
     }
-  
     // Send data to backend for user registration
     axios
       .post("http://localhost:8000/api/v1/signup", formData)
       .then((response) => {
         console.log("Response:", response.data);
-       
-        // For example, show success message or redirect to login page
-        setIsLoggedIn(false); // Change as per your requirements
-        navigate("/"); // Redirect to login page after successful registration
+        setIsLoggedIn(false);
+        navigate("/");
       })
       .catch((error) => {
         console.error("Error:", error.response.data);
-        // Handle error scenarios (optional)
-        // For example, display error message to the user
       });
   };
-
   return (
     // <>
     <Container>
       <Row lg={12}>
         <h1 className="text-center">CREATE ACCOUNT</h1>
 
-       
         <Row>
           <Col className="">
-        
             <form onSubmit={submitHandler}>
-             
               <Row>
                 <Col md={6}>
                   <Form.Group md={6}>
@@ -249,8 +234,9 @@ const SignupForm = (props) => {
           <Col xs={12} sm={6} md={6} lg={6}>
             <img
               src="https://img.freepik.com/premium-vector/business-data-information-illustration_251005-479.jpg"
-              alt=""  loading="lazy"
-              style={{ width: "600px" ,height:"400px", paddingLeft:"20px" }}
+              alt=""
+              loading="lazy"
+              style={{ width: "600px", height: "400px", paddingLeft: "20px" }}
             />
           </Col>
         </Row>

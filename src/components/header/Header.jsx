@@ -1,9 +1,10 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import style from "./Header.module.css";
 import logImg from "../../assets/log.jpg";
 const Header = (props) => {
   const isLoggedIn = props.isLoggedIn;
   const setIsLoggedIn = props.setIsLoggedIn;
+
 
   return (
     <div className={style.header_content}>
@@ -13,88 +14,78 @@ const Header = (props) => {
       <div className={style.header_content1}>
         <nav className={style.header_nav_text}>
           <li className={`${style.header_item} ${style.no_underline}`}>
-            {" "}
-            <Link to="/">Home</Link>
+            <NavLink to="/">Home</NavLink>
           </li>
           {!isLoggedIn && (
             <li className={style.header_item}>
-            <Link to="/about">
-              About
-            </Link>
+              <NavLink to="/about">About</NavLink>
             </li>
           )}
           {isLoggedIn && (
- <li className={style.header_item}> 
-            <Link to="/newadmission">
-             NewAdmissiom
-            </Link>
+            <li className={style.header_item}>
+              <NavLink to="/newadmission">NewAdmissiom</NavLink>
+            </li>
+          )}
+          {isLoggedIn && (
+            <li className={style.header_item}>
+              <NavLink to="/exitfrom">EXIT STUDENT</NavLink>
+            </li>
+          )}
+          {isLoggedIn && (
+            <li className={style.header_item}>
+              <NavLink to="/pgcource">PG PROGRAM</NavLink>
             </li>
           )}
 
           {isLoggedIn && (
             <li className={style.header_item}>
-            <Link to="/exitfrom">
-               EXIT STUDENT
-            </Link>
+              <NavLink to="/job">JOB</NavLink>
             </li>
           )}
 
           {isLoggedIn && (
             <li className={style.header_item}>
-              <Link to="/pgcource">
-              PG PROGRAM
-              </Link>
-              </li>
+              <NavLink to="/showFormData">ShowFormData</NavLink>
+            </li>
           )}
-
-          {isLoggedIn && (
-            <li className={style.header_item}>
-              <Link to="/job">
-          
-                
-                JOB
-          
-              
-              </Link>
-              </li>
-          )}
+          {/*  */}
         </nav>
 
         <>
           <div className={style.login_and_signup}>
             {!isLoggedIn && (
-               <li className={style.header_item}>
-              <Link to="/loginfrom">
-                {/* <button className="bg-richblack-800 py-[8px] px-[12px] rounded-[8px] border border-richblack-700"> */}
-                Log in
-                {/* </button> */}
-              </Link>
+              <li className={style.header_item}>
+                <NavLink to="/loginfrom">
+                  {/* <button className="bg-richblack-800 py-[8px] px-[12px] rounded-[8px] border border-richblack-700"> */}
+                  Log in
+                  {/* </button> */}
+                </NavLink>
               </li>
             )}
 
             {!isLoggedIn && (
-                <li className={style.header_item}>
-              <Link to="/signupfrom">
-                {/* <button className="bg-richblack-800 py-[8px] px-[12px] rounded-[8px] border border-richblack-700"> */}
-                Sign up
-                {/* </button> */}
-              </Link>
+              <li className={style.header_item}>
+                <NavLink to="/signupfrom">
+                  {/* <button className="bg-richblack-800 py-[8px] px-[12px] rounded-[8px] border border-richblack-700"> */}
+                  Sign up
+                  {/* </button> */}
+                </NavLink>
               </li>
             )}
 
             {isLoggedIn && (
-                 <li className={style.header_item}>
-              <Link to="/">
-                <div
-                  className=""
-                  onClick={() => {
-                    setIsLoggedIn(false);
-                    // toast.success("Logged out");
-                  }}
-                >
-                  Log out
-                </div>
-              </Link>
+              <li className={style.header_item}>
+                <NavLink to="/">
+                  <div
+                    className=""
+                    onClick={() => {
+                      setIsLoggedIn(false);
+                      // toast.success("Logged out");
+                    }}
+                  >
+                    Log out
+                  </div>
+                </NavLink>
               </li>
             )}
           </div>

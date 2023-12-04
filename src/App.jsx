@@ -13,6 +13,8 @@ import ExitFrom from "./components/pages/exitRecord/ExitFrom";
 import PgCource from "./components/pages/pgcource/PgCource";
 import Job from './components/job/Job'
 import Footer from './components/footer/Footer';
+import ShowFormData from './components/ShowFormData'
+// import ShowFormData from './components/ShowFormData';
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   // useEffect(() => {
@@ -50,6 +52,7 @@ function App() {
         <Route path='/exitfrom' element={<ExitFrom/>} />
         <Route path='/pgcource' element={<PgCource/>}/>
         <Route path='job' element={<Job/>} />
+        <Route path='showFormData/:id' element={<ShowFormData/>}/>
         <Route path='/loginfrom' element={<LoginFrom  setIsLoggedIn={setIsLoggedIn}/>}/>
         <Route path='/signupfrom' element={<SignupFrom setIsLoggedIn={setIsLoggedIn}/>}/>
        

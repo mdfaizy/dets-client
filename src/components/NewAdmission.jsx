@@ -1,9 +1,12 @@
 import { useState } from "react";
 import { Container, Row, Col, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+// import ShowFormData from '../components/ShowFormData';
+import Cookies from 'js-cookie'; 
 function NewAdmission() {
   const navigate = useNavigate();
-
+ 
+  // const [formSubmitted, setFormSubmitted] = useState(false);
   const [step, setStep] = useState(1);
   // const [emailExists, setEmailExists] = useState(false); // State to track email existence
 
@@ -30,7 +33,7 @@ function NewAdmission() {
     cource_name: "",
     stream: "",
     phone_no: "",
-    category:"",
+    category: "",
     schoolName_10th: "",
     roll_No_10th: "",
     regisration_No_10th: "",
@@ -44,32 +47,19 @@ function NewAdmission() {
     board_Name_12th: "",
     year_of_passing_12th: "",
     persentage_12th: "",
- //file
+    //file
     rankcardFile: "",
     aadhar_card_file: "",
     your_Residence_Certificate: "",
     sc_MarksheetFile: "",
-    hs_MarksheetFile:"",
+    hs_MarksheetFile: "",
     passport_Photo_Size: "",
-    antiragging:"",
+    antiragging: "",
     signature_or_Thumb: "",
   });
-
-
-
-
-
-
-
-
-
-
-
-
-  
   // const submitHandler = async (event) => {
   //   event.preventDefault();
-  
+
   //   const formDataObj = new FormData();
   //   Object.entries(formData).forEach(([key, value]) => {
   //     if (value instanceof File) {
@@ -78,13 +68,13 @@ function NewAdmission() {
   //       formDataObj.append(key, value);
   //     }
   //   });
-  
+
   //   try {
   //     const response = await fetch("http://localhost:8000/api/v1/newAdmission", {
   //       method: "POST",
   //       body: formDataObj,
   //     });
-  
+
   //     if (response.ok) {
   //       const responseData = await response.json();
   //       console.log(responseData);
@@ -100,15 +90,14 @@ function NewAdmission() {
   //     // Handle other error cases (e.g., network errors)
   //   }
   // };
-  
 
   const changeHandler = (event) => {
     const { name, value, type, files } = event.target;
-  
+
     if (type === "file") {
       setFormData((prevData) => ({
         ...prevData,
-        [name]: files[0], // Handle file input separately
+        [name]: files[0], 
       }));
     } else {
       setFormData((prevData) => ({
@@ -117,27 +106,35 @@ function NewAdmission() {
       }));
     }
   };
-  
+
   const submitHandler = async (event) => {
     event.preventDefault();
-  
     const formDataToSend = new FormData();
-  
     // Append each form field to formDataToSend
     for (let key in formData) {
       formDataToSend.append(key, formData[key]);
     }
-  
+
     try {
-      const response = await fetch("http://localhost:8000/api/v1/newAdmission", {
-        method: "POST",
-        body: formDataToSend, // Send formDataToSend instead of JSON.stringify(formData)
-      });
-  
+      const response = await fetch(
+        "http://localhost:8000/api/v1/newAdmission",
+        {
+          method: "POST",
+          // body:JSON.stringify(formData) ,
+          // body: formDataToSend, 
+          body: formDataToSend, 
+        }
+      );
+
       if (response.ok) {
         const responseData = await response.json();
         console.log(responseData);
-        navigate("/");
+
+        console.log(responseData.data._id);
+        Cookies.set('formData', JSON.stringify(formData));
+  
+        navigate(`/ShowFormData/${responseData.data._id}`); 
+
       } else {
         console.log("Form not submitted. Error status:", response.status);
         // Handle the error or display a message to the user
@@ -147,7 +144,7 @@ function NewAdmission() {
       // Handle other error cases (e.g., network errors)
     }
   };
-  
+
   return (
     <>
       <Container>
@@ -164,7 +161,7 @@ function NewAdmission() {
                     <>
                       <Form.Group as={Col} md="4">
                         <Form.Label>
-                          Frist Name<span className="text-danger">*</span>
+                          First Name<span className="text-danger">*</span>
                         </Form.Label>
                         <Form.Control
                           type="text"
@@ -188,7 +185,6 @@ function NewAdmission() {
                           className="rounded-2"
                         />
                       </Form.Group>
-
                       <Form.Group as={Col} md="4">
                         <Form.Label>
                           Father Name<span className="text-danger">*</span>
@@ -203,7 +199,6 @@ function NewAdmission() {
                           className="rounded-2"
                         />
                       </Form.Group>
-
                       <Form.Group as={Col} md="4">
                         <Form.Label>
                           Mother Name<span className="text-danger">*</span>
@@ -218,7 +213,6 @@ function NewAdmission() {
                           className="rounded-2"
                         />
                       </Form.Group>
-
                       <Form.Group as={Col} md="4">
                         <Form.Label>
                           Email<span className="text-danger">*</span>
@@ -233,7 +227,6 @@ function NewAdmission() {
                           className="rounded-2"
                         />
                       </Form.Group>
-
                       <Form.Group as={Col} md="4">
                         <Form.Label>
                           Date of Birth<span className="text-danger">*</span>
@@ -248,7 +241,6 @@ function NewAdmission() {
                           className="rounded-2"
                         />
                       </Form.Group>
-
                       <Form.Group as={Col} md="4" className="mb-3">
                         <Form.Label htmlFor="gender">
                           Exam Type<span className="text-danger">*</span>
@@ -267,7 +259,7 @@ function NewAdmission() {
                       </Form.Group>
                       <Form.Group as={Col} md="4" className="mb-3">
                         <Form.Label htmlFor="category">
-                        CATEGORY<span className="text-danger">*</span>
+                          CATEGORY<span className="text-danger">*</span>
                         </Form.Label>
                         <Form.Select
                           id=" category"
@@ -297,7 +289,6 @@ function NewAdmission() {
                           className="rounded-2"
                         />
                       </Form.Group>
-
                       <Form.Group as={Col} md="4">
                         <Form.Label>
                           Rank<span className="text-danger">*</span>
@@ -312,7 +303,6 @@ function NewAdmission() {
                           className="rounded-2"
                         />
                       </Form.Group>
-
                       <Form.Group as={Col} md="4">
                         <Form.Label>
                           Cource<span className="text-danger">*</span>
@@ -327,7 +317,6 @@ function NewAdmission() {
                           className="rounded-2"
                         />
                       </Form.Group>
-
                       <Form.Group as={Col} md="4">
                         <Form.Label>
                           Stream<span className="text-danger">*</span>
@@ -356,7 +345,6 @@ function NewAdmission() {
                           className="rounded-2"
                         />
                       </Form.Group>
-
                       <Row>
                         <Col md="4">
                           <button
@@ -369,11 +357,10 @@ function NewAdmission() {
                       </Row>
                     </>
                   )}
-
                   {step === 2 && (
                     <>
                       <h2 className="text-xl font-semibold mb-4">
-                        Step 2: Higher Secondary
+                        Step 2: Higher Secondary Education
                       </h2>
                       <Form.Group as={Col} md="4">
                         <Form.Label>
@@ -429,7 +416,6 @@ function NewAdmission() {
                           className="rounded-2"
                         />
                       </Form.Group>
-
                       <Form.Group as={Col} md="4">
                         <Form.Label>
                           Year of Passing<span className="text-danger">*</span>
@@ -444,7 +430,6 @@ function NewAdmission() {
                           className="rounded-2"
                         />
                       </Form.Group>
-
                       <Form.Group as={Col} md="4">
                         <Form.Label>
                           Persentage<span className="text-danger">*</span>
@@ -480,11 +465,10 @@ function NewAdmission() {
                       </Row>
                     </>
                   )}
-
                   {step === 3 && (
                     <>
                       <h2 className="text-xl font-semibold mb-4">
-                        Step 3: S Secondary
+                        Step 3: Senior Secondary Education
                       </h2>
                       <Form.Group as={Col} md="4">
                         <Form.Label>
@@ -541,7 +525,6 @@ function NewAdmission() {
                           className="rounded-2"
                         />
                       </Form.Group>
-
                       <Form.Group as={Col} md="4">
                         <Form.Label>
                           Year of Passing<span className="text-danger">*</span>
@@ -556,7 +539,6 @@ function NewAdmission() {
                           className="rounded-2"
                         />
                       </Form.Group>
-
                       <Form.Group as={Col} md="4">
                         <Form.Label>
                           Persentage<span className="text-danger">*</span>
@@ -571,7 +553,6 @@ function NewAdmission() {
                           className="rounded-2"
                         />
                       </Form.Group>
-
                       <Row className="text-center my-4">
                         <Col className="my-1">
                           <button
@@ -592,13 +573,11 @@ function NewAdmission() {
                       </Row>
                     </>
                   )}
-
                   {step === 4 && (
                     <>
                       <h2 className="text-xl font-semibold mb-4">
                         Step 4: Document
                       </h2>
-
                       <Form.Group as={Col} md="4">
                         <Form.Label>
                           Aadhar Card<span className="text-danger">*</span>
@@ -612,7 +591,6 @@ function NewAdmission() {
                           className="rounded-2"
                         />
                       </Form.Group>
-
                       <Form.Group as={Col} md="4">
                         <Form.Label>
                           Rank Card<span className="text-danger">*</span>
@@ -628,7 +606,7 @@ function NewAdmission() {
                       </Form.Group>
                       <Form.Group as={Col} md="4">
                         <Form.Label>
-                           SS Marksheet
+                        Senior Secondary Marksheet
                           <span className="text-danger">*</span>
                         </Form.Label>
                         <Form.Control
@@ -640,11 +618,9 @@ function NewAdmission() {
                           className="rounded-2"
                         />
                       </Form.Group>
-
-
                       <Form.Group as={Col} md="4">
                         <Form.Label>
-                           HS Marksheet
+                        Higher Secondary Marksheet
                           <span className="text-danger">*</span>
                         </Form.Label>
                         <Form.Control
@@ -658,7 +634,7 @@ function NewAdmission() {
                       </Form.Group>
                       <Form.Group as={Col} md="4">
                         <Form.Label>
-                        Antiragging
+                          Antiragging
                           <span className="text-danger">*</span>
                         </Form.Label>
                         <Form.Control
@@ -670,12 +646,9 @@ function NewAdmission() {
                           className="rounded-2"
                         />
                       </Form.Group>
-                  
-
-
                       <Form.Group as={Col} md="4">
                         <Form.Label>
-                           Residence Certificate
+                          Residence Certificate
                           <span className="text-danger">*</span>
                         </Form.Label>
                         <Form.Control
@@ -687,7 +660,6 @@ function NewAdmission() {
                           className="rounded-2"
                         />
                       </Form.Group>
-
                       <Form.Group as={Col} md="4">
                         <Form.Label>
                           Passport Photo Size
@@ -702,10 +674,9 @@ function NewAdmission() {
                           className="rounded-2"
                         />
                       </Form.Group>
-
                       <Form.Group as={Col} md="4">
                         <Form.Label>
-                          Signature OR Thumb
+                          Signature/OR Thumb
                           <span className="text-danger">*</span>
                         </Form.Label>
                         <Form.Control
@@ -717,7 +688,6 @@ function NewAdmission() {
                           className="rounded-2"
                         />
                       </Form.Group>
-                    
                       <Row className="text-center my-3">
                         <Col>
                           <button
@@ -740,6 +710,7 @@ function NewAdmission() {
                   )}
                 </Row>
               </Form>
+             
             </Col>
           </Col>
         </Row>
