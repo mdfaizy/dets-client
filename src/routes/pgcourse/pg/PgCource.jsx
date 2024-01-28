@@ -98,8 +98,8 @@ const PgCource = (props) => {
 
         console.log(responseData.data._id);
         Cookies.set("formData", JSON.stringify(formData));
-        navigate("/sumbitdata",{ state:{apidata: response.data}});
-        // navigate(`/ShowFormData/${responseData.data._id}`);
+        navigate("/sumbitdata",{ state:{apidata: responseData}});
+        navigate(`/ShowFormData/${responseData.data._id}`);
       } else {
         console.log("Form not submitted. Error status:", response.status);
       }
@@ -216,8 +216,8 @@ const PgCource = (props) => {
           </Form.Select>
         </Form.Group>
         <Form.Group as={Col} md="4" className="mb-3">
-          <Form.Label htmlFor="gender">
-            Exame Type <span className="text-danger">*</span>
+          <Form.Label htmlFor="exametpe">
+            Exam Type <span className="text-danger">*</span>
           </Form.Label>
           <Form.Select
             id="exameType"

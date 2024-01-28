@@ -28,7 +28,7 @@ import Newstudent from "./routes/newstudent/Newstudent";
 // import Newstudent from "./routes/newstudent/Newstudent.module";
 import Btechjob from "./routes/job/softwarejob/Btechjob";
 import Pgcourse from "./routes/pgcourse/Pgcourse";
-import SumbitData from "./components/sumbitdata/SumbitData";
+import PgCourseSumbitData from "./components/sumbitdata/PgCourseSumbitData";
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
@@ -128,7 +128,7 @@ function App() {
         <Route path="newstudent" element={<Newstudent/>}/>
         <Route path="/btechjob" element={<Btechjob/>}/>
         <Route path="/pgcourses" element={<Pgcourse/>}/>
-        <Route path="/sumbitdata" element={<SumbitData/>}/>
+        <Route path="/pgsumbitdata" element={<PgCourseSumbitData/>}/>
       </Routes>
       <Footer />
     </>

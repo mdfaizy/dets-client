@@ -1,6 +1,7 @@
 import { Container } from 'react-bootstrap'
 import { useLocation } from 'react-router-dom'
-const EducationSumbitAfter = () => {
+import logo_university from '../../assets/log.jpg';
+const PgCourseSumbitData = () => {
   const location = useLocation()
   const { apidata } = location.state || {}
   console.log(apidata)
@@ -9,36 +10,28 @@ const EducationSumbitAfter = () => {
       <>
         <Container>
 
-          <table style={{ display: 'block', background: '#f8f8fa url(https://i.ibb.co/VTk0B0B/pattern.png) repeat top left', width: '800px', color: '#444444', boxShadow: '0px 0 6px #ccc' }} cellSpacing="0" cellPadding="0" border="0" align="center">
-            {/* <tr style={{ width: '100%', borderCollapse: 'collapse' }}>
-              <tr width="800px" style={{ width: '100%', display: 'grid', borderCollapse: 'collapse' }}>
-                <td>
-                  <p style={{ margin: '0', fontSize: '11px', textAlign: 'right', paddingRight: '5px', paddingTop: '-5px' }}>
-                    Regd. NO. :427, Block No. 4, Volume 107, Page on 136-149
-                  </p>
-                </td>
-                <tr width="800px" style={{ width: '800px', backgroundColor: 'white', height: '100px', borderBottom: '3px solid #006cb5', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                  <td style={{ width: '800px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                    <p>
-                      <img alt="logo" src="http://almanacsocialwelfare.com/assets/logo-9bd8e0f9.png" style={{ height: '80px' }} />
-                    </p>
-                    <span style={{ textAlign: 'center', alignItems: 'center', marginTop: '15px' }}>
-                      <b style={{ marginBottom: '0px', color: '#006cb5', fontSize: '28px', fontWeight: 'bold' }}>ALMANAC SOCIAL WELFARE</b>
-                      <br />
-                      (Regd. Under Govt. of NCT of Delhi Registration Act 1882)
-                    </span>
-                    <table style={{ margin: '0', fontSize: '11px', textAlign: 'right', paddingRight: '-5px', marginTop: '-14px' }}>
-                      <td style={{ marginTop: '5px', fontSize: '11px', textAlign: 'right' }}>
-                        Regd. NO./12A : AAGTA7404EE20211<br />
-                        Regd. NO.80G : AAGTA7404EF20219<br />
-                        Niti Aayog Regd. : DL/2021/0272793<br />
-                        PAN Number : AAGTA7404E
-                      </td>
-                    </table>
-                  </td>
-                </tr>
-              </tr>
-            </tr> */}
+          {/* <table > */}
+          <table style={{ display: 'block', background: '#f8f8fa url(https://i.ibb.co/VTk0B0B/pattern.png) repeat top left', width: '800px', color: '#444444', boxShadow: '0px 0 6px #ccc',marginTop:'20px'  }} cellSpacing="0" cellPadding="0" border="0" align="center">
+          <tr>
+    <td>
+    </td>
+  </tr>
+ 
+
+<tr style={{ width: '100%', borderCollapse: 'collapse' }}>
+  <tr width="800px" style={{ width: '100%', display: 'grid', borderCollapse: 'collapse' }}>
+    <tr width="800px" style={{ width: '800px', backgroundColor: 'white', height: '100px', borderBottom: '3px solid #006cb5'  }}>
+      <td style={{ width: '800px', textAlign: 'center', verticalAlign: 'middle' }}>
+        <span>
+          <b style={{ marginBottom: '0px', color: '#006cb5', fontSize: '28px', fontWeight: 'bold' }}>UNIVERSITY OF KALYANI</b>
+          <br />
+          ( Department of Engineering and Technological Studies(DETS))<br/>
+          (Kalyani, West Bengal,741235)
+        </span>
+      </td>
+    </tr>
+  </tr>
+</tr>
             <tr style={{ display: 'block', padding: '20px' }}>
               <td style={{ fontFamily: 'calibri, helvetica, arial, sans-serif' }}>
                 <table style={{ width: '760px', display: 'block', wordBreak: 'break-all', boxShadow: '0px 0 6px #ccc', background: '#fff', padding: '0px 15px', borderRadius: '5px', fontSize: '14px' }} cellSpacing="0" cellPadding="0" border="0" align="center">
@@ -83,9 +76,14 @@ const EducationSumbitAfter = () => {
                               <td>{apidata.data.motherName}</td>
                             </tr>
                             <tr>
-                              <td width="100px" style={{ fontFamily: 'calibri, helvetica, arial, sans-serif' }}>Name of the Applicant</td>
+                              <td width="100px" style={{ fontFamily: 'calibri, helvetica, arial, sans-serif' }}>Email</td>
                               <td width="40px" align="center"><b>:</b></td>
-                              <td>{apidata.data.applicant_name}</td>
+                              <td>{apidata.data.email}</td>
+                            </tr>
+                            <tr>
+                              <td width="100px" style={{ fontFamily: 'calibri, helvetica, arial, sans-serif' }}>Date of Birth</td>
+                              <td width="40px" align="center"><b>:</b></td>
+                              <td>{apidata.data.date_of_birth}</td>
                             </tr>
                             <tr>
                               <td width="100px" style={{ fontFamily: 'calibri, helvetica, arial, sans-serif' }}>Gender</td>
@@ -93,9 +91,9 @@ const EducationSumbitAfter = () => {
                               <td>{apidata.data.gender}</td>
                             </tr>
                             <tr>
-                              <td width="100px" style={{ fontFamily: 'calibri, helvetica, arial, sans-serif' }}>Age</td>
+                              <td width="100px" style={{ fontFamily: 'calibri, helvetica, arial, sans-serif' }}>Exam</td>
                               <td width="40px" align="center"><b>:</b></td>
-                              <td>{apidata.data.age}</td>
+                              <td>{apidata.data.exameType}</td>
                             </tr>
                             <tr>
                               <td width="100px" style={{ fontFamily: 'calibri, helvetica, arial, sans-serif' }}>Category</td>
@@ -103,36 +101,33 @@ const EducationSumbitAfter = () => {
                               <td>{apidata.data.category}</td>
                             </tr>
                             <tr>
-                              <td width="100px" style={{ fontFamily: 'calibri, helvetica, arial, sans-serif' }}>Religion</td>
+                              <td width="100px" style={{ fontFamily: 'calibri, helvetica, arial, sans-serif' }}>All India Rank</td>
                               <td width="40px" align="center"><b>:</b></td>
-                              <td>{apidata.data.religion}</td>
+                              <td>{apidata.data.allIndiaRank}</td>
                             </tr>
                             <tr>
-                              <td width="100px" style={{ fontFamily: 'calibri, helvetica, arial, sans-serif' }}>Father's/Husband Name</td>
+                              <td width="100px" style={{ fontFamily: 'calibri, helvetica, arial, sans-serif' }}>Stream</td>
                               <td width="40px" align="center"><b>:</b></td>
-                              <td>{apidata.data.father_husband_name}</td>
+                              <td>{apidata.data.stream}</td>
                             </tr>
                             <tr>
-                              <td width="100px" style={{ fontFamily: 'calibri, helvetica, arial, sans-serif' }}>Mother's Name</td>
+                              <td width="100px" style={{ fontFamily: 'calibri, helvetica, arial, sans-serif' }}>Session</td>
                               <td width="40px" align="center"><b>:</b></td>
-                              <td>{apidata.data.motherName}</td>
+                              <td>{apidata.data.session}</td>
                             </tr>
                             <tr>
-                              <td width="100px" style={{ fontFamily: 'calibri, helvetica, arial, sans-serif' }}>Permanent Address</td>
+                              <td width="100px" style={{ fontFamily: 'calibri, helvetica, arial, sans-serif' }}>Institute City</td>
                               <td width="40px" align="center"><b>:</b></td>
-                              <td>{apidata.data.permanent_address}</td>
+                              <td>{apidata.data.InstituteCity}</td>
                             </tr>
                             <tr>
-                              <td width="100px" style={{ fontFamily: 'calibri, helvetica, arial, sans-serif' }}>Aadhar No</td>
+                              <td width="100px" style={{ fontFamily: 'calibri, helvetica, arial, sans-serif' }}>Institute Name</td>
                               <td width="40px" align="center"><b>:</b></td>
-                              <td>{apidata.data.aadhar_no}</td>
+                              <td>{apidata.data.InstituteName}</td>
                             </tr>
-                            <tr>
-                              <td width="100px" style={{ fontFamily: 'calibri, helvetica, arial, sans-serif' }}>Voter Id No.</td>
-                              <td width="40px" align="center"><b>:</b></td>
-                              <td>{apidata.data.voter_id_no}</td>
-                            </tr>
-                            <tr>
+
+
+                            {/* <tr>
                               <td width="100px" style={{ fontFamily: 'calibri, helvetica, arial, sans-serif' }}>Monthly Family Income</td>
                               <td width="40px" align="center"><b>:</b></td>
                               <td>{apidata.data.monthly_family_income}</td>
@@ -216,7 +211,9 @@ const EducationSumbitAfter = () => {
                               <td width="100px" style={{ fontFamily: 'calibri, helvetica, arial, sans-serif' }}>Date</td>
                               <td width="40px" align="center"><b>:</b></td>
                               <td>{apidata.data.date}</td>
-                            </tr>
+                            </tr> */}
+
+
                           </tbody>
                         </table>
                       </td>
@@ -224,18 +221,7 @@ const EducationSumbitAfter = () => {
                   </tbody>
                 </table>
               </td>
-              {/* <tbody style={{ width: "100%", paddingTop: '20px', textAlign: 'center', alignItems: 'center' }}>
-                <td style={{ borderTop: '2px solid transparent', borderImage: 'linear-gradient(0.25turn, red, green) 1', width: '800px', border: '1px solid #cac2be' }}>
-                  <div style={{ width: '100%', textAlign: 'center', fontSize: '12px', border: '1px solid #eeeeee', paddingBottom: '7px', background: '#fff' }}>
-                    <p style={{ width: '100%', fontSize: '11px', color: '#444444', textAlign: 'center' }}>
-                      Registration Office: 277, Okhla Village, Jamia Nagar, New Delhi-110025., Branch Office: 3rd Floor, 43-B, Okhla, Jamia Nagar, New Delhi - 110025
-                      <br />
-                      Web: <a target="_blank" href="http://almanacsocialwelfare.com" rel="noopener" style={{ textDecoration: 'none', color: '#444444' }}>almanacsocialwelfare.com</a>,
-                      E-mail: <a href="mailto:socialwelfarealmanac@gmail.com" style={{ textDecoration: 'none', color: '#444444' }}>socialwelfarealmanac@gmail.com</a>
-                    </p>
-                  </div>
-                </td>
-              </tbody> */}
+
             </tr>
           </table>
         </Container>
@@ -243,5 +229,5 @@ const EducationSumbitAfter = () => {
     </>
   )
 }
-export default EducationSumbitAfter
+export default PgCourseSumbitData;
 
