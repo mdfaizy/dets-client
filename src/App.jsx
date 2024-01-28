@@ -1,25 +1,41 @@
 import "./App.css";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import About from "./components/About";
-import Home from "./components/Home";
-import LoginFrom from "./components/LoginFrom";
-// import NewAdmission from "./components/NewAdmission";
-import NewAdmission from './components/NewAdmission';
-import { Route, Routes } from "react-router-dom";
-import Header from "./components/header/Header";
-import SignupFrom from "./components/SignupFrom";
 import { useState } from "react";
-import ExitFrom from "./components/pages/exitRecord/ExitFrom";
-import PgCource from "./components/pages/pgcource/PgCource";
-import Job from './components/job/Job'
-import Footer from './components/footer/Footer';
-import ShowFormData from './components/ShowFormData'
-// import ShowFormData from './components/ShowFormData';
+import About from "./routes/About";
+import Home from "./components/home/Home";
+import Job from "./routes/job/Job";
+import "bootstrap/dist/css/bootstrap.min.css";
+import LoginFrom from "./components/pages/login/LoginFrom";
+import Footer from "./components/common/footer/Footer";
+import Header from "./components/common/header/Header";
+import { Route, Routes } from "react-router-dom";
+import SignupFrom from "./components/pages/signup/SignupFrom";
+import NewAdmission from "./routes/newstudent/newadmission/NewAdmission";
+import ExitFrom from "./routes/exitstudent/exit/ExitFrom";
+import PgCource from "./routes/pgcourse/pg/PgCource";
+import ShowFormData from "./components/ShowFormData";
+import Addmissiondata from "./applicationdata/Addmissiondata";
+import Exitdata from "./applicationdata/Exitdata";
+import Pgdata from "./applicationdata/Pgdata";
+import Jobdata from "./applicationdata/Jobdata";
+import Allnewstudent from "./adminsection/Allnewstudent";
+import Allexitstudent from "./adminsection/Allexitstudent";
+import Allpgstudent from "./adminsection/Allpgstudent";
+import Allstudentjob from "./adminsection/Allstudentjob";
+import ForgatePassword from "./components/pages/forgatepassword/ForgatePassword";
+import ReasetPassword from "./components/pages/forgatepassword/ReasetPassword";
+import Exit from "./routes/exitstudent/Exit";
+import Newstudent from "./routes/newstudent/Newstudent";
+// import Newstudent from "./routes/newstudent/Newstudent.module";
+import Btechjob from "./routes/job/softwarejob/Btechjob";
+import Pgcourse from "./routes/pgcourse/Pgcourse";
+import SumbitData from "./components/sumbitdata/SumbitData";
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [istoken, setToken] = useState("");
   // useEffect(() => {
   //   // Check if the user is logged in by verifying the authentication cookie
-  //   const authToken = getCookie('token'); // Replace 'authToken' with your authentication cookie name
+  //   const authToken = setToken('token'); // Replace 'authToken' with your authentication cookie name
   //   console.log(authToken);
   //   if (authToken) {
   //     // Validate the authentication cookie with your backend or decode it to determine authentication status
@@ -39,27 +55,83 @@ function App() {
   //   }
   //   return null;
   // };
-
-
+  const handleDataFromChild = (token) => {
+    // Handle the received data from the child component
+    console.log("Data from child:", token);
+    setToken(token);
+  };
   return (
     <>
-    <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
-
+      <Header
+        isLoggedIn={isLoggedIn}
+        setIsLoggedIn={setIsLoggedIn}
+        isAdmin={isAdmin}
+        setIsAdmin={setIsAdmin}
+      />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route index element={<Home />} />
         <Route path="/about" element={<About />} />
-        <Route path="/newadmission" element={<NewAdmission />} />
-        <Route path='/exitfrom' element={<ExitFrom/>} />
-        <Route path='/pgcource' element={<PgCource/>}/>
-        <Route path='job' element={<Job/>} />
-        <Route path='showFormData/:id' element={<ShowFormData/>}/>
-        <Route path='/loginfrom' element={<LoginFrom  setIsLoggedIn={setIsLoggedIn}/>}/>
-        <Route path='/signupfrom' element={<SignupFrom setIsLoggedIn={setIsLoggedIn}/>}/>
-       
+
+        <Route
+          path="/newadmission"
+          element={<NewAdmission istoken={istoken} />}
+        />
+        <Route path="/exitfrom" element={<ExitFrom istoken={istoken} />} />
+        <Route path="/pgcource" element={<PgCource istoken={istoken} />} />
+        <Route path="job" element={<Job istoken={istoken} />} />
+        <Route
+          path="/showFormData"
+          element={<ShowFormData istoken={istoken} isAdmin={isAdmin} />}
+        />
+        <Route
+          path="/loginfrom"
+          element={
+            <LoginFrom
+              sendDataToParent={handleDataFromChild}
+              setIsLoggedIn={setIsLoggedIn}
+              setIsAdmin={setIsAdmin}
+            />
+          }
+        />
+        <Route
+          path="/signupfrom"
+          element={<SignupFrom setIsLoggedIn={setIsLoggedIn} />}
+        />
+        <Route
+          path="/new_addmission"
+          element={<Addmissiondata istoken={istoken} />}
+        />
+        <Route
+          path="/exit_application"
+          element={<Exitdata istoken={istoken} />}
+        />
+        <Route path="/pg_application" element={<Pgdata istoken={istoken} />} />
+        <Route
+          path="/job_application"
+          element={<Jobdata istoken={istoken} />}
+        />
+
+        {/* <Route path='/all_new_addmission/:id' element={<Allnewstudent/>}/> */}
+        <Route
+          path="/all_new_addmission/:id"
+          element={<Allnewstudent istoken={istoken} />}
+        />
+
+        <Route path="/all_exit_student/:id" element={<Allexitstudent />} />
+        <Route path="/all_pg_student" element={<Allpgstudent />} />
+        <Route path="/all_student_job" element={<Allstudentjob />} />
+
+        <Route path="/forgatepassword" element={<ForgatePassword/>}/>
+        <Route path="/reasetpassword/:token" element={<ReasetPassword />} />
+
+        <Route path="/exit" element={<Exit />} />
+        <Route path="newstudent" element={<Newstudent/>}/>
+        <Route path="/btechjob" element={<Btechjob/>}/>
+        <Route path="/pgcourses" element={<Pgcourse/>}/>
+        <Route path="/sumbitdata" element={<SumbitData/>}/>
       </Routes>
-      <Footer/>
+      <Footer />
     </>
   );
 }
-
 export default App;

@@ -1,0 +1,54 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+.login_top_content{
+  background-color: darkslategray;
+  height: 100%;
+}
+.login_content{
+  padding: 20px;
+}
+.login_heading_text{
+  text-align: center;
+  color: white;
+  font-size: 2rem;
+  padding: 10px;
+}
+.linkWithoutDecoration{
+  text-decoration: none; 
+  color: inherit; 
+}
+.forgate_password{
+  text-align: right;
+  padding-top: 10px;
+  color: white;
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+.forgate_password:hover{
+  color: #00d9ff;
+}
+.signin_button{
+  background-color: #00d9ff;
+  color: #ffffff;
+  border-color: #00d9ff;
+  width: 100%;
+  border-radius: 20px;
+  margin: 10px;
+  padding: 6px;
+  font-size: 1rem;
+}
+.google_signin{
+  background-color: #ff8800;
+  color: #ffffff;
+  border-color: #ff8800;
+  width: 100%;
+  margin: 10px;
+  border-radius: 20px;
+  padding: 4px;
+  font-size: 1rem;
+}
+
+
+ 

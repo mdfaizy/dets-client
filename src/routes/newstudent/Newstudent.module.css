@@ -1,0 +1,35 @@
+.newimage{
+    width: 100%;
+    height: 450px;
+}
+.new_conatiner{    
+    background-color: #4a9e74;
+    margin-top: 10px;
+}
+.new_student_text{
+    color: white;
+    max-width: 80%;
+    margin: 0 auto;
+    padding-top: 20px;
+    font-size: 1.1rem;
+    margin-top: 20px;
+    text-align: justify;
+
+}
+.newstudent_link{ 
+    padding: 20px;   
+    justify-content: center;
+    text-align: center;
+}
+.newstudent_text_link{
+    background-color: #2888bc;
+    color: white;
+    list-style: none;
+    text-decoration: none;
+    padding: 10px 15px;
+    text-align: center;
+    align-items: center;
+    border-radius: 5px;
+
+
+}

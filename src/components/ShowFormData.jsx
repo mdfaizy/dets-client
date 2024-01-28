@@ -1,52 +1,72 @@
-// ShowFormData.js
+// import { useState, useEffect } from "react";
+// import   "./ShowFormData.css";
+import style from "./showdata.module.css";
+// import axios from "axios";
+import { Link } from "react-router-dom";
+import { Container, Row, Col } from "react-bootstrap";
+import showdata_img from '../assets/showdata.png';
 
-import { useState, useEffect } from 'react';
-import { useParams } from "react-router-dom";
-import './ShowFormData.css';
-// import Cookies from 'js-cookie';
-
-function ShowFormData() {
-  const [formData, setFormData] = useState({});
-
-const {id} =useParams();
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(`http://localhost:8000/api/v1/getnewadmission/${id}`, {
-          method: 'GET',
-        });
-             console.log(response);
-        if (response.ok) {
-          const data = await response.json();
-          console.log(data);
-          setFormData(data.data);
-        } else {
-          console.error('Failed to fetch form data. Status:', response.status);
-        }
-      } catch (error) {
-        console.error('Error fetching form data:', error);
-      }
-    };
-
-    fetchData();
-  }, [id]);
-
+function ShowFormData(props) {
+  const isAdmin = props.isAdmin;
   return (
-    <div className="form-data-container">
-      <h1>Form Data</h1>
-      <div className="form-field">
-        <p><strong>Name:</strong> {formData.firstName}</p>
-      </div>
-      
-      <div className="form-field">
-        <p><strong>Email:</strong> {formData.email}</p>
-      </div>
-      <div className="form-field">
-        <p><strong>Date of Birth:</strong> {formData.date_of_birth}</p>
-      </div>
-      {/* Render other form fields as needed */}
+
+    <>
+    <div className={style.showdata_img}>
+      <img src={showdata_img} alt="" />
+    
     </div>
+   
+    <Container className={style.form_data_container}>
+      <Row>
+        {!isAdmin && (
+          <Row className="my-4 p-2">
+            {/* text-center custom-col */}
+            <Col className={style.from_data_link}
+              // style={{ backgroundColor: "#f0f0f0", borderRadius: "10px" }}
+              direction="horizontal"
+            >
+              <Link to="/new_addmission" className={style.custom_link}>
+                Addmission Application Data
+              </Link>
+              <Link to="/exit_application" className={style.custom_link}>
+                ExitStudent Application Data
+              </Link>
+              <Link to="/pg_application" className={style.custom_link}>
+                PG Application Data
+              </Link>
+              <Link to="/job_application" className={style.custom_link}>
+                Job Application Data
+              </Link>
+            </Col>
+          </Row>
+        )}
+
+        {/* show Data in admin section and add to function  delete and update */}
+        {isAdmin && (
+          <Row className="my-4">
+            <Col
+              className="text-center custom-col "
+              style={{ backgroundColor: "#f0f0f0", borderRadius: "10px" }}
+              direction="horizontal"
+            >
+              <Link to="/all_new_addmission/:id" className={style.custom_link}>
+                All New Addmission Record
+              </Link>
+              <Link to="/all_exit_student/:id" className={style.custom_link}>
+                All Exit Student Record
+              </Link>
+              <Link to="/all_pg_student/:id" className={style.custom_link}>
+                All PG Student Record
+              </Link>
+              <Link to="/all_student_job/:id" className={style.custom_link}>
+                All Student Job Record
+              </Link>
+            </Col>
+          </Row>
+        )}
+      </Row>
+    </Container>
+    </>
   );
 }
 

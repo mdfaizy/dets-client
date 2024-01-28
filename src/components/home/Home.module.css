@@ -1,0 +1,33 @@
+
+
+.slider_image_home{
+    width: 100%;
+     height: 400px;
+}
+
+.university_name{
+    color: white;
+    font-weight: 600;
+}
+
+.all_program_details{
+    background-color: rgb(55, 79, 98);
+    /* width: 100%; */
+    
+}
+.program_text{
+    text-align: center;
+    color: white;
+    font-size: 2rem;
+    padding: 10px;
+    font-weight: 700;
+
+}
+.all_program_info{
+    padding: 5px;
+    max-width: 900px;
+    margin: 0 auto;
+    color: white;
+
+
+}

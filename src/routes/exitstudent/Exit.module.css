@@ -1,0 +1,34 @@
+.exitImage{
+    width: 100%;
+    height: 400px;
+}
+.exitContainer{    
+    background-color: #4a9e74;
+    margin-top: 10px;
+}
+.exitStudentText{
+    color: white;
+    max-width: 80%;
+    margin: 0 auto;
+    padding-top: 20px;
+    font-size: 1.1rem;
+    text-align: justify;
+}
+.exitLink{ 
+    padding: 20px;   
+    justify-content: center;
+    text-align: center;
+}
+.exitTextLink{
+    background-color: #1177dd;
+    color: white;
+    width: fit-content;
+    list-style: none;
+    text-decoration: none;
+    padding: 10px 15px;
+    text-align: center;
+    align-items: center;
+    border-radius: 5px;
+
+
+}

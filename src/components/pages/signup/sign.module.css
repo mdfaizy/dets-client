@@ -1,0 +1,114 @@
+.sinnup_content{
+  background-color: darkslategray;
+  height: 100%;
+}
+.sinnup_all_content{
+  padding: 20px;
+}
+.create_account{
+  text-align: center;
+  color: white;
+  font-size: 2rem;
+  padding: 10px;
+}
+.create_signup_button{
+  background-color: #00d9ff;
+  color: #ffffff;
+  border-color: #00d9ff;
+  width: 100%;
+  border-radius: 20px;
+  margin-top: 25px;
+  padding: 6px;
+  font-size: 1rem;
+}
+.create_signup_google_button{
+  background-color: #d685dd;
+  color: #ffffff;
+  border-color:#d685dd;
+  width: 100%;
+  border-radius: 20px;
+  margin-top: 25px;
+  padding: 4px;
+  font-size: 1rem;
+}
+
+
+/* .sign_content {
+  flex-wrap: wrap;
+}
+.sign_content_all_text {
+  display: flex;
+  background-color: rgb(68, 141, 144);
+  flex-wrap: wrap;
+  width: 100vw;
+} */
+/* .sign_top3 {
+  padding: 20px 60px;
+  flex-wrap: wrap;
+}
+.sign_content_all_text {
+}
+.sign_top4 {
+  
+}
+.frist_last_name {
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+input {
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.paragraph {
+  color: black;
+  padding-left: 20px;
+  flex-wrap: wrap;
+}
+.showPassword_icon {
+  position: absolute;
+  margin-left: 200px;
+  margin-top: -30px;
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+.create_confirm_pass {
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+.create_account {
+  font-size: 16px;
+  background-color: yellow;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 10px;
+  margin-top: 20px;
+  border-radius: 30px;
+  border: none;
+}
+
+.create_or{
+  display: flex;
+  justify-content: center;
+  background-color: chocolate;
+  width: 100%;
+  padding: 10px;
+  margin-top: 20px;
+  border-radius: 30px;
+  border: none;
+}
+
+.create_account_google {
+  display: flex;
+  justify-content: center;
+  background-color: rgb(208, 200, 195);
+  width: 100%;
+  padding: 10px;
+  margin-top: 20px;
+  border-radius: 30px;
+  border: none;
+} */
