@@ -4,7 +4,13 @@ import axios from "axios";
 
 const Allexitstudent = () => {
   const [formData, setFormData] = useState([]);
+  const [expandedIndex, setExpandedIndex] = useState(null);
 
+  // ... (Rest of your component code)
+
+  const handleReadMoreClick = (index) => {
+    setExpandedIndex(index === expandedIndex ? null : index);
+  };
   //get data from back end a exit student
   useEffect(() => {
     const fetchData = async () => {
@@ -65,6 +71,23 @@ const Allexitstudent = () => {
               <td>{item.lastName}</td>
               <td>{item.stream}</td>
               <td>{item.email}</td>
+
+              <td>
+                <span
+                  style={{ color: 'blue', cursor: 'pointer' }}
+                  onClick={() => handleReadMoreClick(index)}
+                >
+                  {expandedIndex === index ? 'Show Less' : 'Read More'}
+                </span>
+                {expandedIndex === index && (
+                  <div>
+                    {/* Additional details for Read More */}
+                    <p>Date of Birth: {item.date_of_birth}</p>
+                    <p>Phone No: {item.Phone_no}</p>
+                    {/* Add more details as needed */}
+                  </div>
+                )}
+              </td>
               <td>
                 <button onClick={() => handleDelete(item._id, index)}>
                   Delete

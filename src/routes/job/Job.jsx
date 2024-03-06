@@ -44,27 +44,28 @@ const Job = (props) => {
 
   const submitHandler = async (event) => {
     event.preventDefault();
+    console.log("hi");
 
     const formDataToSend = new FormData();
-
     // Append each form field to formDataToSend
     for (let key in formData) {
       formDataToSend.append(key, formData[key]);
     }
+    console.log("hi1");
 
     try {
       const response = await fetch("http://localhost:8000/api/v1/job", {
         method: "POST",
         body: formDataToSend, // Send formDataToSend instead of JSON.stringify(formData)
       });
-
+      console.log("hi2",response);
       if (response.ok) {
         const responseData = await response.json();
         console.log(responseData);
         console.log(responseData.data._id);
         Cookies.set("formData", JSON.stringify(formData));
         // navigate("/Exitdata");
-        navigate("/Jobdata/applicationdata");
+        navigate("/Jobdata");
       } else {
         console.log("Form not submitted. Error status:", response.status);
         // Handle the error or display a message to the user

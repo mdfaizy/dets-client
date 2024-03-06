@@ -117,17 +117,156 @@
 
 // export default Header;
 
-import { useState } from "react";
-import { NavLink } from "react-router-dom";
-import { Navbar, Nav } from "react-bootstrap";
-import style from "./Header.module.css";
-import logImg from "../../../assets/log.jpg";
+// import { useState } from "react";
+// import { NavLink } from "react-router-dom";
+// import { Navbar, Nav } from "react-bootstrap";
+// import style from "./Header.module.css";
+// import logImg from "../../../assets/log.jpg";
+
+// const Header = (props) => {
+//   const isLoggedIn = props.isLoggedIn;
+//   const setIsLoggedIn = props.setIsLoggedIn;
+//   const isAdmin = props.isAdmin;
+//   const setIsAdmin = props.setIsAdmin;
+//   const [click, setClick] = useState(false);
+
+//   const handleClick = () => {
+//     setClick(!click);
+//   };
+
+//   return (
+//     <div className={style.header_top_content}>
+//     <Navbar collapseOnSelect expand="lg" className={style.header_content}>
+//       <Navbar.Brand>
+//         <img src={logImg} alt="" className={style.logoImage} />
+//       </Navbar.Brand>
+//       <Navbar.Toggle aria-controls="responsive-navbar-nav">
+//         {click ? "Close" : "Menu"}
+//       </Navbar.Toggle>
+//       <Navbar.Collapse
+//         id="responsive-navbar-nav"
+//         className={`${click ? "show" : ""} ${style.nav_menu}`}
+//         onClick={handleClick}
+//       >
+//         <Nav className={`ml-auto ${style.nav_links_container}`}>
+//           <NavLink to="/" className={style.nav_links} onClick={handleClick}>
+//             HOME
+//           </NavLink>
+//           <NavLink
+//             to="/about" className={style.nav_links} onClick={handleClick}>
+//             ABOUT
+//           </NavLink>
+//           {!isAdmin && isLoggedIn && (
+//             <NavLink to="/newstudent"className={style.nav_links} onClick={handleClick}>
+//               ADMISSION
+//             </NavLink>
+//           )}
+//           {!isAdmin && isLoggedIn && (
+//             // <li className={style.nav_links}>
+//             <NavLink to="/exit" className={style.nav_links} onClick={handleClick}>
+//               EXIT STUDENT
+//             </NavLink>
+//             // </li>
+//           )}
+//           {!isAdmin && isLoggedIn && (
+//             <li className={style.nav_links}>
+//               <NavLink to="/pgcourses" className={style.nav_links} onClick={handleClick}>
+//               POSTGRADUATE
+//               </NavLink>
+//             </li>
+//           )}
+
+//           {!isAdmin && isLoggedIn && (
+//             <li className={style.nav_links}>
+//               <NavLink to="/btechjob" className={style.nav_links} onClick={handleClick}>
+//                 JOB
+//               </NavLink>
+//             </li>
+//           )}
+//           {isLoggedIn && (
+//             <li className={style.nav_links} onClick={handleClick}>
+//               <NavLink to="/showFormData" className={style.nav_links}>
+//                 SHOWFORMDATA
+//               </NavLink>
+//             </li>
+//           )}
+//         </Nav>
+//         <Nav
+//           className={`${style.nav_links_container} ${click ? "mr-auto" : ""}`}>
+//           {!isLoggedIn && (
+//             <>
+//               <NavLink
+//                 to="/loginfrom"
+//                 className={style.nav_links}
+//                 onClick={handleClick}
+//               >
+//                 LOGIN
+//               </NavLink>
+//               <NavLink
+//                 to="/signupfrom"
+//                 className={style.nav_links}
+//                 onClick={handleClick}
+//               >
+//                 SIGN UP
+//               </NavLink>
+//               {/* <NavLink to='/exit'>Exit-Student</NavLink>
+
+//               <NavLink to='/newstudent'>New-Admission</NavLink>
+
+//               <NavLink to="/btechjob" >JOB</NavLink> */}
+//               {/* <NavLink to="/pgcourse"
+//               >
+//                 POSTGRUATE
+//               </NavLink> */}
+//             </>
+
+//           )}
+//           {isLoggedIn && (
+//             <NavLink
+//               to="/"
+//               className={style.nav_links}
+//               onClick={() => {
+//                 setIsAdmin(false);
+//                 setIsLoggedIn(false)
+//               }}
+//             >
+//               LOGOUT
+//             </NavLink>
+//           )}
+//         </Nav>
+//       </Navbar.Collapse>
+//     </Navbar>
+//     </div>
+//   );
+// };
+
+// export default Header;
+
+
+
+
+
+
+
+
+import { useState } from 'react';
+import { NavLink } from 'react-router-dom';
+import { Navbar, Nav } from 'react-bootstrap';
+import style from './Header.module.css';
+import logImg from '../../../assets/log.jpg';
 
 const Header = (props) => {
-  const isLoggedIn = props.isLoggedIn;
-  const setIsLoggedIn = props.setIsLoggedIn;
-  const isAdmin = props.isAdmin;
-  const setIsAdmin = props.setIsAdmin;
+  const {
+    isLoggedIn,
+    setIsLoggedIn,
+    isAdmin,
+    setIsAdmin,
+    teacher,
+    setTeacher,
+  } = props;
+  console.log("Teacher Prop Value:", teacher);
+
+
   const [click, setClick] = useState(false);
 
   const handleClick = () => {
@@ -136,62 +275,96 @@ const Header = (props) => {
 
   return (
     <div className={style.header_top_content}>
-    <Navbar collapseOnSelect expand="lg" className={style.header_content}>
-      <Navbar.Brand>
-        <img src={logImg} alt="" className={style.logoImage} />
-      </Navbar.Brand>
-      <Navbar.Toggle aria-controls="responsive-navbar-nav">
-        {click ? "Close" : "Menu"}
-      </Navbar.Toggle>
-      <Navbar.Collapse
-        id="responsive-navbar-nav"
-        className={`${click ? "show" : ""} ${style.nav_menu}`}
-        onClick={handleClick}
-      >
-        <Nav className={`ml-auto ${style.nav_links_container}`}>
-          <NavLink to="/" className={style.nav_links} onClick={handleClick}>
-            HOME
-          </NavLink>
-          <NavLink
-            to="/about" className={style.nav_links} onClick={handleClick}>
-            ABOUT
-          </NavLink>
-          {!isAdmin && isLoggedIn && (
-            <NavLink to="/newstudent"className={style.nav_links} onClick={handleClick}>
-              ADMISSION
+      <Navbar collapseOnSelect expand="lg" className={style.header_content}>
+        <Navbar.Brand>
+          <img src={logImg} alt="" className={style.logoImage} />
+        </Navbar.Brand>
+        <Navbar.Toggle aria-controls="responsive-navbar-nav">
+          {click ? 'Close' : 'Menu'}
+        </Navbar.Toggle>
+        <Navbar.Collapse
+          id="responsive-navbar-nav"
+          className={`${click ? 'show' : ''} ${style.nav_menu}`}
+          onClick={handleClick}
+        >
+          <Nav className={`ml-auto ${style.nav_links_container}`}>
+            <NavLink to="/" className={style.nav_links} onClick={handleClick}>
+              HOME
             </NavLink>
-          )}
-          {!isAdmin && isLoggedIn && (
-            // <li className={style.nav_links}>
-            <NavLink to="/exit" className={style.nav_links} onClick={handleClick}>
-              EXIT STUDENT
+            <NavLink
+              to="/about"
+              className={style.nav_links}
+              onClick={handleClick}
+            >
+              ABOUT
             </NavLink>
-            // </li>
-          )}
-          {!isAdmin && isLoggedIn && (
-            <li className={style.nav_links}>
-              <NavLink to="/pgcourses" className={style.nav_links} onClick={handleClick}>
-              POSTGRADUATE
-              </NavLink>
-            </li>
-          )}
+            {!isAdmin&& !teacher && isLoggedIn && (
+              <>
+                <NavLink
+                  to="/newstudent"
+                  className={style.nav_links}
+                  onClick={handleClick}
+                >
+                  ADMISSION
+                </NavLink>
+                <NavLink
+                  to="/exit"
+                  className={style.nav_links}
+                  onClick={handleClick}
+                >
+                  EXIT STUDENT
+                </NavLink>
+                <li className={style.nav_links}>
+                  <NavLink
+                    to="/pgcourses"
+                    className={style.nav_links}
+                    onClick={handleClick}
+                  >
+                    POSTGRADUATE
+                  </NavLink>
+                </li>
+                <li className={style.nav_links}>
+                  <NavLink
+                    to="/btechjob"
+                    className={style.nav_links}
+                    onClick={handleClick}
+                  >
+                    JOB
+                  </NavLink>
+                </li>
+                <li className={style.nav_links} onClick={handleClick}>
+                  <NavLink
+                    to="/showFormData"
+                    className={style.nav_links}
+                  >
+                    SHOWFORMDATA
+                  </NavLink>
+                </li>
+              </>
+            )}
 
-          {!isAdmin && isLoggedIn && (
-            <li className={style.nav_links}>
-              <NavLink to="/btechjob" className={style.nav_links} onClick={handleClick}>
-                JOB
-              </NavLink>
-            </li>
-          )}
-          {isLoggedIn && (
+{isAdmin && (
             <li className={style.nav_links} onClick={handleClick}>
               <NavLink to="/showFormData" className={style.nav_links}>
                 SHOWFORMDATA
               </NavLink>
             </li>
           )}
-        </Nav>
-        <Nav
+{teacher && (
+              <>
+                <NavLink
+                  to="/studentallinfo"
+                  className={style.nav_links}
+                  onClick={handleClick}
+                >
+                  STUDENT-INFO
+                </NavLink>
+               
+              </>
+            )}
+
+
+       <Nav
           className={`${style.nav_links_container} ${click ? "mr-auto" : ""}`}>
           {!isLoggedIn && (
             <>
@@ -209,17 +382,7 @@ const Header = (props) => {
               >
                 SIGN UP
               </NavLink>
-              {/* <NavLink to='/exit'>Exit-Student</NavLink>
-
-              <NavLink to='/newstudent'>New-Admission</NavLink>
-
-              <NavLink to="/btechjob" >JOB</NavLink> */}
-              {/* <NavLink to="/pgcourse"
-              >
-                POSTGRUATE
-              </NavLink> */}
             </>
-
           )}
           {isLoggedIn && (
             <NavLink
@@ -228,14 +391,16 @@ const Header = (props) => {
               onClick={() => {
                 setIsAdmin(false);
                 setIsLoggedIn(false)
+                setTeacher(false);
               }}
             >
               LOGOUT
             </NavLink>
           )}
         </Nav>
-      </Navbar.Collapse>
-    </Navbar>
+          </Nav>
+        </Navbar.Collapse>
+      </Navbar>
     </div>
   );
 };

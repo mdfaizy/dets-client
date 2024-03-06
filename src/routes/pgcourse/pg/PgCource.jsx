@@ -98,8 +98,8 @@ const PgCource = (props) => {
 
         console.log(responseData.data._id);
         Cookies.set("formData", JSON.stringify(formData));
-        navigate("/sumbitdata",{ state:{apidata: responseData}});
-        navigate(`/ShowFormData/${responseData.data._id}`);
+        navigate("/pgsumbitdata",{ state:{apidata: responseData}});
+        // navigate(`/ShowFormData/${responseData.data._id}`);
       } else {
         console.log("Form not submitted. Error status:", response.status);
       }

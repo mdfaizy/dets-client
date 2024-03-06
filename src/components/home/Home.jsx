@@ -94,7 +94,7 @@ function Home() {
                 </span>
               </Col>
             </Row>
-</Col>
+            </Col>
           
           </Col>
         </Row>

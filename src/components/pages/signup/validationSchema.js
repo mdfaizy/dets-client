@@ -15,15 +15,17 @@ const validationSchema = yup.object().shape({
     .string()
     .required("Password is required")
     .min(8, "Password should be at least 8 characters")
-    .max(15, "Password should not exceed 15 characters")
-    .matches(
-      /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/,
-      "Password should contain at least one digit, one lowercase letter, one uppercase letter"
-    ),
+    .max(15, "Password should not exceed 15 characters"),
   confirmPassword: yup
     .string()
     .oneOf([yup.ref("password"), null], "Passwords must match")
     .required("Confirm Password is required"),
+    instructorKey: yup.string().when('accountType', {
+      is: 'Instructor',
+      then: yup.string()
+        .matches(/^ukdets@#1234$/, 'Invalid Instructor Key'),
+    }),
 });
+
 
 export default validationSchema;

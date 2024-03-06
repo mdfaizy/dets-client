@@ -61,7 +61,8 @@ const ExitFrom = (props) => {
         console.log(responseData);
         console.log(responseData.data._id);
         Cookies.set("formData", JSON.stringify(formData));
-        navigate("/Exitdata");
+        navigate("/exitsumbitdata",{ state:{apidata: responseData}});
+        // navigate("exitsumbitdata");
       } else {
         console.log("Form not submitted. Error status:", response.status);
         // Handle the error or display a message to the user

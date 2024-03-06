@@ -29,7 +29,7 @@ function ShowFormData(props) {
                 Addmission Application Data
               </Link>
               <Link to="/exit_application" className={style.custom_link}>
-                ExitStudent Application Data
+                Exit-Student Application Data
               </Link>
               <Link to="/pg_application" className={style.custom_link}>
                 PG Application Data
