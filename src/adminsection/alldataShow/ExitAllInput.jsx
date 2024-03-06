@@ -1,90 +1,302 @@
-import { useState, useEffect } from "react";
-// import {Link} from 'react-router-dom'
-// import { Container, Row, Col, Form } from "react-bootstrap";
+// import React, { useEffect, useState } from "react";
+// import Table from "react-bootstrap/Table";
+// import axios from "axios";
 
+// const ExitAllInput = () => {
+//   const [formData, setFormData] = useState([]);
+
+//   useEffect(() => {
+//     const fetchData = async () => {
+//       try {
+//         const response = await axios.get(
+//           "http://localhost:8000/api/v1/get_all_exit_student"
+//         );
+//         if (response.status === 200) {
+//           setFormData(response.data.data);
+//         } else {
+//           console.error(
+//             "Failed to fetch exit student data. Status:",
+//             response.status
+//           );
+//         }
+//       } catch (error) {
+//         console.error("Error fetching exit student data:", error);
+//       }
+//     };
+//     fetchData();
+//   }, []);
+
+//   const handleDelete = async (id, index) => {
+//     console.log("delete ", id);
+//     try {
+//       const responseDelete = await axios.delete(
+//         `http://localhost:8000/api/v1/delete_id_exitstudent/${id}`
+//       );
+//       console.log("responseDelete", responseDelete);
+//       const updatedFormData = [...formData];
+//       updatedFormData.splice(index, 1);
+//       setFormData(updatedFormData);
+//     } catch (error) {
+//       console.log("Error deleting selectedItem:", error);
+//     }
+//   };
+
+//   return (
+//     <div>
+//       <h2>All Exit Students Data</h2>
+//       <Table striped bordered hover>
+//         <thead>
+//           <tr>
+//             <th>No</th>
+//             <th>First Name</th>
+//             <th>Last Name</th>
+//             <th>Stream</th>
+//             <th>Email</th>
+//             <th>Registration No</th>
+//             <th>Session</th>
+//             <th>Phone No</th>
+//             <th>First year Cgpa</th>
+//             <th>Second Year</th>
+//             <th>Third Year</th>
+//             <th>Fourth Year</th>
+//             <th>Total</th>
+//             <th>Delete</th>
+//           </tr>
+//         </thead>
+//         <tbody>
+//           {formData.map((selectedItem, index) => (
+//             <tr key={index}>
+//               <td>{index + 1}</td>
+//               <td>{selectedItem.firstName}</td>
+//               <td>{selectedItem.lastName}</td>
+//               <td>{selectedItem.stream}</td>
+//               <td>{selectedItem.email}</td>
+//               <td>{selectedItem.registrationNo}</td>
+//               <td>{selectedItem.session}</td>
+//               <td>{selectedItem.Phone_no}</td>
+//               <td>{selectedItem.year_cgpa_1th}</td>
+//               <td>{selectedItem.year_cgpa_2nd}</td>
+//               <td>{selectedItem.year_cgpa_3rd}</td>
+//               <td>{selectedItem.year_cgpa_4th}</td>
+//               <td>{selectedItem.final_cgpa}</td>
+//               <td>
+//                 <button onClick={() => handleDelete(selectedItem._id, index)}>
+//                   Delete
+//                 </button>
+//               </td>
+//             </tr>
+         
+//       </Table>
+      
+//       {/* Uncomment the following code block if needed */}
+       
+//       <div className="text-center" style={{ display: 'flex', alignselectedItems: 'center', justifyContent: 'center', marginBottom: '20px' }}>
+//         <table
+//           style={{
+//             display: "block",
+//             background: "#f8f8fa url(https://i.ibb.co/VTk0B0B/pattern.png) repeat top left",
+//             width: "800px",
+//             color: "#444444",
+//             boxShadow: "0px 0 6px #ccc",
+//             marginTop: "20px",
+//           }}
+//           cellSpacing="0"
+//           cellPadding="0"
+//           border="0"
+//           align="center"
+//         >
+//           <tr style={{ width: "100%", borderCollapse: "collapse" }}>
+//           <tr
+//             width="800px"
+//             style={{
+//               width: "100%",
+//               display: "grid",
+//               borderCollapse: "collapse",
+//             }}
+//           >
+//             <tr
+//               width="800px"
+//               style={{
+//                 width: "800px",
+//                 backgroundColor: "white",
+//                 height: "100px",
+//                 borderBottom: "3px solid #006cb5",
+//               }}
+//             >
+//               <td
+//                 style={{
+//                   width: "800px",
+//                   textAlign: "center",
+//                   verticalAlign: "middle",
+//                 }}
+//               >
+//                 <span>
+//                   <b
+//                     style={{
+//                       marginBottom: "0px",
+//                       color: "#006cb5",
+//                       fontSize: "28px",
+//                       fontWeight: "bold",
+//                     }}
+//                   >
+//                     UNIVERSITY OF KALYANI
+//                   </b>
+//                   <br />
+//                   ( Department of Engineering and Technological Studies(DETS))
+//                   <br />
+//                   (Kalyani, West Bengal,741235)
+//                 </span>
+//               </td>
+//             </tr>
+//           </tr>                  
+//         </tr>
+
+//         
+//       </table>
+
+//       ))}
+//         </tbody>
+
+//       </div>
+      
+//     </div>
+//   );
+// };
+
+// export default ExitAllInput;
+
+
+
+
+
+import React, { useEffect, useState } from "react";
+import Table from "react-bootstrap/Table";
 import axios from "axios";
-// import { Col } from "react-bootstrap";
-function Exitdata(props) {
-  const [formData, setFormData] = useState({});
-  const { istoken } = props;
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const requestBody = {
-  //         token: istoken,
-  //       };
-
-  //       const response = await fetch(
-  //         "http://localhost:8000/api/v1/get_exitstudent",
-  //         {
-  //           method: "POST",
-  //           headers: {
-  //             "Content-Type": "application/json",
-  //           },
-  //           body: JSON.stringify(requestBody),
-  //         }
-  //       );
-
-  //       if (response.ok) {
-  //         const data = await response.json();
-  //         setFormData(data.data);
-  //       } else {
-  //         console.error("Failed to fetch form data. Status:", response.status);
-  //       }
-  //     } catch (error) {
-  //       console.error("Error fetching form data:", error);
-  //     }
-  //   };
-  //   fetchData();
-  // }, [istoken]);
+const ExitAllInput = () => {
+  const [formData, setFormData] = useState([]);
+  const [selectedItem, setSelectedItem] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const requestBody = {
-          token: istoken,
-        };
-        const response = await axios.post(
-          "http://localhost:8000/api/v1/get_exitstudent",
-          requestBody,
-          {
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
+        const response = await axios.get(
+          "http://localhost:8000/api/v1/get_all_exit_student"
         );
         if (response.status === 200) {
           setFormData(response.data.data);
         } else {
-          console.error("Failed to fetch form data. Status:", response.status);
+          console.error(
+            "Failed to fetch exit student data. Status:",
+            response.status
+          );
         }
       } catch (error) {
-        console.error("Error fetching form data:", error);
+        console.error("Error fetching exit student data:", error);
       }
     };
     fetchData();
-  }, [istoken]);
+  }, []);
+
+  const handleDelete = async (id, index) => {
+    console.log("delete ", id);
+    try {
+      const responseDelete = await axios.delete(
+        `http://localhost:8000/api/v1/delete_id_exitstudent/${id}`
+      );
+      console.log("responseDelete", responseDelete);
+      const updatedFormData = [...formData];
+      updatedFormData.splice(index, 1);
+      setFormData(updatedFormData);
+    } catch (error) {
+      console.log("Error deleting selectedItem:", error);
+    }
+  };
+
+  const handleDetails = (selectedItem) => {
+    setSelectedItem(selectedItem);
+  };
 
   return (
-<div className="text-center" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center',marginBottom:'20px' }}>
-    <table
-        style={{
-          display: "block",
-          background:
-            "#f8f8fa url(https://i.ibb.co/VTk0B0B/pattern.png) repeat top left",
-          width: "800px",
-          color: "#444444",
-          boxShadow: "0px 0 6px #ccc",
-          marginTop: "20px",
-        }}
-        cellSpacing="0"
-        cellPadding="0"
-        border="0"
-        align="center"
-      >
-        <tr style={{ width: "100%", borderCollapse: "collapse" }}>
-          <tr
+    <div>
+      <h2>All Exit Students Data</h2>
+      <Table striped bordered hover>
+        <thead>
+          <tr>
+            <th>No</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Stream</th>
+            <th>Email</th>
+            <th>Registration No</th>
+            <th>Session</th>
+            <th>Phone No</th>
+            <th>First year Cgpa</th>
+            <th>Second Year</th>
+            <th>Third Year</th>
+            <th>Fourth Year</th>
+            <th>Total</th>
+            <th>Delete</th>
+            <th>Details</th>
+          </tr>
+        </thead>
+        <tbody>
+          {formData.map((selectedItem, index) => (
+            <tr key={index}>
+              <td>{index + 1}</td>
+              <td>{selectedItem.firstName}</td>
+              <td>{selectedItem.lastName}</td>
+              <td>{selectedItem.stream}</td>
+              <td>{selectedItem.email}</td>
+              <td>{selectedItem.registrationNo}</td>
+              <td>{selectedItem.session}</td>
+              <td>{selectedItem.Phone_no}</td>
+              <td>{selectedItem.year_cgpa_1th}</td>
+              <td>{selectedItem.year_cgpa_2nd}</td>
+              <td>{selectedItem.year_cgpa_3rd}</td>
+              <td>{selectedItem.year_cgpa_4th}</td>
+              <td>{selectedItem.final_cgpa}</td>
+              <td>
+                <button onClick={() => handleDelete(selectedItem._id, index)}>
+                  Delete
+                </button>
+              </td>
+              <td>
+                <button onClick={() => handleDetails(selectedItem)}>Details</button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </Table>
+
+      {selectedItem && (
+        <div
+          className="text-center"
+          style={{
+            display: "flex",
+            alignselectedItems: "center",
+            justifyContent: "center",
+            marginBottom: "20px",
+          }}
+        >
+          <table
+            style={{
+              display: "block",
+              background:
+                "#f8f8fa url(https://i.ibb.co/VTk0B0B/pattern.png) repeat top left",
+              width: "800px",
+              color: "#444444",
+              boxShadow: "0px 0 6px #ccc",
+              marginTop: "20px",
+            }}
+            cellSpacing="0"
+            cellPadding="0"
+            border="0"
+            align="center"
+          >
+            <tbody>
+              <tr style={{ width: "100%", borderCollapse: "collapse" }}>
+           <tr
             width="800px"
             style={{
               width: "100%",
@@ -126,11 +338,11 @@ function Exitdata(props) {
                 </span>
               </td>
             </tr>
-          </tr>
+          </tr>                  
         </tr>
-        <tr style={{ display: "block", padding: "20px" }}>
-          <td style={{ fontFamily: "calibri, helvetica, arial, sans-serif" }}>
-            <table
+             <tr style={{ display: "block", padding: "20px" }}>
+           <td style={{ fontFamily: "calibri, helvetica, arial, sans-serif" }}>
+             <table
               style={{
                 width: "760px",
                 display: "block",
@@ -174,7 +386,7 @@ function Exitdata(props) {
                   </td>
                 </tr>
                 <tr style={{ display: "grid" }}>
-                  {/* Your content goes here */}
+                  
                   <td colSpan={3}>
                     <table
                       style={{
@@ -191,7 +403,7 @@ function Exitdata(props) {
                       border="0"
                       align="left"
                     >
-                      {/* Your table content goes here */}
+                     
                       <thead style={{}}>
                         <tr
                           style={{
@@ -240,7 +452,7 @@ function Exitdata(props) {
                           <td width="40px" align="center">
                             <b>:</b>
                           </td>
-                          <td>{formData.fristName}</td>
+                          <td>{selectedItem.fristName}</td>
                         </tr>
                         <tr>
                           <td
@@ -256,7 +468,7 @@ function Exitdata(props) {
                           <td width="40px" align="center">
                             <b>:</b>
                           </td>
-                          <td>{formData.lastName}</td>
+                        <td>{selectedItem.lastName}</td>
                         </tr>
                         <tr>
                           <td
@@ -272,7 +484,7 @@ function Exitdata(props) {
                           <td width="40px" align="center">
                             <b>:</b>
                           </td>
-                          <td>{formData.fatherName}</td>
+                          <td>{selectedItem.fatherName}</td>
                         </tr>
                         <tr>
                           <td
@@ -288,7 +500,7 @@ function Exitdata(props) {
                           <td width="40px" align="center">
                             <b>:</b>
                           </td>
-                          <td>{formData.motherName}</td>
+                          <td>{selectedItem.motherName}</td>
                         </tr>
                         <tr>
                           <td
@@ -304,7 +516,7 @@ function Exitdata(props) {
                           <td width="40px" align="center">
                             <b>:</b>
                           </td>
-                          <td>{formData.email}</td>
+                          <td>{selectedItem.email}</td>
                         </tr>
                         <tr>
                           <td
@@ -320,7 +532,7 @@ function Exitdata(props) {
                           <td width="40px" align="center">
                             <b>:</b>
                           </td>
-                          <td>{formData.rollNo}</td>
+                          <td>{selectedItem.rollNo}</td>
                         </tr>
                         <tr>
                           <td
@@ -336,7 +548,7 @@ function Exitdata(props) {
                           <td width="40px" align="center">
                             <b>:</b>
                           </td>
-                          <td>{formData.date_of_birth}</td>
+                          <td>{selectedItem.date_of_birth}</td>
                         </tr>
                         <tr>
                           <td
@@ -352,7 +564,7 @@ function Exitdata(props) {
                           <td width="40px" align="center">
                             <b>:</b>
                           </td>
-                          <td>{formData.stream}</td>
+                          <td>{selectedItem.stream}</td>
                         </tr>
 
                         <tr>
@@ -369,7 +581,7 @@ function Exitdata(props) {
                           <td width="40px" align="center">
                             <b>:</b>
                           </td>
-                          <td>{formData.registrationNo}</td>
+                          <td>{selectedItem.registrationNo}</td>
                         </tr>
                         <tr>
                           <td
@@ -385,7 +597,7 @@ function Exitdata(props) {
                           <td width="40px" align="center">
                             <b>:</b>
                           </td>
-                          <td>{formData.session}</td>
+                          <td>{selectedItem.session}</td>
                         </tr>
                         <tr>
                           <td
@@ -401,7 +613,7 @@ function Exitdata(props) {
                           <td width="40px" align="center">
                             <b>:</b>
                           </td>
-                          <td>{formData.Phone_no}</td>
+                          <td>{selectedItem.Phone_no}</td>
                         </tr>
                         <tr>
                           <td
@@ -417,7 +629,7 @@ function Exitdata(props) {
                           <td width="40px" align="center">
                             <b>:</b>
                           </td>
-                          <td>{formData.session}</td>
+                          <td>{selectedItem.session}</td>
                         </tr>
                         <tr>
                           <td
@@ -433,7 +645,7 @@ function Exitdata(props) {
                           <td width="40px" align="center">
                             <b>:</b>
                           </td>
-                          <td>{formData.year_cgpa_1th}</td>
+                          <td>{selectedItem.year_cgpa_1th}</td>
                         </tr>
 
                         <tr>
@@ -450,7 +662,7 @@ function Exitdata(props) {
                           <td width="40px" align="center">
                             <b>:</b>
                           </td>
-                          <td>{formData.year_cgpa_2nd}</td>
+                          <td>{selectedItem.year_cgpa_2nd}</td>
                         </tr>
 
                         <tr>
@@ -467,7 +679,7 @@ function Exitdata(props) {
                           <td width="40px" align="center">
                             <b>:</b>
                           </td>
-                          <td>{formData.year_cgpa_3rd}</td>
+                          <td>{selectedItem.year_cgpa_3rd}</td>
                         </tr>
 
                         <tr>
@@ -484,112 +696,8 @@ function Exitdata(props) {
                           <td width="40px" align="center">
                             <b>:</b>
                           </td>
-                          <td>{formData.year_cgpa_4th}</td>
+                          <td>{selectedItem.year_cgpa_4th}</td>
                         </tr>
-
-                        {/* 
-                            
-                            firstName: "",
-    lastName: "",
-    fatherName: "",
-    motherName: "",
-    email: "",
-    rollNo: "",
-    date_of_birth: "",
-    stream: "",
-    registrationNo: "",
-    session: "",
-    Phone_no: "",
-    year_cgpa_1th: "",
-    year_cgpa_2nd: "",
-    year_cgpa_3rd: "",
-    year_cgpa_4th: "",
-    final_cgpa: "",
-                            <tr>
-                              <td width="100px" style={{ fontFamily: 'calibri, helvetica, arial, sans-serif' }}>Monthly Family Income</td>
-                              <td width="40px" align="center"><b>:</b></td>
-                              <td>{monthly_family_income}</td>
-                            </tr>
-                            <tr>
-                              <td width="100px" style={{ fontFamily: 'calibri, helvetica, arial, sans-serif' }}>Mobile No</td>
-                              <td width="40px" align="center"><b>:</b></td>
-                              <td>{mobileNo}</td>
-                            </tr>
-                            <tr>
-                              <td width="100px" style={{ fontFamily: 'calibri, helvetica, arial, sans-serif' }}>Bank Name</td>
-                              <td width="40px" align="center"><b>:</b></td>
-                              <td>{bank_name}</td>
-                            </tr>
-                            <tr>
-                              <td width="100px" style={{ fontFamily: 'calibri, helvetica, arial, sans-serif' }}>IFSC Code</td>
-                              <td width="40px" align="center"><b>:</b></td>
-                              <td>{ifsc_code}</td>
-                            </tr>
-                            <tr>
-                              <td width="100px" style={{ fontFamily: 'calibri, helvetica, arial, sans-serif' }}>Account</td>
-                              <td width="40px" align="center"><b>:</b></td>
-                              <td>{account}</td>
-                            </tr>
-                            <tr>
-                              <td width="100px" style={{ fontFamily: 'calibri, helvetica, arial, sans-serif' }}>Account Holder's Name</td>
-                              <td width="40px" align="center"><b>:</b></td>
-                              <td>{account_holder_name}</td>
-                            </tr>
-                            <tr>
-                              <td width="100px" style={{ fontFamily: 'calibri, helvetica, arial, sans-serif' }}>Parent Name</td>
-                              <td width="40px" align="center"><b>:</b></td>
-                              <td>{parent_name}</td>
-                            </tr>
-                            <tr>
-                              <td width="100px" style={{ fontFamily: 'calibri, helvetica, arial, sans-serif' }}>Relationship with guardian</td>
-                              <td width="40px" align="center"><b>:</b></td>
-                              <td>{relationship_with_guardian}</td>
-                            </tr>
-                            <tr>
-                              <td width="100px" style={{ fontFamily: 'calibri, helvetica, arial, sans-serif' }}>Occupation</td>
-                              <td width="40px" align="center"><b>:</b></td>
-                              <td>{parent_occupation}</td>
-                            </tr>
-                            <tr>
-                              <td width="100px" style={{ fontFamily: 'calibri, helvetica, arial, sans-serif' }}>Parent Address</td>
-                              <td width="40px" align="center"><b>:</b></td>
-                              <td>{parent_address}</td>
-                            </tr>
-                            <tr>
-                              <td width="100px" style={{ fontFamily: 'calibri, helvetica, arial, sans-serif' }}>Parent Email</td>
-                              <td width="40px" align="center"><b>:</b></td>
-                              <td>{parent_email}</td>
-                            </tr>
-                            <tr>
-                              <td width="100px" style={{ fontFamily: 'calibri, helvetica, arial, sans-serif' }}>Parent Mobile No</td>
-                              <td width="40px" align="center"><b>:</b></td>
-                              <td>{parent_mobile_no}</td>
-                            </tr>
-                            <tr>
-                              <td width="100px" style={{ fontFamily: 'calibri, helvetica, arial, sans-serif' }}>I Have Declared That</td>
-                              <td width="40px" align="center"><b>:</b></td>
-                              <td>{i_have_declared}</td>
-                            </tr>
-                            <tr>
-                              <td width="100px" style={{ fontFamily: 'calibri, helvetica, arial, sans-serif' }}>S/o/D/o/W/o</td>
-                              <td width="40px" align="center"><b>:</b></td>
-                              <td>{s_o_w_o}</td>
-                            </tr>
-                            <tr>
-                              <td width="100px" style={{ fontFamily: 'calibri, helvetica, arial, sans-serif' }}>R/o</td>
-                              <td width="40px" align="center"><b>:</b></td>
-                              <td>{R_o}</td>
-                            </tr>
-                            <tr>
-                              <td width="100px" style={{ fontFamily: 'calibri, helvetica, arial, sans-serif' }}>Place</td>
-                              <td width="40px" align="center"><b>:</b></td>
-                              <td>{place}</td>
-                            </tr>
-                            <tr>
-                              <td width="100px" style={{ fontFamily: 'calibri, helvetica, arial, sans-serif' }}>Date</td>
-                              <td width="40px" align="center"><b>:</b></td>
-                              <td>{date}</td>
-                            </tr> */}
                       </tbody>
                     </table>
                   </td>
@@ -598,11 +706,12 @@ function Exitdata(props) {
             </table>
           </td>
         </tr>
-      </table>
+            </tbody>
+          </table>
+        </div>
+      )}
     </div>
   );
-}
+};
 
-export default Exitdata;
-
-//
+export default ExitAllInput;

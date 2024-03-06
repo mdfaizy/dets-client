@@ -63,7 +63,7 @@ const Exitsumbitdata = () => {
                             <tr>
                               <td width="100px" style={{ fontFamily: 'calibri, helvetica, arial, sans-serif' }}>Frist Name:</td>
                               <td width="40px" align="center"><b>:</b></td>
-                              <td>{apidata.data.fristName}</td>
+                              <td>{apidata.data.firstName}</td>
                             </tr>
                             <tr>
                               <td width="100px" style={{ fontFamily: 'calibri, helvetica, arial, sans-serif' }}>Last Name</td>
