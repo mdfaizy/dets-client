@@ -33,6 +33,9 @@ function NewAdmission(props) {
     scoure_rank: "",
     cource_name: "",
     stream: "",
+    gender:"",
+    domicile:"",
+    admission_session:"",
     phone_no: "",
     category: "",
     schoolName_10th: "",
@@ -83,7 +86,7 @@ function NewAdmission(props) {
     }
     try {
       const response = await fetch(
-        "http://localhost:8000/api/v1/newAdmission",
+        "http://localhost:8000/api/v1/student/newAdmission",
         {
           method: "POST",
           // body:JSON.stringify(formData) ,
@@ -110,93 +113,6 @@ function NewAdmission(props) {
   };
 
 
-  // const handleUpdate = async (id) => {
-  //   console.log("update", id);
-  //   try {
-  //     const Updateresponse = await fetch(`http://localhost:8000/api/v1/updateAdmission/${id}`, {
-  //       method: 'PUT',
-  //       headers: {
-  //         'Content-Type': 'application/json'
-  //       },
-  //       body: JSON.stringify(formData) // Assuming formData contains updated admission details
-  //     });
-  
-  //     if (Updateresponse.ok) {
-  //       const updatedData = await Updateresponse.json();
-  //       console.log('Admission updated:', updatedData);
-  //       // Handle success or update UI accordingly
-  //     } else {
-  //       console.log('Update failed. Error status:', Updateresponse.status);
-  //       // Handle update failure or display error message
-  //     }
-  //   } catch (error) {
-  //     console.error('Error occurred while updating:', error);
-  //     // Handle error or display error message to the user
-  //   }
-  // };
-  
-
-
-
-
-
-  // useEffect(() => {
-  //   const fetchData = async (id) => {
-  //     try {
-  //       const response = await fetch(`http://localhost:8000/api/v1/getsigin_By_Id${id}`, {
-  //         headers: {
-  //           Authorization: `Bearer ${props.istoken}`,
-  //         },
-  //       });
-  
-  //       if (response.ok) {
-  //         const data = await response.json();
-  //         // Conditionally set the fetched data while preserving existing 'token' or other fields
-  //         setFormData((prevData) => ({
-  //           ...prevData,
-  //           ...data, // Assuming 'data' contains the user details fetched from the API
-  //         }));
-  //       } else {
-  //         console.log('Failed to fetch user data');
-  //       }
-  //     } catch (error) {
-  //       console.error('Error fetching user data:', error);
-  //     }
-  //   };
-  
-  //   fetchData();
-  // }, [props.istoken]);
-  
-
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     console.log('hi');
-  //     try {
-  //       const response = await fetch(`http://localhost:8000/api/v1/getsigin_By_Id`, {
-  //         headers: {
-  //           Authorization: `Bearer ${props.istoken}`,
-  //         },
-  //       });
-  
-  //       if (response.ok) {
-  //         const data = await response.json();
-  //         // Conditionally set the fetched data while preserving existing 'token' or other fields
-  //         setFormData((prevData) => ({
-  //           ...prevData,
-  //           ...data, // Assuming 'data' contains the user details fetched from the API
-  //         }));
-  //       } else {
-  //         console.log('Failed to fetch user data');
-  //       }
-  //     } catch (error) {
-  //       console.error('Error fetching user data:', error);
-  //     }
-  //   };
-  
-  //   fetchData(); // The issue might be here - no 'id' provided
-  // }, [props.istoken]);
-  
 
   return (
     <>
@@ -281,6 +197,9 @@ function NewAdmission(props) {
                           className="rounded-2"
                         />
                       </Form.Group>
+
+                      
+
                       <Form.Group as={Col} md="4">
                         <Form.Label>
                           Date of Birth<span className="text-danger">*</span>
@@ -311,6 +230,60 @@ function NewAdmission(props) {
                           <option value="jelet">JElETE</option>
                         </Form.Select>
                       </Form.Group>
+
+
+
+                      <Form.Group as={Col} md="4" className="mb-3">
+                        <Form.Label htmlFor="gender">
+                          Gender<span className="text-danger">*</span>
+                        </Form.Label>
+                        <Form.Select
+                          id="gender"
+                          name="gender"
+                          className="rounded-0"
+                          value={formData.gender}
+                          onChange={changeHandler}
+                        >
+                          <option value="">Select Gender</option>
+                          <option value="M">M</option>
+                          <option value="F">F</option>
+                        </Form.Select>
+                      </Form.Group>
+
+
+                      <Form.Group as={Col} md="4" className="mb-3">
+                        <Form.Label htmlFor="domicile">
+                          Domicile<span className="text-danger">*</span>
+                        </Form.Label>
+                        <Form.Select
+                          id="domicile"
+                          name="domicile"
+                          className="rounded-0"
+                          value={formData.domicile}
+                          onChange={changeHandler}
+                        >
+                          <option value="">Select Domicile</option>
+                          <option value="YES">YES</option>
+                          <option value="No">NO</option>
+                        </Form.Select>
+                      </Form.Group>
+
+
+
+<Form.Group as={Col} md="4">
+                        <Form.Label>
+                         Admission Session<span className="text-danger">*</span>
+                        </Form.Label>
+                        <Form.Control
+                          type="number"
+                          name="admission_session"
+                          id="admission_session"
+                          value={formData.admission_session}
+                          placeholder="Enter ..."
+                          onChange={changeHandler}
+                          className="rounded-2"
+                        />
+                      </Form.Group>
                       <Form.Group as={Col} md="4" className="mb-3">
                         <Form.Label htmlFor="category">
                           CATEGORY<span className="text-danger">*</span>
@@ -324,9 +297,12 @@ function NewAdmission(props) {
                         >
                           <option value="">Select Category</option>
                           <option value="general">General</option>
-                          <option value="obc">OBCs</option>
-                          <option value="sc">SCs</option>
-                          <option value="st">STs</option>
+                          <option value="obc_a">OBC-A</option>
+                          <option value="obc_b">OBC-B</option>
+                          <option value="ews">EWS</option>
+                          <option value="sc">SC</option>
+                          <option value="st">ST</option>
+                          <option value="pwd">PWD</option>
                         </Form.Select>
                       </Form.Group>
                       <Form.Group as={Col} md="4">
@@ -338,7 +314,7 @@ function NewAdmission(props) {
                           name="application_exam_no"
                           id="application_exam_no"
                           value={formData.application_exam_no}
-                          placeholder="Enater Application No..."
+                          placeholder="Enter Application No..."
                           onChange={changeHandler}
                           className="rounded-2"
                         />
@@ -352,7 +328,7 @@ function NewAdmission(props) {
                           name="scoure_rank"
                           id="scoure_rank"
                           value={formData.scoure_rank}
-                          placeholder="Enater Your Rank..."
+                          placeholder="Enter Your Rank..."
                           onChange={changeHandler}
                           className="rounded-2"
                         />
@@ -366,7 +342,7 @@ function NewAdmission(props) {
                           name="cource_name"
                           id="cource_name"
                           value={formData.cource_name}
-                          placeholder="Enater Cource Name..."
+                          placeholder="Enter Cource Name..."
                           onChange={changeHandler}
                           className="rounded-2"
                         />
@@ -380,7 +356,7 @@ function NewAdmission(props) {
                           name="stream"
                           id="stream"
                           value={formData.stream}
-                          placeholder="Enater Stream..."
+                          placeholder="Enter Stream..."
                           onChange={changeHandler}
                           className="rounded-2"
                         />
@@ -394,7 +370,7 @@ function NewAdmission(props) {
                           name="phone_no"
                           id="phone_no"
                           value={formData.phone_no}
-                          placeholder="Enater Phone No..."
+                          placeholder="Enter Phone No..."
                           onChange={changeHandler}
                           className="rounded-2"
                         />
@@ -437,7 +413,7 @@ function NewAdmission(props) {
                           name="roll_No_10th"
                           id="roll_No"
                           value={formData.roll_No_10th}
-                          placeholder="Enater Roll No..."
+                          placeholder="Enter Roll No..."
                           onChange={changeHandler}
                           className="rounded-2"
                         />
@@ -449,9 +425,9 @@ function NewAdmission(props) {
                         <Form.Control
                           type="text"
                           name="regisration_No_10th"
-                          id="regisration_No"
+                          id="regisration_No_10th"
                           value={formData.regisration_No_10th}
-                          placeholder="Enater Regisration No..."
+                          placeholder="Enter Regisration No..."
                           onChange={changeHandler}
                           className="rounded-2"
                         />
@@ -465,7 +441,7 @@ function NewAdmission(props) {
                           name="board_Name_10th"
                           id="board_Name_10th"
                           value={formData.board_Name_10th}
-                          placeholder="Enater Board Name..."
+                          placeholder="Enter Board Name..."
                           onChange={changeHandler}
                           className="rounded-2"
                         />
@@ -479,7 +455,7 @@ function NewAdmission(props) {
                           name="year_of_passing_10th"
                           id="year_of_passing_10th"
                           value={formData.year_of_passing_10th}
-                          placeholder="Enater Passing Year..."
+                          placeholder="Enter Passing Year..."
                           onChange={changeHandler}
                           className="rounded-2"
                         />
@@ -493,7 +469,7 @@ function NewAdmission(props) {
                           name="persentage_10th"
                           id="persentage_10th"
                           value={formData.persentage_10th}
-                          placeholder="Enater Persentage..."
+                          placeholder="Enter Persentage..."
                           onChange={changeHandler}
                           className="rounded-2"
                         />
@@ -546,7 +522,7 @@ function NewAdmission(props) {
                           name="roll_No_12th"
                           id="roll_No_12th"
                           value={formData.roll_No_12th}
-                          placeholder="Enater Roll No..."
+                          placeholder="Enter Roll No..."
                           onChange={changeHandler}
                           className="rounded-2"
                         />
@@ -560,7 +536,7 @@ function NewAdmission(props) {
                           name="regisration_No_12th"
                           id="regisration_No_12th"
                           value={formData.regisration_No_12th}
-                          placeholder="Enater Regisration No..."
+                          placeholder="Enter Regisration No..."
                           onChange={changeHandler}
                           className="rounded-2"
                         />
@@ -574,7 +550,7 @@ function NewAdmission(props) {
                           name="board_Name_12th"
                           id="board_Name_12th"
                           value={formData.board_Name_12th}
-                          placeholder="Enater Board Name..."
+                          placeholder="Enter Board Name..."
                           onChange={changeHandler}
                           className="rounded-2"
                         />
@@ -588,7 +564,7 @@ function NewAdmission(props) {
                           name="year_of_passing_12th"
                           id="year_of_passing_12th"
                           value={formData.year_of_passing_12th}
-                          placeholder="Enater Passing Year..."
+                          placeholder="Enter Passing Year..."
                           onChange={changeHandler}
                           className="rounded-2"
                         />
@@ -602,7 +578,7 @@ function NewAdmission(props) {
                           name="persentage_12th"
                           id="persentage_12th"
                           value={formData.persentage_12th}
-                          placeholder="Enater Persentage..."
+                          placeholder="Enter Persentage..."
                           onChange={changeHandler}
                           className="rounded-2"
                         />

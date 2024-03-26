@@ -7,7 +7,12 @@ import { Container, Row, Col } from "react-bootstrap";
 import showdata_img from '../assets/showdata.png';
 
 function ShowFormData(props) {
-  const isAdmin = props.isAdmin;
+  // const isAdmin = props.isAdmin;
+  const {
+    
+    isAdmin,
+    teacher,
+  } = props;
   return (
 
     <>
@@ -47,6 +52,29 @@ function ShowFormData(props) {
             <Col
               className="text-center custom-col "
               style={{ backgroundColor: "#f0f0f0", borderRadius: "10px" }}
+              direction="horizontal"
+            >
+              <Link to="/all_new_addmission/:id" className={style.custom_link}>
+                All New Addmission Record
+              </Link>
+              <Link to="/all_exit_student/:id" className={style.custom_link}>
+                All Exit Student Record
+              </Link>
+              <Link to="/all_pg_student/:id" className={style.custom_link}>
+                All PG Student Record
+              </Link>
+              <Link to="/all_student_job/:id" className={style.custom_link}>
+                All Student Job Record
+              </Link>
+            </Col>
+          </Row>
+        )}
+
+{teacher&& (
+          <Row className="my-4">
+            <Col
+              className="text-center custom-col "
+              
               direction="horizontal"
             >
               <Link to="/all_new_addmission/:id" className={style.custom_link}>

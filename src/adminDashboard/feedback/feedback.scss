@@ -1,0 +1,49 @@
+// .allfeedbacktopcontainer {
+//   background-color: rgb(55, 52, 52);
+
+//   display: flex;
+//   flex-wrap: wrap;
+//    justify-content: center;
+
+//   .review-content {
+//     width: 400px;
+//     height: 300px;
+//     color: white;
+//     border: 1px solid ghostwhite;
+//     border-radius: 4px;
+//     margin: 4px;
+//     text-overflow:clip
+//   }
+// }
+
+
+
+
+.allfeedbacktopcontainer {
+    background-color: rgb(55, 52, 52);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  
+    .review-content {
+      width: 400px;
+      height: 300px;
+      color: white;
+      border: 1px solid ghostwhite;
+      border-radius: 4px;
+      margin: 4px;
+      overflow-x: auto; /* Add this line to enable horizontal scrolling */
+    overflow-y: hidden; /* Hide vertical overflow */
+    text-overflow: ellipsis; /* Use ellipsis to indicate clipped text */
+    white-space: nowrap; /*
+    }
+  
+    .review-content > div {
+      padding: 8px; /* Add padding to the content inside .review-content */
+    }
+  
+    .read-more-button {
+      margin-top: 8px; /* Add margin to the button for spacing */
+    }
+  }
+  

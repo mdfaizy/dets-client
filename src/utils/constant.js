@@ -3,3 +3,4 @@ export const ACCOUNT_TYPE = {
     INSTRUCTOR: "Instructor",
     // ADMIN: "Admin",
   }
+  

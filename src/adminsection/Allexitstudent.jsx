@@ -552,19 +552,29 @@
 // };
 
 // export default Allexitstudent;
+
+// import './mediaprint.css';
+import { MdAssignmentTurnedIn } from "react-icons/md";
 import { useEffect, useState } from "react";
 import Table from "react-bootstrap/Table";
 import axios from "axios";
-import ExitAllInput from "./alldataShow/ExitAllInput";
-
-const Allexitstudent = () => {
+import style from './adminsection.module.css'
+import './showdataAdminandteacher.scss'
+const Allexitstudent = (props) => {
+  const { isAdmin, teacher } = props;
   const [formData, setFormData] = useState([]);
+  const [hoveredIndex, setHoveredIndex] = useState(null);
+  const [clickedIndex, setClickedIndex] = useState(null);
+  const [isEditing, setIsEditing] = useState(false);
+  const [editFormData, setEditFormData] = useState({});
 
+
+const [item,setItem=useState]=useState(null)
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:8000/api/v1/get_all_exit_student"
+          "http://localhost:8000/api/v1/exit/get_all_exit_student"
         );
         if (response.status === 200) {
           setFormData(response.data.data);
@@ -581,30 +591,133 @@ const Allexitstudent = () => {
     fetchData();
   }, []);
 
-  const handleDelete = async (id, index) => {
-    console.log("delete ", id);
-    try {
-      const responseDelete = await axios.delete(
-        `http://localhost:8000/api/v1/delete_id_exitstudent/${id}`
-      );
-      console.log("responseDelete", responseDelete);
+//   const handleDelete = async (id, index) => {
+//     console.log("delete ", id);
+//     try {
+//       const responseDelete = await axios.delete(
+//         `http://localhost:8000/api/v1/delete_id_exitstudent/${id}`
+//       );
+//       console.log("responseDelete", responseDelete);
+//       const updatedFormData = [...formData];
+//       updatedFormData.splice(index, 1);
+//       setFormData(updatedFormData);
+//     } catch (error) {
+//       console.log("Error deleting item:", error);
+//     }
+//   };
+
+// // style={{ width: "100%" }}
+//   const handleDetails = (item) => {
+//     setItem(item);
+//   };
+
+
+
+
+
+const handleDelete = async (id, index) => {
+  try {
+    const responseDelete = await axios.delete(
+      `http://localhost:8000/api/v1/delete_newadmission/${id}`
+    );
+    console.log("responseDelete", responseDelete);
+    const updatedFormData = [...formData];
+    updatedFormData.splice(index, 1);
+    setFormData(updatedFormData);
+  } catch (error) {
+    console.log("Error deleting item:", error);
+  }
+};
+
+const handleEdit = (index) => {
+  setIsEditing(true);
+  setClickedIndex(index);
+  setEditFormData({
+    // Initialize edit form data with existing values
+    firstName: formData[index].firstName,
+    lastName: formData[index].lastName,
+    fatherName: formData[index].fatherName,
+    motherName: formData[index].motherName,
+    stream: formData[index].stream,
+    email: formData[index].email,
+    date_of_birth:formData[index].date_of_birth,
+    examType: formData[index].examType,
+    category:formData[index].category,
+    application_exam_no: formData[index].application_exam_no,
+    scoure_rank:formData[index].scoure_rank,
+    cource_name:formData[index].cource_name,
+    phone_no:formData[index].phone_no,
+    schoolName_10th:formData[index].schoolName_10th,
+
+  });
+};
+
+
+
+const handleSave = async (id, index) => {
+  try {
+    // Make a PUT request to update the data in the database
+    const response = await axios.put(
+      `http://localhost:8000/api/v1/update_new_admission/${id}`,
+      editFormData
+    );
+
+    if (response.data.success) {
+      console.log("New admission data updated successfully");
+      // Update local state with the edited data
       const updatedFormData = [...formData];
-      updatedFormData.splice(index, 1);
+      updatedFormData[index] = { ...editFormData, _id: id };
       setFormData(updatedFormData);
-    } catch (error) {
-      console.log("Error deleting item:", error);
+      setIsEditing(false);
+    } else {
+      console.error("Failed to update new admission data");
     }
-  };
+  } catch (error) {
+    console.error("Error updating new admission data:", error);
+  }
+};
+
+const handleCancel = () => {
+  setIsEditing(false);
+  setClickedIndex(null);
+  setEditFormData({});
+};
+
+const handleInputChange = (e) => {
+  const { name, value } = e.target;
+  setEditFormData((prev) => ({
+    ...prev,
+    [name]: value,
+  }));
+};
+
+const handleDetails = (item) => {
+  setItem(item);
+};
+
+
+const handleRowHover = (index) => {
+  setHoveredIndex(index);
+};
+
+const handleRowLeave = () => {
+  setHoveredIndex(null);
+};
+
 
   return (
-    <div style={{ width: "800px", overflowX: "auto" }}>
-      <h2>All Exit Students Data</h2>
-      <Table striped bordered hover style={{ width: "100%" }}>
+    <div style={{ }}>
+      <h2 className="text-center my-4">All EXIT STUDENTS DATA</h2>
+
+      <div className={style.teacher_verify}>
+      <Table striped bordered hover  >
         <thead>
           <tr>
             <th>No</th>
             <th>First Name</th>
             <th>Last Name</th>
+            <th>Father Name</th>
+            <th>Mother Name</th>
             <th>Stream</th>
             <th>Email</th>
             <th>Registration No</th>
@@ -616,6 +729,7 @@ const Allexitstudent = () => {
             <th>Fourth Year</th>
             <th>Total</th>
             <th>Action</th>
+
           </tr>
         </thead>
         <tbody>
@@ -624,6 +738,8 @@ const Allexitstudent = () => {
               <td>{index + 1}</td>
               <td>{item.firstName}</td>
               <td>{item.lastName}</td>
+              <td>{item.fatherName}</td>
+              <td>{item.motherName}</td>
               <td>{item.stream}</td>
               <td>{item.email}</td>
               <td>{item.registrationNo}</td>
@@ -634,16 +750,283 @@ const Allexitstudent = () => {
               <td>{item.year_cgpa_3rd}</td>
               <td>{item.year_cgpa_4th}</td>
               <td>{item.final_cgpa}</td>
-              <td>
+              {/* <td>
                 <button onClick={() => handleDelete(item._id, index)}>
                   Delete
                 </button>
+                
               </td>
+              <td>
+                <button onClick={() => handleDetails(item)}>Details</button>
+              </td> */}
+
+
+
+
+<td style={{ position: "relative" }} 
+key={index}
+onMouseEnter={() => handleRowHover(index)}
+onMouseLeave={handleRowLeave}>
+                  <MdAssignmentTurnedIn className={style.icon_show} />
+
+                  {isEditing && clickedIndex === index && hoveredIndex === index && (
+                    <div className={style.editButton_click_after}
+        
+                    >
+                      <button onClick={() => handleSave(item._id, index)}>
+                        Save
+                      </button>
+                      <button onClick={handleCancel}>Cancel</button>
+                    </div>
+                  )}
+                  {!isEditing && hoveredIndex === index && (
+                    <div
+                    className={style.icon_click_after_show}
+                    >
+                      {/* <button onClick={() => handleEdit(index)}>Edit</button>
+
+
+                      <button onClick={() => handleDelete(item._id, index)}>
+                        Delete
+                      </button> */}
+
+{!teacher && isAdmin && (
+  <>
+    <button onClick={() => handleEdit(index)}>Edit</button>
+    <button onClick={() => handleDelete(item._id, index)}>Delete</button>
+  </>
+)}
+                      <button onClick={() => handleDetails(item)}>Details</button>
+                    </div>
+                  )}
+                </td>
+
+
             </tr>
           ))}
         </tbody>
-      <ExitAllInput/>
       </Table>
+      </div>
+     
+      {item&&(
+      <div className="addmission_top_contante">
+      <table
+        className="admission_table_contante"
+        cellSpacing="0"
+        cellPadding="0"
+        border="0"
+        align="center"
+      >
+        <tr className="admission_top_tr_contante">
+          <tr className="admission_top_tr2">
+            <tr className="admission_top_tr3">
+              <td className="admission_top_td1">
+                <span>
+                  <b className="admission_top_unive_name">
+                    UNIVERSITY OF KALYANI
+                  </b>
+                  <br />
+                  ( Department of Engineering and Technological Studies(DETS))
+                  <br />
+                  (Kalyani, West Bengal,741235)
+                </span>
+              </td>
+            </tr>
+          </tr>
+        </tr>
+        <tr className="table_contante">
+          <td className="table_contante_td">
+            <table
+              className="table_table_data_contante"
+              cellSpacing="0"
+              cellPadding="0"
+            >
+              <tbody>
+                <tr className="table_tbody_hading">
+                  Department of Engineering and Technological Studies <br />
+                  Exit Student
+                </tr>
+
+                <tr className="tbody_contante">
+
+                  <td colSpan={3}>
+                    <table
+                      className="table_contante_table"
+                      cellSpacing="0"
+                      cellPadding="5"
+                      border="0"
+                      align="left"
+                    >
+                      <thead>
+                        <tr className="thead_detail_info">
+                          <th className="thead_heading_info" width="20%">
+                            Info
+                          </th>
+                          <th width="5%">
+                            <br />
+                          </th>
+                          <th className="thead_heading_info" width="65%">
+                            Details
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody className="tbody_formData_info">
+                        <tr>
+                          <td className="tbody_formData_info_name">
+                            First Name:
+                          </td>
+                          <td className="tbody_fromData_and_info_dot">
+                            <b>:</b>
+                          </td>
+                          <td>{item.firstName}</td>
+                        </tr>
+                        <tr>
+                          <td className="tbody_formData_info_name">
+                            Last Name
+                          </td>
+                          <td className="tbody_fromData_and_info_dot">
+                            <b>:</b>
+                          </td>
+                          <td>{item.lastName}</td>
+                        </tr>
+                        <tr>
+                          <td className="tbody_formData_info_name">
+                            Father Name
+                          </td>
+                          <td className="tbody_fromData_and_info_dot">
+                            <b>:</b>
+                          </td>
+                          <td>{item.fatherName}</td>
+                        </tr>
+                        <tr>
+                          <td className="tbody_formData_info_name">
+                            Mother Name
+                          </td>
+                          <td className="tbody_fromData_and_info_dot">
+                            <b>:</b>
+                          </td>
+                          <td>{item.motherName}</td>
+                        </tr>
+                        <tr>
+                          <td className="tbody_formData_info_name">Email</td>
+                          <td className="tbody_fromData_and_info_dot">
+                            <b>:</b>
+                          </td>
+                          <td>{item.email}</td>
+                        </tr>
+                        <tr>
+                          <td className="tbody_formData_info_name">Roll No:</td>
+                          <td className="tbody_fromData_and_info_dot">
+                            <b>:</b>
+                          </td>
+                          <td>{item.rollNo}</td>
+                        </tr>
+                        <tr>
+                          <td className="tbody_formData_info_name">
+                            Date of Birth
+                          </td>
+                          <td className="tbody_fromData_and_info_dot">
+                            <b>:</b>
+                          </td>
+                          <td>{item.date_of_birth}</td>
+                        </tr>
+                        <tr>
+                          <td className="tbody_formData_info_name">Stream</td>
+                          <td className="tbody_fromData_and_info_dot">
+                            <b>:</b>
+                          </td>
+                          <td>{item.stream}</td>
+                        </tr>
+
+                        <tr>
+                          <td className="tbody_formData_info_name">Category</td>
+                          <td className="tbody_fromData_and_info_dot">
+                            <b>:</b>
+                          </td>
+                          <td>{item.category}</td>
+                        </tr>
+                        <tr>
+                          <td className="tbody_formData_info_name">
+                            Registration No
+                          </td>
+                          <td className="tbody_fromData_and_info_dot">
+                            <b>:</b>
+                          </td>
+                          <td>{item.registrationNo}</td>
+                        </tr>
+                        <tr>
+                          <td className="tbody_formData_info_name">Session</td>
+                          <td className="tbody_fromData_and_info_dot">
+                            <b>:</b>
+                          </td>
+                          <td>{item.session}</td>
+                        </tr>
+                        <tr>
+                          <td className="tbody_formData_info_name">Phone No</td>
+                          <td className="tbody_fromData_and_info_dot">
+                            <b>:</b>
+                          </td>
+                          <td>{item.Phone_no}</td>
+                        </tr>
+                        <tr>
+                          <td className="tbody_formData_info_name">Session</td>
+                          <td className="tbody_fromData_and_info_dot">
+                            <b>:</b>
+                          </td>
+                          <td>{item.session}</td>
+                        </tr>
+                        <tr>
+                          <td className="tbody_formData_info_name">
+                            First Year
+                          </td>
+                          <td className="tbody_fromData_and_info_dot">
+                            <b>:</b>
+                          </td>
+                          <td>{item.year_cgpa_1th}</td>
+                        </tr>
+
+                        <tr>
+                          <td className="tbody_formData_info_name">
+                            Second Year
+                          </td>
+                          <td className="tbody_fromData_and_info_dot">
+                            <b>:</b>
+                          </td>
+                          <td>{item.year_cgpa_2nd}</td>
+                        </tr>
+
+                        <tr>
+                          <td className="tbody_formData_info_name">
+                            Third Year
+                          </td>
+                          <td className="tbody_fromData_and_info_dot">
+                            <b>:</b>
+                          </td>
+                          <td>{item.year_cgpa_3rd}</td>
+                        </tr>
+
+                        <tr>
+                          <td className="tbody_formData_info_name">
+                            Fourthe Year
+                          </td>
+                          <td className="tbody_fromData_and_info_dot">
+                            <b>:</b>
+                          </td>
+                          <td>{item.year_cgpa_4th}</td>
+                        </tr>
+
+                        
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </div>
+      )}
     </div>
   );
 };

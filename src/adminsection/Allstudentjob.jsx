@@ -7,7 +7,7 @@ const Allstudentjob = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/api/v1/get_all_Job_student');
+        const response = await axios.get('http://localhost:8000/api/v1/job/get_all_Job_student');
         if (response.status === 200) {
             console.log(response);
           setFormData(response.data.data);
@@ -26,7 +26,7 @@ const Allstudentjob = () => {
     console.log("delete ", id);
     try {
       const responseDelete = await axios.delete(
-        `http://localhost:8000/api/v1/delete_newadmission/${id}`
+        `http://localhost:8000/api/v1/job/delete_newadmission/${id}`
       );
       console.log("responseDelete", responseDelete);
       const updatedFormData = [...formData];

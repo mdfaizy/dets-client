@@ -54,7 +54,7 @@ const Job = (props) => {
     console.log("hi1");
 
     try {
-      const response = await fetch("http://localhost:8000/api/v1/job", {
+      const response = await fetch("http://localhost:8000/api/v1/job/job", {
         method: "POST",
         body: formDataToSend, // Send formDataToSend instead of JSON.stringify(formData)
       });
@@ -65,7 +65,7 @@ const Job = (props) => {
         console.log(responseData.data._id);
         Cookies.set("formData", JSON.stringify(formData));
         // navigate("/Exitdata");
-        navigate("/Jobdata");
+        navigate("/job_application");
       } else {
         console.log("Form not submitted. Error status:", response.status);
         // Handle the error or display a message to the user

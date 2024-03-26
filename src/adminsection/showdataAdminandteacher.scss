@@ -1,0 +1,111 @@
+.addmission_top_contante {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+  
+    .admission_table_contante {
+      background: "#f8f8fa url(https://i.ibb.co/VTk0B0B/pattern.png) repeat top left";
+      width: 800px;
+      color: #444444;
+      box-shadow: 0px 0 6px #ccc;
+      margin-top: 20px;
+      background: url(https://i.ibb.co/VTk0B0B/pattern.png);
+      background: no-repeat;
+      border: 0;
+      text-align: center;
+  
+      .admission_top_tr_contante {
+        width: 100%;
+        border-collapse: collapse;
+        .admission_top_tr2 {
+          width: 800px;
+          display: grid;
+          width: 100%;
+          border-collapse: collapse;
+          .admission_top_tr3 {
+            width: 800px;
+            width: 100%;
+            background-color: white;
+            height: 100px;
+            border-bottom: 3px solid #006cb5;
+            .admission_top_td1 {
+              width: 800px;
+              text-align: center;
+              vertical-align: middle;
+              .admission_top_unive_name {
+                margin-bottom: 0;
+                color: #006cb5;
+                font-size: 28px;
+                font-weight: bold;
+              }
+            }
+          }
+        }
+      }
+      .table_contante {
+        display: block;
+        padding: 20px;
+        .table_contante_td {
+          font-family: calibri, helvetica, arial, sans-serif;
+          .table_table_data_contante {
+            width: 760px;
+            // wordBreak: "break-all",
+            display: block;
+            box-shadow: 0px 0 6px #ccc;
+            background: #fff;
+            border-radius: 5px;
+            font-size: 14px;
+            padding: 0px 15px;
+            border: 0px;
+            text-align: center;
+            .table_tbody_hading {
+              text-align: center;
+              vertical-align: middle;
+              font-size: 20px;
+            }
+            .tbody_contante {
+              display: grid;
+              .table_contante_table {
+                margin-bottom: 20px;
+                width: 730px;
+                font-size: 14px;
+                text-align: left;
+                background: #ffffff;
+                border: 1px solid #cac2be;
+                clear: both;
+                .thead_detail_info{
+                  background-color: #5a5d5f;
+                  height: 20px;
+                  color: white;
+                  font-size: 20px;
+                  .thead_heading_info{
+                                padding-left:10px;
+                                text-align: left;
+                                 font-family: calibri,helvetica,arial,sans-serif;
+                  }
+                }
+  
+                .tbody_formData_info{
+  
+                  .tbody_formData_info_name{
+                    
+                    padding-left: 10px;
+                    width: 100px;
+  font-family: calibri, helvetica, arial, sans-serif;
+  
+                  }
+                  .tbody_fromData_and_info_dot{
+                    text-align: center;
+                    width: 40px;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  

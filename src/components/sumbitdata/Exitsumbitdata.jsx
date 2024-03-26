@@ -1,6 +1,6 @@
 import { Container } from 'react-bootstrap'
 import { useLocation } from 'react-router-dom'
-import logo_university from '../../assets/log.jpg';
+// import logo_university from '../../assets/log.jpg';
 
 const Exitsumbitdata = () => {
     const location = useLocation()

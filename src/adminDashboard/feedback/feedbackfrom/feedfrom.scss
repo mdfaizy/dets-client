@@ -1,0 +1,23 @@
+.feedbaackTop-container {
+  background-color: gray;
+
+  .from-containt {
+    max-width: 500px;
+    margin: 0 auto;
+    border-radius: 10px;
+    .reviewButton {
+      
+      padding: 10px 15px;
+   
+      text-align: center;
+      align-items: center;
+      justify-content: center;
+      display: flex;
+      max-width: 30%;
+    
+      margin: 0 auto;
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+  }
+}

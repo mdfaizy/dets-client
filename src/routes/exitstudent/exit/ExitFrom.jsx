@@ -51,7 +51,7 @@ const ExitFrom = (props) => {
     }
 
     try {
-      const response = await fetch("http://localhost:8000/api/v1/exitStudent", {
+      const response = await fetch("http://localhost:8000/api/v1/exit/exitStudent", {
         method: "POST",
         body: formDataToSend, // Send formDataToSend instead of JSON.stringify(formData)
       });

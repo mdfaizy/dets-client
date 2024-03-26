@@ -4,8 +4,19 @@ import { Link } from "react-router-dom";
 import "./Footer.css";
 import { useEffect } from "react";
 
-const Footer = () => {
+const Footer = (props) => {
   // Function to scroll to the top of the page
+  const {
+    isLoggedIn,
+    setIsLoggedIn,
+    isAdmin,
+    setIsAdmin,
+    teacher,
+    setTeacher,
+  } = props;
+  console.log("Teacher Prop Value:", teacher);
+
+
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -51,7 +62,10 @@ const Footer = () => {
               style={{ listStyleType: "none", color: "white" }}
             >
               <h2 className="mb-4">Useful Links</h2>
-              <p>
+              {isLoggedIn&&
+<>
+
+<p>
                 <i>
                   <BiChevronRight />
                 </i>
@@ -83,6 +97,44 @@ const Footer = () => {
                   JOB
                 </Link>
               </p>
+</>
+
+
+              }
+              {/* <p>
+                <i>
+                  <BiChevronRight />
+                </i>
+                <Link to="/newadmission" className="linkStyle">
+                  New Admission
+                </Link>
+              </p>
+              <p>
+                <i>
+                  <BiChevronRight />
+                </i>
+                <Link to="/exitfrom" className="linkStyle">
+                  EXIT STUDENT
+                </Link>
+              </p>
+              <p>
+                <i>
+                  <BiChevronRight />
+                </i>
+                <Link to="/pgcource" className="linkStyle">
+                  PG PROGRAM
+                </Link>
+              </p>
+              <p>
+                <i>
+                  <BiChevronRight />
+                </i>
+                <Link to="/job" className="linkStyle">
+                  JOB
+                </Link>
+              </p> */}
+
+              
               {/* Add className to other links similarly */}
             </div>
           </Col>

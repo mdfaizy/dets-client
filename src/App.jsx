@@ -31,67 +31,51 @@ import Pgcourse from "./routes/pgcourse/Pgcourse";
 import PgCourseSumbitData from "./components/sumbitdata/PgCourseSumbitData";
 import Exitsumbitdata from "./components/sumbitdata/Exitsumbitdata";
 import StudentAllInfo from "./routes/StudentDetails/StudentAllInfo";
+import FeedbackFullContent from "./adminDashboard/FeedbackFullContent";
+// import ExitAllInput from "./adminsection/alldataShow/ExitAllInput";
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const [istoken, setToken] = useState("");
   const [teacher, setTeacher] = useState(false);
-  // useEffect(() => {
-  //   // Check if the user is logged in by verifying the authentication cookie
-  //   const authToken = setToken('token'); // Replace 'authToken' with your authentication cookie name
-  //   console.log(authToken);
-  //   if (authToken) {
-  //     // Validate the authentication cookie with your backend or decode it to determine authentication status
-  //     // If the cookie is valid, set the user as authenticated
-  //     setIsLoggedIn(true);
-  //   }
-  // }, []);
 
-  // // Function to get a specific cookie by name
-  // const getCookie = (name) => {
-  //   const cookies = document.cookie.split(';');
-  //   for (let cookie of cookies) {
-  //     const [cookieName, cookieValue] = cookie.split('=');
-  //     if (cookieName.trim() === name) {
-  //       return cookieValue;
-  //     }
-  //   }
-  //   return null;
-  // };
   // const handleDataFromChild = (token) => {
-  //   // Handle the received data from the child component
   //   console.log("Data from child:", token);
   //   setToken(token);
+  //   console.log("Teacher state in App.js:", teacher);
   // };
 
- 
+
+
   const handleDataFromChild = (token) => {
     console.log("Data from child:", token);
     setToken(token);
     console.log("Teacher state in App.js:", teacher);
+    setIsLoggedIn(true); // Update login status upon successful login
   };
+
+  const handleLogout = () => {
+    // Update login status upon logout
+    setIsLoggedIn(false);
+    setIsAdmin(false);
+    setTeacher(false);
+    setToken(""); // Clear token upon logout
+  };
+
   return (
     <>
-      {/* <Header
+      <Header
         isLoggedIn={isLoggedIn}
         setIsLoggedIn={setIsLoggedIn}
         isAdmin={isAdmin}
         setIsAdmin={setIsAdmin}
-      /> */}
-
-
-<Header
-  isLoggedIn={isLoggedIn}
-  setIsLoggedIn={setIsLoggedIn}
-  isAdmin={isAdmin}
-  setIsAdmin={setIsAdmin}
-  teacher={teacher} 
-  setTeacher={setTeacher}
-
-   // Pass the teacher state to the Header component
-/>
+        teacher={teacher}
+        setTeacher={setTeacher}
+        handleLogout={handleLogout}
+      // Pass the teacher state to the Header component
+      />
       <Routes>
-        <Route index element={<Home/>} />
+        <Route index element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route
           path="/newadmission"
@@ -134,22 +118,42 @@ function App() {
         {/* <Route path='/all_new_addmission/:id' element={<Allnewstudent/>}/> */}
         <Route
           path="/all_new_addmission/:id"
-          element={<Allnewstudent istoken={istoken} />}
+          element={<Allnewstudent istoken={istoken}
+            isAdmin={isAdmin}
+            teacher={teacher} />}
         />
-        <Route path="/all_exit_student/:id" element={<Allexitstudent />} />
-        <Route path="/all_pg_student/:id" element={<Allpgstudent />} />
-        <Route path="/all_student_job/:id" element={<Allstudentjob />} />
-        <Route path="/forgatepassword" element={<ForgatePassword/>}/>
+        <Route path="/all_exit_student/:id" element={<Allexitstudent
+          isAdmin={isAdmin}
+          teacher={teacher} />} />
+        <Route path="/all_pg_student/:id" element={<Allpgstudent
+          isAdmin={isAdmin}
+          teacher={teacher}
+        />} />
+        <Route path="/all_student_job/:id" element={<Allstudentjob
+          isAdmin={isAdmin}
+          teacher={teacher} />} />
+        <Route path="/forgatepassword" element={<ForgatePassword />} />
         <Route path="/reasetpassword/:token" element={<ReasetPassword />} />
         <Route path="/exit" element={<Exit />} />
-        <Route path="newstudent" element={<Newstudent/>}/>
-        <Route path="/btechjob" element={<Btechjob/>}/>
-        <Route path="/pgcourses" element={<Pgcourse/>}/>
-        <Route path="/pgsumbitdata" element={<PgCourseSumbitData/>}/>
-        <Route path='/exitsumbitdata' element={<Exitsumbitdata/>}/>
-      <Route path='/studentallinfo' element={<StudentAllInfo teacher={teacher} istoken={istoken}/>}/>
+        <Route path="newstudent" element={<Newstudent />} />
+        <Route path="/btechjob" element={<Btechjob />} />
+        <Route path="/pgcourses" element={<Pgcourse />} />
+        <Route path="/pgsumbitdata" element={<PgCourseSumbitData />} />
+        <Route path='/exitsumbitdata' element={<Exitsumbitdata />} />
+        <Route path='/studentallinfo' element={<StudentAllInfo teacher={teacher} istoken={istoken} />} />
+
+<Route path='/detailsfeedbac/:id' element={<FeedbackFullContent/>} />
+        
+        {/* <Route path='/exitallinput' element={<ExitAllInput />} /> */}
       </Routes>
-      <Footer />
+      <Footer
+        isLoggedIn={isLoggedIn}
+        setIsLoggedIn={setIsLoggedIn}
+        isAdmin={isAdmin}
+        setIsAdmin={setIsAdmin}
+        teacher={teacher}
+        setTeacher={setTeacher}
+      />
     </>
   );
 }

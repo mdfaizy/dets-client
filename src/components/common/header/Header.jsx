@@ -263,6 +263,7 @@ const Header = (props) => {
     setIsAdmin,
     teacher,
     setTeacher,
+    handleLogout
   } = props;
   console.log("Teacher Prop Value:", teacher);
 
@@ -388,11 +389,12 @@ const Header = (props) => {
             <NavLink
               to="/"
               className={style.nav_links}
-              onClick={() => {
-                setIsAdmin(false);
-                setIsLoggedIn(false)
-                setTeacher(false);
-              }}
+              // onClick={() => {
+              //   setIsAdmin(false);
+              //   setIsLoggedIn(false)
+              //   setTeacher(false);
+              // }}
+              onClick={handleLogout}
             >
               LOGOUT
             </NavLink>

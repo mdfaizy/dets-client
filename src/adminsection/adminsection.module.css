@@ -1,0 +1,80 @@
+
+.teacher_verify{
+  width:100%;
+  overflow-x: auto;
+}
+.icon_show{
+  font-size: 30px;
+  margin: 15px;
+  text-align: center;
+}
+.icon_click_after_show{
+display: flex;
+position: absolute;
+top: 60%;
+right:0rem ;
+z-index: 3;
+}
+.icon_click_after_show button{
+  background-color: aquamarine;
+  padding: 5px;
+  width: 70px;
+  border-radius: 10px;
+  border-color: darkgray;
+  gap: 4px;
+}
+
+.editButton_click_after{
+  position: absolute;
+  top: 60%;
+  right:0rem ;
+  z-index: 3;
+}
+
+.editButton_click_after button{
+  background-color: aquamarine;
+  padding: 5px;
+  width: 70px;
+  border-radius: 10px;
+  border-color: darkgray;
+  gap: 4px;
+}
+
+
+
+.teacher_verify_new_admission{
+  width:100%;
+  overflow-x: auto;
+}
+
+.teacher_verify_th{
+  /*  */
+}
+.teacher_verify_th th{
+
+  width: 100vw;
+
+}
+  @media print {
+    body {
+      font-size: 14pt;
+    }
+    
+    .name{
+        top: 51%;
+      font-size: 15px;
+    }
+    .membershipNumber{
+        right:7%;
+        font-size: 8px;
+    }
+    header, footer {
+      display: none;
+
+    }
+  
+  
+  }
+
+
+
