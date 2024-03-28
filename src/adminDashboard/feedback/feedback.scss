@@ -17,7 +17,7 @@
 // }
 
 .allfeedbacktopcontainer {
-  background-color: rgb(40, 74, 212);
+  // background-color: rgb(40, 74, 212);
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -25,42 +25,40 @@
   .review-content {
     width: 300px;
     height: 200px;
-    color: white;
-    border: 1px solid ghostwhite;
+    color: black;
+    border: 1px solid rgb(81, 81, 89);
     border-radius: 4px;
     margin: 4px;
+    padding: 5px;
 
     overflow-y: auto;
     position: relative;
-    .iconButton {
+    .feedback-link{
+      list-style: none;
+      text-decoration: none;
+      color: black;
+      cursor: pointer;
+    }
+    .iconButton-date {
       position: absolute;
       right: 0;
       bottom: 0;
       padding: 5px;
+      align-items: center;
+      background-color: rgb(25, 240, 240);
+      color: black;
+      padding: 5px;
+      margin: 5px;
+      height: fit-content;
+      border-radius: 5px;
+      display: flex;
+
 
       // background-color: rgb(55, 52, 52);
 
-      .editeButton {
-        font-size: 30px;
-        // background-color: rgb(55, 52, 52);
-        border-radius: 10px;
-        border: none;
-        color: rgb(28, 238, 168);
-        padding: 10px;
-        background: none;
-      }
-      .deleteButton {
-        font-size: 30px;
-        background-color: rgb(55, 52, 52);
-        border-radius: 10px;
-        border: none;
-        color: rgb(28, 238, 168);
-        padding: 10px;
-      }
+     
     }
   }
 
-  .read-more-button {
-    margin-top: 8px; 
-  }
+  
 }
