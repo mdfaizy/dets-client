@@ -99,7 +99,7 @@ function NewAdmission(props) {
         const responseData = await response.json();
         console.log(responseData);
 
-        console.log(responseData.data._id);
+        console.log(responseData.newAdmission._id);
         
         Cookies.set("formData", JSON.stringify(formData));
         navigate("/");

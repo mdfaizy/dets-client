@@ -16,34 +16,51 @@
 //   }
 // }
 
-
-
-
 .allfeedbacktopcontainer {
-    background-color: rgb(55, 52, 52);
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-  
-    .review-content {
-      width: 400px;
-      height: 300px;
-      color: white;
-      border: 1px solid ghostwhite;
-      border-radius: 4px;
-      margin: 4px;
-      overflow-x: auto; /* Add this line to enable horizontal scrolling */
-    overflow-y: hidden; /* Hide vertical overflow */
-    text-overflow: ellipsis; /* Use ellipsis to indicate clipped text */
-    white-space: nowrap; /*
-    }
-  
-    .review-content > div {
-      padding: 8px; /* Add padding to the content inside .review-content */
-    }
-  
-    .read-more-button {
-      margin-top: 8px; /* Add margin to the button for spacing */
+  background-color: rgb(40, 74, 212);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  .review-content {
+    width: 300px;
+    height: 200px;
+    color: white;
+    border: 1px solid ghostwhite;
+    border-radius: 4px;
+    margin: 4px;
+
+    overflow-y: auto;
+    position: relative;
+    .iconButton {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      padding: 5px;
+
+      // background-color: rgb(55, 52, 52);
+
+      .editeButton {
+        font-size: 30px;
+        // background-color: rgb(55, 52, 52);
+        border-radius: 10px;
+        border: none;
+        color: rgb(28, 238, 168);
+        padding: 10px;
+        background: none;
+      }
+      .deleteButton {
+        font-size: 30px;
+        background-color: rgb(55, 52, 52);
+        border-radius: 10px;
+        border: none;
+        color: rgb(28, 238, 168);
+        padding: 10px;
+      }
     }
   }
-  
+
+  .read-more-button {
+    margin-top: 8px; 
+  }
+}

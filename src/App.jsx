@@ -31,8 +31,10 @@ import Pgcourse from "./routes/pgcourse/Pgcourse";
 import PgCourseSumbitData from "./components/sumbitdata/PgCourseSumbitData";
 import Exitsumbitdata from "./components/sumbitdata/Exitsumbitdata";
 import StudentAllInfo from "./routes/StudentDetails/StudentAllInfo";
+// import FeedbackFullContent from "./adminDashboard/FeedbackFullContent";
 import FeedbackFullContent from "./adminDashboard/FeedbackFullContent";
 // import ExitAllInput from "./adminsection/alldataShow/ExitAllInput";
+// import Feedback from "./adminDashboard/feedback/Feedback";
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
@@ -141,9 +143,11 @@ function App() {
         <Route path="/pgsumbitdata" element={<PgCourseSumbitData />} />
         <Route path='/exitsumbitdata' element={<Exitsumbitdata />} />
         <Route path='/studentallinfo' element={<StudentAllInfo teacher={teacher} istoken={istoken} />} />
+        {/* <Route exact path="/feedback/: component={Feedback} /> */}
+<Route path='/feedback/:id' element={<FeedbackFullContent/>} />
+{/* <Route path="/feedback/:id" component={FeedbackFullContent} /> */}
+{/* <Route path="/feedback/:id" component={FeedbackFullContent} /> */}
 
-<Route path='/detailsfeedbac/:id' element={<FeedbackFullContent/>} />
-        
         {/* <Route path='/exitallinput' element={<ExitAllInput />} /> */}
       </Routes>
       <Footer
