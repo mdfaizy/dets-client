@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 // import { FaRegEdit } from "react-icons/fa";
 // import { FaStar } from 'react-icons/fa'
-import { FaStar, FaStarHalfAlt } from 'react-icons/fa'; // Import the star icons
+import { FaStar, FaStarHalfAlt } from "react-icons/fa"; // Import the star icons
 import { AiOutlineStar } from "react-icons/ai";
 import "./feedback.scss";
 import { useEffect, useState } from "react";
@@ -10,7 +10,8 @@ import { FaCalendarAlt } from "react-icons/fa";
 const Feedback = () => {
   const [feedback, setFeedback] = useState([]);
   const [loading, setLoading] = useState(false);
-
+  const [averageRating, setAverageRating] = useState(0);
+  const [showLess, setShowLess] = useState(false);
   const reviewData = async () => {
     setLoading(true);
     try {
@@ -18,6 +19,13 @@ const Feedback = () => {
         "http://localhost:8000/api/v1/feedback/showAllFeedback"
       );
       setFeedback(response.data.data);
+
+      const totalRating = response.data.data.reduce(
+        (accumulator, currentItem) => accumulator + currentItem.rating,
+        0
+      );
+      const avgRating = totalRating / response.data.data.length;
+      setAverageRating(avgRating);
     } catch (error) {
       console.error("Error fetching feedback data:", error);
     }
@@ -47,9 +55,6 @@ const Feedback = () => {
     return date.toLocaleDateString(); // Format date as per local date format
   };
 
-
-
-
   // const renderStarIcons = (rating) => {
   //   const totalStars = 5;
   //   const filledStars = Math.floor(rating);
@@ -68,49 +73,131 @@ const Feedback = () => {
   //   );
   // };
 
+  const toggleDescription = () => {
+    setShowLess(!showLess);
+  };
 
-
+  // Function to render description based on showFullDescription state
+  // const renderDescription = (description) => {
+  //   if (showLess) {
+  //     return description;
+  //   } else {
+  //     return description.substring(0, 50) + "...";
+  //   }
+  // };
 
   return (
     <div className="allfeedbacktopcontainer">
+      <div className="average-rating">
+        <h3>Students Ratings & Reviews : {averageRating}</h3>
+      </div>
       {loading ? (
         <div>Loading...</div>
       ) : feedback.length > 0 ? (
         feedback.map((item, index) => (
           <div key={index} className="review-content">
-            <Link to={`/feedback/${item._id}`} className="feedback-link">
-              <div
-                className="m-2 flex"
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gridArea: "3px",
-                }}
-              >
+            {/* <Link to={`/feedback/${item._id}`} className="feedback-link"> */}
+            <div
+              className="d-flex "
+              style={{
+                // display: "flex",
+                // alignItems: "center",
+                // gridArea: "3px",
+                justifyContent: "space-between",
+                overflow: "hidden",
+              }}
+            >
+              <div className="m-2 d-flex align-items-center">
                 <img
                   src={item.image}
                   alt="user_image"
-                  style={{ width: "40px", height: "40px", borderRadius: "50%" }}
+                  style={{
+                    width: "40px",
+                    height: "40px",
+                    borderRadius: "50%",
+                  }}
                 />
-                <p style={{ margin: "0" }}>{item.userName}</p>
+                <p style={{ margin: "0", paddingLeft: "10px" }}>
+                  {item.userName}
+                </p>
               </div>
 
-              <div>{item.title}</div>
-              <div>
+              <div
+                style={{
+                  margin: "0",
+                  borderRadius: "5px",
+                  backgroundColor:
+                    item.rating >= 4 ? "rgb(0, 173, 51)" : "yellow",
+                  color: "white",
+                  width: "50px",
+                  height: "30px",
+                  padding: "5px",
+                  alignItems: "center",
+                  textAlign: "center",
+                }}
+              >
+                <p>
+                  {item.rating}
+                  <FaStar className="text-white" />
+                </p>
+              </div>
+            </div>
+
+            <div>
+              <h2>{item.title}</h2>
+            </div>
+            <div className="d-flex p-2 gap-4">
+              <p className="rounded  border p-1">Placements</p>
+              <p className="rounded  border p-1">
+                {" "}
+                <FaStar
+                  style={{
+                    margin: "0",
+                    borderRadius: "5px",
+                    color: item.rating >= 4 ? "rgb(0, 173, 51)" : "yellow",
+                    // color: "white",
+                    width: "50px",
+                    height: "30px",
+                    padding: "5px",
+                    alignItems: "center",
+                    textAlign: "center",
+                  }}
+                />
+                Infrastructure
+              </p>
+              <p className="rounded  border p-1">Faculty</p>
+              <p className="rounded  border p-1">Crowd & Campus Life</p>
+              <p className="rounded  border p-1">Hostels</p>
+            </div>
+
+            {/* <div>
                 <p>{item.description.substring(0, 50)}...</p>
+              </div> */}
+
+            {/* <div>
+              <p>{renderDescription(item.description)}</p>
+              <button onClick={toggleDescription} className="btn btn-link">
+                {showLess ? "Show less" : "Read more"}
+              </button>
+            </div> */}
+
+<div>
+                <p>{item.description.substring(0, 50)}</p>
+                {item.description.length > 50 && (
+                  <button className="btn btn-link">
+                    {item.showMore ? "Show less" : "Read more"}
+                  </button>
+                )}
               </div>
-              <p>{item.rating}<FaStar/></p>
 
-
-              {/* <div>{renderStarIcons(item.rating)}</div> */}
-
-              <div className="iconButton-date">
-                
-                  <FaCalendarAlt style={{ marginRight: "5px" }} />
-                  <p className="m-0 text-black">{formatDate(item.createdAt)}</p>
-               
-              </div>
-            </Link>
+            <div className="iconButton-date">
+              <FaCalendarAlt style={{ marginRight: "5px" }} />
+              <p className="m-0 text-black">
+                {" "}
+                Reviewed on {formatDate(item.createdAt)}
+              </p>
+            </div>
+            {/* </Link> */}
           </div>
         ))
       ) : (

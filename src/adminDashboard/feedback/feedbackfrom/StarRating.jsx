@@ -33,33 +33,17 @@ const StarRating = ({ rating, onRatingChange }) => {
   const stars = [1, 2, 3, 4, 5];
 
   return (
-    // <div>
-    //   {stars.map((star) => (
-    //     <span
-    //       key={star}
-    //     //   className={`star ${star <= rating ? "star-filled" : ""}`} // Apply "star-filled" class when rating is greater than or equal to star
-    //     //   onClick={() => onRatingChange(star)}
-    //    {
-    //     star ?(<FaStar/>
-    //     ):(<FaStarHalfAlt/>):(<AiOutlineStar/>)
-    //    }
-    //    >
-    //       {/* ★ */}
-    //       <FaStar/>
-    //     </span>
-    //   ))}
-    // </div>
-
+    
 
     <div>
     {stars.map((star) => (
-      <span key={star} onClick={() => onRatingChange(star)}>
+      <span key={star} onClick={() => onRatingChange(star)}  >
         {star <= rating ? (
-          <FaStar />
+          <FaStar  style={{fontSize:"60px"}}/>
         ) : star - 0.5 === rating ? (
-          <FaStarHalfAlt />
+          <FaStarHalfAlt style={{fontSize:"60px"}}/>
         ) : (
-          <AiOutlineStar />
+          <AiOutlineStar style={{fontSize:"60px"}}/>
         )}
       </span>
     ))}

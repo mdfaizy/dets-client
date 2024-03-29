@@ -1,16 +1,13 @@
 import { useState } from "react";
 import { Form, Button } from "react-bootstrap";
-// import Cookies from "js-cookie"; // Import Cookies library
 import "./feedfrom.scss";
-// import Container from "react-bootstrap/Container";
-// import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import StarRating from './StarRating'
+import StarRating from "./StarRating";
 const FeedbackForm = () => {
   const [formData, setFormData] = useState({
     title: "",
     description: "",
-    rating:0,
+    rating: 0,
   });
 
   const changeHandler = (event) => {
@@ -20,7 +17,6 @@ const FeedbackForm = () => {
       [name]: value,
     }));
   };
-
 
   const handleRatingChange = (rating) => {
     setFormData((prevData) => ({
@@ -79,26 +75,28 @@ const FeedbackForm = () => {
             />
           </Form.Group>
 
-          <Form.Group controlId="description">
+          <Form.Group controlId="description" >
             <Form.Label>
               Description<span className="text-danger">*</span>
             </Form.Label>
             <Form.Control
               as="textarea"
               name="description"
-              style={{ height: "150px" }}
+              style={{ height: "180px" }}
               value={formData.description}
               placeholder="Enter description.."
               onChange={changeHandler}
               required
+            
             />
           </Form.Group>
 
-
-
           <Form.Group controlId="rating">
             <Form.Label>Rating</Form.Label>
-            <StarRating rating={formData.rating} onRatingChange={handleRatingChange} />
+            <StarRating className="w-25"
+              rating={formData.rating}
+              onRatingChange={handleRatingChange}
+            />
           </Form.Group>
           <Button type="submit" className="reviewButton">
             Submit
