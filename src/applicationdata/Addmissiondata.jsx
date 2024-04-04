@@ -4,6 +4,27 @@ import axios from "axios";
 function Addmissiondata(props) {
   const [formData, setFormData] = useState({});
   const { istoken } = props;
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await axios.post(
+  //         "http://localhost:8000/api/v1/student/get_new_admission"
+  //       );
+  //       if (response.data.success) {
+  //         setFormData(response.data.data);
+  //       } else {
+  //         console.error("Failed to fetch admission data");
+  //       }
+  //     } catch (error) {
+  //       console.error("Error fetching admission data:", error);
+  //     }
+  //   };
+  //   fetchData();
+  // }, []);
+
+  // --------------------===========================================
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -12,7 +33,7 @@ function Addmissiondata(props) {
         };
 
         const response = await axios.post(
-          "http://localhost:8000/api/v1/student/getnewadmission",
+          "http://localhost:8000/api/v1/student/getnewadmissionId",
           requestBody,
           {
             headers: {
@@ -20,7 +41,7 @@ function Addmissiondata(props) {
             },
           }
         );
-
+        console.log("response", response);
         if (response.status === 200) {
           setFormData(response.data.data);
         } else {
@@ -90,10 +111,8 @@ function Addmissiondata(props) {
                   Department of Engineering and Technological Studies <br />
                   New Admission Student
                 </tr>
-               
 
                 <tr className="tbody_contante">
-                  {/* Your content goes here */}
                   <td colSpan={3}>
                     <table
                       className="table_contante_table"
@@ -159,7 +178,7 @@ function Addmissiondata(props) {
                           </td>
                           <td>{formData.email}</td>
                         </tr>
-                        
+
                         <tr>
                           <td className="tbody_formData_info_name">
                             Date of Birth

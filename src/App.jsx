@@ -49,20 +49,20 @@ function App() {
 
 
 
-  const handleDataFromChild = (token) => {
-    console.log("Data from child:", token);
-    setToken(token);
-    console.log("Teacher state in App.js:", teacher);
-    setIsLoggedIn(true); // Update login status upon successful login
-  };
+  // const handleDataFromChild = (token) => {
+  //   console.log("Data from child:", token);
+  //   setToken(token);
+  //   console.log("Teacher state in App.js:", teacher);
+  //   setIsLoggedIn(true); // Update login status upon successful login
+  // };
 
-  const handleLogout = () => {
-    // Update login status upon logout
-    setIsLoggedIn(false);
-    setIsAdmin(false);
-    setTeacher(false);
-    setToken(""); // Clear token upon logout
-  };
+  // const handleLogout = () => {
+  //   // Update login status upon logout
+  //   setIsLoggedIn(false);
+  //   setIsAdmin(false);
+  //   setTeacher(false);
+  //   setToken(""); // Clear token upon logout
+  // };
 
   return (
     <>
@@ -73,7 +73,7 @@ function App() {
         setIsAdmin={setIsAdmin}
         teacher={teacher}
         setTeacher={setTeacher}
-        handleLogout={handleLogout}
+        // handleLogout={handleLogout}
       // Pass the teacher state to the Header component
       />
       <Routes>
@@ -94,7 +94,7 @@ function App() {
           path="/loginfrom"
           element={
             <LoginFrom
-              sendDataToParent={handleDataFromChild}
+              // sendDataToParent={handleDataFromChild}
               setIsLoggedIn={setIsLoggedIn}
               setIsAdmin={setIsAdmin}
               setTeacher={setTeacher}

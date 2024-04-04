@@ -2,11 +2,14 @@ import { useState,useEffect } from "react";
 import { Container, Row, Col, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
-const ExitFrom = (props) => {
-  console.log(props.istoken);
+import { useSelector } from "react-redux";
+const ExitFrom = () => {
+  const { token } = useSelector((state) => state.auth);
+  console.log(token);
+
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    token: props.istoken,
+    token:token,
     firstName: "",
     lastName: "",
     fatherName: "",

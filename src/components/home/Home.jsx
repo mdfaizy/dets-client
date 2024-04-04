@@ -7,7 +7,7 @@ import style from "./Home.module.css";
 import AdmissionSummaryData from '../../summaryData/AdmissionSummaryData';
 import Feedback from "../../adminDashboard/feedback/Feedback";
 import Feedbackfrom from "../../adminDashboard/feedback/feedbackfrom/Feedbackfrom";
-
+import Homes from "../../summaryData/flowchart/Homes"
 function Home() {
   return (
     <>
@@ -109,7 +109,7 @@ function Home() {
       </Container>
 
       <AdmissionSummaryData/>
-
+<Homes/>
      <Feedback/>
 
      <Feedbackfrom/>

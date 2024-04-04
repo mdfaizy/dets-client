@@ -5,54 +5,28 @@ function Exitdata(props) {
   const [formData, setFormData] = useState({});
   const { istoken } = props;
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const requestBody = {
-  //         token: istoken,
-  //       };
-
-  //       const response = await fetch(
-  //         "http://localhost:8000/api/v1/get_exitstudent",
-  //         {
-  //           method: "POST",
-  //           headers: {
-  //             "Content-Type": "application/json",
-  //           },
-  //           body: JSON.stringify(requestBody),
-  //         }
-  //       );
-
-  //       if (response.ok) {
-  //         const data = await response.json();
-  //         setFormData(data.data);
-  //       } else {
-  //         console.error("Failed to fetch form data. Status:", response.status);
-  //       }
-  //     } catch (error) {
-  //       console.error("Error fetching form data:", error);
-  //     }
-  //   };
-  //   fetchData();
-  // }, [istoken]);
-
   useEffect(() => {
     const fetchData = async () => {
       try {
         const requestBody = {
           token: istoken,
         };
-        const response = await axios.post(
-          "http://localhost:8000/api/v1/exit/get_exitstudent",
-          requestBody,
+
+        const response = await fetch(
+          "http://localhost:8000/api/v1/get_exitstudent",
           {
+            method: "POST",
             headers: {
               "Content-Type": "application/json",
             },
+            body: JSON.stringify(requestBody),
           }
         );
-        if (response.status === 200) {
-          setFormData(response.data.data);
+
+        console.log(response);
+        if (response.ok) {
+          const data = await response.json();
+          setFormData(data.data);
         } else {
           console.error("Failed to fetch form data. Status:", response.status);
         }
@@ -62,6 +36,33 @@ function Exitdata(props) {
     };
     fetchData();
   }, [istoken]);
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const requestBody = {
+  //         token: istoken,
+  //       };
+  //       const response = await axios.get(
+  //         "http://localhost:8000/api/v1/exit/get_exitstudent",
+  //         requestBody,
+  //         {
+  //           headers: {
+  //             "Content-Type": "application/json",
+  //           },
+  //         }
+  //       );
+  //       if (response.status === 200) {
+  //         setFormData(response.data.data);
+  //       } else {
+  //         console.error("Failed to fetch form data. Status:", response.status);
+  //       }
+  //     } catch (error) {
+  //       console.error("Error fetching form data:", error);
+  //     }
+  //   };
+  //   fetchData();
+  // }, [istoken]);
 
   return (
     <div className="addmission_top_contante">
@@ -103,7 +104,6 @@ function Exitdata(props) {
                 </tr>
 
                 <tr className="tbody_contante">
-
                   <td colSpan={3}>
                     <table
                       className="table_contante_table"
@@ -269,8 +269,6 @@ function Exitdata(props) {
                           </td>
                           <td>{formData.year_cgpa_4th}</td>
                         </tr>
-
-                        
                       </tbody>
                     </table>
                   </td>

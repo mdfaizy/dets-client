@@ -11,7 +11,12 @@ const Feedback = () => {
   const [feedback, setFeedback] = useState([]);
   const [loading, setLoading] = useState(false);
   const [averageRating, setAverageRating] = useState(0);
-  const [showLess, setShowLess] = useState(false);
+
+  const [readmore, setReadMore] = useState(false);
+
+  function readmoreHandler() {
+      setReadMore(!readmore);
+  }
   const reviewData = async () => {
     setLoading(true);
     try {
@@ -19,7 +24,7 @@ const Feedback = () => {
         "http://localhost:8000/api/v1/feedback/showAllFeedback"
       );
       setFeedback(response.data.data);
-
+console.log(" studentInformation",response);
       const totalRating = response.data.data.reduce(
         (accumulator, currentItem) => accumulator + currentItem.rating,
         0
@@ -52,44 +57,16 @@ const Feedback = () => {
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
-    return date.toLocaleDateString(); // Format date as per local date format
+    return date.toLocaleDateString(); 
   };
-
-  // const renderStarIcons = (rating) => {
-  //   const totalStars = 5;
-  //   const filledStars = Math.floor(rating);
-  //   const hasHalfStar = rating % 1 !== 0;
-
-  //   return (
-  //     <div>
-  //       {[...Array(filledStars)].map((_, index) => (
-  //         <FaStar key={index} />
-  //       ))}
-  //       {hasHalfStar && <FaStarHalfAlt />}
-  //       {[...Array(totalStars - filledStars - (hasHalfStar ? 1 : 0))].map((_, index) => (
-  //         <AiOutlineStar key={filledStars + index} />
-  //       ))}
-  //     </div>
-  //   );
-  // };
-
-  const toggleDescription = () => {
-    setShowLess(!showLess);
-  };
-
-  // Function to render description based on showFullDescription state
-  // const renderDescription = (description) => {
-  //   if (showLess) {
-  //     return description;
-  //   } else {
-  //     return description.substring(0, 50) + "...";
-  //   }
-  // };
 
   return (
-    <div className="allfeedbacktopcontainer">
+
+    <div className="bg-success p-2 container-fluid">
+
+<div className="allfeedbacktopcontainer ">
       <div className="average-rating">
-        <h3>Students Ratings & Reviews : {averageRating}</h3>
+        <h3>Students Ratings & Reviews : {averageRating.toFixed(2)}</h3>
       </div>
       {loading ? (
         <div>Loading...</div>
@@ -119,6 +96,8 @@ const Feedback = () => {
                 />
                 <p style={{ margin: "0", paddingLeft: "10px" }}>
                   {item.userName}
+                  {/* {item.studentInformation} */}
+                  
                 </p>
               </div>
 
@@ -170,33 +149,33 @@ const Feedback = () => {
               <p className="rounded  border p-1">Hostels</p>
             </div>
 
-            {/* <div>
-                <p>{item.description.substring(0, 50)}...</p>
-              </div> */}
+      
+               <div className="text-lg">
+              <p className="fs-5">{readmore ? item.description : `${item.description.substring(0, 115)}...` }
+              {item.description.length > 115 && (
+                <button className=" readMoreShowless"  onClick={readmoreHandler}>
+                  {readmore ? `show less` : `read more`}
 
-            {/* <div>
-              <p>{renderDescription(item.description)}</p>
-              <button onClick={toggleDescription} className="btn btn-link">
-                {showLess ? "Show less" : "Read more"}
-              </button>
-            </div> */}
+                </button>
+              )}
+                  </p>
 
-<div>
-                <p>{item.description.substring(0, 50)}</p>
-                {item.description.length > 50 && (
-                  <button className="btn btn-link">
-                    {item.showMore ? "Show less" : "Read more"}
-                  </button>
-                )}
-              </div>
-
-            <div className="iconButton-date">
+                  <div className="iconButton-date " >
               <FaCalendarAlt style={{ marginRight: "5px" }} />
               <p className="m-0 text-black">
                 {" "}
                 Reviewed on {formatDate(item.createdAt)}
               </p>
             </div>
+            </div>
+
+            {/* <div className="iconButton-date " >
+              <FaCalendarAlt style={{ marginRight: "5px" }} />
+              <p className="m-0 text-black">
+                {" "}
+                Reviewed on {formatDate(item.createdAt)}
+              </p>
+            </div> */}
             {/* </Link> */}
           </div>
         ))
@@ -204,6 +183,8 @@ const Feedback = () => {
         <div>No feedback available.</div>
       )}
     </div>
+    </div>
+   
   );
 };
 

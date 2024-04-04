@@ -1,0 +1,37 @@
+
+
+
+
+
+.user-image-logout{
+    /* flex items-center gap-x- */
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    border-radius: 50px;
+    background-color: none;
+    border: 0;
+    width: 40px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.user_img_drop{
+    width: 40px;
+
+    border-radius: 100%;
+    /* background-color: crimson; */
+  padding: 4px;
+}

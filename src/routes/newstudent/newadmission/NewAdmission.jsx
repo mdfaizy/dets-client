@@ -1,11 +1,14 @@
-import { useState ,useEffect} from "react";
+import { useState, useEffect } from "react";
 import { Container, Row, Col, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+
 // import ShowFormData from '../components/ShowFormData';
 import Cookies from "js-cookie";
-function NewAdmission(props) {
+function NewAdmission() {
   const navigate = useNavigate();
-  console.log(props.istoken);
+  // console.log(props.istoken);
+  const { token } = useSelector((state) => state.auth);
   // const [formSubmitted, setFormSubmitted] = useState(false);
   const [step, setStep] = useState(1);
   // const [emailExists, setEmailExists] = useState(false); // State to track email existence
@@ -21,7 +24,7 @@ function NewAdmission(props) {
   };
 
   const [formData, setFormData] = useState({
-    token: props.istoken,
+    token: token,
     firstName: "",
     lastName: "",
     fatherName: "",
@@ -33,9 +36,9 @@ function NewAdmission(props) {
     scoure_rank: "",
     cource_name: "",
     stream: "",
-    gender:"",
-    domicile:"",
-    admission_session:"",
+    gender: "",
+    domicile: "",
+    admission_session: "",
     phone_no: "",
     category: "",
     schoolName_10th: "",
@@ -44,7 +47,6 @@ function NewAdmission(props) {
     board_Name_10th: "",
     year_of_passing_10th: "",
     persentage_10th: "",
-
     schoolName_12th: "",
     roll_No_12th: "",
     regisration_No_12th: "",
@@ -100,7 +102,7 @@ function NewAdmission(props) {
         console.log(responseData);
 
         console.log(responseData.newAdmission._id);
-        
+
         Cookies.set("formData", JSON.stringify(formData));
         navigate("/");
         // navigate(`/ShowFormData/${responseData.data._id}`);
@@ -111,9 +113,6 @@ function NewAdmission(props) {
       console.error("Error occurred:", error);
     }
   };
-
-
-
   return (
     <>
       <Container>
@@ -198,8 +197,6 @@ function NewAdmission(props) {
                         />
                       </Form.Group>
 
-                      
-
                       <Form.Group as={Col} md="4">
                         <Form.Label>
                           Date of Birth<span className="text-danger">*</span>
@@ -226,12 +223,10 @@ function NewAdmission(props) {
                           onChange={changeHandler}
                         >
                           <option value="">Select Exam</option>
-                          <option value="wbjee">WBJEE</option>
-                          <option value="jelet">JElETE</option>
+                          <option value="WBJEE">WBJEE</option>
+                          <option value="JELETE">JElETE</option>
                         </Form.Select>
                       </Form.Group>
-
-
 
                       <Form.Group as={Col} md="4" className="mb-3">
                         <Form.Label htmlFor="gender">
@@ -250,7 +245,6 @@ function NewAdmission(props) {
                         </Form.Select>
                       </Form.Group>
 
-
                       <Form.Group as={Col} md="4" className="mb-3">
                         <Form.Label htmlFor="domicile">
                           Domicile<span className="text-danger">*</span>
@@ -268,18 +262,17 @@ function NewAdmission(props) {
                         </Form.Select>
                       </Form.Group>
 
-
-
-<Form.Group as={Col} md="4">
+                      <Form.Group as={Col} md="4">
                         <Form.Label>
-                         Admission Session<span className="text-danger">*</span>
+                          Admission Session
+                          <span className="text-danger">*</span>
                         </Form.Label>
                         <Form.Control
-                          type="number"
+                          type="text"
                           name="admission_session"
                           id="admission_session"
                           value={formData.admission_session}
-                          placeholder="Enter ..."
+                          placeholder="20XX-20XX"
                           onChange={changeHandler}
                           className="rounded-2"
                         />
@@ -296,13 +289,13 @@ function NewAdmission(props) {
                           onChange={changeHandler}
                         >
                           <option value="">Select Category</option>
-                          <option value="general">General</option>
-                          <option value="obc_a">OBC-A</option>
-                          <option value="obc_b">OBC-B</option>
-                          <option value="ews">EWS</option>
-                          <option value="sc">SC</option>
-                          <option value="st">ST</option>
-                          <option value="pwd">PWD</option>
+                          <option value="GENERAL">GENERAL</option>
+                          <option value="OBC-A">OBC-A</option>
+                          <option value="OBC-B">OBC-B</option>
+                          <option value="EWS">EWS</option>
+                          <option value="SC">SC</option>
+                          <option value="ST">ST</option>
+                          <option value="PWD">PWD</option>
                         </Form.Select>
                       </Form.Group>
                       <Form.Group as={Col} md="4">
@@ -356,7 +349,7 @@ function NewAdmission(props) {
                           name="stream"
                           id="stream"
                           value={formData.stream}
-                          placeholder="Enter Stream..."
+                          placeholder="Electronics and Instrumentation Engineering (EIE)/Information Technology (IT)"
                           onChange={changeHandler}
                           className="rounded-2"
                         />
