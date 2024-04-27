@@ -78,12 +78,12 @@ const ExitFrom = () => {
   return (
     <>
       {/* <Col className="text-center">Exit-Student</Col> */}
-      <Container>
-        <Row>
+      <Container fluid>
+        <Row className="bg-dark text-white ">
           <>
-          <Col className="text-center my-4" >Exit Student</Col>
+          <Col className="text-center my-4" >EXIT STUDENT</Col>
             <Form onSubmit={submitHandler}>
-            <Row>
+            <Row className="px-5 outline-none">
 
             <Form.Group as={Col} md="4">
                 <Form.Label>

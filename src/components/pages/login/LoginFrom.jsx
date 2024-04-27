@@ -289,7 +289,8 @@ import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { useDispatch } from "react-redux";
-import { login } from "../../../services/apiFunction/authApi";
+// import { login } from "../../../services/apiFunction/authApi";
+import {login} from "../../../services/apiFunction/authApi";
 
 const LoginFrom = ({ setIsAdmin, setTeacher }) => {
   // const navigate = useNavigate();
@@ -340,10 +341,23 @@ const LoginFrom = ({ setIsAdmin, setTeacher }) => {
     }));
   };
 
-  const submitHandler = (e) => {
-    e.preventDefault();
-    dispatch(login(email, password,setIsAdmin, setTeacher, navigate));
-  };
+  // const submitHandler = (e) => {
+  //   e.preventDefault();
+  //   dispatch(login(email, password,setIsAdmin, setTeacher, navigate));
+  // };
+
+
+  // Inside LoginFrom component
+const submitHandler = async (e) => {
+  e.preventDefault();
+  try {
+    await dispatch(login(email, password, setIsAdmin, setTeacher, navigate));
+  } catch (error) {
+    console.error("Login error:", error);
+    // Handle login error
+  }
+};
+
 
 
 

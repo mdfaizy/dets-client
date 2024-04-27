@@ -16,9 +16,9 @@ const ProfileDropdown = () => {
 
   useOnClickOutside(ref, () => setOpen(false));
 
-  if (!user) return null;
+  // if (!user) return null;
 
-  console.log("user",user.image);
+  // console.log("user",user.image);
   return (
     <div className="">
       <button
@@ -29,10 +29,10 @@ const ProfileDropdown = () => {
       >
         <div className="user-image-logout">
           <img
-            src={user.image}
-            // src="https://api.dicebear.com/6.x/initials/svg?seed=MD"
-            // alt={`profile-${user?.firstName}`}
-          
+            // src={user.image}
+            src="https://api.dicebear.com/6.x/initials/svg?seed=MD"
+            alt={`profile-${user?.firstName}`}
+           
             className="user_img_drop"
           />
           <AiOutlineCaretDown className="text-sm text-richblack-100" />
@@ -49,7 +49,7 @@ const ProfileDropdown = () => {
           ref={ref}
         >
           <Link
-            to="/dashboard/my-profile"
+            to="/dashboard/profile"
             className="dropdown-item"
             onClick={() => setOpen(false)}
           >
@@ -73,3 +73,5 @@ const ProfileDropdown = () => {
 };
 
 export default ProfileDropdown;
+
+

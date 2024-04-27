@@ -7,7 +7,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import LoginFrom from "./components/pages/login/LoginFrom";
 import Footer from "./components/common/footer/Footer";
 import Header from "./components/common/header/Header";
-import { Route, Routes } from "react-router-dom";
+import { Route, Router, Routes } from "react-router-dom";
 import SignupFrom from "./components/pages/signup/SignupFrom";
 import NewAdmission from "./routes/newstudent/newadmission/NewAdmission";
 import ExitFrom from "./routes/exitstudent/exit/ExitFrom";
@@ -33,8 +33,13 @@ import Exitsumbitdata from "./components/sumbitdata/Exitsumbitdata";
 import StudentAllInfo from "./routes/StudentDetails/StudentAllInfo";
 // import FeedbackFullContent from "./adminDashboard/FeedbackFullContent";
 import FeedbackFullContent from "./adminDashboard/FeedbackFullContent";
+import NewStudentReport from "./admin&teacher/createReport/newStudent/NewStudentReport";
 // import ExitAllInput from "./adminsection/alldataShow/ExitAllInput";
 // import Feedback from "./adminDashboard/feedback/Feedback";
+import ExitReport from "./admin&teacher/createReport/exit/ExitReport";
+import Report from "./admin&teacher/report/Report";
+import PgReport from "./admin&teacher/createReport/PgReport";
+import JobReport from "./admin&teacher/createReport/JobReport";
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
@@ -46,8 +51,6 @@ function App() {
   //   setToken(token);
   //   console.log("Teacher state in App.js:", teacher);
   // };
-
-
 
   // const handleDataFromChild = (token) => {
   //   console.log("Data from child:", token);
@@ -74,7 +77,7 @@ function App() {
         teacher={teacher}
         setTeacher={setTeacher}
         // handleLogout={handleLogout}
-      // Pass the teacher state to the Header component
+        // Pass the teacher state to the Header component
       />
       <Routes>
         <Route index element={<Home />} />
@@ -98,7 +101,8 @@ function App() {
               setIsLoggedIn={setIsLoggedIn}
               setIsAdmin={setIsAdmin}
               setTeacher={setTeacher}
-            />}
+            />
+          }
         />
         <Route
           path="/signupfrom"
@@ -120,20 +124,26 @@ function App() {
         {/* <Route path='/all_new_addmission/:id' element={<Allnewstudent/>}/> */}
         <Route
           path="/all_new_addmission/:id"
-          element={<Allnewstudent istoken={istoken}
-            isAdmin={isAdmin}
-            teacher={teacher} />}
+          element={
+            <Allnewstudent
+              istoken={istoken}
+              isAdmin={isAdmin}
+              teacher={teacher}
+            />
+          }
         />
-        <Route path="/all_exit_student/:id" element={<Allexitstudent
-          isAdmin={isAdmin}
-          teacher={teacher} />} />
-        <Route path="/all_pg_student/:id" element={<Allpgstudent
-          isAdmin={isAdmin}
-          teacher={teacher}
-        />} />
-        <Route path="/all_student_job/:id" element={<Allstudentjob
-          isAdmin={isAdmin}
-          teacher={teacher} />} />
+        <Route
+          path="/all_exit_student/:id"
+          element={<Allexitstudent isAdmin={isAdmin} teacher={teacher} />}
+        />
+        <Route
+          path="/all_pg_student/:id"
+          element={<Allpgstudent isAdmin={isAdmin} teacher={teacher} />}
+        />
+        <Route
+          path="/all_student_job/:id"
+          element={<Allstudentjob isAdmin={isAdmin} teacher={teacher} />}
+        />
         <Route path="/forgatepassword" element={<ForgatePassword />} />
         <Route path="/reasetpassword/:token" element={<ReasetPassword />} />
         <Route path="/exit" element={<Exit />} />
@@ -141,14 +151,20 @@ function App() {
         <Route path="/btechjob" element={<Btechjob />} />
         <Route path="/pgcourses" element={<Pgcourse />} />
         <Route path="/pgsumbitdata" element={<PgCourseSumbitData />} />
-        <Route path='/exitsumbitdata' element={<Exitsumbitdata />} />
-        <Route path='/studentallinfo' element={<StudentAllInfo teacher={teacher} istoken={istoken} />} />
+        <Route path="/exitsumbitdata" element={<Exitsumbitdata />} />
+        <Route
+          path="/studentallinfo"
+          element={<StudentAllInfo teacher={teacher} istoken={istoken} />}
+        />
         {/* <Route exact path="/feedback/: component={Feedback} /> */}
-<Route path='/feedback/:id' element={<FeedbackFullContent/>} />
-{/* <Route path="/feedback/:id" component={FeedbackFullContent} /> */}
-{/* <Route path="/feedback/:id" component={FeedbackFullContent} /> */}
+        <Route path="/feedback/:id" element={<FeedbackFullContent />} />
 
-        {/* <Route path='/exitallinput' element={<ExitAllInput />} /> */}
+        <Route path="/newstudentreport" element={<NewStudentReport />} />
+
+        <Route path="/createreport" element={<Report />} />
+       <Route path="/createexitreport" element={<ExitReport />} />
+       <Route path="/createpgreport" element={<PgReport />} />
+       <Route path='/createjobreport' element={<JobReport />} />
       </Routes>
       <Footer
         isLoggedIn={isLoggedIn}

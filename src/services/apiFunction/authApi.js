@@ -2,12 +2,13 @@
 
 import { toast } from "react-toastify";
 import { setLoading, setToken } from "../../redux/slices/authSlice";
+// import { setLoading, setToken, setUser, setIsAdmin, setTeacher } from "../../redux/slices/authSlice";
 // import { resetCart } from "../../slices/cartSlice"
-import { setUser } from "../../redux/slices/profileSlice";
+// import { setUser } from "../../redux/slices/profileSlice";
 import { apiConnector } from "../apiConnector";
 import { endpoints } from "../apis";
 
-const { SIGNUP_API, LOGIN_API ,VERIFY_USER} = endpoints;
+const { SIGNUP_API, LOGIN_API, VERIFY_USER } = endpoints;
 
 export const sendOtp = async (email, navigate) => {
   return async (dispatch) => {
@@ -38,7 +39,15 @@ export const sendOtp = async (email, navigate) => {
 };
 
 export const signUpFrom = (formData, navigate) => {
-  const { firstName, lastName, email, password, confirmPassword, instructorKey, accountType } = formData; // Include accountType here
+  const {
+    firstName,
+    lastName,
+    email,
+    password,
+    confirmPassword,
+    instructorKey,
+    accountType,
+  } = formData; // Include accountType here
   return async (dispatch) => {
     const toastId = toast.loading("Loading...");
     dispatch(setLoading(true));
@@ -49,8 +58,8 @@ export const signUpFrom = (formData, navigate) => {
         email,
         password,
         confirmPassword,
-        accountType ,
-        instructorKey 
+        accountType,
+        instructorKey,
       });
 
       console.log("SIGNUP API RESPONSE:", response);
@@ -71,126 +80,19 @@ export const signUpFrom = (formData, navigate) => {
   };
 };
 
-
-
-
 export function logout(navigate) {
   return (dispatch) => {
-    dispatch(setToken(null))
-    dispatch(setUser(null))
+    dispatch(setToken(null));
+    // dispatch(setUser(null));
     // dispatch(resetCart())
-    localStorage.removeItem("token")
-    localStorage.removeItem("user")
-    toast.success("Logged Out")
-    navigate("/")
-  }
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    toast.success("Logged Out");
+    navigate("/");
+  };
 }
 
-
-
-// export function login(email, password, setIsAdmin, setTeacher, navigate) {
-//   return async (dispatch) => {
-//     const toastId = toast.loading("Loading...");
-//     dispatch(setLoading(true));
-//     try {
-//       const response = await apiConnector("POST", LOGIN_API, {
-//         email,
-//         password,
-//       });
-
-//       console.log("LOGIN API RESPONSE............", response);
-
-//       if (!response.data.success) {
-//         throw new Error(response.data.message);
-//       }
-
-//       toast.success("Login Successful");
-//       dispatch(setToken(response.data.token));
-//       const userImage = response.data?.user?.image
-//         ? response.data.user.image
-//         : `https://api.dicebear.com/5.x/initials/svg?seed=${response.data.user.firstName} ${response.data.user.lastName}`;
-//       dispatch(setUser({ ...response.data.user, image: userImage }));
-
-//       localStorage.setItem("token", JSON.stringify(response.data.token));
-//       localStorage.setItem("user", JSON.stringify(response.data.user));
-
-//       // Check if the user is an instructor
-//       if (response.data.user.instructorKey === "ukdets@#1234" && response.data.user.accountType === "Instructor") {
-//         dispatch(setTeacher(true));
-//         console.log("Logged in as an Instructor", response.data.user.accountType);
-//       }
-
-//       // Check if the user is an admin
-//       if (import.meta.env.VITE_REACT_APP_ADMIN_TOKEN === response.data.token) {
-//         dispatch(setIsAdmin(true));
-//       }
-
-//       navigate("/");
-//     } catch (error) {
-//       console.log("LOGIN API ERROR............", error);
-//       toast.error("Login Failed");
-//       dispatch(setLoading(false)); // Set loading to false here as well
-//       toast.dismiss(toastId);
-//       return; // Return from here to prevent further execution
-//     }
-//     dispatch(setLoading(false));
-//     toast.dismiss(toastId);
-//   };
-// }
-
-
-
-
-// export function login(email, password, setIsAdmin, setTeacher, navigate) {
-//   return async (dispatch) => {
-//     const toastId = toast.loading("Loading...");
-//     dispatch(setLoading(true));
-//     try {
-//       const response = await apiConnector("POST", LOGIN_API, {
-//         email,
-//         password,
-//       });
-//       console.log("LOGIN API RESPONSE:", response);
-//       if (!response.data.success) {
-//         toast.error(response.data.message);
-//         throw new Error(response.data.message);
-//       }
-//       toast.success("Login Successful");
-
-//       // Dispatch actions based on user role
-//       const { user } = response.data;
-//       console.log("user:", user)
-//       dispatch(setToken(response.data.token));
-//       dispatch(setUser(user));
-
-
-//        // Check if the user is an admin
-//        if (import.meta.env.VITE_REACT_APP_ADMIN_TOKEN === response.data.token) {
-//         dispatch(setIsAdmin(true));
-//       }
-//       // Check if the user is an instructor
-//       if (user.instructorKey === "ukdets@#1234" && user.accountType === "Instructor") {
-//         dispatch(setTeacher(true));
-//         console.log("Logged in as an Instructor", user.accountType);
-//       }
-
-     
-
-//       localStorage.setItem("token", JSON.stringify(response.data.token));
-//       localStorage.setItem("user", JSON.stringify(user));
-
-//       navigate("/");
-//     } catch (error) {
-//       console.error("LOGIN API ERROR:", error);
-//       toast.error("Login Failed");
-//     } finally {
-//       dispatch(setLoading(false));
-//       toast.dismiss(toastId);
-//     }
-//   };
-// }
-
-export function login(email, password, setIsAdmin, setTeacher, navigate) {
+export function login(email, password, setIsAdmin,setTeacher, navigate) {
   return async (dispatch) => {
     const toastId = toast.loading("Logging in...");
     try {
@@ -207,30 +109,44 @@ export function login(email, password, setIsAdmin, setTeacher, navigate) {
 
       // Dispatch actions based on user role
       const { user } = response.data;
-      console.log(user)
-      console.log("user.firstName",firstName)
-      dispatch(setToken(response.data.token));
-      dispatch(setUser(user));
 
-    
-      dispatch(setToken(response.data.token));
-      const userImage = response.data?.user?.image
-        ? response.data.user.image
-        : `https://api.dicebear.com/5.x/initials/svg?seed=${response.data.user.firstName} ${response.data.user.lastName}`;
-      dispatch(setUser({ ...response.data.user, image: userImage }));
-    console.log("userImage",userImage);
-      // Check if the user is an admin
       if (import.meta.env.VITE_REACT_APP_ADMIN_TOKEN === response.data.token) {
+        
+         dispatch(setToken(response.data.token));
         dispatch(setIsAdmin(true));
+
+         localStorage.setItem("token", JSON.stringify(response.data.token));
+
       }
-      // Check if the user is an instructor
+      
+
+
       if (user.instructorKey === "ukdets@#1234" && user.accountType === "Instructor") {
-        dispatch(setTeacher(true));
+        dispatch(setToken(response.data.token));
+        // dispatch(setAccountType(response.user.accountType));
+        localStorage.setItem("token", JSON.stringify(response.data.token));
+        // dispatch(setTeacher(true)); // Set teacher state to true
+        console.log("jiii",response.data.token);
+        // console.log("gfgdfgd",response.data.accountType      )
         console.log("Logged in as an Instructor", user.accountType);
       }
 
+
+      console.log(user);
+      dispatch(setToken(response.data.token));
+      console.log(response.data.token);
+      // dispatch(setUser(user));
+
+      // dispatch(setToken(response.data.token));
+      const userImage = response.data?.user?.image
+        ? response.data.user.image
+        : `https://api.dicebear.com/5.x/initials/svg?seed=${response.data.user.firstName} ${response.data.user.lastName}`;
+      // dispatch(setUser({ ...response.data.user, image: userImage }));
+      console.log("userImage", userImage);    
+
+      
       localStorage.setItem("token", JSON.stringify(response.data.token));
-      localStorage.setItem("user", JSON.stringify(user));
+      // localStorage.setItem("user", JSON.stringify(user));
 
       navigate("/");
     } catch (error) {
@@ -242,30 +158,52 @@ export function login(email, password, setIsAdmin, setTeacher, navigate) {
   };
 }
 
+// export function login(email, password, setIsAdmin, setTeacher, navigate) {
+//   return async (dispatch) => {
+//     const toastId = toast.loading("Logging in...");
+//     try {
+//       const response = await apiConnector("POST", LOGIN_API, {
+//         email,
+//         password,
+//       });
 
+//       if (!response.data.success) {
+//         toast.error(response.data.message);
+//         throw new Error(response.data.message);
+//       }
 
+//       const { user, token } = response.data;
 
+//       // Dispatch actions
+//       dispatch(setToken(token));
+//       dispatch(setUser(user));
 
+//       // Set user image
+//       const userImage = response.data?.user?.image
+//         ? response.data.user.image
+//         : `https://api.dicebear.com/5.x/initials/svg?seed=${response.data.user.firstName} ${response.data.user.lastName}`;
+//       dispatch(setUser({ ...response.data.user, image: userImage }));
 
+//       // Check if the user is an admin or instructor
+//       if (user.accountType === "Admin") {
+//         dispatch(setIsAdmin(true));
+//       }
+//       if (user.accountType === "Instructor" && user.instructorKey === "ukdets@#1234") {
+//         dispatch(setTeacher(true));
+//       }
 
+//       // Save token and user to local storage
+//       localStorage.setItem("token", token);
+//       localStorage.setItem("user", JSON.stringify(user));
 
+//       toast.success("Login Successful");
+//       navigate("/");
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//     } catch (error) {
+//       console.error("LOGIN API ERROR:", error);
+//       toast.error("Login Failed");
+//     } finally {
+//       toast.dismiss(toastId); // Dismiss loading toast
+//     }
+//   };
+// }

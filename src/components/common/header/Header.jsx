@@ -441,6 +441,7 @@ import { Navbar, Nav } from 'react-bootstrap';
 import style from './Header.module.css';
 import logImg from '../../../assets/log.jpg';
 import { useSelector } from "react-redux";
+
 const Header = (props) => {
   const {
     isLoggedIn,
@@ -453,7 +454,7 @@ const Header = (props) => {
   } = props;
   console.log("Teacher Prop Value:", teacher);
   const { token } = useSelector((state) => state.auth);
-  // const { user } = useSelector((state) => state.profile);
+  // const { accountType } = useSelector((state) => state.auth);
 
   const [click, setClick] = useState(false);
 
@@ -535,14 +536,17 @@ const Header = (props) => {
               </>
             )}
 
-{isAdmin && (
+{isAdmin && teacher!==null && (
             <li className={style.nav_links} onClick={handleClick}>
               <NavLink to="/showFormData" className={style.nav_links}>
-                SHOWFORMDATA
+               A  SHOWFORMDATA
               </NavLink>
             </li>
           )}
+  {/* {token !== null && accountType === "Instructor" && ( */}
 {teacher && token!==null &&(
+
+
               <>
                 <NavLink
                   to="/studentallinfo"
@@ -552,6 +556,13 @@ const Header = (props) => {
                   STUDENT-INFO
                 </NavLink>
                
+
+             
+               <NavLink 
+                className={style.nav_links}
+               to='/createreport'>
+               REPORT CREATE
+               </NavLink>
               </>
             )}
 
@@ -577,7 +588,6 @@ const Header = (props) => {
             </>
           )}
          
-
 {token !== null && <ProfileDropdown />}
         </Nav>
           </Nav>

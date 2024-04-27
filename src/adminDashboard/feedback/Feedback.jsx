@@ -24,7 +24,9 @@ const Feedback = () => {
         "http://localhost:8000/api/v1/feedback/showAllFeedback"
       );
       setFeedback(response.data.data);
+
 console.log(" studentInformation",response);
+
       const totalRating = response.data.data.reduce(
         (accumulator, currentItem) => accumulator + currentItem.rating,
         0
@@ -74,6 +76,7 @@ console.log(" studentInformation",response);
         feedback.map((item, index) => (
           <div key={index} className="review-content">
             {/* <Link to={`/feedback/${item._id}`} className="feedback-link"> */}
+           
             <div
               className="d-flex "
               style={{
@@ -87,6 +90,7 @@ console.log(" studentInformation",response);
               <div className="m-2 d-flex align-items-center">
                 <img
                   src={item.image}
+                  
                   alt="user_image"
                   style={{
                     width: "40px",
@@ -94,13 +98,14 @@ console.log(" studentInformation",response);
                     borderRadius: "50%",
                   }}
                 />
+                { console.log('${src={item.image}}')}
+                { console.log(item.image)}
                 <p style={{ margin: "0", paddingLeft: "10px" }}>
                   {item.userName}
-                  {/* {item.studentInformation} */}
+                 
                   
                 </p>
               </div>
-
               <div
                 style={{
                   margin: "0",

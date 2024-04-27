@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 import "./admissiondata.scss";
 import axios from "axios";
-function Addmissiondata(props) {
+import {useSelector} from 'react-redux'
+function Addmissiondata() {
   const [formData, setFormData] = useState({});
-  const { istoken } = props;
+  // const { istoken } = props;
 
+ const { token } = useSelector((state) => state.auth);
   // useEffect(() => {
   //   const fetchData = async () => {
   //     try {
@@ -24,12 +26,12 @@ function Addmissiondata(props) {
   // }, []);
 
   // --------------------===========================================
-
+console.log(token);
   useEffect(() => {
     const fetchData = async () => {
       try {
         const requestBody = {
-          token: istoken,
+          token: token,
         };
 
         const response = await axios.post(
@@ -52,7 +54,7 @@ function Addmissiondata(props) {
       }
     };
     fetchData();
-  }, [istoken]);
+  }, [token]);
 
   // const handlePrint = () => {
   //   window.print(); // This triggers the browser's print dialog
