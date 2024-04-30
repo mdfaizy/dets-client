@@ -411,23 +411,6 @@ const SignupForm = () => {
   // };
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   // const [accountType, setAccountType] = useState('Student');
   const [formData, setFormData] = useState({
     email: "",
@@ -470,13 +453,6 @@ const SignupForm = () => {
       accountType: "Student", // Reset accountType to Student
     });
   };
-  
-
-
-
-
-  
-
   return (
     <div className={style.sinnup_content}>
       <Container className={style.sinnup_all_content}>

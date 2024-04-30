@@ -1,88 +1,34 @@
 import { useState, useEffect } from "react";
 import "./admissiondata.scss";
 import axios from "axios";
-// import { useLocation } from "react-router-dom";
-function Pgdata(props) {
-  // const location = useLocation()
-  // const { apidata } = location.state || {}
-  //   const [formData, setFormData] = useState({});
-  //   const { istoken } = props;
-  //   useEffect(() => {
-  //     const fetchData = async () => {
-  //       try {
-  //         const requestBody = {
-  //           token: istoken,
-  //         };
-  //         const response = await axios.post(
-  //           "http://localhost:8000/api/v1/get_pg_cource",
-  //           requestBody,
-  //           {
-  //             headers: {
-  //               "Content-Type": "application/json",
-  //             },
-  //           }
-  //         );
-  //         if (response.status === 200) {
-  //           setFormData(response.data.data);
-  //         } else {
-  //           console.error("Failed to fetch form data. Status:", response.status);
-  //         }
-  //       } catch (error) {
-  //         console.error("Error fetching form data:", error);
-  //       }
-  //     };
-  //     fetchData();
-  //   }, [istoken]);
-
+import { useSelector } from "react-redux";
+function Exitdata() {
   const [formData, setFormData] = useState({});
-  const { istoken } = props;
-
-  //   useEffect(() => {
-  //     const fetchData = async () => {
-  //       try {
-  //         const requestBody = {
-  //           token: istoken,
-  //         };
-  //         const response = await axios.post(
-  //           "http://localhost:8000/api/v1/get_pg_cource",
-  //           requestBody,
-  //           {
-  //             headers: {
-  //               "Content-Type": "application/json",
-  //             },
-  //           }
-  //         );
-  //         if (response.status === 200) {
-  //           setFormData(response.data.data);
-  //         } else {
-  //           console.error("Failed to fetch form data. Status:", response.status);
-  //         }
-  //       } catch (error) {
-  //         console.error("Error fetching form data:", error);
-  //       }
-  //     };
-  //     fetchData();
-  //   }, [istoken]);
-
+  const { token } = useSelector((state) => state.auth);
+  console.log("admission token",token);
   useEffect(() => {
     const fetchData = async () => {
       try {
         const requestBody = {
-          token: istoken,
+          token: token,
         };
 
         const response = await axios.post(
-          "http://localhost:8000/api/v1/pgcourse/get_pg_student",
+          "http://localhost:8000/api/v1/exit/get_exitstudent",
           requestBody,
           {
+            method: "POST",
             headers: {
               "Content-Type": "application/json",
             },
+            body: JSON.stringify(requestBody),
           }
         );
 
-        if (response.status === 200) {
-          setFormData(response.data.data);
+        console.log(response);
+        if (response.ok) {
+          const data = await response.json();
+          setFormData(data.data);
         } else {
           console.error("Failed to fetch form data. Status:", response.status);
         }
@@ -91,7 +37,8 @@ function Pgdata(props) {
       }
     };
     fetchData();
-  }, [istoken]);
+  }, [token]);
+
 
   return (
     <div className="addmission_top_contante">
@@ -129,7 +76,7 @@ function Pgdata(props) {
               <tbody>
                 <tr className="table_tbody_hading">
                   Department of Engineering and Technological Studies <br />
-                  PG Student
+                  Exit Student
                 </tr>
 
                 <tr className="tbody_contante">
@@ -199,6 +146,13 @@ function Pgdata(props) {
                           <td>{formData.email}</td>
                         </tr>
                         <tr>
+                          <td className="tbody_formData_info_name">Roll No:</td>
+                          <td className="tbody_fromData_and_info_dot">
+                            <b>:</b>
+                          </td>
+                          <td>{formData.rollNo}</td>
+                        </tr>
+                        <tr>
                           <td className="tbody_formData_info_name">
                             Date of Birth
                           </td>
@@ -208,19 +162,13 @@ function Pgdata(props) {
                           <td>{formData.date_of_birth}</td>
                         </tr>
                         <tr>
-                          <td className="tbody_formData_info_name">Gender</td>
+                          <td className="tbody_formData_info_name">Stream</td>
                           <td className="tbody_fromData_and_info_dot">
                             <b>:</b>
                           </td>
-                          <td>{formData.gender}</td>
+                          <td>{formData.stream}</td>
                         </tr>
-                        <tr>
-                          <td className="tbody_formData_info_name">Exam</td>
-                          <td className="tbody_fromData_and_info_dot">
-                            <b>:</b>
-                          </td>
-                          <td>{formData.exameType}</td>
-                        </tr>
+
                         <tr>
                           <td className="tbody_formData_info_name">Category</td>
                           <td className="tbody_fromData_and_info_dot">
@@ -230,19 +178,26 @@ function Pgdata(props) {
                         </tr>
                         <tr>
                           <td className="tbody_formData_info_name">
-                            All India Rank
+                            Registration No
                           </td>
                           <td className="tbody_fromData_and_info_dot">
                             <b>:</b>
                           </td>
-                          <td>{formData.allIndiaRank}</td>
+                          <td>{formData.registrationNo}</td>
                         </tr>
                         <tr>
-                          <td className="tbody_formData_info_name">Stream</td>
+                          <td className="tbody_formData_info_name">Session</td>
                           <td className="tbody_fromData_and_info_dot">
                             <b>:</b>
                           </td>
-                          <td>{formData.stream}</td>
+                          <td>{formData.session}</td>
+                        </tr>
+                        <tr>
+                          <td className="tbody_formData_info_name">Phone No</td>
+                          <td className="tbody_fromData_and_info_dot">
+                            <b>:</b>
+                          </td>
+                          <td>{formData.Phone_no}</td>
                         </tr>
                         <tr>
                           <td className="tbody_formData_info_name">Session</td>
@@ -253,21 +208,42 @@ function Pgdata(props) {
                         </tr>
                         <tr>
                           <td className="tbody_formData_info_name">
-                            Institute City
+                            First Year
                           </td>
                           <td className="tbody_fromData_and_info_dot">
                             <b>:</b>
                           </td>
-                          <td>{formData.InstituteCity}</td>
+                          <td>{formData.year_cgpa_1th}</td>
                         </tr>
+
                         <tr>
                           <td className="tbody_formData_info_name">
-                            Institute Name
+                            Second Year
                           </td>
                           <td className="tbody_fromData_and_info_dot">
                             <b>:</b>
                           </td>
-                          <td>{formData.InstituteName}</td>
+                          <td>{formData.year_cgpa_2nd}</td>
+                        </tr>
+
+                        <tr>
+                          <td className="tbody_formData_info_name">
+                            Third Year
+                          </td>
+                          <td className="tbody_fromData_and_info_dot">
+                            <b>:</b>
+                          </td>
+                          <td>{formData.year_cgpa_3rd}</td>
+                        </tr>
+
+                        <tr>
+                          <td className="tbody_formData_info_name">
+                            Fourthe Year
+                          </td>
+                          <td className="tbody_fromData_and_info_dot">
+                            <b>:</b>
+                          </td>
+                          <td>{formData.year_cgpa_4th}</td>
                         </tr>
                       </tbody>
                     </table>
@@ -281,4 +257,6 @@ function Pgdata(props) {
     </div>
   );
 }
-export default Pgdata;
+
+export default Exitdata;
+

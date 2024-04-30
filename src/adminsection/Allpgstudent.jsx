@@ -4,6 +4,7 @@ import axios from "axios";
 import { MdAssignmentTurnedIn } from "react-icons/md";
 import style from "./adminsection.module.css";
 import "./showdataAdminandteacher.scss";
+import { getAllPgStudents,deletePgStudent,updatePgStudent } from "../services/hooks/pgcourseApi";
 const Allpgstudent = (props) => {
   const { isAdmin, teacher } = props;
   const [formData, setFormData] = useState([]);
@@ -14,42 +15,70 @@ const Allpgstudent = (props) => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [item, setItem = useState] = useState(null);
 
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await axios.get(
+  //         "http://localhost:8000/api/v1/pgcourse/get_all_pgcource_student"
+  //       );
+  //       if (response.status === 200) {
+  //         console.log(response);
+  //         setFormData(response.data.data);
+  //       } else {
+  //         console.error(
+  //           "Failed to fetch admission data. Status:",
+  //           response.status
+  //         );
+  //       }
+  //     } catch (error) {
+  //       console.error("Error fetching admission data:", error);
+  //     }
+  //   };
+  //   fetchData();
+  // }, []);
+
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(
-          "http://localhost:8000/api/v1/pgcourse/get_all_pgcource_student"
-        );
-        if (response.status === 200) {
-          console.log(response);
-          setFormData(response.data.data);
-        } else {
-          console.error(
-            "Failed to fetch admission data. Status:",
-            response.status
-          );
-        }
+        const data = await getAllPgStudents();
+        setFormData(data);
       } catch (error) {
-        console.error("Error fetching admission data:", error);
+        console.error('Error fetching PG students data:', error);
       }
     };
     fetchData();
   }, []);
 
+  // const handleDelete = async (id, index) => {
+  //   console.log("delete ", id);
+  //   try {
+  //     const responseDelete = await axios.delete(
+  //       `http://localhost:8000/api/v1/pgcourse/delete_id_pgstudent/${id}`
+  //     );
+  //     console.log("responseDelete", responseDelete);
+  //     const updatedFormData = [...formData];
+  //     updatedFormData.splice(index, 1);
+  //     setFormData(updatedFormData);
+  //   } catch (error) {
+  //     console.log("Error deleting item:", error);
+  //   }
+  // };
+
+
+
   const handleDelete = async (id, index) => {
-    console.log("delete ", id);
     try {
-      const responseDelete = await axios.delete(
-        `http://localhost:8000/api/v1/pgcourse/delete_id_pgstudent/${id}`
-      );
-      console.log("responseDelete", responseDelete);
+      await deletePgStudent(id);
       const updatedFormData = [...formData];
       updatedFormData.splice(index, 1);
       setFormData(updatedFormData);
     } catch (error) {
-      console.log("Error deleting item:", error);
+      console.error(error);
     }
   };
+
+
   const handleEdit = (index) => {
     setIsEditing(true);
     setClickedIndex(index);
@@ -116,22 +145,26 @@ const Allpgstudent = (props) => {
             <th>No</th>
             <th>First Name</th>
             <th>Last Name</th>
+            <th>Email</th>
+            <th>DOB</th>
+            <th>Gender</th>
+            <th>Category</th>
+
+
             <th>Father Name</th>
             <th>Mother Name</th>
-            <th>Email</th>
-            <th>Stream</th>
-            <th> DOB</th>
-            <th> Gender</th>
-            <th>Exame Type</th>
-            <th>Category</th>
-            <th>All India Rank</th>
-            <th>Session</th>
-            <th>Institute City</th>
-            <th>Institute Name</th>
 
-            {/* <th>Delete</th> */}
+            <th>All India Rank</th>
+            <th>Stream</th>
+            <th>Session</th>
+            <th>Exame Type</th>
+            <th>Institute Name</th>
+            <th>Course</th>
+            <th>Institute City</th>
+            <th>Category Rank</th>
+          
             <th className={style.icon_show}>
-              {/* <MdAssignmentTurnedIn /> */}
+              
               Action
             </th>
           </tr>
@@ -184,6 +217,48 @@ const Allpgstudent = (props) => {
                 )}
               </td>
 
+
+             
+              <td>
+                {isEditing && clickedIndex === index ? (
+                  <input
+                    type="text"
+                    name="date_of_birth"
+                    value={editFormData.date_of_birth}
+                    onChange={handleInputChange}
+                  />
+                ) : (
+                  item.date_of_birth
+                )}
+              </td>
+
+              <td>
+                {isEditing && clickedIndex === index ? (
+                  <input
+                    type="text"
+                    name="gender"
+                    value={editFormData.gender}
+                    onChange={handleInputChange}
+                  />
+                ) : (
+                  item.gender
+                )}
+              </td>
+
+              <td>
+                {isEditing && clickedIndex === index ? (
+                  <input
+                    type="text"
+                    name="category"
+                    value={editFormData.category}
+                    onChange={handleInputChange}
+                  />
+                ) : (
+                  item.category
+                )}
+              </td>
+
+
               <td>
                 {isEditing && clickedIndex === index ? (
                   <input
@@ -208,79 +283,7 @@ const Allpgstudent = (props) => {
                   item.motherName
                 )}
               </td>
-              <td>
-                {isEditing && clickedIndex === index ? (
-                  <input
-                    type="text"
-                    name="email"
-                    value={editFormData.email}
-                    onChange={handleInputChange}
-                  />
-                ) : (
-                  item.email
-                )}
-              </td>
-              <td>
-                {isEditing && clickedIndex === index ? (
-                  <input
-                    type="text"
-                    name="stream"
-                    value={editFormData.stream}
-                    onChange={handleInputChange}
-                  />
-                ) : (
-                  item.stream
-                )}
-              </td>
-
-              <td>
-                {isEditing && clickedIndex === index ? (
-                  <input
-                    type="text"
-                    name="date_of_birth"
-                    value={editFormData.date_of_birth}
-                    onChange={handleInputChange}
-                  />
-                ) : (
-                  item.date_of_birth
-                )}
-              </td>
-              <td>
-                {isEditing && clickedIndex === index ? (
-                  <input
-                    type="text"
-                    name="gender"
-                    value={editFormData.gender}
-                    onChange={handleInputChange}
-                  />
-                ) : (
-                  item.gender
-                )}
-              </td>
-              <td>
-                {isEditing && clickedIndex === index ? (
-                  <input
-                    type="text"
-                    name="exameType"
-                    value={editFormData.exameType}
-                    onChange={handleInputChange}
-                  />
-                ) : (
-                  item.exameType
-                )}
-              </td>
-              <td>
-                {isEditing && clickedIndex === index ? (
-                  <input
-                    type="text"
-                    name="category"
-                    value={editFormData.category}
-                    onChange={handleInputChange}
-                  />
-                ) : (
-                  item.category
-                )}
-              </td>
+              
               <td>
                 {isEditing && clickedIndex === index ? (
                   <input
@@ -291,6 +294,21 @@ const Allpgstudent = (props) => {
                   />
                 ) : (
                   item.allIndiaRank
+                )}
+              </td>
+
+             
+
+              <td>
+                {isEditing && clickedIndex === index ? (
+                  <input
+                    type="text"
+                    name="stream"
+                    value={editFormData.stream}
+                    onChange={handleInputChange}
+                  />
+                ) : (
+                  item.stream
                 )}
               </td>
               <td>
@@ -310,12 +328,43 @@ const Allpgstudent = (props) => {
                 {isEditing && clickedIndex === index ? (
                   <input
                     type="text"
+                    name="exameType"
+                    value={editFormData.exameType}
+                    onChange={handleInputChange}
+                  />
+                ) : (
+                  item.exameType
+                )}
+              </td>
+             
+             
+              
+
+
+              <td>
+                {isEditing && clickedIndex === index ? (
+                  <input
+                    type="text"
                     name="InstituteCity"
                     value={editFormData.InstituteCity}
                     onChange={handleInputChange}
                   />
                 ) : (
                   item.InstituteCity
+                )}
+              </td>
+
+
+              <td>
+                {isEditing && clickedIndex === index ? (
+                  <input
+                    type="text"
+                    name="cource"
+                    value={editFormData.cource}
+                    onChange={handleInputChange}
+                  />
+                ) : (
+                  item.cource
                 )}
               </td>
 
@@ -331,6 +380,7 @@ const Allpgstudent = (props) => {
                   item.InstituteName
                 )}
               </td>
+              
 
               {/* <td style={{ position: 'relative' }}>
                 <MdAssignmentTurnedIn />
@@ -455,7 +505,7 @@ const Allpgstudent = (props) => {
                            <td className="tbody_fromData_and_info_dot">
                              <b>:</b>
                            </td>
-                           <td>{item.firstName}</td>
+                           <td>{isEditing?isEditing.firstName:item.firstName}</td>
                          </tr>
                          <tr>
                            <td className="tbody_formData_info_name">
@@ -464,7 +514,7 @@ const Allpgstudent = (props) => {
                            <td className="tbody_fromData_and_info_dot">
                              <b>:</b>
                            </td>
-                           <td>{item.lastName}</td>
+                           <td>{isEditing?isEditing.lastName:item.lastName}</td>
                          </tr>
                          <tr>
                            <td className="tbody_formData_info_name">
@@ -473,7 +523,7 @@ const Allpgstudent = (props) => {
                            <td className="tbody_fromData_and_info_dot">
                              <b>:</b>
                            </td>
-                           <td>{item.fatherName}</td>
+                           <td>{isEditing?isEditing.fatherName:item.fatherName}</td>
                          </tr>
                          <tr>
                            <td className="tbody_formData_info_name">
@@ -482,14 +532,14 @@ const Allpgstudent = (props) => {
                            <td className="tbody_fromData_and_info_dot">
                              <b>:</b>
                            </td>
-                           <td>{item.motherName}</td>
+                           <td>{isEditing?isEditing.motherName:item.motherName}</td>
                          </tr>
                          <tr>
                            <td className="tbody_formData_info_name">Email</td>
                            <td className="tbody_fromData_and_info_dot">
                              <b>:</b>
                            </td>
-                           <td>{item.email}</td>
+                           <td>{isEditing?isEditing.email:item.email}</td>
                          </tr>
                          <tr>
                            <td className="tbody_formData_info_name">
@@ -498,28 +548,28 @@ const Allpgstudent = (props) => {
                            <td className="tbody_fromData_and_info_dot">
                              <b>:</b>
                            </td>
-                           <td>{item.date_of_birth}</td>
+                           <td>{isEditing?isEditing.date_of_birth:item.date_of_birth}</td>
                          </tr>
                          <tr>
                            <td className="tbody_formData_info_name">Gender</td>
                            <td className="tbody_fromData_and_info_dot">
                              <b>:</b>
                            </td>
-                           <td>{item.gender}</td>
+                           <td>{isEditing?isEditing.gender:item.gender}</td>
                          </tr>
                          <tr>
                            <td className="tbody_formData_info_name">Exam</td>
                            <td className="tbody_fromData_and_info_dot">
                              <b>:</b>
                            </td>
-                           <td>{item.exameType}</td>
+                           <td>{isEditing?isEditing.exameType:item.exameType}</td>
                          </tr>
                          <tr>
                            <td className="tbody_formData_info_name">Category</td>
                            <td className="tbody_fromData_and_info_dot">
                              <b>:</b>
                            </td>
-                           <td>{item.category}</td>
+                           <td>{isEditing?isEditing.category:item.category}</td>
                          </tr>
                          <tr>
                            <td className="tbody_formData_info_name">
@@ -528,21 +578,21 @@ const Allpgstudent = (props) => {
                            <td className="tbody_fromData_and_info_dot">
                              <b>:</b>
                            </td>
-                           <td>{item.allIndiaRank}</td>
+                           <td>{isEditing?isEditing.allIndiaRank:item.allIndiaRank}</td>
                          </tr>
                          <tr>
                            <td className="tbody_formData_info_name">Stream</td>
                            <td className="tbody_fromData_and_info_dot">
                              <b>:</b>
                            </td>
-                           <td>{item.stream}</td>
+                           <td>{isEditing?isEditing.stream:item.stream}</td>
                          </tr>
                          <tr>
                            <td className="tbody_formData_info_name">Session</td>
                            <td className="tbody_fromData_and_info_dot">
                              <b>:</b>
                            </td>
-                           <td>{item.session}</td>
+                           <td>{isEditing?isEditing.session:item.session}</td>
                          </tr>
                          <tr>
                            <td className="tbody_formData_info_name">
@@ -551,7 +601,7 @@ const Allpgstudent = (props) => {
                            <td className="tbody_fromData_and_info_dot">
                              <b>:</b>
                            </td>
-                           <td>{item.InstituteCity}</td>
+                           <td>{isEditing?isEditing.InstituteCity:item.InstituteCity}</td>
                          </tr>
                          <tr>
                            <td className="tbody_formData_info_name">
@@ -560,7 +610,17 @@ const Allpgstudent = (props) => {
                            <td className="tbody_fromData_and_info_dot">
                              <b>:</b>
                            </td>
-                           <td>{item.InstituteName}</td>
+                           <td>{isEditing?isEditing.InstituteName:item.InstituteName}</td>
+                         </tr>
+
+                         <tr>
+                           <td className="tbody_formData_info_name">
+                             Couese
+                           </td>
+                           <td className="tbody_fromData_and_info_dot">
+                             <b>:</b>
+                           </td>
+                           <td>{isEditing?isEditing.cource:item.cource}</td>
                          </tr>
                        </tbody>
                      </table>

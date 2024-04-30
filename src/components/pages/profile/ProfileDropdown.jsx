@@ -49,7 +49,7 @@ const ProfileDropdown = () => {
           ref={ref}
         >
           <Link
-            to="/dashboard/profile"
+            to="/showFormData"
             className="dropdown-item"
             onClick={() => setOpen(false)}
           >

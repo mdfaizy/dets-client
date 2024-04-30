@@ -1,32 +1,28 @@
 import { useState, useEffect } from "react";
 import "./admissiondata.scss";
 import axios from "axios";
-function Exitdata(props) {
+import { useSelector } from "react-redux";
+function Jobdata() {
   const [formData, setFormData] = useState({});
-  const { istoken } = props;
-
+  // const { istoken } = props;
+  const {token}=useSelector((state)=>state.auth);
   useEffect(() => {
     const fetchData = async () => {
       try {
         const requestBody = {
-          token: istoken,
+          token: token,
         };
-
-        const response = await fetch(
-          "http://localhost:8000/api/v1/get_exitstudent",
+        const response = await axios.post(
+          "http://localhost:8000/api/v1/job/get_job_student",
+          requestBody,
           {
-            method: "POST",
             headers: {
               "Content-Type": "application/json",
             },
-            body: JSON.stringify(requestBody),
           }
         );
-
-        console.log(response);
-        if (response.ok) {
-          const data = await response.json();
-          setFormData(data.data);
+        if (response.status === 200) {
+          setFormData(response.data.data);
         } else {
           console.error("Failed to fetch form data. Status:", response.status);
         }
@@ -35,34 +31,7 @@ function Exitdata(props) {
       }
     };
     fetchData();
-  }, [istoken]);
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const requestBody = {
-  //         token: istoken,
-  //       };
-  //       const response = await axios.get(
-  //         "http://localhost:8000/api/v1/exit/get_exitstudent",
-  //         requestBody,
-  //         {
-  //           headers: {
-  //             "Content-Type": "application/json",
-  //           },
-  //         }
-  //       );
-  //       if (response.status === 200) {
-  //         setFormData(response.data.data);
-  //       } else {
-  //         console.error("Failed to fetch form data. Status:", response.status);
-  //       }
-  //     } catch (error) {
-  //       console.error("Error fetching form data:", error);
-  //     }
-  //   };
-  //   fetchData();
-  // }, [istoken]);
+  }, [token]);
 
   return (
     <div className="addmission_top_contante">
@@ -100,7 +69,7 @@ function Exitdata(props) {
               <tbody>
                 <tr className="table_tbody_hading">
                   Department of Engineering and Technological Studies <br />
-                  Exit Student
+                  JOB DETAILS
                 </tr>
 
                 <tr className="tbody_contante">
@@ -128,39 +97,21 @@ function Exitdata(props) {
                       <tbody className="tbody_formData_info">
                         <tr>
                           <td className="tbody_formData_info_name">
-                            First Name:
+                            Full Name:
                           </td>
                           <td className="tbody_fromData_and_info_dot">
                             <b>:</b>
                           </td>
-                          <td>{formData.firstName}</td>
+                          <td>{formData.fullName}</td>
                         </tr>
                         <tr>
                           <td className="tbody_formData_info_name">
-                            Last Name
+                            Companies Name
                           </td>
                           <td className="tbody_fromData_and_info_dot">
                             <b>:</b>
                           </td>
-                          <td>{formData.lastName}</td>
-                        </tr>
-                        <tr>
-                          <td className="tbody_formData_info_name">
-                            Father Name
-                          </td>
-                          <td className="tbody_fromData_and_info_dot">
-                            <b>:</b>
-                          </td>
-                          <td>{formData.fatherName}</td>
-                        </tr>
-                        <tr>
-                          <td className="tbody_formData_info_name">
-                            Mother Name
-                          </td>
-                          <td className="tbody_fromData_and_info_dot">
-                            <b>:</b>
-                          </td>
-                          <td>{formData.motherName}</td>
+                          <td>{formData.companies_name}</td>
                         </tr>
                         <tr>
                           <td className="tbody_formData_info_name">Email</td>
@@ -168,13 +119,6 @@ function Exitdata(props) {
                             <b>:</b>
                           </td>
                           <td>{formData.email}</td>
-                        </tr>
-                        <tr>
-                          <td className="tbody_formData_info_name">Roll No:</td>
-                          <td className="tbody_fromData_and_info_dot">
-                            <b>:</b>
-                          </td>
-                          <td>{formData.rollNo}</td>
                         </tr>
                         <tr>
                           <td className="tbody_formData_info_name">
@@ -186,88 +130,88 @@ function Exitdata(props) {
                           <td>{formData.date_of_birth}</td>
                         </tr>
                         <tr>
-                          <td className="tbody_formData_info_name">Stream</td>
-                          <td className="tbody_fromData_and_info_dot">
-                            <b>:</b>
-                          </td>
-                          <td>{formData.stream}</td>
-                        </tr>
-
-                        <tr>
-                          <td className="tbody_formData_info_name">Category</td>
-                          <td className="tbody_fromData_and_info_dot">
-                            <b>:</b>
-                          </td>
-                          <td>{formData.category}</td>
-                        </tr>
-                        <tr>
-                          <td className="tbody_formData_info_name">
-                            Registration No
-                          </td>
-                          <td className="tbody_fromData_and_info_dot">
-                            <b>:</b>
-                          </td>
-                          <td>{formData.registrationNo}</td>
-                        </tr>
-                        <tr>
-                          <td className="tbody_formData_info_name">Session</td>
-                          <td className="tbody_fromData_and_info_dot">
-                            <b>:</b>
-                          </td>
-                          <td>{formData.session}</td>
-                        </tr>
-                        <tr>
                           <td className="tbody_formData_info_name">Phone No</td>
                           <td className="tbody_fromData_and_info_dot">
                             <b>:</b>
                           </td>
-                          <td>{formData.Phone_no}</td>
-                        </tr>
-                        <tr>
-                          <td className="tbody_formData_info_name">Session</td>
-                          <td className="tbody_fromData_and_info_dot">
-                            <b>:</b>
-                          </td>
-                          <td>{formData.session}</td>
+                          <td>{formData.phone_no}</td>
                         </tr>
                         <tr>
                           <td className="tbody_formData_info_name">
-                            First Year
+                            Home City
                           </td>
                           <td className="tbody_fromData_and_info_dot">
                             <b>:</b>
                           </td>
-                          <td>{formData.year_cgpa_1th}</td>
+                          <td>{formData.home_city}</td>
                         </tr>
-
                         <tr>
                           <td className="tbody_formData_info_name">
-                            Second Year
+                            Companies City
                           </td>
                           <td className="tbody_fromData_and_info_dot">
                             <b>:</b>
                           </td>
-                          <td>{formData.year_cgpa_2nd}</td>
+                          <td>{formData.companies_city}</td>
                         </tr>
-
                         <tr>
                           <td className="tbody_formData_info_name">
-                            Third Year
+                            Package lpa
                           </td>
                           <td className="tbody_fromData_and_info_dot">
                             <b>:</b>
                           </td>
-                          <td>{formData.year_cgpa_3rd}</td>
+                          <td>{formData.package_lpa}</td>
                         </tr>
-
+                        <tr>
+                          <td className="tbody_formData_info_name">Job Role</td>
+                          <td className="tbody_fromData_and_info_dot">
+                            <b>:</b>
+                          </td>
+                          <td>{formData.job_role}</td>
+                        </tr>
                         <tr>
                           <td className="tbody_formData_info_name">
-                            Fourthe Year
+                            Selection Type
                           </td>
                           <td className="tbody_fromData_and_info_dot">
                             <b>:</b>
                           </td>
-                          <td>{formData.year_cgpa_4th}</td>
+                          <td>{formData.selectType}</td>
+                        </tr>
+                        <tr>
+                          <td
+                            width="100px"
+                            style={{
+                              fontFamily:
+                                "calibri, helvetica, arial, sans-serif",
+                              paddingLeft: "10px",
+                            }}
+                          >
+                            Total Apply Companies
+                          </td>
+                          <td className="tbody_fromData_and_info_dot">
+                            <b>:</b>
+                          </td>
+                          <td>{formData.totalApplyCompanies}</td>
+                        </tr>
+                        <tr>
+                          <td className="tbody_formData_info_name">
+                            No Of Select Interview
+                          </td>
+                          <td className="tbody_fromData_and_info_dot">
+                            <b>:</b>
+                          </td>
+                          <td>{formData.noOfSelectInterview}</td>
+                        </tr>
+                        <tr>
+                          <td className="tbody_formData_info_name">
+                            Companies Type
+                          </td>
+                          <td className="tbody_fromData_and_info_dot">
+                            <b>:</b>
+                          </td>
+                          <td>{formData.companiesType}</td>
                         </tr>
                       </tbody>
                     </table>
@@ -282,6 +226,4 @@ function Exitdata(props) {
   );
 }
 
-export default Exitdata;
-
-//
+export default Jobdata;

@@ -346,7 +346,6 @@ const LoginFrom = ({ setIsAdmin, setTeacher }) => {
   //   dispatch(login(email, password,setIsAdmin, setTeacher, navigate));
   // };
 
-
   // Inside LoginFrom component
 const submitHandler = async (e) => {
   e.preventDefault();
@@ -357,14 +356,6 @@ const submitHandler = async (e) => {
     // Handle login error
   }
 };
-
-
-
-
-
-
-
-
   return (
     <div className={style.login_top_content}>
       <Container>

@@ -1,20 +1,21 @@
 import { useState } from "react";
-import { Container, Row, Col, Form } from "react-bootstrap";
+import { Container, Row, Col, Form, Accordion } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
+import { useSelector } from "react-redux";
 
-const Job = (props) => {
-  console.log(props.istoken);
+const Job = () => {
+  const { token } = useSelector((state) => state.auth);
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    token: props.istoken,
+    token: token,
     fullName: "",
-    companies_name:"",
+    companies_name: "",
     email: "",
     date_of_birth: "",
-    phone_no:"",
-    home_city:"",
+    phone_no: "",
+    home_city: "",
     companies_city: "",
     package_lpa: "",
     job_role: "",
@@ -23,12 +24,10 @@ const Job = (props) => {
     noOfSelectInterview: "",
     companiesType: "",
   });
- 
+
   const changeHandler = (event) => {
     const { name, value, type, files } = event.target;
 
-
-    
     if (type === "file") {
       setFormData((prevData) => ({
         ...prevData,
@@ -58,7 +57,7 @@ const Job = (props) => {
         method: "POST",
         body: formDataToSend, // Send formDataToSend instead of JSON.stringify(formData)
       });
-      console.log("hi2",response);
+      console.log("hi2", response);
       if (response.ok) {
         const responseData = await response.json();
         console.log(responseData);
@@ -74,19 +73,210 @@ const Job = (props) => {
       console.error("Error occurred:", error);
       // Handle other error cases (e.g., network errors)
     }
-  
   };
   return (
     <>
-  
       <Col className="text-center">JOB</Col>
-     
+
       <Container>
         <Row>
           <Col>
             <Form onSubmit={submitHandler}>
               <Row>
-                <Form.Group as={Col} md="4">
+                <Accordion defaultActiveKey="0">
+                  <Accordion.Item eventKey="0">
+                    <Accordion.Header>Presinoal Information</Accordion.Header>
+                    <Accordion.Body>
+                      <Row>
+                        <Form.Group as={Col} md="4">
+                          <Form.Label>
+                            Full Name<span className="text-danger">*</span>
+                          </Form.Label>
+                          <Form.Control
+                            type="text"
+                            name="fullName"
+                            value={formData.fullName}
+                            placeholder="Enter Full Name.."
+                            onChange={changeHandler}
+                          />
+                        </Form.Group>
+                        <Form.Group as={Col} md="4">
+                          <Form.Label>
+                            Email<span className="text-danger">*</span>
+                          </Form.Label>
+                          <Form.Control
+                            type="text"
+                            name="email"
+                            id="email"
+                            value={formData.email}
+                            placeholder="Enter  Email..."
+                            onChange={changeHandler}
+                            className="rounded-2"
+                          />
+                        </Form.Group>
+
+                        <Form.Group as={Col} md="4">
+                          <Form.Label>
+                            Phone<span className="text-danger">*</span>
+                          </Form.Label>
+                          <Form.Control
+                            type="text"
+                            name="phone_no"
+                            id="phone_no"
+                            value={formData.phone_no}
+                            placeholder="Enter  Phone No..."
+                            onChange={changeHandler}
+                            className="rounded-2"
+                          />
+                        </Form.Group>
+
+                        <Form.Group as={Col} md="4">
+                          <Form.Label>
+                            Home City<span className="text-danger">*</span>
+                          </Form.Label>
+                          <Form.Control
+                            type="text"
+                            name="home_city"
+                            id="home_city"
+                            value={formData.home_city}
+                            placeholder="Enter Home City..."
+                            onChange={changeHandler}
+                            className="rounded-2"
+                          />
+                        </Form.Group>
+                      </Row>
+                    </Accordion.Body>
+                  </Accordion.Item>
+
+                  <Accordion.Item eventKey="1">
+                    <Accordion.Header>Job Information</Accordion.Header>
+
+                    <Accordion.Body>
+                      <Row>
+                        <Form.Group as={Col} md="4" className="mb-3">
+                          <Form.Label htmlFor="selectType">
+                            Select Companies{" "}
+                            <span className="text-danger">*</span>
+                          </Form.Label>
+                          <Form.Select
+                            id="selectType"
+                            name="selectType"
+                            className="rounded-0"
+                            value={formData.selectType}
+                            onChange={changeHandler}
+                          >
+                            <option value="">Select Exam</option>
+                            <option value="on">On Compuse</option>
+                            <option value="Off">Off Compuse</option>
+                          </Form.Select>
+                        </Form.Group>
+                        <Form.Group as={Col} md="4">
+                          <Form.Label>
+                            Apply Your Total Companies
+                            <span className="text-danger">*</span>
+                          </Form.Label>
+                          <Form.Control
+                            type="text"
+                            name="totalApplyCompanies"
+                            id="totalApplyCompanies"
+                            value={formData.totalApplyCompanies}
+                            placeholder=""
+                            onChange={changeHandler}
+                            className="rounded-2"
+                          />
+                        </Form.Group>
+
+                        <Form.Group as={Col} md="4">
+                          <Form.Label>
+                            No Of Select Interview
+                            <span className="text-danger">*</span>
+                          </Form.Label>
+                          <Form.Control
+                            type="text"
+                            name="noOfSelectInterview"
+                            id="noOfSelectInterview"
+                            value={formData.noOfSelectInterview}
+                            placeholder="Enter No Of Select Interview"
+                            onChange={changeHandler}
+                            className="rounded-2"
+                          />
+                        </Form.Group>
+                      </Row>
+                    </Accordion.Body>
+                  </Accordion.Item>
+
+                  <Accordion.Item eventKey="2">
+                    <Accordion.Header>Companies Information</Accordion.Header>
+                    <Accordion.Body>
+                      <Row>
+                        <Form.Group as={Col} md="4">
+                          <Form.Label>
+                            Phone<span className="text-danger">*</span>
+                          </Form.Label>
+                          <Form.Control
+                            type="text"
+                            name="phone_no"
+                            id="phone_no"
+                            value={formData.phone_no}
+                            placeholder="Enter  Phone No..."
+                            onChange={changeHandler}
+                            className="rounded-2"
+                          />
+                        </Form.Group>
+
+                        <Form.Group as={Col} md="4">
+                          <Form.Label>
+                            Package lpa<span className="text-danger">*</span>
+                          </Form.Label>
+                          <Form.Control
+                            type="text"
+                            name="package_lpa"
+                            id="package_lpa"
+                            value={formData.package_lpa}
+                            placeholder=""
+                            onChange={changeHandler}
+                            className="rounded-2"
+                          />
+                        </Form.Group>
+
+                        <Form.Group as={Col} md="4">
+                          <Form.Label>
+                            JOB ROLE<span className="text-danger">*</span>
+                          </Form.Label>
+                          <Form.Control
+                            type="text"
+                            name="job_role"
+                            id="job_role"
+                            value={formData.job_role}
+                            placeholder="Enter Your Role..."
+                            onChange={changeHandler}
+                            className="rounded-2"
+                          />
+                        </Form.Group>
+
+                        <Form.Group as={Col} md="4" className="mb-3">
+                          <Form.Label htmlFor="companiesType">
+                            Type Of Companies{" "}
+                            <span className="text-danger">*</span>
+                          </Form.Label>
+                          <Form.Select
+                            id="companiesType"
+                            name="companiesType"
+                            className="rounded-0"
+                            value={formData.companiesType}
+                            onChange={changeHandler}
+                          >
+                            <option value="">Select Type Of Companies</option>
+                            <option value="Service">Service-based</option>
+                            <option value="Product">Product-based</option>
+                          </Form.Select>
+                        </Form.Group>
+                      </Row>
+                    </Accordion.Body>
+                  </Accordion.Item>
+                </Accordion>
+
+                {/* <Form.Group as={Col} md="4">
                   <Form.Label>
                     Full Name<span className="text-danger">*</span>
                   </Form.Label>
@@ -264,7 +454,7 @@ const Job = (props) => {
                     <option value="Service">Service-based</option>
                     <option value="Product">Product-based</option>
                   </Form.Select>
-                </Form.Group>
+                </Form.Group> */}
                 {/* sumbit button */}
                 <Row>
                   <Col md="12" className="text-center">

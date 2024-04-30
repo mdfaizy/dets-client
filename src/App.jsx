@@ -7,16 +7,16 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import LoginFrom from "./components/pages/login/LoginFrom";
 import Footer from "./components/common/footer/Footer";
 import Header from "./components/common/header/Header";
-import { Route, Router, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import SignupFrom from "./components/pages/signup/SignupFrom";
 import NewAdmission from "./routes/newstudent/newadmission/NewAdmission";
 import ExitFrom from "./routes/exitstudent/exit/ExitFrom";
 import PgCource from "./routes/pgcourse/pg/PgCource";
 import ShowFormData from "./components/ShowFormData";
-import Addmissiondata from "./applicationdata/Addmissiondata";
-import Exitdata from "./applicationdata/Exitdata";
-import Pgdata from "./applicationdata/Pgdata";
-import Jobdata from "./applicationdata/Jobdata";
+import Addmissiondata from "./containers/applicationdata/Addmissiondata";
+import Exitdata from "./containers/applicationdata/Exitdata";
+import Pgdata from "./containers/applicationdata/Pgdata";
+import Jobdata from "./containers/applicationdata/Jobdata";
 import Allnewstudent from "./adminsection/Allnewstudent";
 import Allexitstudent from "./adminsection/Allexitstudent";
 import Allpgstudent from "./adminsection/Allpgstudent";
@@ -28,8 +28,8 @@ import Newstudent from "./routes/newstudent/Newstudent";
 // import Newstudent from "./routes/newstudent/Newstudent.module";
 import Btechjob from "./routes/job/softwarejob/Btechjob";
 import Pgcourse from "./routes/pgcourse/Pgcourse";
-import PgCourseSumbitData from "./components/sumbitdata/PgCourseSumbitData";
-import Exitsumbitdata from "./components/sumbitdata/Exitsumbitdata";
+import PgCourseSumbitData from "./containers/sumbitdata/PgCourseSumbitData";
+import Exitsumbitdata from "./containers/sumbitdata/Exitsumbitdata";
 import StudentAllInfo from "./routes/StudentDetails/StudentAllInfo";
 // import FeedbackFullContent from "./adminDashboard/FeedbackFullContent";
 import FeedbackFullContent from "./adminDashboard/FeedbackFullContent";
@@ -70,8 +70,7 @@ function App() {
   return (
     <>
       <Header
-        isLoggedIn={isLoggedIn}
-        setIsLoggedIn={setIsLoggedIn}
+        
         isAdmin={isAdmin}
         setIsAdmin={setIsAdmin}
         teacher={teacher}

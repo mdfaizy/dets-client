@@ -3,7 +3,7 @@ import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "./Footer.css";
 import { useEffect } from "react";
-
+import { useSelector } from "react-redux";
 const Footer = (props) => {
   // Function to scroll to the top of the page
   const {
@@ -16,7 +16,7 @@ const Footer = (props) => {
   } = props;
   console.log("Teacher Prop Value:", teacher);
 
-
+  const { token } = useSelector((state) => state.auth);
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -62,9 +62,8 @@ const Footer = (props) => {
               style={{ listStyleType: "none", color: "white" }}
             >
               <h2 className="mb-4">Useful Links</h2>
-              {isLoggedIn&&
+              {token!==null&&
 <>
-
 <p>
                 <i>
                   <BiChevronRight />
@@ -98,44 +97,7 @@ const Footer = (props) => {
                 </Link>
               </p>
 </>
-
-
               }
-              {/* <p>
-                <i>
-                  <BiChevronRight />
-                </i>
-                <Link to="/newadmission" className="linkStyle">
-                  New Admission
-                </Link>
-              </p>
-              <p>
-                <i>
-                  <BiChevronRight />
-                </i>
-                <Link to="/exitfrom" className="linkStyle">
-                  EXIT STUDENT
-                </Link>
-              </p>
-              <p>
-                <i>
-                  <BiChevronRight />
-                </i>
-                <Link to="/pgcource" className="linkStyle">
-                  PG PROGRAM
-                </Link>
-              </p>
-              <p>
-                <i>
-                  <BiChevronRight />
-                </i>
-                <Link to="/job" className="linkStyle">
-                  JOB
-                </Link>
-              </p> */}
-
-              
-              {/* Add className to other links similarly */}
             </div>
           </Col>
           <Col lg={3} md={6} sm={6} xs={12} className="mb-4">

@@ -4,30 +4,9 @@ import axios from "axios";
 import {useSelector} from 'react-redux'
 function Addmissiondata() {
   const [formData, setFormData] = useState({});
-  // const { istoken } = props;
-
  const { token } = useSelector((state) => state.auth);
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await axios.post(
-  //         "http://localhost:8000/api/v1/student/get_new_admission"
-  //       );
-  //       if (response.data.success) {
-  //         setFormData(response.data.data);
-  //       } else {
-  //         console.error("Failed to fetch admission data");
-  //       }
-  //     } catch (error) {
-  //       console.error("Error fetching admission data:", error);
-  //     }
-  //   };
-  //   fetchData();
-  // }, []);
-
-  // --------------------===========================================
-console.log(token);
-  useEffect(() => {
+ console.log("admission token",token);
+useEffect(() => {
     const fetchData = async () => {
       try {
         const requestBody = {
@@ -37,9 +16,11 @@ console.log(token);
         const response = await axios.post(
           "http://localhost:8000/api/v1/student/getnewadmissionId",
           requestBody,
+          
           {
             headers: {
               "Content-Type": "application/json",
+              // Authorization: `Bearer ${token}`,
             },
           }
         );
@@ -50,7 +31,7 @@ console.log(token);
           console.error("Failed to fetch form data. Status:", response.status);
         }
       } catch (error) {
-        console.error("Error fetching form data:", error);
+        console.error("Error fetching form data:", error.message);
       }
     };
     fetchData();

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Container, Row, Col, Form, Accordion } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
@@ -10,29 +10,46 @@ function NewAdmission() {
   // const [emailExists, setEmailExists] = useState(false); // State to track email existence
   const [formData, setFormData] = useState({
     token: token,
+   //personal details
     firstName: "",
     lastName: "",
+    email:"",
+    date_of_birth:"",
+    gender:"",
+    domicile:"",
+    phone_no:"",
+    addhar_number:"",
+    category:"",
+
+//parent details 
     fatherName: "",
     motherName: "",
-    email: "",
-    date_of_birth: "",
+    parent_phone_no:"",
+    parent_incom:"",
+    parent_occoupation:"",
+//admission
     examType: "",
+    admission_session: "",
     application_exam_no: "",
     scoure_rank: "",
     cource_name: "",
     stream: "",
-    gender: "",
-    domicile: "",
-    admission_session: "",
-    phone_no: "",
-    category: "",
+    //address details
+     village:"",
+     police_station:"",
+     distric:"",
+     pin_code:"",
+     state_name:"",
+     //10th details
+
+    
     schoolName_10th: "",
     roll_No_10th: "",
     regisration_No_10th: "",
     board_Name_10th: "",
     year_of_passing_10th: "",
     persentage_10th: "",
-
+//12th details
     schoolName_12th: "",
     roll_No_12th: "",
     regisration_No_12th: "",
@@ -40,8 +57,8 @@ function NewAdmission() {
     year_of_passing_12th: "",
     persentage_12th: "",
     //file
-    rankcardFile: "",
     aadhar_card_file: "",
+    rankcardFile: "",
     your_Residence_Certificate: "",
     sc_MarksheetFile: "",
     hs_MarksheetFile: "",
@@ -113,9 +130,11 @@ function NewAdmission() {
               <Form onSubmit={submitHandler}>
                 <Row>
                   <Accordion defaultActiveKey="0">
-                    <Accordion.Item eventKey="0" xs={12} md={12}>
+                    <Accordion.Item eventKey="0" xs={12} md={12} className=""
+                    style={{ backgroundColor: "gray"}}>
                       <Accordion.Header>Personal information</Accordion.Header>
                       <Accordion.Body>
+                        <Row>
                         <Form.Group as={Col} md={4}>
                           <Form.Label>
                             First Name<span className="text-danger">*</span>
@@ -240,14 +259,32 @@ function NewAdmission() {
                             className="rounded-2"
                           />
                         </Form.Group>
+                        <Form.Group as={Col} md="4" className="mb-3">
+                        <Form.Label htmlFor="domicile">
+                          Domicile<span className="text-danger">*</span>
+                        </Form.Label>
+                        <Form.Select
+                          id="domicile"
+                          name="domicile"
+                          className="rounded-0"
+                          value={formData.domicile}
+                          onChange={changeHandler}
+                        >
+                          <option value="">Select Domicile</option>
+                          <option value="YES">YES</option>
+                          <option value="No">NO</option>
+                        </Form.Select>
+                      </Form.Group>
+                        </Row>
                       </Accordion.Body>
                     </Accordion.Item>
 
                     <Accordion.Item eventKey="1" xs={12} md={12}>
                       <Accordion.Header>
-                        Father And Mother Details
+                        Perant  Details
                       </Accordion.Header>
                       <Accordion.Body>
+                        <Row>
                         <Form.Group as={Col} md="4">
                           <Form.Label>
                             Father Name<span className="text-danger">*</span>
@@ -323,11 +360,13 @@ function NewAdmission() {
                             className="rounded-2"
                           />
                         </Form.Group>
+                        </Row>
                       </Accordion.Body>
                     </Accordion.Item>
                     <Accordion.Item eventKey="2">
                       <Accordion.Header>Admission Details</Accordion.Header>
                       <Accordion.Body>
+                        <Row>
                         <Form.Group as={Col} md="4" className="mb-3">
                           <Form.Label htmlFor="gender">
                             Exam Type<span className="text-danger">*</span>
@@ -416,21 +455,23 @@ function NewAdmission() {
                             className="rounded-2"
                           />
                         </Form.Group>
+                        </Row>
                       </Accordion.Body>
                     </Accordion.Item>
 
                     <Accordion.Item eventKey="3" xs={12} md={12}>
-                      <Accordion.Header>Address</Accordion.Header>
+                      <Accordion.Header>Permanent Address</Accordion.Header>
                       <Accordion.Body>
+                        <Row>
                         <Form.Group as={Col} md="4">
                           <Form.Label>
-                            Father Name<span className="text-danger">*</span>
+                            Village/City<span className="text-danger">*</span>
                           </Form.Label>
                           <Form.Control
                             type="text"
-                            name="fatherName"
-                            id="fatherName"
-                            value={formData.fatherName}
+                            name="village"
+                            id="village"
+                            value={formData.village}
                             placeholder="Enter Father Name..."
                             onChange={changeHandler}
                             className="rounded-2"
@@ -438,13 +479,13 @@ function NewAdmission() {
                         </Form.Group>
                         <Form.Group as={Col} md="4">
                           <Form.Label>
-                            Mother Name<span className="text-danger">*</span>
+                            Police Station<span className="text-danger">*</span>
                           </Form.Label>
                           <Form.Control
                             type="text"
-                            name="motherName"
-                            id="motherName"
-                            value={formData.motherName}
+                            name="police_station"
+                            id="police_station"
+                            value={formData.police_station}
                             placeholder="Enter Mother Name..."
                             onChange={changeHandler}
                             className="rounded-2"
@@ -453,56 +494,58 @@ function NewAdmission() {
 
                         <Form.Group as={Col} md="4">
                           <Form.Label>
-                            Parent Phone No
+                          Distric
                             <span className="text-danger">*</span>
                           </Form.Label>
                           <Form.Control
                             type="text"
-                            name="parent_phone_no"
-                            id="phone_no"
-                            value={formData.parent_phone_no}
+                            name="distric"
+                            id="distric"
+                            value={formData.distric}
                             placeholder="Enter Parent Phone No..."
                             onChange={changeHandler}
                             className="rounded-2"
                           />
                         </Form.Group>
-
                         <Form.Group as={Col} md="4">
                           <Form.Label>
-                            Parent Incom<span className="text-danger">*</span>
+                            Pin Code
+                            <span className="text-danger">*</span>
                           </Form.Label>
                           <Form.Control
                             type="text"
-                            name="parent_incom"
-                            id="parent_incom"
-                            value={formData.parent_incom}
+                            name="pin_code"
+                            id="pin_code"
+                            value={formData.pin_code}
+                            placeholder="Enter Parent Phone No..."
+                            onChange={changeHandler}
+                            className="rounded-2"
+                          />
+                        </Form.Group>
+                        <Form.Group as={Col} md="4">
+                          <Form.Label>
+                            State<span className="text-danger">*</span>
+                          </Form.Label>
+                          <Form.Control
+                            type="text"
+                            name="state_name"
+                            id="state_name"
+                            value={formData.state_name}
                             placeholder="Enter Parent Incom..."
                             onChange={changeHandler}
                             className="rounded-2"
                           />
                         </Form.Group>
 
-                        <Form.Group as={Col} md="4">
-                          <Form.Label>
-                            Parent Occupation
-                            <span className="text-danger">*</span>
-                          </Form.Label>
-                          <Form.Control
-                            type="text"
-                            name="parent_occoupation"
-                            id="parent_occoupation"
-                            value={formData.parent_occoupation}
-                            placeholder="Enter Parent Phone No..."
-                            onChange={changeHandler}
-                            className="rounded-2"
-                          />
-                        </Form.Group>
+                        
+                        </Row>
                       </Accordion.Body>
                     </Accordion.Item>
 
                     <Accordion.Item eventKey="4">
                       <Accordion.Header>Hs Details</Accordion.Header>
                       <Accordion.Body>
+                        <Row>
                         <Form.Group as={Col} md="4">
                           <Form.Label>
                             School Name<span className="text-danger">*</span>
@@ -586,6 +629,7 @@ function NewAdmission() {
                             className="rounded-2"
                           />
                         </Form.Group>
+                        </Row>
                       </Accordion.Body>
                     </Accordion.Item>
 
@@ -595,7 +639,7 @@ function NewAdmission() {
                         Senior Secondary Education
                       </Accordion.Header>
                       <Accordion.Body>
-                        <>
+                        <Row>
                           <Form.Group as={Col} md="4">
                             <Form.Label>
                               School Name<span className="text-danger">*</span>
@@ -682,14 +726,14 @@ function NewAdmission() {
                             />
                           </Form.Group>
                           <Row className="text-center my-4"></Row>
-                        </>
+                        </Row>
                       </Accordion.Body>
                     </Accordion.Item>
 
                     <Accordion.Item eventKey="6">
                       <Accordion.Header> Document</Accordion.Header>
                       <Accordion.Body>
-                        <>
+                        <Row>
                           <Form.Group as={Col} md="4">
                             <Form.Label>
                               Aadhar Card<span className="text-danger">*</span>
@@ -800,12 +844,12 @@ function NewAdmission() {
                               className="rounded-2"
                             />
                           </Form.Group>
-                        </>
+                        </Row>
                       </Accordion.Body>
                     </Accordion.Item>
                   </Accordion>
 
-                  <Col className="my-1">
+                  <Col className="my-1 text-center">
                     <button
                       className="text-denger px-4 py-2  border-0   rounded-md"
                       type="submit"

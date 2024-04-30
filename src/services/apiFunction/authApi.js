@@ -1,7 +1,7 @@
 // import { toast } from "react-hot-toast";
 
 import { toast } from "react-toastify";
-import { setLoading, setToken } from "../../redux/slices/authSlice";
+import { setLoading, setToken ,setAccountType} from "../../redux/slices/authSlice";
 // import { setLoading, setToken, setUser, setIsAdmin, setTeacher } from "../../redux/slices/authSlice";
 // import { resetCart } from "../../slices/cartSlice"
 // import { setUser } from "../../redux/slices/profileSlice";
@@ -83,10 +83,10 @@ export const signUpFrom = (formData, navigate) => {
 export function logout(navigate) {
   return (dispatch) => {
     dispatch(setToken(null));
-    // dispatch(setUser(null));
+   
     // dispatch(resetCart())
     localStorage.removeItem("token");
-    localStorage.removeItem("user");
+    localStorage.removeItem("accountType");
     toast.success("Logged Out");
     navigate("/");
   };
@@ -110,30 +110,47 @@ export function login(email, password, setIsAdmin,setTeacher, navigate) {
       // Dispatch actions based on user role
       const { user } = response.data;
 
+      // if (import.meta.env.VITE_REACT_APP_ADMIN_TOKEN === response.data.token) {
+      //    dispatch(setToken(response.data.token));
+      //   dispatch(setIsAdmin(true));
+      //    localStorage.setItem("token", JSON.stringify(response.data.token));
+      // }
+      // if (user.instructorKey === "ukdets@#1234" && user.accountType === "Instructor") {
+      //   dispatch(setToken(response.data.token));
+      //   // dispatch(setAccountType(response.user.accountType));
+      //   localStorage.setItem("token", JSON.stringify(response.data.token));
+      //   // dispatch(setTeacher(true)); // Set teacher state to true
+      //   console.log("jiii",response.data.token);
+      //   console.log("gfgdfgd",response.data.accountType)
+      //   console.log("Logged in as an Instructor", user.accountType);
+      // }
+
+
+
+      // =======================
+
+
       if (import.meta.env.VITE_REACT_APP_ADMIN_TOKEN === response.data.token) {
-        
-         dispatch(setToken(response.data.token));
+        dispatch(setToken(response.data.token));
         dispatch(setIsAdmin(true));
-
-         localStorage.setItem("token", JSON.stringify(response.data.token));
-
+        dispatch(setAccountType("Admin")); // Set account type as Admin
+        localStorage.setItem("token", JSON.stringify(response.data.token));
+      }
+      
+      if (user.instructorKey === "ukdets@#1234" && user.accountType === "Instructor") {
+        dispatch(setToken(response.data.token));
+        console.log("AccountType", user.accountType);
+       
+        dispatch(setAccountType("Instructor")); // Set account type as Instructor
+        localStorage.setItem("token", JSON.stringify(response.data.token));
       }
       
 
 
-      if (user.instructorKey === "ukdets@#1234" && user.accountType === "Instructor") {
-        dispatch(setToken(response.data.token));
-        // dispatch(setAccountType(response.user.accountType));
-        localStorage.setItem("token", JSON.stringify(response.data.token));
-        // dispatch(setTeacher(true)); // Set teacher state to true
-        console.log("jiii",response.data.token);
-        // console.log("gfgdfgd",response.data.accountType      )
-        console.log("Logged in as an Instructor", user.accountType);
-      }
-
-
       console.log(user);
       dispatch(setToken(response.data.token));
+      dispatch(setAccountType(response.data.accountType));
+      console.log(user.accountType);
       console.log(response.data.token);
       // dispatch(setUser(user));
 
@@ -146,7 +163,7 @@ export function login(email, password, setIsAdmin,setTeacher, navigate) {
 
       
       localStorage.setItem("token", JSON.stringify(response.data.token));
-      // localStorage.setItem("user", JSON.stringify(user));
+      localStorage.setItem("accountType", JSON.stringify(user.accountType));
 
       navigate("/");
     } catch (error) {
