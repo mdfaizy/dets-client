@@ -402,7 +402,7 @@ const submitHandler = async (e) => {
                   </span>
                 </Col>
               </Form.Group>
-              <Link to="/forgatepassword" className={style.linkWithoutDecoration}>
+              <Link to="/forgot-password" className={style.linkWithoutDecoration}>
                 <p className={style.forgate_password}>Forgot Password</p>
               </Link>
               <Col md={6} lg={12}>

@@ -4,7 +4,12 @@ import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { Provider } from 'react-redux'
-import store from "./redux/store.js";
+// import store from "./redux/store.js";
+import { configureStore } from "@reduxjs/toolkit";
+import rootReducer from "./redux/reducer/index.js";
+const store= configureStore({
+  reducer: rootReducer,
+});
 const root = createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>

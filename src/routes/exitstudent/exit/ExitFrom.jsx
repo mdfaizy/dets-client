@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState ,useEffect} from "react";
 import { Container, Row, Col, Form, Accordion } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import { useSelector } from "react-redux";
+import axios from "axios";
 const ExitFrom = () => {
   const { token } = useSelector((state) => state.auth);
   console.log(token);
@@ -27,6 +28,8 @@ const ExitFrom = () => {
     year_cgpa_4th: "",
     final_cgpa: "",
   });
+  console.log("token",token);
+
   const changeHandler = (event) => {
     const { name, value, type, files } = event.target;
 
@@ -44,6 +47,37 @@ const ExitFrom = () => {
     }
   };
 
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const requestBody = {
+  //         token: token,
+  //       };
+
+  //       const response = await axios.post(
+  //         "http://localhost:8000/api/v1/student/getnewadmissionId",
+  //         requestBody,
+          
+  //         {
+  //           headers: {
+  //             "Content-Type": "application/json",
+  //             // Authorization: `Bearer ${token}`,
+  //           },
+  //         }
+  //       );
+  //       console.log("responsetrtyrtr", response.data);
+  //       if (response.status === 200) {
+  //         setFormData(response.data.data);
+  //       } else {
+  //         console.error("Failed to fetch form data. Status:", response.status);
+  //       }
+  //     } catch (error) {
+  //       console.error("Error fetching form data:", error.message);
+  //     }
+  //   };
+  //   fetchData();
+  // }, [token]);
   const submitHandler = async (event) => {
     event.preventDefault();
     const formDataToSend = new FormData();
@@ -58,7 +92,7 @@ const ExitFrom = () => {
         "http://localhost:8000/api/v1/exit/exitStudent",
         {
           method: "POST",
-          body: formDataToSend, // Send formDataToSend instead of JSON.stringify(formData)
+          body: formDataToSend, 
         }
       );
 

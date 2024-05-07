@@ -40,6 +40,10 @@ import ExitReport from "./admin&teacher/createReport/exit/ExitReport";
 import Report from "./admin&teacher/report/Report";
 import PgReport from "./admin&teacher/createReport/PgReport";
 import JobReport from "./admin&teacher/createReport/JobReport";
+import FetchUserData from "../data/FetchUserData";
+import AdmissionSummaryData from "./summaryData/AdmissionSummaryData";
+import FilterData from "./admin&teacher/data/FilterData";
+import VerifyOtp from "./components/pages/EmailVerify/verifyOtp";
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
@@ -92,6 +96,8 @@ function App() {
           path="/showFormData"
           element={<ShowFormData istoken={istoken} isAdmin={isAdmin} />}
         />
+        <Route path='/verify-email' element={<VerifyOtp/>}/>
+      
         <Route
           path="/loginfrom"
           element={
@@ -107,9 +113,11 @@ function App() {
           path="/signupfrom"
           element={<SignupFrom setIsLoggedIn={setIsLoggedIn} />}
         />
+        <Route path='/forgot-password' element={<ForgatePassword/>}/>
+        <Route path='/update-password/:id' element={<ReasetPassword/>}/>
         <Route
           path="/new_addmission"
-          element={<Addmissiondata istoken={istoken} />}
+          element={<Addmissiondata istoken={istoken}  />}
         />
         <Route
           path="/exit_application"
@@ -164,6 +172,10 @@ function App() {
        <Route path="/createexitreport" element={<ExitReport />} />
        <Route path="/createpgreport" element={<PgReport />} />
        <Route path='/createjobreport' element={<JobReport />} />
+
+       <Route path="/fetchuserdata/:id"  element={<FetchUserData/>}/>
+       <Route path='/filterdataall' element={<FilterData/>}/>
+       <Route path='/admissionfilterdata' element={<AdmissionSummaryData/>}/>
       </Routes>
       <Footer
         isLoggedIn={isLoggedIn}
@@ -173,6 +185,7 @@ function App() {
         teacher={teacher}
         setTeacher={setTeacher}
       />
+    
     </>
   );
 }

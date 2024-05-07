@@ -8,17 +8,13 @@ import useOnClickOutside from "../../../hooks/useOnClickOutside";
 import { logout } from "../../../services/apiFunction/authApi";
 
 const ProfileDropdown = () => {
-  const { user } = useSelector((state) => state.profile);
+  // const { user } = useSelector((state) => state.profile);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const ref = useRef(null);
 
   useOnClickOutside(ref, () => setOpen(false));
-
-  // if (!user) return null;
-
-  // console.log("user",user.image);
   return (
     <div className="">
       <button
@@ -31,7 +27,7 @@ const ProfileDropdown = () => {
           <img
             // src={user.image}
             src="https://api.dicebear.com/6.x/initials/svg?seed=MD"
-            alt={`profile-${user?.firstName}`}
+            // alt={`profile-${user?.firstName}`}
            
             className="user_img_drop"
           />

@@ -108,6 +108,10 @@ const Header = (props) => {
                 <NavLink className={style.nav_links} to="/createreport">
                   REPORT CREATE
                 </NavLink>
+
+                <NavLink className={style.nav_links} to="/filterdataall">
+                  FILTER-DATA
+                </NavLink>
               </>
             )}
 

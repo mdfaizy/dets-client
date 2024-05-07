@@ -318,13 +318,13 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import InputGroup from "react-bootstrap/InputGroup";
+
 import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setSignupData } from "../../../redux/slices/authSlice";
-import { signUpFrom } from "../../../services/apiFunction/authApi";
-
+// import { signUpFrom } from "../../../services/apiFunction/authApi";
+import {sendOtp} from "../../../services/apiFunction/authApi"
 const SignupForm = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -439,10 +439,14 @@ const SignupForm = () => {
       return;
     }
 
-    const signupData = { ...formData };
+    const signupData = { ...formData,
+     
+     };
+    // dispatch(setSignupData(signupData));
+    // dispatch(signUpFrom(formData, navigate));
     dispatch(setSignupData(signupData));
-    dispatch(signUpFrom(formData, navigate));
-
+    dispatch(sendOtp(formData.email, navigate));
+  
     setFormData({
       email: "",
       password: "",

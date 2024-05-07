@@ -8,6 +8,7 @@ import AdmissionSummaryData from '../../summaryData/AdmissionSummaryData';
 import Feedback from "../../adminDashboard/feedback/Feedback";
 import Feedbackfrom from "../../adminDashboard/feedback/feedbackfrom/Feedbackfrom";
 import Homes from "../../summaryData/flowchart/Homes"
+
 function Home() {
   return (
     <>
@@ -107,6 +108,7 @@ function Home() {
           </Col>
         </Row>
       </Container>
+
 
       <AdmissionSummaryData/>
 <Homes/>

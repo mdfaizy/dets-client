@@ -1,17 +1,21 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Container, Row, Col, Form, Accordion } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-
-import { useSelector } from "react-redux";
-import Cookies from "js-cookie";
+// import { useParams } from "react-router-dom";
+import {  useSelector } from "react-redux";
+// import Cookies from "js-cookie";
+import axios from "axios";
 function NewAdmission() {
+  // const { userData }=props;
+  // console.log(" userData, userData", userData);
+  // const { id } = useParams();
   const navigate = useNavigate();
   const { token } = useSelector((state) => state.auth);
-  // const [emailExists, setEmailExists] = useState(false); // State to track email existence
+  const [data,setData]=useState([null])
   const [formData, setFormData] = useState({
     token: token,
    //personal details
-    firstName: "",
+    firstName:"",
     lastName: "",
     email:"",
     date_of_birth:"",
@@ -29,7 +33,10 @@ function NewAdmission() {
     parent_occoupation:"",
 //admission
     examType: "",
-    admission_session: "",
+    counselling:"",
+    start_session: "",
+    end_session: "",
+
     application_exam_no: "",
     scoure_rank: "",
     cource_name: "",
@@ -82,6 +89,30 @@ function NewAdmission() {
     }
   };
 
+
+
+
+// const getUserData = async () => {
+//   try {
+//     const response = await axios.get(`http://localhost:8000/api/v1/getsigin_By_Id/${id}`);
+// console.log("response.data.data",response.data.data)
+//     // Set the data received from the API response
+//     setData(response.data.data);
+//   } catch (error) {
+//     console.log("Error getting user data:", error);
+//   }
+// };
+
+
+//   useEffect(() => {
+    
+    
+//       getUserData();
+    
+//   },[id]);
+
+
+
   const submitHandler = async (event) => {
     event.preventDefault();
     const formDataToSend = new FormData();
@@ -106,7 +137,7 @@ function NewAdmission() {
 
         console.log(responseData.newAdmission._id);
 
-        Cookies.set("formData", JSON.stringify(formData));
+        // Cookies.set("formData", JSON.stringify(formData));
         navigate("/");
         // navigate(`/ShowFormData/${responseData.data._id}`);
       } else {
@@ -141,9 +172,10 @@ function NewAdmission() {
                           </Form.Label>
                           <Form.Control
                             type="text"
-                            name="firstName"
+                            name={"firstName"}
                             id="firstName"
                             value={formData.firstName}
+                            // value={userData?.firstName || ""}
                             placeholder="Enter Name.."
                             onChange={changeHandler}
                           />
@@ -322,9 +354,9 @@ function NewAdmission() {
                           <Form.Control
                             type="text"
                             name="parent_phone_no"
-                            id="phone_no"
+                            id="parent_phone_no"
                             value={formData.parent_phone_no}
-                            placeholder="Enter Parent Phone No..."
+                            placeholder="Parent Phone No..."
                             onChange={changeHandler}
                             className="rounded-2"
                           />
@@ -339,7 +371,7 @@ function NewAdmission() {
                             name="parent_incom"
                             id="parent_incom"
                             value={formData.parent_incom}
-                            placeholder="Enter Parent Incom..."
+                            placeholder="Parent Incom..."
                             onChange={changeHandler}
                             className="rounded-2"
                           />
@@ -355,7 +387,7 @@ function NewAdmission() {
                             name="parent_occoupation"
                             id="parent_occoupation"
                             value={formData.parent_occoupation}
-                            placeholder="Enter Parent Phone No..."
+                            placeholder="Parent Occupation..."
                             onChange={changeHandler}
                             className="rounded-2"
                           />
@@ -383,17 +415,51 @@ function NewAdmission() {
                             <option value="JELETE">JElETE</option>
                           </Form.Select>
                         </Form.Group>
+
+                        <Form.Group as={Col} md="4" className="mb-3">
+                          <Form.Label htmlFor="counselling">
+                          Counselling
+<span className="text-danger">*</span>
+                          </Form.Label>
+                          <Form.Select
+                            id="counselling"
+                            name="counselling"
+                            className="rounded-0"
+                            value={formData.counselling}
+                            onChange={changeHandler}
+                          >
+                            <option value="">Select Counselling</option>
+                            <option value="central">Central Counselling</option>
+                            <option value="decentralised">Decentralised Counselling</option>
+                          </Form.Select>
+                        </Form.Group>
                         <Form.Group as={Col} md="4">
                           <Form.Label>
-                            Admission Session
+                            Session Start
                             <span className="text-danger">*</span>
                           </Form.Label>
                           <Form.Control
                             type="text"
-                            name="admission_session"
-                            id="admission_session"
-                            value={formData.admission_session}
-                            placeholder="20XX-20XX"
+                            name="start_session"
+                            id="start_session"
+                            value={formData.start_session}
+                            placeholder="20XX"
+                            onChange={changeHandler}
+                            className="rounded-2"
+                          />
+                        </Form.Group>
+
+                        <Form.Group as={Col} md="4">
+                          <Form.Label>
+                            Session-End
+                            <span className="text-danger">*</span>
+                          </Form.Label>
+                          <Form.Control
+                            type="text"
+                            name="end_session"
+                            id="end_session"
+                            value={formData.end_session}
+                            placeholder="20XX"
                             onChange={changeHandler}
                             className="rounded-2"
                           />

@@ -8,20 +8,103 @@ import { setLoading, setToken ,setAccountType} from "../../redux/slices/authSlic
 import { apiConnector } from "../apiConnector";
 import { endpoints } from "../apis";
 
-const { SIGNUP_API, LOGIN_API, VERIFY_USER } = endpoints;
+const { SIGNUP_API, LOGIN_API, SENDOTP_API ,RESETPASSTOKEN_API,
+  RESETPASSWORD_API
 
-export const sendOtp = async (email, navigate) => {
+} = endpoints;
+
+// export const sendOtp = async (email, navigate) =>{
+//   return async (dispatch) => {
+//     const toastId = toast.loading("Loading...");
+//     dispatch(setLoading(true));
+//     try {
+//       const response = await apiConnector("POST", SENDOTP_API, {
+//         email,
+//         checkUserPresent: true,
+//       });
+//       console.log("SENDOTP API RESPONSE............", response);
+
+//       console.log(response.data.success);
+
+//       if (!response.data.success) {
+//         throw new Error(response.data.message);
+//       }
+
+//       toast.success("OTP Sent Successfully");
+//       navigate("/verify-email");
+//     } catch (error) {
+//       console.log("SENDOTP API ERROR............", error);
+//       toast.error("Could Not Send OTP");
+//     }
+//     dispatch(setLoading(false));
+//     toast.dismiss(toastId);
+//   };
+// }
+
+// export const signUpFrom = (formData, navigate) => {
+//   const {
+//     firstName,
+//     lastName,
+//     email,
+//     password,
+//     confirmPassword,
+//     instructorKey,
+//     accountType,
+//     otp,
+//   } = formData; // Include accountType here
+//   return async (dispatch) => {
+//     const toastId = toast.loading("Loading...");
+//     dispatch(setLoading(true));
+//     try {
+//       const response = await apiConnector("POST", SIGNUP_API, {
+//         firstName,
+//         lastName,
+//         email,
+//         password,
+//         confirmPassword,
+//         accountType,
+//         instructorKey,
+//         otp,
+//       });
+
+//       console.log("SIGNUP API RESPONSE:", response);
+
+//       if (!response.data.success) {
+//         throw new Error(response.data.message);
+//       }
+
+//       toast.success("Signup Successful");
+//       navigate("/LoginFrom");
+//     } catch (error) {
+//       console.error("SIGNUP API ERROR:", error);
+//       toast.error("Sign Up failed");
+//       navigate("/signupfrom");
+//     }
+//     dispatch(setLoading(false));
+//     toast.dismiss(toastId);
+//   };
+// };
+
+
+
+
+
+
+// ==========
+
+
+
+
+export function sendOtp(email, navigate) {
   return async (dispatch) => {
-    const toastId = toast.loading("Loading...");
     dispatch(setLoading(true));
     try {
-      const response = await apiConnector("GET", VERIFY_USER, {
+      const response = await apiConnector("POST", SENDOTP_API, {
         email,
         checkUserPresent: true,
       });
+      
       console.log("SENDOTP API RESPONSE............", response);
-
-      console.log(response.data.success);
 
       if (!response.data.success) {
         throw new Error(response.data.message);
@@ -29,56 +112,117 @@ export const sendOtp = async (email, navigate) => {
 
       toast.success("OTP Sent Successfully");
       navigate("/verify-email");
+      dispatch(setLoading(false));
     } catch (error) {
       console.log("SENDOTP API ERROR............", error);
-      toast.error("Could Not Send OTP");
+      toast.error(error?.response?.data?.message);
+      dispatch(setLoading(false));
     }
-    dispatch(setLoading(false));
-    toast.dismiss(toastId);
   };
-};
+}
 
-export const signUpFrom = (formData, navigate) => {
-  const {
-    firstName,
-    lastName,
-    email,
-    password,
-    confirmPassword,
-    instructorKey,
-    accountType,
-  } = formData; // Include accountType here
+export function signUp(
+  accountType,
+  firstName,
+  lastName,
+  email,
+  password,
+  confirmPassword,
+  instructorKey,
+  otp,
+  navigate
+) {
   return async (dispatch) => {
     const toastId = toast.loading("Loading...");
     dispatch(setLoading(true));
     try {
       const response = await apiConnector("POST", SIGNUP_API, {
+        accountType,
         firstName,
         lastName,
         email,
         password,
         confirmPassword,
-        accountType,
         instructorKey,
+        otp,
       });
 
-      console.log("SIGNUP API RESPONSE:", response);
+      console.log("SIGNUP API RESPONSE............", response);
 
       if (!response.data.success) {
         throw new Error(response.data.message);
       }
-
+     
       toast.success("Signup Successful");
       navigate("/LoginFrom");
+      dispatch(setLoading(false));
+      toast.dismiss(toastId);
     } catch (error) {
-      console.error("SIGNUP API ERROR:", error);
-      toast.error("Sign Up failed");
-      navigate("/signupfrom");
+      console.log("SIGNUP API ERROR............", error);
+      toast.error("Signup Failed");
+      // navigate("/signupfrom");
+      dispatch(setLoading(false));
+      toast.dismiss(toastId);
     }
-    dispatch(setLoading(false));
-    toast.dismiss(toastId);
   };
-};
+}
+
+
+
+
+
+
+
+
+
+
+
+
+// export function signUpFrom(
+//   firstName,
+//   lastName,
+//   email,
+//   password,
+//   confirmPassword,
+//   instructorKey,
+//   accountType,
+//   navigate,
+//   otp
+// ) {
+//   return async (dispatch) => {
+//     const toastId = toast.loading("Loading...");
+//     dispatch(setLoading(true));
+//     try {
+//       const response = await apiConnector("POST", SIGNUP_API, {
+//         firstName,
+//         lastName,
+//         email,
+//         password,
+//         confirmPassword,
+//         instructorKey,
+//         accountType,
+//         otp,
+//       });
+//       console.log("SIGNUP API RESPONSE:", response.data);
+//       console.log(otp, firstName, lastName, email, password);
+
+//       if (!response.data.success) {
+//         throw new Error(response.data.message);
+//       }
+
+//       toast.success("Signup Successful");
+//       navigate("/LoginFrom");
+//     } catch (error) {
+//       console.error("SIGNUP API ERROR:", error);
+//       toast.error("Signup Failed");
+//       // Handle navigation error here or provide a default navigation path
+//       // navigate("/signupfrom");
+//     }
+//     dispatch(setLoading(false));
+//     toast.dismiss(toastId);
+//   };
+// }
+
 
 export function logout(navigate) {
   return (dispatch) => {
@@ -175,52 +319,56 @@ export function login(email, password, setIsAdmin,setTeacher, navigate) {
   };
 }
 
-// export function login(email, password, setIsAdmin, setTeacher, navigate) {
-//   return async (dispatch) => {
-//     const toastId = toast.loading("Logging in...");
-//     try {
-//       const response = await apiConnector("POST", LOGIN_API, {
-//         email,
-//         password,
-//       });
 
-//       if (!response.data.success) {
-//         toast.error(response.data.message);
-//         throw new Error(response.data.message);
-//       }
+export function resetPassword(password, confirmPassword, token,setresetComplete) {
+  return async (dispatch) => {
+    const toastId = toast.loading("Loading...")
+    dispatch(setLoading(true))
+    try {
+      const response = await apiConnector("POST", RESETPASSWORD_API, {
+        password,
+        confirmPassword,
+        token,
+      })
 
-//       const { user, token } = response.data;
+      console.log("RESETPASSWORD RESPONSE............", response)
 
-//       // Dispatch actions
-//       dispatch(setToken(token));
-//       dispatch(setUser(user));
+      if (!response.data.success) {
+        throw new Error(response.data.message)
+      }
 
-//       // Set user image
-//       const userImage = response.data?.user?.image
-//         ? response.data.user.image
-//         : `https://api.dicebear.com/5.x/initials/svg?seed=${response.data.user.firstName} ${response.data.user.lastName}`;
-//       dispatch(setUser({ ...response.data.user, image: userImage }));
+      toast.success("Password Reset Successfully")
+      setresetComplete(true)
+    } catch (error) {
+      console.log("RESETPASSWORD ERROR............", error)
+      toast.error("Failed To Reset Password")
+    }
+    toast.dismiss(toastId)
+    dispatch(setLoading(false))
+  }
+}
+export function forgotPassword(email,setEmailSent) {
+  return async (dispatch) => {
+    // const toastId = toast.loading("Loading...")
+    dispatch(setLoading(true))
+    try {
+      const response = await apiConnector("POST", RESETPASSTOKEN_API, {
+        email,
+      })
 
-//       // Check if the user is an admin or instructor
-//       if (user.accountType === "Admin") {
-//         dispatch(setIsAdmin(true));
-//       }
-//       if (user.accountType === "Instructor" && user.instructorKey === "ukdets@#1234") {
-//         dispatch(setTeacher(true));
-//       }
+      console.log("FORGOTPASSWORD RESPONSE............", response)
 
-//       // Save token and user to local storage
-//       localStorage.setItem("token", token);
-//       localStorage.setItem("user", JSON.stringify(user));
+      if (!response.data.success) {
+        toast.error(response.data.message)
+        throw new Error(response.data.message)
+      }
 
-//       toast.success("Login Successful");
-//       navigate("/");
-
-//     } catch (error) {
-//       console.error("LOGIN API ERROR:", error);
-//       toast.error("Login Failed");
-//     } finally {
-//       toast.dismiss(toastId); // Dismiss loading toast
-//     }
-//   };
-// }
+      toast.success("Reset Email Sent");
+      setEmailSent(true)
+    } catch (error) {
+      console.log("FORGOTPASSWORD ERROR............", error)
+    }
+    // toast.dismiss(toastId)
+    dispatch(setLoading(false))
+  }
+}

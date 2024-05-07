@@ -1,4 +1,5 @@
-
+import axios from "axios";
+import { useState,useEffect } from "react";
 import {
   BarChart,
   Bar,
@@ -20,7 +21,7 @@ import styles from "./Home.module.css";
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
-const days = ["New Admission", "EXIT STUDENT", "PG COURSE", "JOB", "PASS", "FAIL", "TOTAL STUDENT"];
+const days = ["New", "EXIT", "PG", "JOB", "PASS", "FAIL", "TOTAL STUDENT"];
 const sales = days.map((day) => ({
   name: day,
   value: getRandomInt(1000, 5000),
@@ -44,6 +45,9 @@ const topSellingProducts = [
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#8884d8"];
 
 const Homes = () => {
+
+
+
   return (
     <div className={styles.container}>
       {/* <Sidebar /> */}
@@ -55,9 +59,9 @@ const Homes = () => {
         </div>
         <div className={styles.charts}>
           <div className={styles.sales_chart}>
-            <h2>Sales</h2>
+            <h2>Student Info</h2>
             <BarChart width={500} height={300} data={data.sales}>
-              <XAxis dataKey="name" />
+              <XAxis dataKey="name"  />
               <YAxis />
               <Tooltip />
               <Legend />
@@ -110,3 +114,33 @@ const Homes = () => {
 };
 
 export default Homes;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

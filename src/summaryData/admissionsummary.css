@@ -2,11 +2,15 @@
 .search-container {
     width: 50%;
     margin: 50px auto;
+    display: flex;
+    gap: 10px;
 }
 .has-search .form-control {
     padding-left: 2.375rem;
 }
-
+.input-group-append button{
+    margin-left: 10px;
+}
 .has-search .form-control-feedback {
     position: absolute;
     z-index: 2;
