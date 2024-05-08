@@ -1,0 +1,49 @@
+.reset-password-container {
+  background-color: rgba(58, 54, 54, 0.904);
+  .reset-container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 25px;
+
+    .reset-second-container{
+        margin-top: 60px;
+        margin-bottom: 30px;
+    .reset-heading {
+      font-size: 2rem;
+      color: rgb(255, 255, 255);
+    }
+    .reset-paragraph {
+      font-size: 1.125rem;
+      color: rgba(255, 255, 255, 0.902);
+      margin-top: 1.125rem;
+    }
+    .input-confirm-password-icon {
+      padding: 4px;
+      background-color: white;
+      border-radius: 5px 5px 5px 5px;
+    }
+    .reset-password-button {
+      margin-top: 20px;
+      width: 100%;
+      background-color: rgba(117, 231, 244, 0.811);
+      border: none;
+      padding: 8px;
+      font-size: 1.125rem;
+    }
+    .back-button {
+      width: fit-content;
+      margin-top: 15px;
+      list-style: none;
+      text-decoration: none;
+      Link {
+        list-style: none;
+        text-decoration: none;
+      }
+      .back-link {
+        color: white;
+        font-size: 1.25rem;
+      }
+    }
+  }
+}
+}

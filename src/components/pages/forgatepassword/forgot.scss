@@ -1,0 +1,61 @@
+.forgate-password-container {
+  background-color: rgb(35, 32, 32);
+  align-items: center;
+  justify-content: center;
+
+  .forgot-container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 35px;
+    
+.forgot-second-container{
+  margin-top: 60px;
+
+    .forgot-heading {
+      color: white;
+      font-size: 30px;
+      
+    }
+    .forgot-paragraph {
+      // my-4 text-[1.125rem] leading-[1.625rem] text-center text-white
+      margin-bottom: 10px;
+      font-size: 1.125rem;
+      color: rgb(182, 179, 179);
+    }
+    .lable {
+      text-shadow: 0ex;
+      color: white;
+      font-size: 1rem;
+    }
+    .input-group {
+      padding: 10px;
+      box-shadow: (0_1px_0_0);
+      outline: none;
+      margin-bottom: 15px;
+    }
+    .reset-button {
+      margin-top: 5px;
+      width: 100%;
+      background-color: rgba(117, 231, 244, 0.811);
+      border: none;
+      padding: 8px;
+      font-size: 1.125rem;
+    }
+    .back-button {
+      
+      margin-top: 15px;
+      list-style: none;
+      text-decoration: none;
+      Link {
+        list-style: none;
+        text-decoration: none;
+      }
+      .back-link {
+        color: white;
+        font-size: 1.25rem;
+      }
+    }
+  }
+}
+
+}

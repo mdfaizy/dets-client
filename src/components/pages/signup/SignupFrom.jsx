@@ -340,75 +340,7 @@ const SignupForm = () => {
     });
   };
 
-  // const [accountType, setAccountType] = useState('Student');
-  // const [formData, setFormData] = useState({
-  //   email: "",
-  //   password: "",
-  //   firstName: "",
-  //   lastName: "",
-  //   confirmPassword: "",
-  //   instructorKey: "",
-  // });
 
-  // const { firstName, lastName, email, password, confirmPassword, instructorKey } = formData;
-
-  // const changeHandler = (e) => {
-  // //   const { name, value } = e.target;
-  // //   if (name === 'accountType') {
-  // //     setAccountType(value);
-  // //   } else {
-  // //     setFormData((prevData) => ({
-  // //       ...prevData,
-  // //       [name]: value,
-  // //     }));
-  // //   }
-  // // };
-
-  // const { name, value } = e.target;
-
-  //   if (name === 'accountType') {
-  //     setAccountType(value);
-  //   } else {
-  //     setFormData((prev) => ({
-  //       ...prev,
-  //       [name]: value,
-  //     }));
-  //   }
-  // };
-
-  // // const submitHandler = (e) => {
-  // //   e.preventDefault();
-  // //   const signupData = { ...formData };
-  // //   dispatch(setSignupData(signupData));
-  // //   dispatch(signUpFrom(formData, navigate));
-  // //   setFormData({
-  // //     email: "",
-  // //     password: "",
-  // //     firstName: "",
-  // //     lastName: "",
-  // //     confirmPassword: "",
-  // //     accountType: "Student",
-  // //     instructorKey: "",
-  // //   });
-  // // };
-
-
-
-  // const submitHandler = (e) => {
-  //   e.preventDefault();
-  //   const signupData = { ...formData };
-  //   dispatch(setSignupData(signupData));
-  //   dispatch(signUpFrom(formData, navigate));
-  //   setFormData({
-  //     email: "",
-  //     password: "",
-  //     firstName: "",
-  //     lastName: "",
-  //     confirmPassword: "",
-  //     instructorKey: "",
-  //   });
-  //   setAccountType("Student"); 
-  // };
 
 
   // const [accountType, setAccountType] = useState('Student');
@@ -440,11 +372,12 @@ const SignupForm = () => {
     }
 
     const signupData = { ...formData,
-     
+    
      };
     // dispatch(setSignupData(signupData));
     // dispatch(signUpFrom(formData, navigate));
     dispatch(setSignupData(signupData));
+    // dispatch(sendOtp(formData.email, navigate));
     dispatch(sendOtp(formData.email, navigate));
   
     setFormData({

@@ -22,7 +22,7 @@ import Allexitstudent from "./adminsection/Allexitstudent";
 import Allpgstudent from "./adminsection/Allpgstudent";
 import Allstudentjob from "./adminsection/Allstudentjob";
 import ForgatePassword from "./components/pages/forgatepassword/ForgatePassword";
-import ReasetPassword from "./components/pages/forgatepassword/ReasetPassword";
+import ReasetPassword from "./components//pages/forgatepassword/resetPassword/ResetPassword";
 import Exit from "./routes/exitstudent/Exit";
 import Newstudent from "./routes/newstudent/Newstudent";
 // import Newstudent from "./routes/newstudent/Newstudent.module";
@@ -151,8 +151,8 @@ function App() {
           path="/all_student_job/:id"
           element={<Allstudentjob isAdmin={isAdmin} teacher={teacher} />}
         />
-        <Route path="/forgatepassword" element={<ForgatePassword />} />
-        <Route path="/reasetpassword/:token" element={<ReasetPassword />} />
+        {/* <Route path="/forgatepassword" element={<ForgatePassword />} />
+        <Route path="/reasetpassword/:token" element={<ReasetPassword />} /> */}
         <Route path="/exit" element={<Exit />} />
         <Route path="newstudent" element={<Newstudent />} />
         <Route path="/btechjob" element={<Btechjob />} />

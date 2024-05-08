@@ -1,6 +1,6 @@
 // import { toast } from "react-hot-toast";
-
-import { toast } from "react-toastify";
+import toast from 'react-hot-toast';
+// import { toast } from "react-toastify";
 import { setLoading, setToken ,setAccountType} from "../../redux/slices/authSlice";
 // import { setLoading, setToken, setUser, setIsAdmin, setTeacher } from "../../redux/slices/authSlice";
 // import { resetCart } from "../../slices/cartSlice"
@@ -110,7 +110,10 @@ export function sendOtp(email, navigate) {
         throw new Error(response.data.message);
       }
 
-      toast.success("OTP Sent Successfully");
+      // toast.success("OTP Sent Successfully");
+      toast.success("OTP Sent Successfully", {
+        position: "top-right", // Set position to top-right
+      });
       navigate("/verify-email");
       dispatch(setLoading(false));
     } catch (error) {
@@ -128,9 +131,9 @@ export function signUp(
   email,
   password,
   confirmPassword,
-  instructorKey,
   otp,
-  navigate
+  instructorKey,
+  navigate,
 ) {
   return async (dispatch) => {
     const toastId = toast.loading("Loading...");
@@ -154,13 +157,13 @@ export function signUp(
       }
      
       toast.success("Signup Successful");
-      navigate("/LoginFrom");
+      navigate('/loginfrom');
       dispatch(setLoading(false));
       toast.dismiss(toastId);
     } catch (error) {
       console.log("SIGNUP API ERROR............", error);
       toast.error("Signup Failed");
-      // navigate("/signupfrom");
+      navigate('/signupfrom');
       dispatch(setLoading(false));
       toast.dismiss(toastId);
     }
@@ -319,7 +322,31 @@ export function login(email, password, setIsAdmin,setTeacher, navigate) {
   };
 }
 
+export function getPasswordResetToken(email, setEmailSent) {
+  return async (dispatch) => {
+    const toastId = toast.loading("Loading...")
+    dispatch(setLoading(true))
+    try {
+      const response = await apiConnector("POST", RESETPASSTOKEN_API, {
+        email,
+      })
 
+      console.log("RESETPASSTOKEN RESPONSE............", response)
+
+      if (!response.data.success) {
+        throw new Error(response.data.message)
+      }
+
+      toast.success("Reset Email Sent")
+      setEmailSent(true)
+    } catch (error) {
+      console.log("RESETPASSTOKEN ERROR............", error)
+      toast.error("Failed To Send Reset Email")
+    }
+    toast.dismiss(toastId)
+    dispatch(setLoading(false))
+  }
+}
 export function resetPassword(password, confirmPassword, token,setresetComplete) {
   return async (dispatch) => {
     const toastId = toast.loading("Loading...")
