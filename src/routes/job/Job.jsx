@@ -1,15 +1,17 @@
 import { useState } from "react";
 import { Container, Row, Col, Form, Accordion } from "react-bootstrap";
+import { useSelector,useDispatch} from "react-redux";
 import { useNavigate } from "react-router-dom";
-import Cookies from "js-cookie";
-import { useSelector } from "react-redux";
+import {submitJobForm} from "../../services/apiFunction/job"
+///
 
 const Job = () => {
-  const { token } = useSelector((state) => state.auth);
   const navigate = useNavigate();
-
+  const { token } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  
   const [formData, setFormData] = useState({
-    token: token,
+    token:token,
     fullName: "",
     companies_name: "",
     email: "",
@@ -25,55 +27,131 @@ const Job = () => {
     companiesType: "",
   });
 
+  // const changeHandler = (e) => {
+  //   const { name, value } = e.target;
+  //   setFormData((prev) => ({
+  //     ...prev,
+  //     [name]: value,
+  //   }));
+  // };
   const changeHandler = (event) => {
-    const { name, value, type, files } = event.target;
-
-    if (type === "file") {
-      setFormData((prevData) => ({
-        ...prevData,
-        [name]: files[0],
-      }));
-    } else {
-      setFormData((prevData) => ({
-        ...prevData,
-        [name]: value,
-      }));
-    }
-  };
-
-  const submitHandler = async (event) => {
-    event.preventDefault();
-    console.log("hi");
-
-    const formDataToSend = new FormData();
-    // Append each form field to formDataToSend
-    for (let key in formData) {
-      formDataToSend.append(key, formData[key]);
-    }
-    console.log("hi1");
-
-    try {
-      const response = await fetch("http://localhost:8000/api/v1/job/job", {
-        method: "POST",
-        body: formDataToSend, // Send formDataToSend instead of JSON.stringify(formData)
-      });
-      console.log("hi2", response);
-      if (response.ok) {
-        const responseData = await response.json();
-        console.log(responseData);
-        console.log(responseData.data._id);
-        Cookies.set("formData", JSON.stringify(formData));
-        // navigate("/Exitdata");
-        navigate("/job_application");
+      const { name, value, type, files } = event.target;
+  
+      if (type === "file") {
+        setFormData((prevData) => ({
+          ...prevData,
+          [name]: files[0],
+        }));
       } else {
-        console.log("Form not submitted. Error status:", response.status);
-        // Handle the error or display a message to the user
+        setFormData((prevData) => ({
+          ...prevData,
+          [name]: value,
+        }));
       }
-    } catch (error) {
-      console.error("Error occurred:", error);
-      // Handle other error cases (e.g., network errors)
-    }
+    };
+
+  // const submitHandler = (e) => {
+  //   e.preventDefault();
+  //   dispatch(submitJobForm(formData,navigate)); // Dispatch action creator
+  //   setFormData({ 
+  //     fullName: "",
+  //     companies_name: "",
+  //     email: "",
+  //     date_of_birth: "",
+  //     phone_no: "",
+  //     home_city: "",
+  //     companies_city: "",
+  //     package_lpa: "",
+  //     job_role: "",
+  //     selectType: "",
+  //     totalApplyCompanies: "",
+  //     noOfSelectInterview: "",
+  //     companiesType: "",
+  //   });
+  //   // navigate("/job_application");
+  // };
+
+
+
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    dispatch(submitJobForm(formData, navigate));
   };
+  
+
+  //befor redux
+
+
+  // const { token } = useSelector((state) => state.auth);
+  // const navigate = useNavigate();
+
+  // const [formData, setFormData] = useState({
+  //   token: token,
+  //   fullName: "",
+  //   companies_name: "",
+  //   email: "",
+  //   date_of_birth: "",
+  //   phone_no: "",
+  //   home_city: "",
+  //   companies_city: "",
+  //   package_lpa: "",
+  //   job_role: "",
+  //   selectType: "",
+  //   totalApplyCompanies: "",
+  //   noOfSelectInterview: "",
+  //   companiesType: "",
+  // });
+
+  // const changeHandler = (event) => {
+  //   const { name, value, type, files } = event.target;
+
+  //   if (type === "file") {
+  //     setFormData((prevData) => ({
+  //       ...prevData,
+  //       [name]: files[0],
+  //     }));
+  //   } else {
+  //     setFormData((prevData) => ({
+  //       ...prevData,
+  //       [name]: value,
+  //     }));
+  //   }
+  // };
+
+  // const submitHandler = async (event) => {
+  //   event.preventDefault();
+  //   console.log("hi");
+
+  //   const formDataToSend = new FormData();
+  //   // Append each form field to formDataToSend
+  //   for (let key in formData) {
+  //     formDataToSend.append(key, formData[key]);
+  //   }
+  //   console.log("hi1");
+
+  //   try {
+  //     const response = await fetch("http://localhost:8000/api/v1/job/job", {
+  //       method: "POST",
+  //       body: formDataToSend, // Send formDataToSend instead of JSON.stringify(formData)
+  //     });
+  //     console.log("hi2", response);
+  //     if (response.ok) {
+  //       const responseData = await response.json();
+  //       console.log(responseData);
+  //       console.log(responseData.data._id);
+  //       Cookies.set("formData", JSON.stringify(formData));
+  //       // navigate("/Exitdata");
+  //       navigate("/job_application");
+  //     } else {
+  //       console.log("Form not submitted. Error status:", response.status);
+  //       // Handle the error or display a message to the user
+  //     }
+  //   } catch (error) {
+  //     console.error("Error occurred:", error);
+  //     // Handle other error cases (e.g., network errors)
+  //   }
+  // };
   return (
     <>
       <Col className="text-center">JOB</Col>

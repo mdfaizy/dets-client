@@ -1,10 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit"
 
 const initialState = {
-  step: 1,
-  newadmission: null,
-  editnesadmission: false,
-  delatestudent: false,
+  newadmissionData: null,
+  loading: false,
 }
 
 const newadmissionSlice = createSlice({

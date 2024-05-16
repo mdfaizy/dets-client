@@ -1,4 +1,4 @@
-import style from "../../adminsection/adminsection.module.css";
+import style from "../../admin/all-student/adminsection.module.css";
 import { useEffect, useState } from "react";
 import Table from "react-bootstrap/Table";
 import axios from "axios";

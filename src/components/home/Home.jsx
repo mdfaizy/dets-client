@@ -5,11 +5,16 @@ import Carousel from "react-bootstrap/Carousel";
 import image from "../../assets/image1.jpg";
 import style from "./Home.module.css";
 import AdmissionSummaryData from '../../summaryData/AdmissionSummaryData';
-import Feedback from "../../adminDashboard/feedback/Feedback";
-import Feedbackfrom from "../../adminDashboard/feedback/feedbackfrom/Feedbackfrom";
+// import Feedback from "../../adminDashboard/feedback/Feedback";
+// import Feedbackfrom from "../../adminDashboard/feedback/feedbackfrom/Feedbackfrom";
 import Homes from "../../summaryData/flowchart/Homes"
-
+import EditJob from "../../adminsection/job/EditJob";
+import { Link } from "react-router-dom";
+import { useNavigate ,useParams} from "react-router-dom";
+import JobDataPrint from "../../adminsection/job/JobDataPrint";
 function Home() {
+  const { id } = useParams();
+  console.log("id",id);
   return (
     <>
       <Carousel data-bs-theme="dark" className="">
@@ -108,13 +113,16 @@ function Home() {
           </Col>
         </Row>
       </Container>
-
+<JobDataPrint/>
+<EditJob/>
+<Link to={`/editjob/${id}`}>Edit</Link>
 
       <AdmissionSummaryData/>
 <Homes/>
-     <Feedback/>
 
-     <Feedbackfrom/>
+     {/* <Feedback/>
+
+     <Feedbackfrom/> */}
 
 
     

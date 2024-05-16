@@ -1,5 +1,5 @@
-import Allexitstudent from "../../adminsection/Allexitstudent";
-import ShowFormData from "../../components/ShowFormData";
+import Allexitstudent from "../../admin/all-student/Allexitstudent";
+import ShowFormData from "../../form-data/see-details/ShowFormData";
 import { Container, Row, Col } from "react-bootstrap";
 import style from "./StudentInfo.module.css";
 // import axios from "axios";

@@ -15,11 +15,20 @@ RESETPASSWORD_API: BASE_URL + "/auth/reset-password",
 
 
 
+//Job 
+
+export const Jobs = {
+  POST_JOIN_JOB_API: BASE_URL + "/job/job",
+  // GET_USER_ENROLLED_COURSES_API: BASE_URL + "/profile/getEnrolledCourses",
+  // GET_INSTRUCTOR_DATA_API: BASE_URL + "/profile/instructorDashboard",
+}
+
+
 
 export const Endpoints = {
   GET_USER_DETAILS_API: BASE_URL + "/profile/getUserDetails",
   GET_USER_ENROLLED_COURSES_API: BASE_URL + "/profile/getEnrolledCourses",
-  GET_INSTRUCTOR_DATA_API: BASE_URL + "/profile/instructorDashboard",
+  DELETE_JOB_DETAIL_API: BASE_URL + "/job/delete_id_jobstudent",
 }
 
 

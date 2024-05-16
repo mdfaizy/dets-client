@@ -132,8 +132,8 @@ export function signUp(
   password,
   confirmPassword,
   otp,
-  instructorKey,
   navigate,
+  instructorKey,
 ) {
   return async (dispatch) => {
     const toastId = toast.loading("Loading...");
@@ -163,7 +163,7 @@ export function signUp(
     } catch (error) {
       console.log("SIGNUP API ERROR............", error);
       toast.error("Signup Failed");
-      navigate('/signupfrom');
+      // navigate('/signupfrom');
       dispatch(setLoading(false));
       toast.dismiss(toastId);
     }

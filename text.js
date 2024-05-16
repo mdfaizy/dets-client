@@ -1,84 +1,151 @@
-// import React, { useState } from 'react';
+import ProfileDropdown from "../../pages/profile/ProfileDropdown";
+import { useState } from "react";
+import { NavLink } from "react-router-dom";
+import { Navbar, Nav } from "react-bootstrap";
+import style from "./Header.module.css";
+import logImg from "../../../assets/log.jpg";
+import { useSelector } from "react-redux";
 
-// const ForgotPassword = () => {
-//   const [email, setEmail] = useState('');
+const Header = (props) => {
+  const { isAdmin, setIsAdmin, teacher, setTeacher } = props;
+  console.log("Teacher Prop Value:", teacher);
+  const { token, accountType } = useSelector((state) => state.auth);
+  // const { accountType } = useSelector((state) => state.auth);
+  console.log("Header AccountType", accountType);
+  console.log("Header Token", token);
+  const [click, setClick] = useState(false);
 
-//   const handleForgotPassword = async () => {
-//     try {
-//       // Make a POST request to your backend to initiate the forgot password process
-//       const response = await fetch('/api/v1/forgot-password', {
-//         method: 'POST',
-//         headers: {
-//           'Content-Type': 'application/json',
-//         },
-//         body: JSON.stringify({ email }),
-//       });
+  const handleClick = () => {
+    setClick(!click);
+  };
 
-//       const result = await response.json();
-//       console.log(result); // Log the response from the server
-//     } catch (error) {
-//       console.error('Error:', error);
-//     }
-//   };
+  return (
+    <div className={style.header_top_content}>
+      <Navbar collapseOnSelect expand="lg" className={style.header_content}>
+        <Navbar.Brand>
+          <img src={logImg} alt="" className={style.logoImage} />
+        </Navbar.Brand>
+        <Navbar.Toggle aria-controls="responsive-navbar-nav">
+          {click ? "Close" : "Menu"}
+        </Navbar.Toggle>
+        <Navbar.Collapse
+          id="responsive-navbar-nav"
+          className={`${click ? "show" : ""} ${style.nav_menu}`}
+          onClick={handleClick}
+        >
+          <Nav className={`ml-auto ${style.nav_links_container}`}>
+            <NavLink to="/" className={style.nav_links} onClick={handleClick}>
+              HOME
+            </NavLink>
+            <NavLink
+              to="/about"
+              className={style.nav_links}
+              onClick={handleClick}
+            >
+              ABOUT
+            </NavLink>
+            {!isAdmin && token !== null && accountType === "Student" && (
+              // {/* {!isAdmin&& !teacher && isLoggedIn && ( */}
+              <>
+                <NavLink
+                  to="/newstudent"
+                  className={style.nav_links}
+                  onClick={handleClick}
+                >
+                  ADMISSION
+                </NavLink>
+                <NavLink
+                  to="/exit"
+                  className={style.nav_links}
+                  onClick={handleClick}
+                >
+                  EXIT STUDENT
+                </NavLink>
+                <li className={style.nav_links}>
+                  <NavLink
+                    to="/pgcourses"
+                    className={style.nav_links}
+                    onClick={handleClick}
+                  >
+                    POSTGRADUATE
+                  </NavLink>
+                </li>
+                <li className={style.nav_links}>
+                  <NavLink
+                    to="/btechjob"
+                    className={style.nav_links}
+                    onClick={handleClick}
+                  >
+                    JOB
+                  </NavLink>
+                </li>
+                <li className={style.nav_links} onClick={handleClick}>
+                  <NavLink to="/showFormData" className={style.nav_links}>
+                    SHOWFORMDATA
+                  </NavLink>
+                </li>
+              </>
+            )}
 
-//   return (
-//     <div>
-//       <label>Email:</label>
-//       <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-//       <button onClick={handleForgotPassword}>Submit</button>
-//     </div>
-//   );
-// };
+            {isAdmin && (
+              <li className={style.nav_links} onClick={handleClick}>
+                <NavLink to="/showFormData" className={style.nav_links}>
+                  A SHOWFORMDATA
+                </NavLink>
+              </li>
+            )}
+            {/* {teacher && token!==null &&( */}
+            {token !== null && accountType === "Instructor" && (
+              <>
+                <NavLink
+                  to="/studentallinfo"
+                  className={style.nav_links}
+                  onClick={handleClick}
+                >
+                  STUDENT-INFO
+                </NavLink>
 
-// export default ForgotPassword;
+                <NavLink className={style.nav_links} to="/createreport">
+                  REPORT CREATE
+                </NavLink>
 
+                <NavLink className={style.nav_links} to="/filterdataall">
+                  FILTER-DATA
+                </NavLink>
+              </>
+            )}
 
+            <Nav
+              className={`${style.nav_links_container} ${
+                click ? "mr-auto" : ""
+              }`}
+            >
+              {token === null && (
+                <>
+                  <NavLink
+                    to="/loginfrom"
+                    className={style.nav_links}
+                    onClick={handleClick}
+                  >
+                    LOGIN
+                  </NavLink>
+                  <NavLink
+                    to="/signupfrom"
+                    className={style.nav_links}
+                    onClick={handleClick}
+                  >
+                    SIGN UP
+                  </NavLink>
+                </>
+              )}
 
+              {token !== null && <ProfileDropdown />}
+            </Nav>
+          </Nav>
+        </Navbar.Collapse>
+      </Navbar>
+    </div>
+  );
+};
 
-
-
-
-
-
-
-
-
-
-
-
-// import React, { useState } from 'react';
-
-// const ResetPassword = () => {
-//   const [token, setToken] = useState('');
-//   const [password, setPassword] = useState('');
-
-//   const handleResetPassword = async () => {
-//     try {
-//       // Make a POST request to your backend to reset the password
-//       const response = await fetch('/api/v1/reset-password', {
-//         method: 'POST',
-//         headers: {
-//           'Content-Type': 'application/json',
-//         },
-//         body: JSON.stringify({ token, password }),
-//       });
-
-//       const result = await response.json();
-//       console.log(result); // Log the response from the server
-//     } catch (error) {
-//       console.error('Error:', error);
-//     }
-//   };
-
-//   return (
-//     <div>
-//       <label>Token:</label>
-//       <input type="text" value={token} onChange={(e) => setToken(e.target.value)} />
-//       <label>New Password:</label>
-//       <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-//       <button onClick={handleResetPassword}>Reset Password</button>
-//     </div>
-//   );
-// };
-
-// export default ResetPassword;
+export default Header;

@@ -1,9 +1,9 @@
-import { useState ,useEffect} from "react";
+import { useState} from "react";
 import { Container, Row, Col, Form, Accordion } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import { useSelector } from "react-redux";
-import axios from "axios";
+// import axios from "axios";
 const ExitFrom = () => {
   const { token } = useSelector((state) => state.auth);
   console.log(token);

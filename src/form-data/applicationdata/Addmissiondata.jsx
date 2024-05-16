@@ -2,27 +2,19 @@ import { useState, useEffect } from "react";
 import "./admissiondata.scss";
 import axios from "axios";
 import {useSelector} from 'react-redux'
+import { useParams } from "react-router-dom";
 function Addmissiondata() {
   const [formData, setFormData] = useState({});
  const { token } = useSelector((state) => state.auth);
  console.log("admission token",token);
+ const {id}=useParams()
 useEffect(() => {
     const fetchData = async () => {
       try {
-        const requestBody = {
-          token: token,
-        };
+       
 
-        const response = await axios.post(
-          "http://localhost:8000/api/v1/student/getnewadmissionId",
-          requestBody,
-          
-          {
-            headers: {
-              "Content-Type": "application/json",
-              // Authorization: `Bearer ${token}`,
-            },
-          }
+        const response = await axios.get(
+          `http://localhost:8000/api/v1/student/getnewadmissionId/6646092e9788f8705ab622bb`
         );
         console.log("response", response);
         if (response.status === 200) {
@@ -57,6 +49,7 @@ useEffect(() => {
 
   //   doc.save("form_data.pdf");
   // };
+  
   return (
     <div className="addmission_top_contante">
       <table

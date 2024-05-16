@@ -53,6 +53,10 @@ import { createSlice } from "@reduxjs/toolkit";
 
 
 const initialState ={
+  signupData: null,
+//   // accountType: null,
+  loading: false,
+  
   accountType: localStorage.getItem("accountType")? JSON.parse(localStorage.getItem("accountType")): null,
     token: localStorage.getItem("token") ? JSON.parse(localStorage.getItem("token")):null,
 }

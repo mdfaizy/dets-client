@@ -1,34 +1,21 @@
 import { useState, useEffect } from "react";
-import "./admissiondata.scss";
+import "../../form-data/applicationdata/admissiondata.scss";
 import axios from "axios";
 import { useSelector } from "react-redux";
-function Exitdata() {
+// import { useLocation } from "react-router-dom";
+const PgDataDelete = () => {
+  // const location = useLocation()
+  // const { apidata } = location.state || {}
   const [formData, setFormData] = useState({});
-  const { token } = useSelector((state) => state.auth);
-  console.log("admission token",token);
+ const {token}=useSelector((state)=>state.auth);
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const requestBody = {
-          token: token,
-        };
-
         const response = await axios.post(
-          "http://localhost:8000/api/v1/exit/get_exitstudent",
-          requestBody,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(requestBody),
-          }
-        );
-
-        console.log(response);
-        if (response.ok) {
-          const data = await response.json();
-          setFormData(data.data);
+          "http://localhost:8000/api/v1/pgcourse/get_pg_student");
+         console.log("responce",response)
+        if (response.status === 200) {
+          setFormData(response.data.data);
         } else {
           console.error("Failed to fetch form data. Status:", response.status);
         }
@@ -38,7 +25,6 @@ function Exitdata() {
     };
     fetchData();
   }, [token]);
-
 
   return (
     <div className="addmission_top_contante">
@@ -76,7 +62,7 @@ function Exitdata() {
               <tbody>
                 <tr className="table_tbody_hading">
                   Department of Engineering and Technological Studies <br />
-                  Exit Student
+                  PG Student
                 </tr>
 
                 <tr className="tbody_contante">
@@ -146,13 +132,6 @@ function Exitdata() {
                           <td>{formData.email}</td>
                         </tr>
                         <tr>
-                          <td className="tbody_formData_info_name">Roll No:</td>
-                          <td className="tbody_fromData_and_info_dot">
-                            <b>:</b>
-                          </td>
-                          <td>{formData.rollNo}</td>
-                        </tr>
-                        <tr>
                           <td className="tbody_formData_info_name">
                             Date of Birth
                           </td>
@@ -162,13 +141,19 @@ function Exitdata() {
                           <td>{formData.date_of_birth}</td>
                         </tr>
                         <tr>
-                          <td className="tbody_formData_info_name">Stream</td>
+                          <td className="tbody_formData_info_name">Gender</td>
                           <td className="tbody_fromData_and_info_dot">
                             <b>:</b>
                           </td>
-                          <td>{formData.stream}</td>
+                          <td>{formData.gender}</td>
                         </tr>
-
+                        <tr>
+                          <td className="tbody_formData_info_name">Exam</td>
+                          <td className="tbody_fromData_and_info_dot">
+                            <b>:</b>
+                          </td>
+                          <td>{formData.exameType}</td>
+                        </tr>
                         <tr>
                           <td className="tbody_formData_info_name">Category</td>
                           <td className="tbody_fromData_and_info_dot">
@@ -178,12 +163,19 @@ function Exitdata() {
                         </tr>
                         <tr>
                           <td className="tbody_formData_info_name">
-                            Registration No
+                            All India Rank
                           </td>
                           <td className="tbody_fromData_and_info_dot">
                             <b>:</b>
                           </td>
-                          <td>{formData.registrationNo}</td>
+                          <td>{formData.allIndiaRank}</td>
+                        </tr>
+                        <tr>
+                          <td className="tbody_formData_info_name">Stream</td>
+                          <td className="tbody_fromData_and_info_dot">
+                            <b>:</b>
+                          </td>
+                          <td>{formData.stream}</td>
                         </tr>
                         <tr>
                           <td className="tbody_formData_info_name">Session</td>
@@ -193,57 +185,22 @@ function Exitdata() {
                           <td>{formData.session}</td>
                         </tr>
                         <tr>
-                          <td className="tbody_formData_info_name">Phone No</td>
+                          <td className="tbody_formData_info_name">
+                            Institute City
+                          </td>
                           <td className="tbody_fromData_and_info_dot">
                             <b>:</b>
                           </td>
-                          <td>{formData.Phone_no}</td>
-                        </tr>
-                        <tr>
-                          <td className="tbody_formData_info_name">Session</td>
-                          <td className="tbody_fromData_and_info_dot">
-                            <b>:</b>
-                          </td>
-                          <td>{formData.session}</td>
+                          <td>{formData.InstituteCity}</td>
                         </tr>
                         <tr>
                           <td className="tbody_formData_info_name">
-                            First Year
+                            Institute Name
                           </td>
                           <td className="tbody_fromData_and_info_dot">
                             <b>:</b>
                           </td>
-                          <td>{formData.year_cgpa_1th}</td>
-                        </tr>
-
-                        <tr>
-                          <td className="tbody_formData_info_name">
-                            Second Year
-                          </td>
-                          <td className="tbody_fromData_and_info_dot">
-                            <b>:</b>
-                          </td>
-                          <td>{formData.year_cgpa_2nd}</td>
-                        </tr>
-
-                        <tr>
-                          <td className="tbody_formData_info_name">
-                            Third Year
-                          </td>
-                          <td className="tbody_fromData_and_info_dot">
-                            <b>:</b>
-                          </td>
-                          <td>{formData.year_cgpa_3rd}</td>
-                        </tr>
-
-                        <tr>
-                          <td className="tbody_formData_info_name">
-                            Fourthe Year
-                          </td>
-                          <td className="tbody_fromData_and_info_dot">
-                            <b>:</b>
-                          </td>
-                          <td>{formData.year_cgpa_4th}</td>
+                          <td>{formData.InstituteName}</td>
                         </tr>
                       </tbody>
                     </table>
@@ -257,6 +214,4 @@ function Exitdata() {
     </div>
   );
 }
-
-export default Exitdata;
-
+export default PgDataDelete;

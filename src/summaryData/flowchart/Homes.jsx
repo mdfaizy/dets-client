@@ -21,16 +21,17 @@ import styles from "./Home.module.css";
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
-const days = ["New", "EXIT", "PG", "JOB", "PASS", "FAIL", "TOTAL STUDENT"];
-const sales = days.map((day) => ({
-  name: day,
-  value: getRandomInt(1000, 5000),
+const years = ["New", "EXIT", "PG", "JOB", "PASS", "FAIL", "TOTAL STUDENT"];
+const student = years.map((year) => ({
+  name: year,
+  value: getRandomInt(10, 300),
 }));
-const orders = days.map((day) => ({
-  name: day,
-  count: getRandomInt(5, 30),
+const admissions = years.map((year) => ({
+  name: year,
+  count: getRandomInt(5, 300),
 }));
-const data = { sales, orders };
+const data = { 
+  student, admissions };
 
 // Dummy data for top selling products
 const topSellingProducts = [
@@ -58,9 +59,12 @@ const Homes = () => {
           {/* Summary components here */}
         </div>
         <div className={styles.charts}>
-          <div className={styles.sales_chart}>
+          <div className={styles.
+            student_chart}>
             <h2>Student Info</h2>
-            <BarChart width={500} height={300} data={data.sales}>
+            <BarChart width={500} height={300} data={data.
+              student
+            }>
               <XAxis dataKey="name"  />
               <YAxis />
               <Tooltip />
@@ -69,9 +73,9 @@ const Homes = () => {
               <Bar dataKey="value" fill="#8884d8" />
             </BarChart>
           </div>
-          <div className={styles.orders_chart}>
-            <h2>Orders</h2>
-            <LineChart width={500} height={300} data={data.orders}>
+          <div className={styles.admissions_chart}>
+            <h2>Student</h2>
+            <LineChart width={500} height={300} data={data.admissions}>
               <XAxis dataKey="name" />
               <YAxis />
               <Tooltip />
@@ -82,7 +86,7 @@ const Homes = () => {
           </div>
           {/* Additional charts like PieChart for order types can be added here */}
           <div className={styles.top_selling_chart}>
-            <h2>Top Selling Products</h2>
+            <h2>Student</h2>
             <PieChart width={600} height={400} >
               <Pie
                 data={topSellingProducts}

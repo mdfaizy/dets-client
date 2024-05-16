@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export const getAllNewStudent = async () => {
   try {
-    const response = await axios.get('http://localhost:8000/api/v1/student/get_new_admission');
+    const response = await axios.get(`http://localhost:8000/api/v1/student/get_new_admission`)
     if (response.data.success) {
       return response.data.data;
     } else {
@@ -17,33 +17,33 @@ export const getAllNewStudent = async () => {
 
 
 
-export const deleteNewAdmission = async (id) => {
-    try {
-      const response = await axios.delete(`http://localhost:8000/api/v1/student/delete_newadmission/${id}`);
-      if (response.data.success) {
-        return true;
-      } else {
-        throw new Error('Failed to delete admission');
-      }
-    } catch (error) {
-      throw new Error(`Error deleting admission: ${error.message}`);
-    }
-  };
-
-
-//   const handleDelete = async (id, index) => {
+// export const deleteNewAdmission = async (id) => {
 //     try {
-//       const responseDelete = await axios.delete(
-//         `http://localhost:8000/api/v1/student/delete_newadmission/${id}`
-//       );
-//       console.log("responseDelete", responseDelete);
-//       const updatedFormData = [...formData];
-//       updatedFormData.splice(index, 1);
-//       setFormData(updatedFormData);
+//       const response = await axios.delete(`http://localhost:8000/api/v1/student/delete_newadmission/${id}`);
+//       if (response.data.success) {
+//         return true;
+//       } else {
+//         throw new Error('Failed to delete admission');
+//       }
 //     } catch (error) {
-//       console.log("Error deleting item:", error);
+//       throw new Error(`Error deleting admission: ${error.message}`);
 //     }
 //   };
+
+
+// //   const handleDelete = async (id, index) => {
+// //     try {
+// //       const responseDelete = await axios.delete(
+// //         `http://localhost:8000/api/v1/student/delete_newadmission/${id}`
+// //       );
+// //       console.log("responseDelete", responseDelete);
+// //       const updatedFormData = [...formData];
+// //       updatedFormData.splice(index, 1);
+// //       setFormData(updatedFormData);
+// //     } catch (error) {
+// //       console.log("Error deleting item:", error);
+// //     }
+// //   };
 
 
 

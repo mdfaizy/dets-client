@@ -88,10 +88,6 @@ function NewAdmission() {
       }));
     }
   };
-
-
-
-
 // const getUserData = async () => {
 //   try {
 //     const response = await axios.get(`http://localhost:8000/api/v1/getsigin_By_Id/${id}`);
@@ -111,9 +107,7 @@ function NewAdmission() {
     
 //   },[id]);
 
-
-
-  const submitHandler = async (event) => {
+const submitHandler = async (event) => {
     event.preventDefault();
     const formDataToSend = new FormData();
     // Append each form field to formDataToSend
@@ -125,8 +119,6 @@ function NewAdmission() {
         "http://localhost:8000/api/v1/student/newAdmission",
         {
           method: "POST",
-          // body:JSON.stringify(formData) ,
-          // body: formDataToSend,
           body: formDataToSend,
         }
       );
@@ -138,7 +130,8 @@ function NewAdmission() {
         console.log(responseData.newAdmission._id);
 
         // Cookies.set("formData", JSON.stringify(formData));
-        navigate("/");
+        // navigate("/");
+        navigate("/newAdmissiondata", { state: { apidata: responseData}});
         // navigate(`/ShowFormData/${responseData.data._id}`);
       } else {
         console.log("Form not submitted. Error status:", response.status);

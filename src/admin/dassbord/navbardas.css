@@ -1,0 +1,12 @@
+
+
+.nabar-dasboard{
+display: flex;
+ width: 100%;
+ background-color: ghostwhite;
+ justify-content: space-between;
+ padding: 5px;
+ padding-left: 10px;
+ align-items: center;
+ text-align: center;
+}

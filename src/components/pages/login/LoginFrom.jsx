@@ -14,103 +14,101 @@
 // import axios from "axios";
 
 // const LoginFrom = (props) => {
-  // const setIsLoggedIn = props.setIsLoggedIn;
-  // const setIsAdmin = props.setIsAdmin;
-  // const setTeacher = props.setTeacher;
-  // const navigate = useNavigate();
+// const setIsLoggedIn = props.setIsLoggedIn;
+// const setIsAdmin = props.setIsAdmin;
+// const setTeacher = props.setTeacher;
+// const navigate = useNavigate();
 
-  // const [showPassword, setShowPassword] = useState(false);
-  // const [formData, setFormData] = useState({
-  //   email: "",
-  //   password: "",
-  // });
+// const [showPassword, setShowPassword] = useState(false);
+// const [formData, setFormData] = useState({
+//   email: "",
+//   password: "",
+// });
 
-  // const handleClick = (buttonName) => {
-  //   setShowPassword({
-  //     ...showPassword,
-  //     [buttonName]: !showPassword[buttonName],
-  //   });
-  // };
+// const handleClick = (buttonName) => {
+//   setShowPassword({
+//     ...showPassword,
+//     [buttonName]: !showPassword[buttonName],
+//   });
+// };
 
-  // const changeHandler = (event) => {
-  //   setFormData((prev) => ({
-  //     ...prev,
-  //     [event.target.name]: event.target.value,
-  //   }));
-  // };
+// const changeHandler = (event) => {
+//   setFormData((prev) => ({
+//     ...prev,
+//     [event.target.name]: event.target.value,
+//   }));
+// };
 
-  // const submitHandler = async (event) => {
-  //   event.preventDefault();
-  //   try {
-  //     const response = await axios.post(
-  //       "http://localhost:8000/api/v1/signin",
-  //       formData,
-  //       {
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //         },
-  //       }
-  //     );
+// const submitHandler = async (event) => {
+//   event.preventDefault();
+//   try {
+//     const response = await axios.post(
+//       "http://localhost:8000/api/v1/signin",
+//       formData,
+//       {
+//         headers: {
+//           "Content-Type": "application/json",
+//         },
+//       }
+//     );
 
-  //     console.log(response.data);
+//     console.log(response.data);
 
-  //     const token = response.data.token;
+//     const token = response.data.token;
 
-  //     if (response.status === 200) {
-  //       const responseData = response.data;
-  //       const token = responseData.token;
+//     if (response.status === 200) {
+//       const responseData = response.data;
+//       const token = responseData.token;
 
-  //       // Save the token in local storage
-  //       localStorage.setItem("token", token);
-  //       console.log("faizy", responseData);
+//       // Save the token in local storage
+//       localStorage.setItem("token", token);
+//       console.log("faizy", responseData);
 
-  //       props.sendDataToParent(token);
+//       props.sendDataToParent(token);
 
-  //       if (
-  //         responseData.user &&
-  //         responseData.user.instructorKey === "ukdets@#1234" &&
-  //         responseData.user.accountType === "Instructor"
-  //       ) {
-  //         setTeacher(true);
-  //         console.log("Logged in as an Instructor", responseData.user.accountType);
-  //       }
+//       if (
+//         responseData.user &&
+//         responseData.user.instructorKey === "ukdets@#1234" &&
+//         responseData.user.accountType === "Instructor"
+//       ) {
+//         setTeacher(true);
+//         console.log("Logged in as an Instructor", responseData.user.accountType);
+//       }
 
-  //       if (import.meta.env.VITE_REACT_APP_ADMIN_TOKEN === token) {
-  //         setIsAdmin(true);
-  //       }
-  //       setIsLoggedIn(true);
-  //       navigate("/");
-  //       toast.success("Login successful", {
-  //         position: toast.POSITION.TOP_CENTER,
-  //         autoClose: 2000,
-  //         closeButton: false,
-  //         className: style.customToast,
-  //       });
-  //     } else {
-  //       console.error("Login failed:", response.data);
-  //       toast.error("Login failed. Please try again.", {
-  //         position: toast.POSITION.TOP_RIGHT,
-  //         autoClose: 2000,
-  //         closeButton: false,
-  //         style: { width: "300px" },
-  //         className: style.customErrorToast,
-  //       });
-  //     }
-  //   } catch (error) {
-  //     console.error("Error occurred:", error);
-  //     toast.error("An error occurred. Please try again later.", {
-  //       position: toast.POSITION.TOP_RIGHT,
-  //       autoClose: 3000,
-  //       closeButton: true,
-  //       style: { width: "300px" },
-  //       className: style.customErrorToast,
-  //     });
-  //   }
-  // };
+//       if (import.meta.env.VITE_REACT_APP_ADMIN_TOKEN === token) {
+//         setIsAdmin(true);
+//       }
+//       setIsLoggedIn(true);
+//       navigate("/");
+//       toast.success("Login successful", {
+//         position: toast.POSITION.TOP_CENTER,
+//         autoClose: 2000,
+//         closeButton: false,
+//         className: style.customToast,
+//       });
+//     } else {
+//       console.error("Login failed:", response.data);
+//       toast.error("Login failed. Please try again.", {
+//         position: toast.POSITION.TOP_RIGHT,
+//         autoClose: 2000,
+//         closeButton: false,
+//         style: { width: "300px" },
+//         className: style.customErrorToast,
+//       });
+//     }
+//   } catch (error) {
+//     console.error("Error occurred:", error);
+//     toast.error("An error occurred. Please try again later.", {
+//       position: toast.POSITION.TOP_RIGHT,
+//       autoClose: 3000,
+//       closeButton: true,
+//       style: { width: "300px" },
+//       className: style.customErrorToast,
+//     });
+//   }
+// };
 
-
-
-//-----------Redux 
+//-----------Redux
 
 // import style from "./login.module.css";
 // import { useState } from "react";
@@ -251,31 +249,7 @@
 
 // export default LoginFrom;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ///---------------------------------
-
-
-
-
 
 // LoginFrom.jsx
 import style from "./login.module.css";
@@ -290,38 +264,9 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { useDispatch } from "react-redux";
 // import { login } from "../../../services/apiFunction/authApi";
-import {login} from "../../../services/apiFunction/authApi";
+import { login } from "../../../services/apiFunction/authApi";
 
 const LoginFrom = ({ setIsAdmin, setTeacher }) => {
-  // const navigate = useNavigate();
-  // const dispatch = useDispatch();
-  // const [formData, setFormData] = useState({
-  //   email: "",
-  //   password: "",
-  // });
-  // const [showPassword, setShowPassword] = useState(false);
-
-  // const changeHandler = (e) => {
-  //   setFormData((prevData) => ({
-  //     ...prevData,
-  //     [e.target.name]: e.target.value,
-  //   }));
-  // };
-
-
-  // const submitHandler = async (e) => {
-  //   e.preventDefault();
-  //   try {
-  //     // Dispatch login action
-  //     // await dispatch(login(email, password,setIsAdmin, setTeacher, navigate));
-  //     await dispatch(login(email, password, navigate, setIsAdmin, setTeacher));
-  //   } catch (error) {
-  //     console.error("Login error:", error);
-  //     // Handle login error
-  //   }
-  // };
-
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [formData, setFormData] = useState({
@@ -340,22 +285,16 @@ const LoginFrom = ({ setIsAdmin, setTeacher }) => {
       [e.target.name]: e.target.value,
     }));
   };
-
-  // const submitHandler = (e) => {
-  //   e.preventDefault();
-  //   dispatch(login(email, password,setIsAdmin, setTeacher, navigate));
-  // };
-
   // Inside LoginFrom component
-const submitHandler = async (e) => {
-  e.preventDefault();
-  try {
-    await dispatch(login(email, password, setIsAdmin, setTeacher, navigate));
-  } catch (error) {
-    console.error("Login error:", error);
-    // Handle login error
-  }
-};
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    try {
+      await dispatch(login(email, password, setIsAdmin, setTeacher, navigate));
+    } catch (error) {
+      console.error("Login error:", error);
+      // Handle login error
+    }
+  };
   return (
     <div className={style.login_top_content}>
       <Container>
@@ -402,7 +341,10 @@ const submitHandler = async (e) => {
                   </span>
                 </Col>
               </Form.Group>
-              <Link to="/forgot-password" className={style.linkWithoutDecoration}>
+              <Link
+                to="/forgot-password"
+                className={style.linkWithoutDecoration}
+              >
                 <p className={style.forgate_password}>Forgot Password</p>
               </Link>
               <Col md={6} lg={12}>
@@ -411,10 +353,7 @@ const submitHandler = async (e) => {
                 </Button>
               </Col>
               <Col md={16} lg={12}>
-                <Button
-                  className={style.google_signin}
-                  type="submit"
-                >
+                <Button className={style.google_signin} type="submit">
                   <FcGoogle
                     className="px-1"
                     style={{ width: "50px", height: "25px" }}
