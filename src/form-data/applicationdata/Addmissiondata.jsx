@@ -1,33 +1,30 @@
 import { useState, useEffect } from "react";
 import "./admissiondata.scss";
 import axios from "axios";
-import {useSelector} from 'react-redux'
 import { useParams } from "react-router-dom";
+import { newadmissionEndpoints } from "../../services/apis";
 function Addmissiondata() {
   const [formData, setFormData] = useState({});
- const { token } = useSelector((state) => state.auth);
- console.log("admission token",token);
- const {id}=useParams()
-useEffect(() => {
-    const fetchData = async () => {
-      try {
-       
-
-        const response = await axios.get(
-          `http://localhost:8000/api/v1/student/getnewadmissionId/6646092e9788f8705ab622bb`
-        );
-        console.log("response", response);
-        if (response.status === 200) {
-          setFormData(response.data.data);
-        } else {
-          console.error("Failed to fetch form data. Status:", response.status);
-        }
-      } catch (error) {
-        console.error("Error fetching form data:", error.message);
-      }
-    };
+  const { id } = useParams();
+  const token = localStorage.getItem("token");
+  const fetchData = async () => {
+    try {
+      const cleanToken = token.replace(/^"|"$/g, "");
+      const apiUrl = `${newadmissionEndpoints.GET_NEW_ADMISSIOM_DATA}/${id}`;
+      const { data: res } = await axios.get(apiUrl, {
+        headers: {
+          Authorization: `Bearer ${cleanToken}`,
+        },
+      });
+      setFormData(res.Newadmission);
+      console.log(res);
+    } catch (error) {
+      console.error("Error fetching form data:", error);
+    }
+  };
+  useEffect(() => {
     fetchData();
-  }, [token]);
+  }, []);
 
   // const handlePrint = () => {
   //   window.print(); // This triggers the browser's print dialog
@@ -49,7 +46,7 @@ useEffect(() => {
 
   //   doc.save("form_data.pdf");
   // };
-  
+
   return (
     <div className="addmission_top_contante">
       <table

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import Table from "react-bootstrap/Table";
 // import { MdAssignmentTurnedIn } from "react-icons/md";
 import "./showdataAdminandteacher.scss";
-import { getAllNewStudent } from "../../services/hooks/newadmissionapi";
+import { getAllNewStudent } from "../../services/apiFunction/newadmissionApi";
 import AdmissionDropDown from "../../adminsection/admission/AdmissionDropDown";
 
 const AllNewStudents = () => {
@@ -14,6 +14,7 @@ const AllNewStudents = () => {
       try {
         const data = await getAllNewStudent();
         setFormData(data);
+
       } catch (error) {
         console.error("Error fetching admission data:", error);
       }
@@ -23,8 +24,8 @@ const AllNewStudents = () => {
 
   return (
     <div style={{ margin: "70px" }}>
-      <h2 className="text-center p-4">All New Students Data</h2>
-      <div className={style.teacher_verify_new_admission}>
+      <h2 className={style.heading}>All New Students Data</h2>
+      <div className={style.teacher_verify}>
         <Table striped bordered hover>
           <thead>
             <tr className={style.teacher_verify_th}>
@@ -40,7 +41,7 @@ const AllNewStudents = () => {
           </thead>
           <tbody>
             {formData.map((item, index) => (
-              <tr key={index}>
+              <tr key={index} className={style.text_data_td}>
                 <td>{index + 1}</td>
                 <td>{item.firstName}</td>
                 <td>{item.lastName}</td>
@@ -50,9 +51,9 @@ const AllNewStudents = () => {
                 <td>{item.date_of_birth}</td>
                 <td>{item.gender}</td>
 
-                <button>
-                  <AdmissionDropDown />
-                </button>
+                <td className={style.button}>
+                  <AdmissionDropDown  id={item._id}/>
+                </td>
               </tr>
             ))}
           </tbody>

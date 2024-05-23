@@ -3,7 +3,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { FaSearch } from "react-icons/fa";
 import "./admissionsummary.css";
-import {getAllNewStudent} from '../services/hooks/newadmissionapi'
+import { getAllNewStudent } from "../services/apiFunction/newadmissionApi";
 const AdmissionSummaryData = () => {
   const [formData, setFormData] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -30,9 +30,6 @@ const AdmissionSummaryData = () => {
   //   data.admission_session.includes(searchTerm)
   // );
 
-
-
-
   const [startSession, setStartSession] = useState("");
   const [endSession, setEndSession] = useState("");
 
@@ -55,7 +52,6 @@ const AdmissionSummaryData = () => {
   //   fetchData();
   // }, [startSession,endSession]);
 
-
   // useEffect(() => {
   //   const fetchData = async () => {
   //     try {
@@ -68,7 +64,6 @@ const AdmissionSummaryData = () => {
   //   };
   //   fetchData();
   // }, [startSession, endSession]);
-
 
   useEffect(() => {
     const fetchData = async () => {
@@ -84,21 +79,36 @@ const AdmissionSummaryData = () => {
   }, []);
 
   const filteredData = formData.filter((data) => {
-    const startMatch = data.start_session && data.start_session.includes(startSession);
+    const startMatch =
+      data.start_session && data.start_session.includes(startSession);
     const endMatch = data.end_session && data.end_session.includes(endSession);
     return startMatch && endMatch;
   });
-  
 
-  const streamIT = (stream) => filteredData.filter(data => data.stream === stream).length;
-  const streamEIE= (stream) => filteredData.filter(data => data.stream === stream).length; 
-  const exameTypeCount = (examType) => filteredData.filter(data => data.examType === examType ).length;
+  const streamIT = (stream) =>
+    filteredData.filter((data) => data.stream === stream).length;
+  const streamEIE = (stream) =>
+    filteredData.filter((data) => data.stream === stream).length;
+  const exameTypeCount = (examType) =>
+    filteredData.filter((data) => data.examType === examType).length;
 
-  const categoryCount = (category, gender) => filteredData.filter(data => data.category === category && data.gender === gender).length;
+  const categoryCount = (category, gender) =>
+    filteredData.filter(
+      (data) => data.category === category && data.gender === gender
+    ).length;
   // const obcStCount = (category, gender) => filteredData.filter(data => data.category === category && data.gender === gender).length;
-  const generalCount = (category, gender) => filteredData.filter(data => data.category === category && data.gender === gender).length;
-  const ewsCount = (category, gender) => filteredData.filter(data => data.category === category && data.gender === gender).length;
-  const obcACount = (category, gender) => filteredData.filter(data => data.category === category && data.gender === gender).length;
+  const generalCount = (category, gender) =>
+    filteredData.filter(
+      (data) => data.category === category && data.gender === gender
+    ).length;
+  const ewsCount = (category, gender) =>
+    filteredData.filter(
+      (data) => data.category === category && data.gender === gender
+    ).length;
+  const obcACount = (category, gender) =>
+    filteredData.filter(
+      (data) => data.category === category && data.gender === gender
+    ).length;
 
   // const filteredData = formData.filter((data) => {
   //   // Check if start_session and end_session properties exist and are arrays
@@ -113,12 +123,6 @@ const AdmissionSummaryData = () => {
   //   const endMatch = data.end_session && data.end_session.includes(endSession);
   //   return startMatch && endMatch;
   // });
-  
-  
-
-  
-  
-  
 
   return (
     <div className="bg-light pt-3 pb-4 mt-3 mb-3">
@@ -150,7 +154,7 @@ const AdmissionSummaryData = () => {
           </div>
         </div>
       </div> */}
-<div className="search-container d-flex">
+      <div className="search-container d-flex">
         <div className="input-group">
           <input
             type="text"
@@ -159,7 +163,6 @@ const AdmissionSummaryData = () => {
             value={startSession}
             onChange={(e) => setStartSession(e.target.value)}
           />
-          
         </div>
 
         <div className="input-group">
@@ -179,13 +182,22 @@ const AdmissionSummaryData = () => {
       </div>
 
       <div className="">
-     
         <Table striped bordered hover>
           <thead>
-            <tr style={{fontSize:'12px',alignItems:"center",textAlign:'center',justifyContent:'center'}}>
+            <tr
+              style={{
+                fontSize: "12px",
+                alignItems: "center",
+                textAlign: "center",
+                justifyContent: "center",
+                padding: "3px",
+              }}
+            >
               <th rowSpan="2">No</th>
               <th colSpan="2">Course</th>
-              <th colSpan="2"className="">Admission</th>
+              <th colSpan="2" className="">
+                Admission
+              </th>
               <th colSpan="3">Gender</th>
               <th colSpan="3">SC</th>
               <th colSpan="3">ST</th>
@@ -200,7 +212,14 @@ const AdmissionSummaryData = () => {
           </thead>
 
           <tbody>
-            <tr style={{fontSize:'12px',alignItems:"center",textAlign:'center',justifyContent:'center'}}>
+            <tr
+              style={{
+                fontSize: "12px",
+                alignItems: "center",
+                textAlign: "center",
+                justifyContent: "center",
+              }}
+            >
               <td></td>
               <td>B.Tech(IT)</td>
               <td>B.Tech(EIE)</td>
@@ -242,15 +261,33 @@ const AdmissionSummaryData = () => {
 
           <tbody>
             {filteredData.map((data, index) => (
-              <tr key={index} style={{fontSize:'12px',alignItems:"center",textAlign:'center',justifyContent:'center'}}>
+              <tr
+                key={index}
+                style={{
+                  fontSize: "12px",
+                  alignItems: "center",
+                  textAlign: "center",
+                  justifyContent: "center",
+                }}
+              >
                 <td>{index + 1}</td>
-                <td>{data.stream == "IT" ? data.cource_name + "(IT)" : ""}({streamIT('IT')})</td>
                 <td>
-                  {data.stream == "EIE" ? data.cource_name + "(EIE)" : ""}({streamEIE("EIE")})
+                  {data.stream == "IT" ? data.cource_name + "(IT)" : ""}(
+                  {streamIT("IT")})
+                </td>
+                <td>
+                  {data.stream == "EIE" ? data.cource_name + "(EIE)" : ""}(
+                  {streamEIE("EIE")})
                 </td>
 
-                <td>{data.examType == "WBJEE" ? data.examType : ""}({exameTypeCount("WBJEE")})</td>
-                <td>{data.examType == "JELETE" ? data.examType : ""}({exameTypeCount("JELETE")})</td>
+                <td>
+                  {data.examType == "WBJEE" ? data.examType : ""}(
+                  {exameTypeCount("WBJEE")})
+                </td>
+                <td>
+                  {data.examType == "JELETE" ? data.examType : ""}(
+                  {exameTypeCount("JELETE")})
+                </td>
 
                 <td>{data.gender == "M" ? data.gender : ""}</td>
                 <td>{data.gender == "F" ? data.gender : ""}</td>
@@ -263,70 +300,86 @@ const AdmissionSummaryData = () => {
                 <td>
                   {data.category === "SC" && data.gender === "M"
                     ? data.gender
-                    : ""}({categoryCount('SC','M')})
+                    : ""}
+                  ({categoryCount("SC", "M")})
                 </td>
                 <td>
                   {data.category === "SC" && data.gender === "F"
                     ? data.gender
-                    : ""}({categoryCount('SC','F')})
+                    : ""}
+                  ({categoryCount("SC", "F")})
                 </td>
                 <td>{data.category == "SC" ? data.domicile : ""}</td>
 
                 <td>
                   {data.category === "OBC-ST" && data.gender === "M"
                     ? data.gender
-                    : ""}({categoryCount('OBC-ST','M')})
+                    : ""}
+                  ({categoryCount("OBC-ST", "M")})
                 </td>
                 <td>
                   {data.category === "OBC-ST" && data.gender === "F"
                     ? data.gender
-                    : ""}({categoryCount('OBC-ST','F')})
+                    : ""}
+                  ({categoryCount("OBC-ST", "F")})
                 </td>
                 <td>{data.domicile == "ST" ? data.domicile : ""}</td>
 
                 <td>
                   {data.category === "OBC-A" && data.gender === "M"
                     ? data.gender
-                    : ""}({categoryCount('OBC-A','M')})
+                    : ""}
+                  ({categoryCount("OBC-A", "M")})
                 </td>
                 <td>
                   {data.category === "OBC-A" && data.gender === "F"
                     ? data.gender
-                    : ""}({categoryCount('OBC-A','F')})
+                    : ""}
+                  ({categoryCount("OBC-A", "F")})
                 </td>
                 <td>{data.category == "OBC-A" ? data.domicile : ""}</td>
 
                 <td>
-               <td>{data.category === 'OBC-B' && data.gender === 'M' ? 'M' : ''}({categoryCount('OBC-B','M')})</td>
+                  <td>
+                    {data.category === "OBC-B" && data.gender === "M"
+                      ? "M"
+                      : ""}
+                    ({categoryCount("OBC-B", "M")})
+                  </td>
                 </td>
                 <td>
                   {data.category === "OBC-B" && data.gender === "F"
                     ? data.gender
-                    : ""}({categoryCount('OBC-B','F')})
+                    : ""}
+                  ({categoryCount("OBC-B", "F")})
                 </td>
                 <td>{data.category == "OBC-B" ? data.domicile : ""}</td>
 
                 <td>
                   {data.category === "EWS" && data.gender === "M"
                     ? data.gender
-                    : ""}({ewsCount('EWS', 'M')})
+                    : ""}
+                  ({ewsCount("EWS", "M")})
                 </td>
                 <td>
                   {data.category === "EWS" && data.gender === "F"
                     ? data.gender
-                    : ""}({ewsCount('EWS', 'F')})
+                    : ""}
+                  ({ewsCount("EWS", "F")})
                 </td>
                 <td>{data.category == "EWS" ? data.domicile : ""}</td>
 
                 <td>
                   {data.category === "GENERAL" && data.gender === "M"
                     ? data.gender
-                    : ""}({generalCount('GENERAL', 'M')})
+                    : ""}
+                  ({generalCount("GENERAL", "M")})
                 </td>
                 <td>
                   {data.category === "GENERAL" && data.gender === "F"
                     ? data.gender
-                    : ""}({generalCount('GENERAL', 'F')})
+                    : ""}
+                  ({generalCount("GENERAL", "F")})
                 </td>
                 <td>{data.category == "GENERAL" ? data.domicile : ""}</td>
 
@@ -345,13 +398,6 @@ const AdmissionSummaryData = () => {
                 <td>{data.admission_session}</td>
               </tr>
             ))}
-
-              <tr>
-              <td colSpan="17">{obcACount('OBC-B', 'M')}</td>
-              <td colSpan="2">{obcACount('OBC-B', 'M')}</td>
-              <td colSpan="17">{obcACount('OBC-B', 'F')}</td>
-              <td colSpan="2">{obcACount('OBC-B', 'F')}</td>
-            </tr>
           </tbody>
         </Table>
       </div>

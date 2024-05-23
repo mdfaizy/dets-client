@@ -16,11 +16,6 @@ const Allstudentjob = () => {
         if (response.status === 200) {
           console.log(response);
           setFormData(response.data.data);
-        } else {
-          console.error(
-            "Failed to fetch admission data. Status:",
-            response.status
-          );
         }
       } catch (error) {
         console.error("Error fetching admission data:", error);
@@ -30,16 +25,18 @@ const Allstudentjob = () => {
   }, []);
 
   return (
-    <div>
-      <h2>All Jobs Students Data</h2>
+    <div
+      className={style.alljobdata}
+    >
+      <h2 className={style.heading}>All Jobs Students Data</h2>
       <div className="p-2 gap-1">
         <button>Excel</button>
         <button>Print</button>
         <button>Download</button>
       </div>
-      <div className={style.teacher_verify_new_admission}>
+      <div className={style.teacher_verify}>
         <Table striped bordered hover>
-          <thead className={style.teacher_verify_new_admission}>
+          <thead>
             <tr className={style.teacher_verify_th}>
               <th>No</th>
               <th>Full Name</th>
@@ -48,9 +45,8 @@ const Allstudentjob = () => {
               <th>Home City</th>
               <th>Companies Name</th>
               <th>Select Companies</th>
-              <th>Apply Your Total Companies</th>
 
-              <th>Action</th>
+              <th className={style.icon_show}>Action</th>
             </tr>
           </thead>
 
@@ -68,11 +64,9 @@ const Allstudentjob = () => {
 
                 <td>{item.selectType}</td>
 
-                <td>{item.totalApplyCompanies}</td>
-
-                <button>
-                  <JobDropDown />
-                </button>
+                <td>
+                  <JobDropDown id={item._id} />
+                </td>
               </tr>
             ))}
           </tbody>

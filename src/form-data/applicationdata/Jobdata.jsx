@@ -1,38 +1,49 @@
 import { useState, useEffect } from "react";
 import "./admissiondata.scss";
 import axios from "axios";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import { Jobs } from "../../services/apis.js";
+import { fetchJobData } from "../../services/apiFunction/job.js";
+
 function Jobdata() {
   const [formData, setFormData] = useState({});
   // const { istoken } = props;
-  const {id}=useParams();
-  const {token}=useSelector((state)=>state.auth);
+  const { id } = useParams();
+  console.log(id);
+  // const token = localStorage.getItem("token");
+
+  // const fetchData = async () => {
+  //   try {
+  //     const cleanToken = token.replace(/^"|"$/g, "");
+  //     const API_Url = `${Jobs.Get_User_Data}/${id}`;
+  //     const { data: res } = await axios.get(API_Url, {
+  //       headers: {
+  //         Authorization: `Bearer ${cleanToken}`,
+  //       },
+  //     });
+  //     setFormData(res.jobData);
+  //     console.log(res);
+
+  //   } catch (error) {
+  //     console.error("Error fetching form data:", error);
+  //   }
+  // };
+
+
+
+  const fetchData = async () => {
+    try {
+      const data = await fetchJobData(id);
+      setFormData(data);
+      console.log(data);
+    } catch (error) {
+      console.error("Error fetching form data:", error);
+    }
+  };
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          `http://localhost:8000/api/v1/job/getJob_ById/${id}`
-      
-          // {
-          //   headers: {
-          //     "Content-Type": "application/json",
-          //     Authorization: `Bearer ${token}`
-          //   },
-          // }
-        );
-        console.log("response: " ,response)
-        if (response.status === 200) {
-          setFormData(response.data.jobData);
-        } else {
-          console.error("Failed to fetch form data. Status:", response.status);
-        }
-      } catch (error) {
-        console.error("Error fetching form data:", error);
-      }
-    };
     fetchData();
-  }, [id]);
+  }, []);
 
   return (
     <div className="addmission_top_contante">

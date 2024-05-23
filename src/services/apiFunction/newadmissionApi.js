@@ -1,16 +1,14 @@
-import { toast } from "react-hot-toast"
+import { toast } from "react-hot-toast";
 
 // import { updateCompletedLectures } from "../../slices/viewCourseSlice"
-import { setLoading } from "../../redux/slices/newdmissionSlice";
-import { apiConnector } from "../apiConnector"
-import { newadmissionEndpoints } from "../apis"
-
-
+import { setLoading } from "../../redux/slices/authSlice";
+import { apiConnector } from "../apiConnector";
+// import { newadmissionEndpoints } from "../apis"
+import { newadmissionEndpoints } from "../apis.js";
 
 // import { setLoading } from "./path-to-your-profile-slice";
 
-
-const { POST_NEW_STUDENT_API } =  newadmissionEndpoints;
+const { POST_NEW_STUDENT_API } = newadmissionEndpoints;
 
 export const addNewStudent = async (data, token, dispatch) => {
   let result = null;
@@ -22,13 +20,13 @@ export const addNewStudent = async (data, token, dispatch) => {
       "Content-Type": "multipart/form-data",
       Authorization: `Bearer ${token}`,
     });
-    
+
     console.log("CREATE COURSE API RESPONSE............", response);
-    
+
     if (!response?.data?.success) {
       throw new Error("Could Not Add Course Details");
     }
-    
+
     toast.success("Course Details Added Successfully");
     result = response?.data?.data;
   } catch (error) {
@@ -41,6 +39,51 @@ export const addNewStudent = async (data, token, dispatch) => {
   return result;
 };
 
+
+
+
+
+
+
+
+import axios from "axios";
+const token = localStorage.getItem("token");
+export const getAllNewStudent = async () => {
+  try {
+    const response = await axios.get(
+      `http://localhost:8000/api/v1/student/get_new_admission`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    console.log("responce", response);
+    if (response.data.success) {
+      return response.data.data;
+    } else {
+      throw new Error("Failed to fetch admission data");
+    }
+  } catch (error) {
+    throw new Error(`Error fetching admission data: ${error.message}`);
+  }
+};
+
+
+
+
+export const deleteNewAdmission = async (id) => {
+    try {
+      const response = await axios.delete(`http://localhost:8000/api/v1/student/delete_newadmission/${id}`);
+      console.log(response);
+      if (response.status === 200) {
+        console.log("responseDelete",response.data.data)
+        return response.data.data;
+      }
+    } catch (error) {
+      throw new Error(`Error deleting admission: ${error.message}`);
+    }
+  };
 // const {
 // //   COURSE_DETAILS_API,
 // //   COURSE_CATEGORIES_API,
@@ -101,13 +144,8 @@ export const addNewStudent = async (data, token, dispatch) => {
 // //   return result
 // // }
 
-
-
-
-
 // // Import necessary Redux actions from your slice file
 // import { setLoading } from "./path-to-your-profile-slice";
-
 
 // // Your API functions
 // export const addNewStudent = async (data, token, dispatch) => {
@@ -137,7 +175,6 @@ export const addNewStudent = async (data, token, dispatch) => {
 //   }
 //   return result;
 // };
-
 
 // // fetching the available course categories
 // // export const fetchCourseCategories = async () => {

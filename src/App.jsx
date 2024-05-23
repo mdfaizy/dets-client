@@ -59,71 +59,83 @@ import Jobsumbitdata from "./form-data/sumbitdata/Jobsumbitdata";
 import PgDataDelete from "./adminsection/pgadmission/PgDataDelete";
 import PgDataEdit from "./adminsection/pgadmission/PgDataEdit";
 import PgPrint from "./adminsection/pgadmission/PgPrint";
-import DeleteExit from './adminsection/exitdata/DeleteExit'
+import DeleteExit from "./adminsection/exitdata/DeleteExit";
 import FeedbackForm from "./adminDashboard/feedback/feedbackfrom/Feedbackfrom";
 import Feedback from "./adminDashboard/feedback/Feedback";
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
-  const [istoken, setToken] = useState("");
+
   const [teacher, setTeacher] = useState(false);
 
   const [sidebartoggle, setSidebartoggle] = useState(false);
   return (
-    <>
+    <div style={{backgroundColor:"#000814"}}>
       <Header
         isAdmin={isAdmin}
         setIsAdmin={setIsAdmin}
         teacher={teacher}
         setTeacher={setTeacher}
-        // handleLogout={handleLogout}
-        // Pass the teacher state to the Header component
+        
       />
       {/* <div style={{display:"flex"}}>
         <Sidebar sidebartoggle={sidebartoggle}/>
         <Dassboars  sidebartoggle={sidebartoggle}  setSidebartoggle={setSidebartoggle}/>
       </div> */}
       <Routes>
-
         <Route index element={<Home />} />
         <Route path="/about" element={<About />} />
-      {/* User route */}
-      <Route path="/verify-email" element={<VerifyOtp />} />
-      <Route path="/signupfrom" element={<SignupFrom setIsLoggedIn={setIsLoggedIn} />} />
-      <Route path="/loginfrom" element={ <LoginFrom setIsAdmin={setIsAdmin} setTeacher={setTeacher} />} />
-      <Route path="/forgot-password" element={<ForgatePassword />} />
-      <Route path="/update-password/:id" element={<ReasetPassword />} />
+        {/* User route */}
+        <Route path="/verify-email" element={<VerifyOtp />} />
+        <Route
+          path="/signupfrom"
+          element={<SignupFrom setIsLoggedIn={setIsLoggedIn} />}
+        />
+        <Route
+          path="/loginfrom"
+          element={
+            <LoginFrom setIsAdmin={setIsAdmin} setTeacher={setTeacher} />
+          }
+        />
+        <Route path="/forgot-password" element={<ForgatePassword />} />
+        <Route path="/update-password/:id" element={<ReasetPassword />} />
         {/* Admission route */}
-        <Route path="/newadmission" element={<NewAdmission  />} />
+        <Route path="/newadmission" element={<NewAdmission />} />
         <Route path="/exitfrom" element={<ExitFrom />} />
-        <Route path="/pgcource" element={<PgCource  />} />
-        <Route path="job" element={<Job  />} />
+        <Route path="/pgcource" element={<PgCource />} />
+        <Route path="job" element={<Job />} />
 
-          {/*Show Application  */}
-        <Route path="/showFormData" element={<ShowFormData  isAdmin={isAdmin} />}/>
+        {/*Show Application  */}
+        <Route
+          path="/showFormData"
+          element={<ShowFormData isAdmin={isAdmin} />}
+        />
 
-       
-       
-        <Route  path="/new_addmission/6646092e9788f8705ab622bb" element={<Addmissiondata/>}/>
-        <Route path="/exit_application/:id" element={<Exitdata  />} />
-        <Route path="/pg_application/:id" element={<Pgdata  />}/>
-        <Route path="/job_application/:id" element={<Jobdata  />}/>
+        <Route
+          path="/new_addmission/:id"
+          element={<Addmissiondata />}
+        />
+        <Route path="/exit_application/:id" element={<Exitdata />} />
+        <Route path="/pg_application/:id" element={<Pgdata />} />
+        <Route path="/job_application/:id" element={<Jobdata />} />
         {/* Show Admin and teacher  */}
         <Route
-          path="/all_new_addmission/:id"
-          element={
-            <Allnewstudent isAdmin={isAdmin} teacher={teacher} /> }/>
+          path="/all_new_addmission"
+          element={<Allnewstudent isAdmin={isAdmin} teacher={teacher} />}
+        />
         <Route
-          path="/all_exit_student/:id"
+          path="/all_exit_student"
           element={<Allexitstudent isAdmin={isAdmin} teacher={teacher} />}
         />
         <Route
-          path="/all_pg_student/:id"
+          path="/all_pg_student"
           element={<Allpgstudent isAdmin={isAdmin} teacher={teacher} />}
         />
-        <Route path="/all_student_job/:id" element={<Allstudentjob isAdmin={isAdmin} teacher={teacher} />}/>
-        {/* <Route path="/forgatepassword" element={<ForgatePassword />} />
-        <Route path="/reasetpassword/:token" element={<ReasetPassword />} /> */}
+        <Route
+          path="/all_student_job"
+          element={<Allstudentjob isAdmin={isAdmin} teacher={teacher} />}
+        />
+       
         {/* from befor ui */}
         <Route path="newstudent" element={<Newstudent />} />
         <Route path="/exit" element={<Exit />} />
@@ -136,8 +148,11 @@ function App() {
         <Route path="/jobsumbitdata" element={<Jobsumbitdata />} />
         <Route
           path="/studentallinfo"
-          element={<StudentAllInfo teacher={teacher}  />}
+          element={<StudentAllInfo teacher={teacher} />}
         />
+
+        {/* get data by ID */}
+        {/* <Route path="/new_addmission/:id" element */}
         {/* <Route exact path="/feedback/: component={Feedback} /> */}
         {/* student by feedback*/}
         <Route path="/feedback/:id" element={<FeedbackFullContent />} />
@@ -151,28 +166,29 @@ function App() {
         <Route path="/filterdataall" element={<FilterData />} />
         <Route path="/admissionfilterdata" element={<AdmissionSummaryData />} />
 
-{/* print and edit ,delete route new admission */}
+        {/* print and edit ,delete route new admission */}
         <Route
-          path="/newadmissiondataprint/:id"element={<PrintNewStudent />}/>
+          path="/newadmissiondataprint/:id"
+          element={<PrintNewStudent />}
+        />
         <Route path="/editnewstudent/:id" element={<EditNewStudent />} />
-        <Route path="/deleteNewstudent" element={<DeleteAdmissin />} />
-{/* print and edit ,delete route exit data */}
+        <Route path="/deleteNewstudent/:id" element={<DeleteAdmissin />} />
+        {/* print and edit ,delete route exit data */}
         <Route path="/exit-data-edit/:id" element={<ExitEdit />} />
-        <Route path="exit-data-print/:id" element={<ExitPrintData />} />
-        <Route path='/exit-data-delete/:id' element={<DeleteExit/>}/>
+        <Route path="/exit-data-print/:id" element={<ExitPrintData />} />
+        <Route path="/exit-data-delete/:id" element={<DeleteExit />} />
 
-        <Route path='/pg-data-edit/:id' element={<PgDataEdit/>}/>
-        <Route path='/pg-form-dataprint/:id' element={<PgPrint/>}/>
-         <Route path='/pgcource-delete/:id' element={<PgDataDelete/>}/>
-{/* print and edit ,delete route job data */}
+        <Route path="/pg-data-edit/:id" element={<PgDataEdit />} />
+        <Route path="/pg-form-dataprint/:id" element={<PgPrint />} />
+        <Route path="/pgcource-delete/:id" element={<PgDataDelete />} />
+        {/* print and edit ,delete route job data */}
         <Route path="/job-data-print/:id" element={<JobDataPrint />} />
         <Route path="/job-data-edit/:id" element={<EditJob />} />
         <Route path="/delete-jobdata/:id" element={<DeleteJob />} />
 
-
         {/* Feedback */}
-        <Route path='/feedback-form' element={<FeedbackForm/>}/>
-        <Route path='feedback-details' element={<Feedback/>}/>
+        <Route path="/feedback-form" element={<FeedbackForm />} />
+        <Route path="/feedback-details" element={<Feedback />} />
       </Routes>
 
       <Footer
@@ -183,7 +199,7 @@ function App() {
         teacher={teacher}
         setTeacher={setTeacher}
       />
-    </>
+    </div>
   );
 }
 export default App;

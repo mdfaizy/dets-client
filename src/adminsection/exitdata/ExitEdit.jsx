@@ -1,31 +1,19 @@
-// import React from 'react'
-
-// const ExitEdit = () => {
-//   return (
-//     <div>ExitEdit</div>
-//   )
-// }
-
-// export default ExitEdit
-import { useState} from "react";
+import { useState, useEffect } from "react";
 import { Container, Row, Col, Form } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
-import Cookies from "js-cookie";
-import { useSelector } from "react-redux";
-// import axios from "axios";
-const ExitEdit = () =>{
-  const { token } = useSelector((state) => state.auth);
-  console.log(token);
+import { useNavigate, useParams } from "react-router-dom";
+import { exitStudentEndpoints } from "../../services/apis";
 
+import axios from "axios";
+const ExitEdit = () => {
   const navigate = useNavigate();
+  const [studentData, setStudentData] = useState({});
   const [formData, setFormData] = useState({
-    token: token,
     firstName: "",
     lastName: "",
     fatherName: "",
     motherName: "",
     email: "",
-    rollNo:"",
+    rollNo: "",
     date_of_birth: "",
     stream: "",
     registrationNo: "",
@@ -37,15 +25,38 @@ const ExitEdit = () =>{
     year_cgpa_4th: "",
     final_cgpa: "",
   });
-  console.log("token",token);
 
+  const token = localStorage.getItem("token");
+  const cleanToken = token ? token.replace(/^"|"$/g, "") : "";
+  const { id } = useParams();
+
+  const fetchData = async () => {
+    try {
+      const API_Url = `${exitStudentEndpoints.GET_EXIT_STUDENT_BY_ID}/${id}`;
+      const { data: res } = await axios.get(API_Url, {
+        headers: {
+          Authorization: `Bearer ${cleanToken}`,
+        },
+      });
+      console.log(res.data);
+      setStudentData(res.data);
+      setFormData((prevData) => ({
+        ...prevData,
+        ...res.data,
+      }));
+    } catch (error) {
+      console.error("Error fetching form data:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
   const changeHandler = (event) => {
     const { name, value, type, files } = event.target;
-
     if (type === "file") {
       setFormData((prevData) => ({
         ...prevData,
-
         [name]: files[0],
       }));
     } else {
@@ -56,81 +67,32 @@ const ExitEdit = () =>{
     }
   };
 
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const requestBody = {
-  //         token: token,
-  //       };
-
-  //       const response = await axios.post(
-  //         "http://localhost:8000/api/v1/student/getnewadmissionId",
-  //         requestBody,
-          
-  //         {
-  //           headers: {
-  //             "Content-Type": "application/json",
-  //             // Authorization: `Bearer ${token}`,
-  //           },
-  //         }
-  //       );
-  //       console.log("responsetrtyrtr", response.data);
-  //       if (response.status === 200) {
-  //         setFormData(response.data.data);
-  //       } else {
-  //         console.error("Failed to fetch form data. Status:", response.status);
-  //       }
-  //     } catch (error) {
-  //       console.error("Error fetching form data:", error.message);
-  //     }
-  //   };
-  //   fetchData();
-  // }, [token]);
-  const submitHandler = async (event) => {
-    event.preventDefault();
-    const formDataToSend = new FormData();
-
-    // Append each form field to formDataToSend
-    for (let key in formData) {
-      formDataToSend.append(key, formData[key]);
-    }
-
+  const submitHandler = async (e) => {
+    e.preventDefault();
     try {
-      const response = await fetch(
-        "http://localhost:8000/api/v1/exit/exitStudent",
-        {
-          method: "POST",
-          body: formDataToSend, 
-        }
-      );
-
-      if (response.ok) {
-        const responseData = await response.json();
-        console.log(responseData);
-        console.log(responseData.data._id);
-        Cookies.set("formData", JSON.stringify(formData));
-        navigate("/exitsumbitdata", { state: { apidata: responseData } });
-        // navigate("exitsumbitdata");
-      } else {
-        console.log("Form not submitted. Error status:", response.status);
-        // Handle the error or display a message to the user
-      }
+      const API_Url = `${exitStudentEndpoints.UPDATE_EXIT_STUDENT}/${id}`;
+      const { data: res } = await axios.put(API_Url, formData, {
+        headers: {
+          Authorization: `Bearer ${cleanToken}`,
+          // "Content-Type": "application/json",
+        },
+      });
+      console.log("Form submitted successfully:", res);
+      navigate("/job_application");
     } catch (error) {
-      console.error("Error occurred:", error);
-      // Handle other error cases (e.g., network errors)
+      console.error("Error submitting form:", error);
     }
   };
+
   return (
     <>
-      {/* <Col className="text-center">Exit-Student</Col> */}
+      <Col className="text-center">Exit-Student</Col>
       <Container fluid>
         <Row className="bg-dark text-white ">
           <>
             <Col className="text-center my-4">EXIT STUDENT</Col>
             <Form onSubmit={submitHandler}>
               <Row className="px-5 outline-none">
-
                 <Form.Group as={Col} md="4">
                   <Form.Label>
                     Frist Name<span className="text-danger">*</span>

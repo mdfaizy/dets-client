@@ -1,15 +1,14 @@
-
-
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Container, Row, Col, Form } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
-import Cookies from "js-cookie";
-import { useSelector } from "react-redux";
-const  PgDataEdit = () => {
-  const { token } = useSelector((state) => state.auth);
+import { useNavigate, useParams } from "react-router-dom";
+
+import { pgCourseEndpoints } from "../../services/apis";
+import axios from "axios";
+const PgDataEdit = () => {
+  // const { token } = useSelector((state) => state.auth);
   const navigate = useNavigate();
+  const [pgData, setPgData] = useState({});
   const [formData, setFormData] = useState({
-    token: token,
     firstName: "",
     lastName: "",
     fatherName: "",
@@ -28,6 +27,33 @@ const  PgDataEdit = () => {
     categoryRank: "",
   });
 
+  const token = localStorage.getItem("token");
+  const cleanToken = token ? token.replace(/^"|"$/g, "") : "";
+  const { id } = useParams();
+
+  const fetchData = async () => {
+    try {
+      const API_Url = `${pgCourseEndpoints.GET_PG_COURSE_BY_ID}/${id}`;
+      const { data: res } = await axios.get(API_Url, {
+        headers: {
+          Authorization: `Bearer ${cleanToken}`,
+        },
+      });
+      console.log(res);
+      setPgData(res.pgdata);
+      setFormData((prevData) => ({
+        ...prevData,
+        ...res.pgdata,
+      }));
+    } catch (error) {
+      console.error("Error fetching form data:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   const changeHandler = (event) => {
     const { name, value, type, files } = event.target;
 
@@ -44,38 +70,22 @@ const  PgDataEdit = () => {
     }
   };
 
-
-  const submitHandler = async (event) => {
-    event.preventDefault();
-    const formDataToSend = new FormData();
-    // Append each form field to formDataToSend
-    for (let key in formData) {
-      formDataToSend.append(key, formData[key]);
-    }
+  const submitHandler = async (e) => {
+    e.preventDefault();
     try {
-      const response = await fetch("http://localhost:8000/api/v1/PgCourse/pg_cource", {
-        method: "POST",
-        // body:JSON.stringify(formData) ,
-        // body: formDataToSend,
-        body: formDataToSend,
+      const API_Url = `${pgCourseEndpoints.UPDATE_PG_STUDENT_BY_ID}/${id}`;
+      const { data: res } = await axios.put(API_Url, formData, {
+        headers: {
+          Authorization: `Bearer ${cleanToken}`,
+          // "Content-Type": "application/json",
+        },
       });
-
-      if (response.ok) {
-        const responseData = await response.json();
-        console.log(responseData);
-
-        console.log(responseData.data._id);
-        Cookies.set("formData", JSON.stringify(formData));
-        navigate("/pgsumbitdata", { state: { apidata: responseData } });
-        // navigate(`/ShowFormData/${responseData.data._id}`);
-      } else {
-        console.log("Form not submitted. Error status:", response.status);
-      }
+      console.log("Form submitted successfully:", res);
+      navigate("/");
     } catch (error) {
-      console.error("Error occurred:", error);
+      console.error("Error submitting form:", error);
     }
   };
-
   return (
     <>
       <Container>
@@ -83,10 +93,7 @@ const  PgDataEdit = () => {
         <Row>
           <Form onSubmit={submitHandler}>
             <Row>
-
-
-
-{/* 
+              {/* 
               <Accordion defaultActiveKey="0">
 
                 <Accordion.Item eventKey="0">
@@ -424,7 +431,6 @@ const  PgDataEdit = () => {
                 </Form.Select>
               </Form.Group>
 
-
               <Form.Group as={Col} md="4">
                 <Form.Label>
                   All India Rank<span className="text-danger">*</span>
@@ -513,4 +519,4 @@ const  PgDataEdit = () => {
   );
 };
 
-export default  PgDataEdit;
+export default PgDataEdit;

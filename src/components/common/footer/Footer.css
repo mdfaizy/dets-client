@@ -1,5 +1,98 @@
 .linkStyle {
-    text-decoration: none; /* Remove underline */
-    color: white; /* Set text color to white */
+    text-decoration: none; 
+    color: white; 
   }
   
+
+
+
+
+   
+.bg-gray-100 {
+  background-color: #0f0e122e;
+padding-top: 20px;
+}
+
+.border-bottom {
+  border-bottom: 1px solid #d1d5db;
+}
+
+.border-right {
+  border-right: 1px solid #d1d5db;
+}
+
+.text-gray-900 {
+  color: #1f2937;
+}
+
+.font-semibold {
+  font-weight: 600;
+}
+
+.hover-text-black:hover {
+  color: #000 !important;
+}
+
+.text-pink-500 {
+  color: #f43f5e;
+}
+
+.text-xl {
+  font-size: 1.25rem;
+}
+
+.mb-7 {
+  margin-bottom: 1.75rem;
+}
+
+.mt-7 {
+  margin-top: 1.75rem;
+}
+
+.mt-24 {
+  margin-top: 6rem;
+}
+
+.pb-14 {
+  padding-bottom: 3.5rem;
+}
+
+.gap-2 > * + * {
+  margin-top: 0.5rem;
+}
+
+.gap-3 > * + * {
+  margin-top: 0.75rem;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.flex-row {
+  flex-direction: row;
+}
+
+.justify-content-between {
+  justify-content: space-between;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.text-lg {
+  font-size: 1.125rem;
+}
+
+.text-dark {
+  color: #343a40;
+}
+
+.text-decoration-none {
+  text-decoration: none;
+}

@@ -1,10 +1,42 @@
 import { Container } from "react-bootstrap";
-import { useLocation } from "react-router-dom";
-
+import {useParams } from "react-router-dom";
+import {useState,useEffect} from 'react'
+import style from "./pgdata.module.css";
+import {pgCourseEndpoints} from "../../services/apis"
+import axios from "axios"
 const PgPrint = () => {
-  const location = useLocation();
-  const { apidata } = location.state || {};
-  console.log(apidata);
+
+  const [formData, setFormData] = useState({});
+  const token = localStorage.getItem("token");
+    const cleanToken = token ? token.replace(/^"|"$/g, "") : "";
+    const { id } = useParams();
+  
+    const fetchData = async () => {
+      try {
+        const API_Url = `${pgCourseEndpoints.GET_PG_COURSE_BY_ID}/${id}`;
+        const { data: res } = await axios.get(API_Url, {
+          headers: {
+            Authorization: `Bearer ${cleanToken}`,
+          },
+        });
+        console.log("pgdata", res);
+        setFormData(res.pgdata
+        );
+      } catch (error) {
+        console.error("Error fetching form data:", error);
+      }
+    };
+  
+    useEffect(() => {
+      fetchData();
+    }, []);
+
+  
+
+    const handlePrint = () => {
+      window.print();
+    };
+
   return (
     <div>
       <>
@@ -179,7 +211,7 @@ const PgPrint = () => {
                                 <td width="40px" align="center">
                                   <b>:</b>
                                 </td>
-                                <td>{apidata.data.firstName}</td>
+                                <td>{formData.firstName}</td>
                               </tr>
                               <tr>
                                 <td
@@ -194,7 +226,7 @@ const PgPrint = () => {
                                 <td width="40px" align="center">
                                   <b>:</b>
                                 </td>
-                                <td>{apidata.data.lastName}</td>
+                                <td>{formData.lastName}</td>
                               </tr>
                               <tr>
                                 <td
@@ -209,7 +241,7 @@ const PgPrint = () => {
                                 <td width="40px" align="center">
                                   <b>:</b>
                                 </td>
-                                <td>{apidata.data.fatherName}</td>
+                                <td>{formData.fatherName}</td>
                               </tr>
                               <tr>
                                 <td
@@ -224,7 +256,7 @@ const PgPrint = () => {
                                 <td width="40px" align="center">
                                   <b>:</b>
                                 </td>
-                                <td>{apidata.data.motherName}</td>
+                                <td>{formData.motherName}</td>
                               </tr>
                               <tr>
                                 <td
@@ -239,7 +271,7 @@ const PgPrint = () => {
                                 <td width="40px" align="center">
                                   <b>:</b>
                                 </td>
-                                <td>{apidata.data.email}</td>
+                                <td>{formData.email}</td>
                               </tr>
                               <tr>
                                 <td
@@ -254,7 +286,7 @@ const PgPrint = () => {
                                 <td width="40px" align="center">
                                   <b>:</b>
                                 </td>
-                                <td>{apidata.data.date_of_birth}</td>
+                                <td>{formData.date_of_birth}</td>
                               </tr>
                               <tr>
                                 <td
@@ -269,7 +301,7 @@ const PgPrint = () => {
                                 <td width="40px" align="center">
                                   <b>:</b>
                                 </td>
-                                <td>{apidata.data.gender}</td>
+                                <td>{formData.gender}</td>
                               </tr>
                               <tr>
                                 <td
@@ -284,7 +316,7 @@ const PgPrint = () => {
                                 <td width="40px" align="center">
                                   <b>:</b>
                                 </td>
-                                <td>{apidata.data.exameType}</td>
+                                <td>{formData.exameType}</td>
                               </tr>
                               <tr>
                                 <td
@@ -299,7 +331,7 @@ const PgPrint = () => {
                                 <td width="40px" align="center">
                                   <b>:</b>
                                 </td>
-                                <td>{apidata.data.category}</td>
+                                <td>{formData.category}</td>
                               </tr>
                               <tr>
                                 <td
@@ -314,7 +346,7 @@ const PgPrint = () => {
                                 <td width="40px" align="center">
                                   <b>:</b>
                                 </td>
-                                <td>{apidata.data.allIndiaRank}</td>
+                                <td>{formData.allIndiaRank}</td>
                               </tr>
                               <tr>
                                 <td
@@ -329,7 +361,7 @@ const PgPrint = () => {
                                 <td width="40px" align="center">
                                   <b>:</b>
                                 </td>
-                                <td>{apidata.data.stream}</td>
+                                <td>{formData.stream}</td>
                               </tr>
                               <tr>
                                 <td
@@ -344,7 +376,7 @@ const PgPrint = () => {
                                 <td width="40px" align="center">
                                   <b>:</b>
                                 </td>
-                                <td>{apidata.data.session}</td>
+                                <td>{formData.session}</td>
                               </tr>
                               <tr>
                                 <td
@@ -359,7 +391,7 @@ const PgPrint = () => {
                                 <td width="40px" align="center">
                                   <b>:</b>
                                 </td>
-                                <td>{apidata.data.InstituteCity}</td>
+                                <td>{formData.InstituteCity}</td>
                               </tr>
                               <tr>
                                 <td
@@ -374,7 +406,7 @@ const PgPrint = () => {
                                 <td width="40px" align="center">
                                   <b>:</b>
                                 </td>
-                                <td>{apidata.data.InstituteName}</td>
+                                <td>{formData.InstituteName}</td>
                               </tr>
                             </tbody>
                           </table>
@@ -388,6 +420,10 @@ const PgPrint = () => {
           </Container>
         </>
       </>
+
+      <button onClick={handlePrint}
+   className={style.job_form_data_print}>Print</button>
+
     </div>
   );
 };

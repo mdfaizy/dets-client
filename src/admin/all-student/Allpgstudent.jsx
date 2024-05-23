@@ -23,56 +23,53 @@ const Allpgstudent = () => {
 
   return (
     <div>
-      <h2>All PG Students Data</h2>
-      <Table striped bordered hover>
-        <thead>
-          <tr>
-            <th>No</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Email</th>
-            <th>DOB</th>
-            <th>Gender</th>
-            <th>Category</th>
+      <h2 className={style.heading}>All PG Students Data</h2>
+      <div className={style.teacher_verify}>
+        <Table striped bordered hover>
+          <thead>
+            <tr className={style.teacher_verify_th}>
+              <th>No</th>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Email</th>
+              <th>DOB</th>
+              <th>Gender</th>
 
-            <th>Father Name</th>
-            <th>Mother Name</th>
+              <th>Father Name</th>
 
-            <th>All India Rank</th>
-            <th>Stream</th>
+              <th>AI Rank</th>
+              <th>Stream</th>
 
-            <th className={style.icon_show}>Action</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {formData.map((item, index) => (
-            <tr key={index}>
-              <td>{index + 1}</td>
-              <td>{item.firstName}</td>
-              <td>{item.lastName}</td>
-
-              <td>{item.date_of_birth}</td>
-
-              <td>{item.gender}</td>
-
-              <td>{item.category}</td>
-
-              <td>{item.fatherName}</td>
-              <td>{item.motherName}</td>
-
-              <td>{item.allIndiaRank}</td>
-
-              <td>{item.stream}</td>
-              <td>{item.session}</td>
-
-              <td>
-                <PgDropDown />
-              </td>
+              <th className={style.icon_show}>Action</th>
             </tr>
-          ))}
-        </tbody>
-      </Table>
+          </thead>
+
+          <tbody>
+            {formData.map((item, index) => (
+              <tr key={index} className={style.text_data_td}>
+                <td>{index + 1}</td>
+                <td>{item.firstName}</td>
+                <td>{item.lastName}</td>
+
+                <td>{item.date_of_birth}</td>
+
+                <td>{item.gender}</td>
+
+                <td>{item.fatherName}</td>
+
+                <td>{item.allIndiaRank}</td>
+
+                <td>{item.stream}</td>
+                <td>{item.session}</td>
+
+                <td className={style.button}>
+                  <PgDropDown id={item._id} />
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      </div>
     </div>
   );
 };

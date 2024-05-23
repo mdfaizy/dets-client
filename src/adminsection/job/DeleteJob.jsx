@@ -1,36 +1,41 @@
 import { useState, useEffect } from "react";
 import "../../form-data/applicationdata/admissiondata.scss";
+import style from "./jobdata.module.css";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import { deleteJobStudent } from "../../services/hooks/jobApi";
-function DeleteJob() {
-  const [formData, setFormData] = useState({});
+import { deleteJobStudent } from "../../services/apiFunction/job";
+import { Jobs } from "../../services/apis";
+
+const DeleteJob = () => {
+  const [jobData, setJobData] = useState({});
+  const [showDeleteButtons, setShowDeleteButtons] = useState(false);
+  const token = localStorage.getItem("token");
+  const cleanToken = token ? token.replace(/^"|"$/g, "") : "";
   const { id } = useParams();
+  const fetchData = async () => {
+    try {
+      const API_Url = `${Jobs.Get_User_Data}/${id}`;
+      const { data: res } = await axios.get(API_Url, {
+        headers: {
+          Authorization: `Bearer ${cleanToken}`,
+        },
+      });
+      setJobData(res.jobData);
+    } catch (error) {
+      console.error("Error fetching form data:", error);
+    }
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          `http://localhost:8000/api/v1/job/getJob_ById/${id}`
-        );
-        console.log("res", response.data.jobData);
-        if (response.status === 200) {
-          setFormData(response.data.jobData);
-        } else {
-          console.error("Failed to fetch form data. Status:", response.status);
-        }
-      } catch (error) {
-        console.error("Error fetching form data:", error);
-      }
-    };
     fetchData();
-  }, [id]);
+  }, []);
+  //delete function call
   const handleDelete = async (id) => {
     try {
       console.log(id);
       await deleteJobStudent(id);
       console.log(id);
-      setFormData({});
+      setJobData({});
     } catch (error) {
       console.error(error);
     }
@@ -97,90 +102,88 @@ function DeleteJob() {
                           </th>
                         </tr>
                       </thead>
-                      <tbody className="tbody_formData_info">
+                      <tbody className="tbody_jobData_info">
                         <tr>
-                          <td className="tbody_formData_info_name">
+                          <td className="tbody_jobData_info_name">
                             Full Name:
                           </td>
                           <td className="tbody_fromData_and_info_dot">
                             <b>:</b>
                           </td>
-                          <td>{formData.fullName}</td>
+                          <td>{jobData.fullName}</td>
                         </tr>
                         <tr>
-                          <td className="tbody_formData_info_name">
+                          <td className="tbody_jobData_info_name">
                             Companies Name
                           </td>
                           <td className="tbody_fromData_and_info_dot">
                             <b>:</b>
                           </td>
-                          <td>{formData.companies_name}</td>
+                          <td>{jobData.companies_name}</td>
                         </tr>
                         <tr>
-                          <td className="tbody_formData_info_name">Email</td>
+                          <td className="tbody_jobData_info_name">Email</td>
                           <td className="tbody_fromData_and_info_dot">
                             <b>:</b>
                           </td>
-                          <td>{formData.email}</td>
+                          <td>{jobData.email}</td>
                         </tr>
                         <tr>
-                          <td className="tbody_formData_info_name">
+                          <td className="tbody_jobData_info_name">
                             Date of Birth
                           </td>
                           <td className="tbody_fromData_and_info_dot">
                             <b>:</b>
                           </td>
-                          <td>{formData.date_of_birth}</td>
+                          <td>{jobData.date_of_birth}</td>
                         </tr>
                         <tr>
-                          <td className="tbody_formData_info_name">Phone No</td>
+                          <td className="tbody_jobData_info_name">Phone No</td>
                           <td className="tbody_fromData_and_info_dot">
                             <b>:</b>
                           </td>
-                          <td>{formData.phone_no}</td>
+                          <td>{jobData.phone_no}</td>
                         </tr>
                         <tr>
-                          <td className="tbody_formData_info_name">
-                            Home City
-                          </td>
+                          <td className="tbody_jobData_info_name">Home City</td>
                           <td className="tbody_fromData_and_info_dot">
                             <b>:</b>
                           </td>
-                          <td>{formData.home_city}</td>
+                          <td>{jobData.home_city}</td>
                         </tr>
                         <tr>
-                          <td className="tbody_formData_info_name">
+                          <td className="tbody_jobData_info_name">
                             Companies City
                           </td>
                           <td className="tbody_fromData_and_info_dot">
                             <b>:</b>
                           </td>
-                          <td>{formData.companies_city}</td>
+                          <td>{jobData.companies_city}</td>
                         </tr>
                         <tr>
-                          <td className="tbody_formData_info_name">
+                          <td className="tbody_jobData_info_name">
                             Package lpa
                           </td>
                           <td className="tbody_fromData_and_info_dot">
                             <b>:</b>
                           </td>
-                          <td>{formData.package_lpa}</td>
+                          <td>{jobData.package_lpa}</td>
                         </tr>
                         <tr>
-                          <td className="tbody_formData_info_name">Job Role</td>
+                          <td className="tbody_jobData_info_name">Job Role</td>
                           <td className="tbody_fromData_and_info_dot">
                             <b>:</b>
                           </td>
-                          <td>{formData.job_role}</td>
+                          <td>{jobData.job_role}</td>
                         </tr>
                         <tr>
-                          <td className="tbody_formData_info_name">
+                          <td className="tbody_jobData_info_name">
                             Selection Type
                           </td>
                           <td className="tbody_fromData_and_info_dot">
                             <b>:</b>
                           </td>
-                          <td>{formData.selectType}</td>
+                          <td>{jobData.selectType}</td>
                         </tr>
                         <tr>
                           <td
@@ -196,38 +199,63 @@ function DeleteJob() {
                           <td className="tbody_fromData_and_info_dot">
                             <b>:</b>
                           </td>
-                          <td>{formData.totalApplyCompanies}</td>
+                          <td>{jobData.totalApplyCompanies}</td>
                         </tr>
                         <tr>
-                          <td className="tbody_formData_info_name">
+                          <td className="tbody_jobData_info_name">
                             No Of Select Interview
                           </td>
                           <td className="tbody_fromData_and_info_dot">
                             <b>:</b>
                           </td>
-                          <td>{formData.noOfSelectInterview}</td>
+                          <td>{jobData.noOfSelectInterview}</td>
                         </tr>
                         <tr>
-                          <td className="tbody_formData_info_name">
+                          <td className="tbody_jobData_info_name">
                             Companies Type
                           </td>
                           <td className="tbody_fromData_and_info_dot">
                             <b>:</b>
                           </td>
-                          <td>{formData.companiesType}</td>
+                          <td>{jobData.companiesType}</td>
                         </tr>
                       </tbody>
                     </table>
                   </td>
                 </tr>
-                <button onClick={() => handleDelete(id)}>Delete</button>
+                {/* <button onClick={() => handleDelete(id)} className={style.delete_button}>Delete</button> */}
               </tbody>
             </table>
           </td>
         </tr>
+        {!showDeleteButtons && (
+          <button
+            onClick={() => setShowDeleteButtons(true)}
+            className={style.delete_button}
+          >
+            Show Delete
+          </button>
+        )}
+
+        {showDeleteButtons && (
+          <div className={style.delete_cancle_button}>
+            <button
+              onClick={() => handleDelete(id)}
+              className={style.delete_button}
+            >
+              Delete
+            </button>
+            <button
+              onClick={() => setShowDeleteButtons(false)}
+              className={style.cancle_button}
+            >
+              Cancel
+            </button>
+          </div>
+        )}
       </table>
     </div>
   );
-}
+};
 
 export default DeleteJob;

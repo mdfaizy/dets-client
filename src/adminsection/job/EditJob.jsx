@@ -1,22 +1,14 @@
-import { useState ,useEffect} from "react";
+import { useState, useEffect } from "react";
 import { Container, Row, Col, Form, Accordion } from "react-bootstrap";
-import { useSelector} from "react-redux";
-import { useParams} from "react-router-dom";
-// import {submitJobForm} from "../../services/apiFunction/job"
-// import { getAllJobStudents,getJobStudents} from "../../services/hooks/jobApi";
-// ///
+import { useNavigate, useParams } from "react-router-dom";
+import { Jobs } from "../../services/apis";
 import axios from "axios";
+import style from "./jobdata.module.css";
 
 const EditJob = () => {
-  // const navigate = useNavigate();
-  const { token } = useSelector((state) => state.auth);
-  // const dispatch = useDispatch();
-  // const dispatch = useDispatch();
-
-  const { id } = useParams();
-
+  const navigate = useNavigate();
+  const [jobData, setJobData] = useState({});
   const [formData, setFormData] = useState({
-    token:token,
     fullName: "",
     companies_name: "",
     email: "",
@@ -31,176 +23,71 @@ const EditJob = () => {
     noOfSelectInterview: "",
     companiesType: "",
   });
+  const token = localStorage.getItem("token");
+  const cleanToken = token ? token.replace(/^"|"$/g, "") : "";
+  const { id } = useParams();
+  const fetchData = async () => {
+    try {
+      const API_Url = `${Jobs.Get_User_Data}/${id}`;
+      const { data: res } = await axios.get(API_Url, {
+        headers: {
+          Authorization: `Bearer ${cleanToken}`,
+        },
+      });
+      setJobData(res.jobData);
+      setFormData((prevData) => ({
+        ...prevData,
+        ...res.jobData,
+      }));
+      console.log(res.jobData);
+    } catch (error) {
+      console.error("Error fetching form data:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   const changeHandler = (event) => {
-      const { name, value, type, files } = event.target;
-  
-      if (type === "file") {
-        setFormData((prevData) => ({
-          ...prevData,
-          [name]: files[0],
-        }));
-      } else {
-        setFormData((prevData) => ({
-          ...prevData,
-          [name]: value,
-        }));
-      }
-    };
+    const { name, value, type, files } = event.target;
+    if (type === "file") {
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: files[0],
+      }));
+    } else {
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }));
+    }
+  };
 
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    try {
+      const API_Url = `${Jobs.UPDATE_JOB_FORM}/${id}`;
+      const { data: res } = await axios.put(API_Url, formData, {
+        headers: {
+          Authorization: `Bearer ${cleanToken}`,
+          "Content-Type": "application/json",
+        },
+      });
+      console.log("Form submitted successfully:", res);
+      navigate("/job_application");
+    } catch (error) {
+      console.error("Error submitting form:", error);
+    }
+  };
 
-
-    
-  // const submitHandler = (e) => {
-  //   e.preventDefault();
-  //   dispatch(submitJobForm(formData)); // Dispatch action creator
-  //   setFormData({ 
-  //     fullName: "",
-  //     companies_name: "",
-  //     email: "",
-  //     date_of_birth: "",
-  //     phone_no: "",
-  //     home_city: "",
-  //     companies_city: "",
-  //     package_lpa: "",
-  //     job_role: "",
-  //     selectType: "",
-  //     totalApplyCompanies: "",
-  //     noOfSelectInterview: "",
-  //     companiesType: "",
-  //   });
-  //   navigate("/job_application");
-  // };
-
-
-  // const submitHandler = async (e) => {
-  //   e.preventDefault();
-  //   try {
-  //     const response = await axios.put(
-  //       `http://localhost:8000/api/v1/job/update_job_cource${id}`,
-  //       formData,
-  //       {
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //           // Authorization: `Bearer ${token}`,
-  //         },
-  //       }
-  //     );
-  //     if (response.status === 200) {
-  //       console.log("Job  updated successfully!");
-  //       navigate("/job_application");
-  //     } else {
-  //       console.error("Failed to update job.");
-  //     }
-  //   } catch (error) {
-  //     console.error("An error occurred while updating job :", error.message);
-  //   }
-  // };
-
- 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(`http://localhost:8000/api/v1/job/getJob_ById/${id}`);
-        console.log("respnce", response);
-        console.log("JOB Data", response.data.jobData);
-        if (response.status === 200) {
-          setFormData(response.data.jobData);
-        } else {
-          console.error("Failed to fetch form data. Status:", response.status);
-        }
-      } catch (error) {
-        console.error("Error fetching form data:", error);
-      }
-    };
-    fetchData();
-  }, [id]); // Make sure to include id in the dependency array to re-run the effect when id changes
-  
-
-
-
-  //befor redux
-
-
-  // const { token } = useSelector((state) => state.auth);
-  // const navigate = useNavigate();
-
-  // const [formData, setFormData] = useState({
-  //   token: token,
-  //   fullName: "",
-  //   companies_name: "",
-  //   email: "",
-  //   date_of_birth: "",
-  //   phone_no: "",
-  //   home_city: "",
-  //   companies_city: "",
-  //   package_lpa: "",
-  //   job_role: "",
-  //   selectType: "",
-  //   totalApplyCompanies: "",
-  //   noOfSelectInterview: "",
-  //   companiesType: "",
-  // });
-
-  // const changeHandler = (event) => {
-  //   const { name, value, type, files } = event.target;
-
-  //   if (type === "file") {
-  //     setFormData((prevData) => ({
-  //       ...prevData,
-  //       [name]: files[0],
-  //     }));
-  //   } else {
-  //     setFormData((prevData) => ({
-  //       ...prevData,
-  //       [name]: value,
-  //     }));
-  //   }
-  // };
-
-  // const submitHandler = async (event) => {
-  //   event.preventDefault();
-  //   console.log("hi");
-
-  //   const formDataToSend = new FormData();
-  //   // Append each form field to formDataToSend
-  //   for (let key in formData) {
-  //     formDataToSend.append(key, formData[key]);
-  //   }
-  //   console.log("hi1");
-
-  //   try {
-  //     const response = await fetch("http://localhost:8000/api/v1/job/job", {
-  //       method: "POST",
-  //       body: formDataToSend, // Send formDataToSend instead of JSON.stringify(formData)
-  //     });
-  //     console.log("hi2", response);
-  //     if (response.ok) {
-  //       const responseData = await response.json();
-  //       console.log(responseData);
-  //       console.log(responseData.data._id);
-  //       Cookies.set("formData", JSON.stringify(formData));
-  //       // navigate("/Exitdata");
-  //       navigate("/job_application");
-  //     } else {
-  //       console.log("Form not submitted. Error status:", response.status);
-  //       // Handle the error or display a message to the user
-  //     }
-  //   } catch (error) {
-  //     console.error("Error occurred:", error);
-  //     // Handle other error cases (e.g., network errors)
-  //   }
-  // };
-  
   return (
     <>
-      <Col className="text-center">JOB</Col>
-
-      <Container>
+      <Container className={style.job_update_form}>
+        <h1>JOB FORM DATA UPDATE</h1>
         <Row>
           <Col>
-          {/* onSubmit={submitHandler} */}
-            <Form >
+            <Form onSubmit={submitHandler}>
               <Row>
                 <Accordion defaultActiveKey="0">
                   <Accordion.Item eventKey="0">

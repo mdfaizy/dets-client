@@ -1,0 +1,78 @@
+.delete_button {
+  background-color: #800000;
+  border-radius: 5px;
+  padding: 5px 16px;
+  margin-bottom: 4px;
+  border: none;
+  color: white;
+  font-size: 20px;
+  margin: 0 auto;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+.cancle_button {
+  background-color: #800000;
+  border-radius: 5px;
+  padding: 5px 16px;
+  margin-bottom: 4px;
+  border: none;
+  color: white;
+  font-size: 20px;
+}
+
+.delete_cancle_button {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+}
+.delete_cancle_button button {
+  padding: 5px 16px;
+  margin: 10px;
+}
+
+/* Job form Update */
+.job_update_form {
+  background-color: #1f6357;
+  padding: 20px;
+  border-radius: 5px;
+}
+.job_update_form h1 {
+  font-size: 20px;
+  text-align: center;
+  color: white;
+  padding-bottom: 10px;
+}
+/* print button style */
+.job_form_data_print {
+  background-color: #800000;
+  border-radius: 5px;
+  padding: 5px 16px;
+  margin-bottom: 4px;
+  border: none;
+  color: white;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  margin: 0 auto;
+  margin-bottom: 10px;
+}
+
+@media print {
+  .no-print {
+    display: none;
+  }
+  body {
+    font-size: 12pt;
+    line-height: 1;
+  }
+
+  header,
+  footer,
+  .sidebar {
+    display: none;
+  }
+  .print-only {
+  }
+}

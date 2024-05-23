@@ -113,9 +113,7 @@ function Home() {
           </Col>
         </Row>
       </Container>
-<JobDataPrint/>
-<EditJob/>
-<Link to={`/editjob/${id}`}>Edit</Link>
+
 
       <AdmissionSummaryData/>
 <Homes/>

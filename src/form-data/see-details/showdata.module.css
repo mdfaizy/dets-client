@@ -2,6 +2,11 @@
 .showdata_img img{
   width: 100%;
   height: 400px;
+  
+}
+.new_student_heading{
+text-align: center;
+color: rgb(32, 214, 214);
 }
 .form_data_container{
   margin: 1cm auto;

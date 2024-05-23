@@ -8,7 +8,7 @@ import axios from "axios";
 function NewAdmission() {
   // const { userData }=props;
   // console.log(" userData, userData", userData);
-  // const { id } = useParams();
+  const { id } = useParams();
   const navigate = useNavigate();
   const { token } = useSelector((state) => state.auth);
   const [data,setData]=useState([null])
@@ -88,6 +88,8 @@ function NewAdmission() {
       }));
     }
   };
+
+
 // const getUserData = async () => {
 //   try {
 //     const response = await axios.get(`http://localhost:8000/api/v1/getsigin_By_Id/${id}`);

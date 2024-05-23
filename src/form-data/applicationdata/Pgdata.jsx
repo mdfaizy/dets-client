@@ -2,98 +2,35 @@ import { useState, useEffect } from "react";
 import "./admissiondata.scss";
 import axios from "axios";
 import { useSelector } from "react-redux";
-// import { useLocation } from "react-router-dom";
+import { pgCourseEndpoints } from "../../services/apis";
+import { useParams } from "react-router-dom";
 function Pgdata() {
-  // const location = useLocation()
-  // const { apidata } = location.state || {}
-  //   const [formData, setFormData] = useState({});
-  //   const { istoken } = props;
-  //   useEffect(() => {
-  //     const fetchData = async () => {
-  //       try {
-  //         const requestBody = {
-  //           token: istoken,
-  //         };
-  //         const response = await axios.post(
-  //           "http://localhost:8000/api/v1/get_pg_cource",
-  //           requestBody,
-  //           {
-  //             headers: {
-  //               "Content-Type": "application/json",
-  //             },
-  //           }
-  //         );
-  //         if (response.status === 200) {
-  //           setFormData(response.data.data);
-  //         } else {
-  //           console.error("Failed to fetch form data. Status:", response.status);
-  //         }
-  //       } catch (error) {
-  //         console.error("Error fetching form data:", error);
-  //       }
-  //     };
-  //     fetchData();
-  //   }, [istoken]);
 
   const [formData, setFormData] = useState({});
- const {token}=useSelector((state)=>state.auth);
+  // const { token } = useSelector((state) => state.auth);
 
-  //   useEffect(() => {
-  //     const fetchData = async () => {
-  //       try {
-  //         const requestBody = {
-  //           token: istoken,
-  //         };
-  //         const response = await axios.post(
-  //           "http://localhost:8000/api/v1/get_pg_cource",
-  //           requestBody,
-  //           {
-  //             headers: {
-  //               "Content-Type": "application/json",
-  //             },
-  //           }
-  //         );
-  //         if (response.status === 200) {
-  //           setFormData(response.data.data);
-  //         } else {
-  //           console.error("Failed to fetch form data. Status:", response.status);
-  //         }
-  //       } catch (error) {
-  //         console.error("Error fetching form data:", error);
-  //       }
-  //     };
-  //     fetchData();
-  //   }, [istoken]);
+  const { id } = useParams();
+  console.log(id);
+   const token = localStorage.getItem("token");
 
+  const fetchData = async () => {
+    try {
+      const cleanToken = token.replace(/^"|"$/g, "");
+      const apiUrl = `${pgCourseEndpoints.GET_PG_COURSE_BY_ID}/${id}`;
+      const { data: res } = await axios.get(apiUrl, {
+        headers: {
+          Authorization: `Bearer ${cleanToken}`,
+        },
+      });
+      setFormData(res.pgdata);
+      console.log(res);
+    } catch (error) {
+      console.error("Error fetching form data:", error);
+    }
+  };
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const requestBody = {
-          token:token,
-        };
-
-        const response = await axios.post(
-          "http://localhost:8000/api/v1/pgcourse/get_pg_student",
-          requestBody,
-          {
-            headers: {
-              "Content-Type": "application/json",
-              
-            },
-          }
-        );
-
-        if (response.status === 200) {
-          setFormData(response.data.data);
-        } else {
-          console.error("Failed to fetch form data. Status:", response.status);
-        }
-      } catch (error) {
-        console.error("Error fetching form data:", error);
-      }
-    };
     fetchData();
-  }, [token]);
+  }, []);
 
   return (
     <div className="addmission_top_contante">

@@ -1,7 +1,7 @@
 import ProfileDropdown from "../../pages/profile/ProfileDropdown";
 import { useState } from "react";
 import { NavLink, Link } from "react-router-dom";
-import { Navbar, Row, Col, Nav, NavDropdown, Container } from "react-bootstrap";
+import { Navbar, Row, Col, Nav, NavDropdown, Container, Dropdown } from "react-bootstrap";
 import style from "./Header.module.css";
 import logImg from "../../../assets/log.jpg";
 import { useSelector } from "react-redux";
@@ -180,6 +180,8 @@ const Header = (props) => {
   const { isAdmin } = props;
 
   const { token, accountType } = useSelector((state) => state.auth);
+  // const accountType=localStorage.getItem('accountType');
+  // const token = localStorage.getItem("token");
   // const { accountType } = useSelector((state) => state.auth);
   console.log("Header AccountType", accountType);
   console.log("Header Token", token);
@@ -483,12 +485,17 @@ return (
                       <NavDropdown
                           title="REPORT"
                           id="collasible-nav-dropdown"
-                          className={style.nav_links}
+                          // className={style.nav_links}
+                          className={`${style.nav_links}`}
                           show={show}
                           onMouseEnter={showDropdown}
                           onMouseLeave={hideDropdown}
                          
+                         
                         >
+                          <NavDropdown.Item className={style.avDropdown_Item}>
+
+                         
                           <Nav.Link as={Link} to="/feedback-form">
                             Feedback Form
                           </Nav.Link>
@@ -501,6 +508,7 @@ return (
                           <NavDropdown.Divider />
                           <NavDropdown.Item to="#action/3.4">
                             Separated link
+                          </NavDropdown.Item>
                           </NavDropdown.Item>
                         </NavDropdown>
                      

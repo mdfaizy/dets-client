@@ -2,43 +2,31 @@ import { useState, useEffect } from "react";
 import "./admissiondata.scss";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import { exitStudentEndpoints } from "../../services/apis";
+import { useParams } from "react-router-dom";
 function Exitdata() {
   const [formData, setFormData] = useState({});
   const { token } = useSelector((state) => state.auth);
-  console.log("admission token",token);
+  const { id } = useParams();
+  const fetchData = async () => {
+    try {
+      const cleanToken = token.replace(/^"|"$/g, "");
+      const apiUrl = `${exitStudentEndpoints.GET_EXIT_STUDENT_BY_ID}/${id}`;
+      const { data: res } = await axios.get(apiUrl, {
+        headers: {
+          Authorization: `Bearer ${cleanToken}`,
+        },
+      });
+      setFormData(res.data);
+      console.log(res);
+    } catch (error) {
+      console.error("Error fetching form data:", error);
+    }
+  };
+
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const requestBody = {
-          token: token,
-        };
-
-        const response = await axios.get(
-          "http://localhost:8000/api/v1/exit/get_exitstudent",
-          requestBody,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(requestBody),
-          }
-        );
-console.log('hii');
-        console.log(" exit response",response);
-        if (response.ok) {
-          const data = await response.json();
-          setFormData(data.data);
-        } else {
-          console.error("Failed to fetch form data. Status:", response.status);
-        }
-      } catch (error) {
-        console.error("Error fetching form data:", error);
-      }
-    };
     fetchData();
-  }, [token]);
-
+  }, []);
 
   return (
     <div className="addmission_top_contante">
@@ -259,4 +247,3 @@ console.log('hii');
 }
 
 export default Exitdata;
-

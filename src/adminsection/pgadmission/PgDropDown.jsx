@@ -2,12 +2,12 @@ import "../../components/pages/profile/profile.css"
 import { useRef, useState } from "react";
 import { AiOutlineCaretDown } from "react-icons/ai";
 import { VscDashboard} from "react-icons/vsc";
-import { Link, useParams } from "react-router-dom";
+import { Link} from "react-router-dom";
 import useOnClickOutside from "../../hooks/useOnClickOutside";
-const PgDropDown= () => {
+const PgDropDown= ({id}) => {
    const [open, setOpen] = useState(false);
    const ref = useRef(null);
- const {id} =useParams();
+
    useOnClickOutside(ref, () => setOpen(false));
    return (
      <div className="">
