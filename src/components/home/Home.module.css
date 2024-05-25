@@ -1,33 +1,148 @@
-
-
-.slider_image_home{
-    width: 100%;
-     height: 400px;
+.slider_image_home {
+  width: 100%;
+  height: 400px;
 }
 
-.university_name{
-    color: white;
-    font-weight: 600;
+.university_name {
+  color: white;
+  font-weight: 600;
 }
 
-.all_program_details{
-    background-color: rgb(55, 79, 98);
-    /* width: 100%; */
-    
+.all_program_details {
+  background-color: rgb(55, 79, 98);
+  /* width: 100%; */
 }
-.program_text{
+
+.program_text {
+  text-align: center;
+  color: white;
+  font-size: 2rem;
+  padding: 10px;
+  font-weight: 700;
+}
+.all_program_info {
+  padding: 5px;
+  max-width: 900px;
+  margin: 0 auto;
+  color: white;
+}
+
+.home_contante {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.section1_top_img {
+  text-align: center;
+  margin: 2rem 1rem;
+  box-shadow: 10px -5px 50px -5px rgba(0, 0, 0, 0.2);
+}
+.section1_top_img video {
+  height: 500px;
+  box-shadow: 20px 20px rgba(255, 255, 255, 1);
+}
+
+.section2_contant {
+  display: flex;
+  gap: 20px;
+}
+.section2top_img {
+  text-align: center;
+  margin: 1rem 1rem;
+  box-shadow: 10px -5px 50px -5px rgba(0, 0, 0, 0.2);
+}
+.video2_element {
+  height: auto;
+  width: 500px;
+  box-shadow: 20px 20px rgba(255, 255, 255, 1);
+}
+
+.program_text {
+  /* margin-left: 20px; */
+}
+.programs_text h1 {
+  color: white;
+  font-size: 35px;
+}
+.programs_text p {
+  color: aquamarine;
+  font-size: 1rempx;
+}
+
+.about_section5 {
+  display: flex;
+  gap: 20px;
+  text-align: center;
+
+  justify-content: space-between;
+  padding-top: 20px;
+}
+
+
+.about_section5 img {
+  width: 500px;
+  height: 500x;
+}
+.about_section4_all{
     text-align: center;
-    color: white;
-    font-size: 2rem;
-    padding: 10px;
-    font-weight: 700;
+}
+.about_section4_all h1{
+    text-align: center;
+    color: aquamarine;
+    font-size: 35px;
 
 }
-.all_program_info{
+.about_section4_all h1 span{
+    color: rgb(77, 102, 214);
+}
+.about_section4_all p{
+    color: rgb(215, 203, 216);
+    font-size: 20px;
+}
+.about_section_team_details{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.about_team_text_img{
+width: 250px;
+height: 460px;
+border-radius: 5px;
+background-color: rgb(139, 148, 148);
+margin: 10px;
+
+}
+.about_team_text_img h1{
+    font-size: 25px;
+    color: rgb(82, 171, 171);
+    text-align: center;
     padding: 5px;
-    max-width: 900px;
-    margin: 0 auto;
+
+}
+.about_team_text_img p{
+    font-size: 14px;
+    text-align: center;
+    padding: 5px;
     color: white;
+}
 
-
+.about_team_text_img img{
+    width: 200px;
+    height: 200px;
+    text-align: center;
+    align-items: center;
+    display: flex;
+    padding: 10px;
+    margin: 0 auto;
+}
+.about_team_text_img button{
+    text-align: center;
+    background-color: rgb(34, 60, 52);
+    border: none;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    padding: 8px;
+    border-radius: 4px;
+    margin:  0 auto;
+  
 }

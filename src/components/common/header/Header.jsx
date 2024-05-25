@@ -472,13 +472,16 @@ return (
                   <Nav.Link as={Link} to="/" className={style.nav_links}>HOME</Nav.Link>
                   <Nav.Link as={Link} to="/about" className={style.nav_links}>ABOUT</Nav.Link>
                  {/* <Nav> */}
-
-                 {!isAdmin && token !== null && accountType === "Student" && (
-                    <>
-                      <Nav.Link as={Link} to="/newstudent" className={style.nav_links} onClick={handleClick}>ADMISSION</Nav.Link>
-                      <Nav.Link as={Link} to="/exit" className={style.nav_links} onClick={handleClick}>EXIT STUDENT</Nav.Link>
+                 <Nav.Link as={Link} to="/newstudent" className={style.nav_links} onClick={handleClick}>ADMISSION</Nav.Link>
+                 <Nav.Link as={Link} to="/exit" className={style.nav_links} onClick={handleClick}>EXIT STUDENT</Nav.Link>
                       <Nav.Link as={Link} to="/pgcourses" className={style.nav_links} onClick={handleClick}>POSTGRADUATE</Nav.Link>
                       <Nav.Link as={Link}  to="/btechjob" className={style.nav_links} onClick={handleClick}>JOB</Nav.Link>
+                 {!isAdmin && token !== null && accountType === "Student" && (
+                    <>
+                      {/* <Nav.Link as={Link} to="/newstudent" className={style.nav_links} onClick={handleClick}>ADMISSION</Nav.Link> */}
+                      {/* <Nav.Link as={Link} to="/exit" className={style.nav_links} onClick={handleClick}>EXIT STUDENT</Nav.Link>
+                      <Nav.Link as={Link} to="/pgcourses" className={style.nav_links} onClick={handleClick}>POSTGRADUATE</Nav.Link>
+                      <Nav.Link as={Link}  to="/btechjob" className={style.nav_links} onClick={handleClick}>JOB</Nav.Link> */}
                       
                       
                       
@@ -523,8 +526,8 @@ return (
                 <Nav className=""> {/* Keeping login/signup or profile dropdown to the right */}
                   {token === null ? (
                     <>
-                      <Nav.Link as={Link} to="/loginfrom" className={style.nav_links} onClick={handleClick}>LOGIN</Nav.Link>
-                      <Nav.Link as={Link} to="/signupfrom" className={style.nav_links} onClick={handleClick}>SIGN UP</Nav.Link>
+                      <Nav.Link as={Link} to="/account" className={style.nav_links}>Account</Nav.Link>
+                      {/* <Nav.Link as={Link} to="/signupfrom" className={style.nav_links} onClick={handleClick}>SIGN UP</Nav.Link> */}
                     </>
                   ) : (
                     <ProfileDropdown />

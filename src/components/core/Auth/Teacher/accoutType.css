@@ -1,0 +1,65 @@
+/* AccountTypeTeacher.css */
+.fieldset {
+  
+  }
+  .teacher-account-type{
+    background-color: white;
+  }
+  .teacher-account-types{
+    max-width: 80%;
+    margin: 0 auto;
+  }
+  .legend {
+    font-weight: bold;
+    border: #5b5d5f;
+
+  }
+  .account-signup-login{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    gap: 60px;
+  }
+  .account-option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 1em;
+    width: 300px;
+    height: 300px;
+    border-radius: 2 solid transparent;
+    border:2px  #007bff;
+    background-color: rgb(80, 124, 153);
+    justify-content: space-between;
+    padding: 10px;
+    border-radius: 10px;
+
+  }
+  
+  .account-option svg {
+    font-size: 2em;
+    margin-bottom: 0.5em;
+  }
+  
+  .account-option button {
+    padding: 0.5em 1em;
+    font-size: 1em;
+    border: none;
+    border-radius: 0.5em;
+    background-color: #edac34;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    
+  }
+  
+  .account-option button:hover {
+    background-color: #dee33d;
+  }
+  
+  .account-option button a {
+    text-decoration: none;
+    color: inherit;
+  }
+  

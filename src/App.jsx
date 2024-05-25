@@ -1,6 +1,6 @@
 import "./App.css";
 import { useState } from "react";
-import About from "./routes/About";
+import About from "./components/pages/about/About";
 import Home from "./components/home/Home";
 import Job from "./routes/job/Job";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -62,6 +62,10 @@ import PgPrint from "./adminsection/pgadmission/PgPrint";
 import DeleteExit from "./adminsection/exitdata/DeleteExit";
 import FeedbackForm from "./adminDashboard/feedback/feedbackfrom/Feedbackfrom";
 import Feedback from "./adminDashboard/feedback/Feedback";
+import Acoount from "./components/pages/createAccount/Acoount";
+import TeacherAccount from "./components/pages/teacherSignupAccount/TeacherAccoutn";
+import OpenRoute from "./components/core/Auth/OpenRoute";
+import PrivateRoute from "./components/core/Auth/PrivateRoute";
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
@@ -70,13 +74,12 @@ function App() {
 
   const [sidebartoggle, setSidebartoggle] = useState(false);
   return (
-    <div style={{backgroundColor:"#000814"}}>
+    <div style={{ backgroundColor: "#000814" }}>
       <Header
         isAdmin={isAdmin}
         setIsAdmin={setIsAdmin}
         teacher={teacher}
         setTeacher={setTeacher}
-        
       />
       {/* <div style={{display:"flex"}}>
         <Sidebar sidebartoggle={sidebartoggle}/>
@@ -94,27 +97,55 @@ function App() {
         <Route
           path="/loginfrom"
           element={
-            <LoginFrom setIsAdmin={setIsAdmin} setTeacher={setTeacher} />
+            <OpenRoute>
+              <LoginFrom setIsAdmin={setIsAdmin} />
+            </OpenRoute>
           }
         />
         <Route path="/forgot-password" element={<ForgatePassword />} />
         <Route path="/update-password/:id" element={<ReasetPassword />} />
+        <Route path="/account" element={<Acoount />} />
+        <Route path="/teacher-account" element={<TeacherAccount />} />
         {/* Admission route */}
-        <Route path="/newadmission" element={<NewAdmission />} />
-        <Route path="/exitfrom" element={<ExitFrom />} />
-        <Route path="/pgcource" element={<PgCource />} />
-        <Route path="job" element={<Job />} />
-
+        <Route
+          path="/newadmission"
+          element={
+            <PrivateRoute>
+              <NewAdmission />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/exitfrom"
+          element={
+            <PrivateRoute>
+              <ExitFrom />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/pgcource"
+          element={
+            <PrivateRoute>
+              <PgCource />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="job"
+          element={
+            <PrivateRoute>
+              <Job />
+            </PrivateRoute>
+          }
+        />
         {/*Show Application  */}
         <Route
           path="/showFormData"
           element={<ShowFormData isAdmin={isAdmin} />}
         />
 
-        <Route
-          path="/new_addmission/:id"
-          element={<Addmissiondata />}
-        />
+        <Route path="/new_addmission/:id" element={<Addmissiondata />} />
         <Route path="/exit_application/:id" element={<Exitdata />} />
         <Route path="/pg_application/:id" element={<Pgdata />} />
         <Route path="/job_application/:id" element={<Jobdata />} />
@@ -135,7 +166,7 @@ function App() {
           path="/all_student_job"
           element={<Allstudentjob isAdmin={isAdmin} teacher={teacher} />}
         />
-       
+
         {/* from befor ui */}
         <Route path="newstudent" element={<Newstudent />} />
         <Route path="/exit" element={<Exit />} />
