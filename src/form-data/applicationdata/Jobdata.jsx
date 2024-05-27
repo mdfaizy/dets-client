@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import "./admissiondata.scss";
-import axios from "axios";
+// import axios from "axios";
 // import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { Jobs } from "../../services/apis.js";
-import { fetchJobData } from "../../services/apiFunction/job.js";
+// import { Jobs } from "../../services/apis.js";
+import { getStudentForJobById } from "../../services/apiFunction/job.js";
 
 function Jobdata() {
   const [formData, setFormData] = useState({});
@@ -31,21 +31,26 @@ function Jobdata() {
   // };
 
 
-
+const token=localStorage.getItem('token');
   const fetchData = async () => {
     try {
-      const data = await fetchJobData(id);
-      setFormData(data);
+      const data = await getStudentForJobById(id,token);
       console.log(data);
+      setFormData(data);
     } catch (error) {
       console.error("Error fetching form data:", error);
     }
   };
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [id]);
+
+  const handlePrint = () => {
+    window.print();
+  };
 
   return (
+    <>
     <div className="addmission_top_contante">
       <table
         className="admission_table_contante"
@@ -235,6 +240,11 @@ function Jobdata() {
         </tr>
       </table>
     </div>
+
+    <button onClick={handlePrint} className="job_form_data_print">
+Print
+</button>
+</>
   );
 }
 

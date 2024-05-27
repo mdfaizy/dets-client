@@ -1,28 +1,32 @@
 import { useState, useEffect } from "react";
 import "../../form-data/applicationdata/admissiondata.scss";
-import axios from "axios";
+// import axios from "axios";
 import style from "./pgdata.module.css";
-// import {deletePgStudent} from '../..'
+import { deletePgStudent } from "../../services/apiFunction/pgApi";
 
-import { pgCourseEndpoints } from "../../services/apis";
+// import { pgCourseEndpoints } from "../../services/apis";
+import { getPgCourseById } from "../../services/apiFunction/pgApi";
 import { useParams } from "react-router-dom";
 const PgDataDelete = () => {
   const [showDeleteButtons, setShowDeleteButtons] = useState(false);
   const [formData, setFormData] = useState({});
   const token = localStorage.getItem("token");
-  const cleanToken = token ? token.replace(/^"|"$/g, "") : "";
+  // const cleanToken = token ? token.replace(/^"|"$/g, "") : "";
   const { id } = useParams();
 
   const fetchData = async () => {
     try {
-      const API_Url = `${pgCourseEndpoints.GET_PG_COURSE_BY_ID}/${id}`;
-      const { data: res } = await axios.get(API_Url, {
-        headers: {
-          Authorization: `Bearer ${cleanToken}`,
-        },
-      });
-      console.log("pgdata", res);
-      setFormData(res.pgdata);
+      // const API_Url = `${pgCourseEndpoints.GET_PG_COURSE_BY_ID}/${id}`;
+      // const { data: res } = await axios.get(API_Url, {
+      //   headers: {
+      //     Authorization: `Bearer ${cleanToken}`,
+      //   },
+      // });
+      // console.log("pgdata", res);
+      // setFormData(res.pgdata);
+      const data = await getPgCourseById(id, token);
+      console.log("data", data);
+      setFormData(data);
     } catch (error) {
       console.error("Error fetching form data:", error);
     }
@@ -35,7 +39,7 @@ const PgDataDelete = () => {
   const handleDelete = async (id) => {
     try {
       console.log(id);
-      // await deleteJobStudent(id);
+      await deletePgStudent(id);
       console.log(id);
       setFormData({});
     } catch (error) {

@@ -3,6 +3,10 @@ import { useEffect, useState } from "react";
 import { Container, Row, Col, Form, Accordion } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 import { newadmissionEndpoints } from "../../services/apis";
+import {
+  getnewadmissionId,
+  updateNewAdmissionData,
+} from "../../services/apiFunction/newadmissionApi";
 const EditNewStudent = () => {
   // const navigate = useNavigate()
   const navigate = useNavigate();
@@ -73,19 +77,22 @@ const EditNewStudent = () => {
   const { id } = useParams();
   const fetchData = async () => {
     try {
-      const API_Url = `${newadmissionEndpoints.GET_NEW_ADMISSIOM_DATA}/${id}`;
-      const { data: res } = await axios.get(API_Url, {
-        headers: {
-          Authorization: `Bearer ${cleanToken}`,
-        },
-      });
-      console.log(res);
-      setNewAdmissionData(res.Newadmission);
+      // const API_Url = `${newadmissionEndpoints.GET_NEW_ADMISSIOM_DATA}/${id}`;
+      // const { data: res } = await axios.get(API_Url, {
+      //   headers: {
+      //     Authorization: `Bearer ${cleanToken}`,
+      //   },
+      // });
+      // console.log(res);
+      // setNewAdmissionData(res.Newadmission);
+      const data = await getnewadmissionId(id, token);
+      console.log(data);
+      setNewAdmissionData(data);
       setFormData((prevData) => ({
         ...prevData,
-        ...res.Newadmission,
+        ...data,
       }));
-      console.log(res.Newadmission);
+      console.log(data);
     } catch (error) {
       console.error("Error fetching form data:", error);
     }
@@ -111,21 +118,25 @@ const EditNewStudent = () => {
     }
   };
 
-  const submitHandler = async (e) => {
-    e.preventDefault();
-    try {
-      const API_Url = `${newadmissionEndpoints.UPDATE_NEW_ADMISSION_FORM}/${id}`;
-      const { data: res } = await axios.put(API_Url, formData, {
-        headers: {
-          Authorization: `Bearer ${cleanToken}`,
-          "Content-Type": "application/json",
-        },
-      });
-      console.log("Form submitted successfully:", res);
-      navigate("/newAdmissiondata");
-    } catch (error) {
-      console.error("Error submitting form:", error);
-    }
+  // const submitHandler = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     const API_Url = `${newadmissionEndpoints.UPDATE_NEW_ADMISSION_FORM}/${id}`;
+  //     const { data: res } = await axios.put(API_Url, formData, {
+  //       headers: {
+  //         Authorization: `Bearer ${cleanToken}`,
+  //         "Content-Type": "application/json",
+  //       },
+  //     });
+  //     console.log("Form submitted successfully:", res);
+  //     navigate("/newAdmissiondata");
+  //   } catch (error) {
+  //     console.error("Error submitting form:", error);
+  //   }
+  // };
+
+  const submitHandler = (e) => {
+    updateNewAdmissionData(e, id, formData, token, navigate);
   };
 
   return (

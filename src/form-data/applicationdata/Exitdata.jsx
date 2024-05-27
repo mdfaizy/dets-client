@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import "./admissiondata.scss";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import { exitStudentEndpoints } from "../../services/apis";
+// import { exitStudentEndpoints } from "../../services/apis";
+import {getExitStudentByID} from "../../services/apiFunction/exitApi";
 import { useParams } from "react-router-dom";
 function Exitdata() {
   const [formData, setFormData] = useState({});
@@ -10,15 +11,17 @@ function Exitdata() {
   const { id } = useParams();
   const fetchData = async () => {
     try {
-      const cleanToken = token.replace(/^"|"$/g, "");
-      const apiUrl = `${exitStudentEndpoints.GET_EXIT_STUDENT_BY_ID}/${id}`;
-      const { data: res } = await axios.get(apiUrl, {
-        headers: {
-          Authorization: `Bearer ${cleanToken}`,
-        },
-      });
-      setFormData(res.data);
-      console.log(res);
+      // const cleanToken = token.replace(/^"|"$/g, "");
+      // const apiUrl = `${exitStudentEndpoints.GET_EXIT_STUDENT_BY_ID}/${id}`;
+      // const { data: res } = await axios.get(apiUrl, {
+      //   headers: {
+      //     Authorization: `Bearer ${cleanToken}`,
+      //   },
+      // });
+      // setFormData(res.data)
+      const data=await getExitStudentByID(id,token);
+      console.log(data);
+      setFormData(data);
     } catch (error) {
       console.error("Error fetching form data:", error);
     }
@@ -28,7 +31,13 @@ function Exitdata() {
     fetchData();
   }, []);
 
+  const handlePrint = () => {
+    window.print();
+  };
+
   return (
+
+    <>
     <div className="addmission_top_contante">
       <table
         className="admission_table_contante"
@@ -243,6 +252,13 @@ function Exitdata() {
         </tr>
       </table>
     </div>
+
+
+
+
+<button onClick={handlePrint} className="job_form_data_print">
+Print
+</button></>
   );
 }
 

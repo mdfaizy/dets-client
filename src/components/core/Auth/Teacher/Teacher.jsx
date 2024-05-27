@@ -1,9 +1,15 @@
 import { SiGnuprivacyguard } from "react-icons/si";
 import { Link } from "react-router-dom";
 import "./accoutType.css";
+import { Container ,Row} from "react-bootstrap";
 
 const AccountTypeTeacher = () => {
   return (
+    <Container>
+
+<Row>
+
+
     <div className="teacher-account-type">
       <div className="teacher-account-types">
         <fieldset className="">
@@ -35,6 +41,8 @@ const AccountTypeTeacher = () => {
         </fieldset>
       </div>
     </div>
+    </Row>
+    </Container>
   );
 };
 

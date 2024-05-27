@@ -1,107 +1,43 @@
-// import { useEffect, useState } from "react";
-// import Table from "react-bootstrap/Table";
-// import axios from "axios";
-// import style from "./adminsection.module.css";
-// import "./showdataAdminandteacher.scss";
-// import ExitDropDown from "../../adminsection/exitdata/ExitDropDown";
-// const Allexitstudent = () => {
-//   // const { isAdmin, teacher } = props;
-//   const [formData, setFormData] = useState();
-//   useEffect(() => {
-//     const fetchData = async () => {
-//       try {
-//         const response = await axios.get(
-//           "http://localhost:8000/api/v1/exit/get_all_exit_student"
-//         );
-//         console.log(response)
-//         if (response.status === 200) {
-//           setFormData(response.data.data);
-//         } 
-//       } catch (error) {
-//         console.error("Error fetching admission data:", error);
-//       }
-//     };
-//     fetchData();
-//   }, []);
-
-//   return (
-//     <div style={{}}>
-//       <h2 className={style.heading}>All EXIT STUDENTS DATA</h2>
-
-//       <div className={style.teacher_verify}>
-//         <Table striped bordered hover>
-//           <thead>
-//             <tr>
-//               <th>No</th>
-//               <th>First Name</th>
-//               <th>Last Name</th>
-
-//               <th>Email</th>
-//               <th>Date of Birth</th>
-//               <th>Gender</th>
-//               <th>Category</th>
-//               <th>Roll Number</th>
-
-//               <th>Action</th>
-//             </tr>
-//           </thead>
-//           <tbody>
-//             {formData.map((item, index) => (
-//               <tr key={index}>
-//                 <td>{index + 1}</td>
-//                 <td>{item.firstName}</td>
-//                 <td>{item.lastName}</td>
-//                 <td>{item.addhar_number}</td>
-//                 <td>{item.email}</td>
-//                 <td>{item.date_of_birth}</td>
-//                 <td>{item.gender}</td>
-//                 <td>{item.category}</td>
-
-//                 <td>
-//                   <ExitDropDown id={item._id}/>
-//                 </td>
-//               </tr>
-//             ))}
-
-
-
-//           </tbody>
-//         </Table>
-//       </div>
-
-
-
-
-
-
-
 import { useEffect, useState } from "react";
 import Table from "react-bootstrap/Table";
-import axios from "axios";
+// import axios from "axios";
 import style from "./adminsection.module.css";
 import "./showdataAdminandteacher.scss";
 import ExitDropDown from "../../adminsection/exitdata/ExitDropDown";
-
+import { getAllExitStudent } from "../../services/apiFunction/exitApi";
 const Allexitstudent = () => {
   const [formData, setFormData] = useState([]);
 
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await axios.get(
+  //         "http://localhost:8000/api/v1/exit/get_all_exit_student"
+  //       );
+  //       console.log(response);
+  //       if (response.status === 200) {
+  //         setFormData(response.data.data);
+  //       }
+  //     } catch (error) {
+  //       console.error("Error fetching admission data:", error);
+  //     }
+  //   };
+  //   fetchData();
+  // }, []);
+
+  const fetchData = async () => {
+    try {
+      const data = await getAllExitStudent();
+      console.log(data);
+      setFormData(data);
+    } catch (error) {
+      console.error("Error fetching admission data:", error);
+    }
+  };
+
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          "http://localhost:8000/api/v1/exit/get_all_exit_student"
-        );
-        console.log(response);
-        if (response.status === 200) {
-          setFormData(response.data.data);
-        }
-      } catch (error) {
-        console.error("Error fetching admission data:", error);
-      }
-    };
     fetchData();
   }, []);
-
   return (
     <div>
       <h2 className={style.heading}>All EXIT STUDENTS DATA</h2>
@@ -153,13 +89,8 @@ const Allexitstudent = () => {
 
 export default Allexitstudent;
 
-
-
-
-
-
-
-      {/* {item && (
+{
+  /* {item && (
         <div className="addmission_top_contante">
           <table
             className="admission_table_contante"
@@ -445,7 +376,8 @@ export default Allexitstudent;
             </tr>
           </table>
         </div>
-      )} */}
+      )} */
+}
 //     </div>
 //   );
 // };

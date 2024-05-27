@@ -6,9 +6,7 @@ import {  useSelector } from "react-redux";
 // import Cookies from "js-cookie";
 import axios from "axios";
 function NewAdmission() {
-  // const { userData }=props;
-  // console.log(" userData, userData", userData);
-  const { id } = useParams();
+ 
   const navigate = useNavigate();
   const { token } = useSelector((state) => state.auth);
   const [data,setData]=useState([null])

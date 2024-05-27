@@ -4,3 +4,5 @@ export const ACCOUNT_TYPE = {
     // ADMIN: "Admin",
   }
   
+  export const LIGHT_THEME = "light";
+export const DARK_THEME = "dark";

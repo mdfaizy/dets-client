@@ -2,11 +2,6 @@ import style from "./sign.module.css";
 import { FcGoogle } from "react-icons/fc";
 import { useState } from "react";
 import {Container,Row,Col,Form,Button} from "react-bootstrap";
-// import Row from "react-bootstrap/Row";
-// import Col from "react-bootstrap/Col";
-// import Form from "react-bootstrap/Form";
-// import Button from "react-bootstrap/Button";
-
 import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";

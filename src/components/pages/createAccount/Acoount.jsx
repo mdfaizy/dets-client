@@ -8,7 +8,6 @@ const Acoount = () => {
         <AccountTypeTeacher />
       </div>
       <div>
-       
         <AccountTypeStudent />
       </div>
     </div>

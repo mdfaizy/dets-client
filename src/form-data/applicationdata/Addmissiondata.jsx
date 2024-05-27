@@ -1,23 +1,26 @@
 import { useState, useEffect } from "react";
 import "./admissiondata.scss";
-import axios from "axios";
+// import axios from "axios";
 import { useParams } from "react-router-dom";
-import { newadmissionEndpoints } from "../../services/apis";
+// import { newadmissionEndpoints } from "../../services/apis";
+import {getnewadmissionId} from "../../services/apiFunction/newadmissionApi";
 function Addmissiondata() {
   const [formData, setFormData] = useState({});
   const { id } = useParams();
   const token = localStorage.getItem("token");
   const fetchData = async () => {
     try {
-      const cleanToken = token.replace(/^"|"$/g, "");
-      const apiUrl = `${newadmissionEndpoints.GET_NEW_ADMISSIOM_DATA}/${id}`;
-      const { data: res } = await axios.get(apiUrl, {
-        headers: {
-          Authorization: `Bearer ${cleanToken}`,
-        },
-      });
-      setFormData(res.Newadmission);
-      console.log(res);
+      // const cleanToken = token.replace(/^"|"$/g, "");
+      // const apiUrl = `${newadmissionEndpoints.GET_NEW_ADMISSIOM_DATA}/${id}`;
+      // const { data: res } = await axios.get(apiUrl, {
+      //   headers: {
+      //     Authorization: `Bearer ${cleanToken}`,
+      //   },
+      // });
+      const data=await getnewadmissionId(id,token);
+      // setFormData(res.Newadmission);
+      setFormData(data);
+      console.log(data);
     } catch (error) {
       console.error("Error fetching form data:", error);
     }
@@ -26,28 +29,12 @@ function Addmissiondata() {
     fetchData();
   }, []);
 
-  // const handlePrint = () => {
-  //   window.print(); // This triggers the browser's print dialog
-  // };
-
-  // const downloadPDF = () => {
-  //   const doc = new jsPDF();
-  //   doc.text("Department of Engineering and Technological Studies", 10, 10);
-  //   // Create table from formData
-  //   const rows = Object.entries(formData).map(([key, value], index) => {
-  //     return [key, value];
-  //   });
-
-  //   doc.autoTable({
-  //     startY: 20,
-  //     head: [["Field", "Value"]],
-  //     body: rows,
-  //   });
-
-  //   doc.save("form_data.pdf");
-  // };
+  const handlePrint = () => {
+    window.print();
+  };
 
   return (
+    <>
     <div className="addmission_top_contante">
       <table
         className="admission_table_contante"
@@ -345,6 +332,11 @@ function Addmissiondata() {
         </tr>
       </table>
     </div>
+
+<button onClick={handlePrint} className="job_form_data_print">
+Print
+</button>
+</>
   );
 }
 

@@ -1,5 +1,5 @@
-import "./App.css";
-import { useState } from "react";
+import "./App.scss";
+import { useState, useEffect } from "react";
 import About from "./components/pages/about/About";
 import Home from "./components/home/Home";
 import Job from "./routes/job/Job";
@@ -66,29 +66,76 @@ import Acoount from "./components/pages/createAccount/Acoount";
 import TeacherAccount from "./components/pages/teacherSignupAccount/TeacherAccoutn";
 import OpenRoute from "./components/core/Auth/OpenRoute";
 import PrivateRoute from "./components/core/Auth/PrivateRoute";
+import BaseLayout from "./components/layout/BaseLayout";
+
+import { toggleTheme } from "./redux/slices/theamSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { LIGHT_THEME, DARK_THEME } from "./utils/constant";
+import MoonIcon from "./assets/Images/moon.svg";
+import SunIcon from "./assets/Images/sun.svg";
+
 function App() {
+  const theme = useSelector((state) => state.theme.theme);
+  const dispatch = useDispatch();
+  const accountType = localStorage.getItem("accountType");
+  console.log(accountType);
+  // Adding dark-mode class to the body tag if dark mode is set
+  useEffect(() => {
+    if (theme === DARK_THEME) {
+      document.body.classList.add("dark-mode");
+    } else {
+      document.body.classList.remove("dark-mode");
+    }
+  }, [theme]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
-
   const [teacher, setTeacher] = useState(false);
-
   const [sidebartoggle, setSidebartoggle] = useState(false);
   return (
-    <div style={{ backgroundColor: "#000814" }}>
+    // style={{ backgroundColor: "#000814" }}
+    <div>
       <Header
         isAdmin={isAdmin}
         setIsAdmin={setIsAdmin}
         teacher={teacher}
         setTeacher={setTeacher}
       />
-      {/* <div style={{display:"flex"}}>
-        <Sidebar sidebartoggle={sidebartoggle}/>
+
+      {/* <div >
+      
         <Dassboars  sidebartoggle={sidebartoggle}  setSidebartoggle={setSidebartoggle}/>
       </div> */}
+
+      <button
+        type="button"
+        className="theme-toggle-btn"
+        onClick={() => dispatch(toggleTheme())}
+      >
+        <img
+          className="theme-icon"
+          src={theme === LIGHT_THEME ? SunIcon : MoonIcon}
+          alt="theme-icon"
+        />
+      </button>
       <Routes>
-        <Route index element={<Home />} />
+        {/* <Route path="/dashboard" element={<Dashboard />} /> */}
+        <Route to="/" element={<Home />} />
+{/* nestade route */}
+        <Route
+          // path="dashboard/"
+          element={<BaseLayout />}
+        >
+          <Route path="dashboard/my-profile" element={<About />} />
+          <Route path="dashboard/feedback-form" element={<FeedbackForm />} />
+          <Route
+            path="dashboard/teacher-account"
+            element={<TeacherAccount />}
+          />
+        </Route>
+
         <Route path="/about" element={<About />} />
         {/* User route */}
+
         <Route path="/verify-email" element={<VerifyOtp />} />
         <Route
           path="/signupfrom"
@@ -132,7 +179,7 @@ function App() {
           }
         />
         <Route
-          path="job"
+          path="/job"
           element={
             <PrivateRoute>
               <Job />

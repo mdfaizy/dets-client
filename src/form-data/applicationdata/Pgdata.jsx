@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import "./admissiondata.scss";
-import axios from "axios";
-import { useSelector } from "react-redux";
-import { pgCourseEndpoints } from "../../services/apis";
+// import axios from "axios";
+// import { useSelector } from "react-redux";
+// import { pgCourseEndpoints } from "../../services/apis";
+import {getPgCourseById} from "../../services/apiFunction/pgApi";
 import { useParams } from "react-router-dom";
 function Pgdata() {
 
@@ -15,15 +16,17 @@ function Pgdata() {
 
   const fetchData = async () => {
     try {
-      const cleanToken = token.replace(/^"|"$/g, "");
-      const apiUrl = `${pgCourseEndpoints.GET_PG_COURSE_BY_ID}/${id}`;
-      const { data: res } = await axios.get(apiUrl, {
-        headers: {
-          Authorization: `Bearer ${cleanToken}`,
-        },
-      });
-      setFormData(res.pgdata);
-      console.log(res);
+      // const cleanToken = token.replace(/^"|"$/g, "");
+      // const apiUrl = `${pgCourseEndpoints.GET_PG_COURSE_BY_ID}/${id}`;
+      // const { data: res } = await axios.get(apiUrl, {
+      //   headers: {
+      //     Authorization: `Bearer ${cleanToken}`,
+      //   },
+      // });
+      // setFormData(res.pgdata);
+      const data = await getPgCourseById(id,token);
+      setFormData(data);
+      console.log(data);
     } catch (error) {
       console.error("Error fetching form data:", error);
     }
@@ -32,7 +35,14 @@ function Pgdata() {
     fetchData();
   }, []);
 
+
+  const handlePrint = () => {
+    window.print();
+  };
+
   return (
+
+    <>
     <div className="addmission_top_contante">
       <table
         className="admission_table_contante"
@@ -218,6 +228,12 @@ function Pgdata() {
         </tr>
       </table>
     </div>
+
+<button onClick={handlePrint} className="job_form_data_print">
+Print
+</button></>
+
+
   );
 }
 export default Pgdata;

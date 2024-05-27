@@ -5,8 +5,15 @@ import { Jobs } from "../apis";
 import axios from "axios";
 import { BASE_URL } from "../apis";
 const { POST_JOIN_JOB_API } = Jobs;
+import { JpbEndpoints } from "../apis";
 // const { Get_User_Data } = Jobs;
-
+const {
+  GET_USER_DETAILS_API,
+  GET_STUDENT_JOB_BY_ID_API,
+  DELETE_JOB_DETAIL_API,
+  GET_ALL_STUDENT_FOR_JOB_API,
+  UODATE_JOB_DETAIL_BY_ID_API,
+} = JpbEndpoints;
 export function submitJobForm(formData, navigate) {
   return async (dispatch) => {
     const toastId = toast.loading("Loading...");
@@ -32,52 +39,115 @@ export function submitJobForm(formData, navigate) {
     }
   };
 }
-//get job form data FindById
-const getToken = () => localStorage.getItem("token")?.replace(/^"|"$/g, "");
-export const fetchJobData = async (id) => {
-  const token = getToken();
-  try {
-    const API_Url = `${BASE_URL}/job/getJob_ById/${id}`;
-    const response = await axios.get(API_Url, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+//fetch student job form data FindById
+// const getToken = () => localStorage.getItem("token")?.replace(/^"|"$/g, "");
+// export const getStudentForJobById = async (id,token) => {
+//   // const token = getToken();
+//   const cleanToken = token ? token.replace(/^"|"$/g, "") : "";
+//   try {
+//     // const API_URL = `${BASE_URL}/job/getJob_ById/${id}`;
+//     const API_URL=`${GET_STUDENT_JOB_BY_ID_API}/${id}}`;
 
-    if (response.status === 200) {
-      console.log("response.data", response.data);
-      return response.data.jobData;
-    }
-  } catch (error) {
-    console.error("Error fetching job data:", error);
-    throw new Error(`Error fetching job data: ${error.message}`);
-  }
-};
+//     const response = await ('GET',API_URL, {
+//       headers: {
+//         Authorization: `Bearer ${cleanToken}`,
+//       },
+//     });
 
+//     return response.data.jobData;
+//     // console.log("response.data", response);
+//     // if (response.status === 200) {
+//     //   return response.data.jobData;
+//     // }
+//   } catch (error) {
+//     console.error("Error fetching job data:", error);
+//     throw new Error(`Error fetching job data: ${error.message}`);
+//   }
+// };
+// fetch all data in Job Student
 export const getAllJobStudents = async () => {
   try {
-    const response = await axios.get("http://localhost:8000/api/v1/job/get_all_Job_student");
+  
+    const API_URL = `${GET_ALL_STUDENT_FOR_JOB_API}`;
+    const response = await apiConnector('GET',API_URL);
+    // await axios.get(
+    //   "http://localhost:8000/api/v1/job/get_all_Job_student"
+    // );
+    console.log("response.data.datajobdss", response.data.data);
     if (response.status === 200) {
-      console.log("response.data.datajobdss",response.data.data)
       return response.data.data;
     } else {
-      throw new Error(`Failed to fetch job students data. Status: ${response.status}`);
+      throw new Error(
+        `Failed to fetch job students data. Status: ${response.status}`
+      );
     }
   } catch (error) {
     throw new Error(`Error fetching job students data: ${error.message}`);
   }
 };
+// fetch student job form data FindById
+export const getStudentForJobById = async (id, token) => {
+  const cleanToken = token ? token.replace(/^"|"$/g, "") : "";
+  try {
+    const API_URL = `${GET_STUDENT_JOB_BY_ID_API}/${id}`;
+    console.log(token, id);
+    const response = await axios.get(API_URL, {
+      headers: {
+        Authorization: `Bearer ${cleanToken}`,
+      },
+    });
+    console.log(response);
+    return response.data.jobData;
+  } catch (error) {
+    console.error("Failed to fetch new admission", error);
+  }
+};
 
 export const deleteJobStudent = async (id) => {
   try {
-    const response = await axios.delete(`http://localhost:8000/api/v1/job/delete_id_jobstudent/${id}`);
+    const API_URL=`${DELETE_JOB_DETAIL_API}/${id}`;
+    const response = await axios.delete(
+      // `http://localhost:8000/api/v1/job/delete_id_jobstudent/${id}`
+      API_URL
+    );
     if (response.status === 200) {
       return true;
     } else {
-      throw new Error(`Failed to delete PG student. Status: ${response.status}`);
+      throw new Error(
+        `Failed to delete PG student. Status: ${response.status}`
+      );
     }
   } catch (error) {
     throw new Error(`Error deleting PG student: ${error.message}`);
   }
 };
 
+
+
+// UODATE_JOB_DETAIL_BY_ID_API
+
+export const updateJobStudentData = async (
+  e,
+  id,
+  formData,
+  token,
+  navigate
+) => {
+  e.preventDefault();
+  try {
+    const cleanToken = token ? token.replace(/^"|"$/g, "") : "";
+    const API_Url = `${UODATE_JOB_DETAIL_BY_ID_API}/${id}`;
+
+    const { data: res } = await axios.put(API_Url, formData, {
+      headers: {
+        Authorization: `Bearer ${cleanToken}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    console.log("Form submitted successfully:", res);
+    navigate("/", { state: { apidata: res } });
+  } catch (error) {
+    console.error("Error submitting form:", error);
+  }
+};

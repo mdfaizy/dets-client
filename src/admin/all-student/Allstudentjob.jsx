@@ -1,33 +1,36 @@
 import { useEffect, useState } from "react";
 import Table from "react-bootstrap/Table";
-import axios from "axios";
+// import axios from "axios";
 // import { MdAssignmentTurnedIn } from "react-icons/md";
 import JobDropDown from "../../adminsection/job/JobDropDown";
 import style from "./adminsection.module.css";
+import { getAllJobStudents } from "../../services/apiFunction/job";
 const Allstudentjob = () => {
   const [formData, setFormData] = useState([]);
 
+  const fetchData = async () => {
+    try {
+      // const response = await axios.get(
+      //   "http://localhost:8000/api/v1/job/get_all_Job_student"
+      // );
+      // if (response.status === 200) {
+      //   console.log(response);
+      //   setFormData(response.data.data);
+      const data = await getAllJobStudents();
+      console.log(data);
+      setFormData(data);
+      // }
+    } catch (error) {
+      console.error("Error fetching admission data:", error);
+    }
+  };
+
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          "http://localhost:8000/api/v1/job/get_all_Job_student"
-        );
-        if (response.status === 200) {
-          console.log(response);
-          setFormData(response.data.data);
-        }
-      } catch (error) {
-        console.error("Error fetching admission data:", error);
-      }
-    };
     fetchData();
   }, []);
 
   return (
-    <div
-      className={style.alljobdata}
-    >
+    <div className={style.alljobdata}>
       <h2 className={style.heading}>All Jobs Students Data</h2>
       <div className="p-2 gap-1">
         <button>Excel</button>

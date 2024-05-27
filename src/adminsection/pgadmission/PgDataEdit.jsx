@@ -3,6 +3,7 @@ import { Container, Row, Col, Form } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 
 import { pgCourseEndpoints } from "../../services/apis";
+import { getPgCourseById } from "../../services/apiFunction/pgApi";
 import axios from "axios";
 const PgDataEdit = () => {
   // const { token } = useSelector((state) => state.auth);
@@ -33,17 +34,21 @@ const PgDataEdit = () => {
 
   const fetchData = async () => {
     try {
-      const API_Url = `${pgCourseEndpoints.GET_PG_COURSE_BY_ID}/${id}`;
-      const { data: res } = await axios.get(API_Url, {
-        headers: {
-          Authorization: `Bearer ${cleanToken}`,
-        },
-      });
-      console.log(res);
-      setPgData(res.pgdata);
+      // const API_Url = `${pgCourseEndpoints.GET_PG_COURSE_BY_ID}/${id}`;
+      // const { data: res } = await axios.get(API_Url, {
+      //   headers: {
+      //     Authorization: `Bearer ${cleanToken}`,
+      //   },
+      // });
+
+      // console.log(res);
+      // setPgData(res.pgdata);
+      const data = await getPgCourseById(id, token);
+      setPgData(data);
       setFormData((prevData) => ({
         ...prevData,
-        ...res.pgdata,
+        // ...res.pgdata,
+        ...data,
       }));
     } catch (error) {
       console.error("Error fetching form data:", error);

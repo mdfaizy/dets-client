@@ -14,7 +14,6 @@ const AllNewStudents = () => {
       try {
         const data = await getAllNewStudent();
         setFormData(data);
-
       } catch (error) {
         console.error("Error fetching admission data:", error);
       }
@@ -52,7 +51,7 @@ const AllNewStudents = () => {
                 <td>{item.gender}</td>
 
                 <td className={style.button}>
-                  <AdmissionDropDown  id={item._id}/>
+                  <AdmissionDropDown id={item._id} />
                 </td>
               </tr>
             ))}

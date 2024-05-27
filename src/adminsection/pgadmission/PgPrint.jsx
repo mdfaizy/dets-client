@@ -1,41 +1,42 @@
 import { Container } from "react-bootstrap";
-import {useParams } from "react-router-dom";
-import {useState,useEffect} from 'react'
+import { useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
 import style from "./pgdata.module.css";
-import {pgCourseEndpoints} from "../../services/apis"
-import axios from "axios"
+// import {pgCourseEndpoints} from "../../services/apis"
+import { getPgCourseById } from "../../services/apiFunction/pgApi";
+// import axios from "axios"
 const PgPrint = () => {
-
   const [formData, setFormData] = useState({});
   const token = localStorage.getItem("token");
-    const cleanToken = token ? token.replace(/^"|"$/g, "") : "";
-    const { id } = useParams();
-  
-    const fetchData = async () => {
-      try {
-        const API_Url = `${pgCourseEndpoints.GET_PG_COURSE_BY_ID}/${id}`;
-        const { data: res } = await axios.get(API_Url, {
-          headers: {
-            Authorization: `Bearer ${cleanToken}`,
-          },
-        });
-        console.log("pgdata", res);
-        setFormData(res.pgdata
-        );
-      } catch (error) {
-        console.error("Error fetching form data:", error);
-      }
-    };
-  
-    useEffect(() => {
-      fetchData();
-    }, []);
+  // const cleanToken = token ? token.replace(/^"|"$/g, "") : "";
+  const { id } = useParams();
 
-  
+  const fetchData = async () => {
+    try {
+      // const API_Url = `${pgCourseEndpoints.GET_PG_COURSE_BY_ID}/${id}`;
+      // const { data: res } = await axios.get(API_Url, {
+      //   headers: {
+      //     Authorization: `Bearer ${cleanToken}`,
+      //   },
+      // });
+      // console.log("pgdata", res);
+      // setFormData(res.pgdata
+      // );
+      const data = await getPgCourseById(id, token);
+      console.log("data", data);
+      setFormData(data);
+    } catch (error) {
+      console.error("Error fetching form data:", error);
+    }
+  };
 
-    const handlePrint = () => {
-      window.print();
-    };
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const handlePrint = () => {
+    window.print();
+  };
 
   return (
     <div>
@@ -421,9 +422,9 @@ const PgPrint = () => {
         </>
       </>
 
-      <button onClick={handlePrint}
-   className={style.job_form_data_print}>Print</button>
-
+      <button onClick={handlePrint} className={style.job_form_data_print}>
+        Print
+      </button>
     </div>
   );
 };

@@ -1,26 +1,30 @@
 import { useState, useEffect } from "react";
 import "../../form-data/applicationdata/admissiondata.scss";
 import style from "./jobdata.module.css";
-import axios from "axios";
+// import axios from "axios";
 import { useParams } from "react-router-dom";
 import { deleteJobStudent } from "../../services/apiFunction/job";
-import { Jobs } from "../../services/apis";
+// import { Jobs } from "../../services/apis";
+import { getStudentForJobById } from "../../services/apiFunction/job";
 
 const DeleteJob = () => {
   const [jobData, setJobData] = useState({});
   const [showDeleteButtons, setShowDeleteButtons] = useState(false);
   const token = localStorage.getItem("token");
-  const cleanToken = token ? token.replace(/^"|"$/g, "") : "";
+  // const cleanToken = token ? token.replace(/^"|"$/g, "") : "";
   const { id } = useParams();
   const fetchData = async () => {
     try {
-      const API_Url = `${Jobs.Get_User_Data}/${id}`;
-      const { data: res } = await axios.get(API_Url, {
-        headers: {
-          Authorization: `Bearer ${cleanToken}`,
-        },
-      });
-      setJobData(res.jobData);
+      // const API_Url = `${Jobs.Get_User_Data}/${id}`;
+      // const { data: res } = await axios.get(API_Url, {
+      //   headers: {
+      //     Authorization: `Bearer ${cleanToken}`,
+      //   },
+      // });
+      // setJobData(res.jobData);
+      const data = await getStudentForJobById(id, token);
+      console.log(data);
+      setJobData(data);
     } catch (error) {
       console.error("Error fetching form data:", error);
     }

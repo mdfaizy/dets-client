@@ -108,3 +108,40 @@ font-family: calibri, helvetica, arial, sans-serif;
     }
   }
 }
+
+
+
+
+
+/* print button style */
+.job_form_data_print {
+  background-color: #800000;
+  border-radius: 5px;
+  padding: 5px 16px;
+  margin-bottom: 4px;
+  border: none;
+  color: white;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  margin: 0 auto;
+  margin-bottom: 10px;
+}
+
+@media print {
+  .no-print {
+    display: none;
+  }
+  body {
+    font-size: 12pt;
+    line-height: 1;
+  }
+
+  header,
+  footer,
+  .sidebar {
+    display: none;
+  }
+  .print-only {
+  }
+}

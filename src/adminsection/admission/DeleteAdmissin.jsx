@@ -1,27 +1,33 @@
 import { useState, useEffect } from "react";
 import "../../form-data/applicationdata/admissiondata.scss";
-import axios from "axios";
+// import axios from "axios";
 import style from "./newAdmission.module.css";
 
 import { useParams } from "react-router-dom";
-import { newadmissionEndpoints } from "../../services/apis";
-import { deleteNewAdmission } from "../../services/apiFunction/newadmissionApi";
+// import { newadmissionEndpoints } from "../../services/apis";
+import {
+  deleteNewAdmission,
+  getnewadmissionId,
+} from "../../services/apiFunction/newadmissionApi";
 const DeleteAdmissin = () => {
   const [formData, setFormData] = useState({});
 
   const [deleteButtons, setdeleteButtons] = useState(false);
   const token = localStorage.getItem("token");
-  const cleanToken = token ? token.replace(/^"|"$/g, "") : "";
+  // const cleanToken = token ? token.replace(/^"|"$/g, "") : "";
   const { id } = useParams();
   const fetchData = async () => {
     try {
-      const API_Url = `${newadmissionEndpoints.GET_NEW_ADMISSIOM_DATA}/${id}`;
-      const { data: res } = await axios.get(API_Url, {
-        headers: {
-          Authorization: `Bearer ${cleanToken}`,
-        },
-      });
-      setFormData(res.Newadmission);
+      // const API_Url = `${newadmissionEndpoints.GET_NEW_ADMISSIOM_DATA}/${id}`;
+      // const { data: res } = await axios.get(API_Url, {
+      //   headers: {
+      //     Authorization: `Bearer ${cleanToken}`,
+      //   },
+      // });
+      const data = await getnewadmissionId(id, token);
+      console.log(data);
+
+      setFormData(data);
     } catch (error) {
       console.error("Error fetching form data:", error);
     }

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 // import "../../form-data/applicationdata/admissiondata.scss";
 import axios from "axios";
 import style from "./exitdata.module.css";
-
+import {getExitStudentByID} from '../../services/apiFunction/exitApi'
 import { exitStudentEndpoints } from "../../services/apis";
 import { useParams } from "react-router-dom";
 const ExitPrintData = () => {
@@ -14,14 +14,16 @@ const ExitPrintData = () => {
 
   const fetchData = async () => {
     try {
-      const API_Url = `${exitStudentEndpoints.GET_EXIT_STUDENT_BY_ID}/${id}`;
-      const { data: res } = await axios.get(API_Url, {
-        headers: {
-          Authorization: `Bearer ${cleanToken}`,
-        },
-      });
-      console.log(res);
-      setFormData(res.data);
+      // const API_Url = `${exitStudentEndpoints.GET_EXIT_STUDENT_BY_ID}/${id}`;
+      // const { data: res } = await axios.get(API_Url, {
+      //   headers: {
+      //     Authorization: `Bearer ${cleanToken}`,
+      //   },
+      // });
+      // console.log(res);
+    const data=await  getExitStudentByID(id,token);
+    console.log(data);
+      setFormData(data);
     } catch (error) {
       console.error("Error fetching form data:", error);
     }

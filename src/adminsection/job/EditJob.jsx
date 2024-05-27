@@ -2,8 +2,10 @@ import { useState, useEffect } from "react";
 import { Container, Row, Col, Form, Accordion } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 import { Jobs } from "../../services/apis";
+import { getStudentForJobById } from "../../services/apiFunction/job";
 import axios from "axios";
 import style from "./jobdata.module.css";
+import { updateJobStudentData } from "../../services/apiFunction/job";
 
 const EditJob = () => {
   const navigate = useNavigate();
@@ -28,18 +30,23 @@ const EditJob = () => {
   const { id } = useParams();
   const fetchData = async () => {
     try {
-      const API_Url = `${Jobs.Get_User_Data}/${id}`;
-      const { data: res } = await axios.get(API_Url, {
-        headers: {
-          Authorization: `Bearer ${cleanToken}`,
-        },
-      });
-      setJobData(res.jobData);
+      // const API_Url = `${Jobs.Get_User_Data}/${id}`;
+      // const { data: res } = await axios.get(API_Url, {
+      //   headers: {
+      //     Authorization: `Bearer ${cleanToken}`,
+      //   },
+      // });
+      const data = await getStudentForJobById(id, token);
+      console.log(data);
+      setJobData(data);
+      // setJobData(res.jobData);
+      setJobData(data);
       setFormData((prevData) => ({
         ...prevData,
-        ...res.jobData,
+        // ...res.jobData,
+        ...data,
       }));
-      console.log(res.jobData);
+      console.log(data);
     } catch (error) {
       console.error("Error fetching form data:", error);
     }
@@ -64,23 +71,26 @@ const EditJob = () => {
     }
   };
 
-  const submitHandler = async (e) => {
-    e.preventDefault();
-    try {
-      const API_Url = `${Jobs.UPDATE_JOB_FORM}/${id}`;
-      const { data: res } = await axios.put(API_Url, formData, {
-        headers: {
-          Authorization: `Bearer ${cleanToken}`,
-          "Content-Type": "application/json",
-        },
-      });
-      console.log("Form submitted successfully:", res);
-      navigate("/job_application");
-    } catch (error) {
-      console.error("Error submitting form:", error);
-    }
-  };
+  // const submitHandler = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     const API_Url = `${Jobs.UPDATE_JOB_FORM}/${id}`;
+  //     const { data: res } = await axios.put(API_Url, formData, {
+  //       headers: {
+  //         Authorization: `Bearer ${cleanToken}`,
+  //         "Content-Type": "application/json",
+  //       },
+  //     });
+  //     console.log("Form submitted successfully:", res);
+  //     navigate("/job_application");
+  //   } catch (error) {
+  //     console.error("Error submitting form:", error);
+  //   }
+  // };
 
+  const submitHandler = (e) => {
+    updateJobStudentData(e, id, formData, token, navigate);
+  };
   return (
     <>
       <Container className={style.job_update_form}>
