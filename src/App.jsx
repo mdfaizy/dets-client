@@ -73,6 +73,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { LIGHT_THEME, DARK_THEME } from "./utils/constant";
 import MoonIcon from "./assets/Images/moon.svg";
 import SunIcon from "./assets/Images/sun.svg";
+import AreaTable from "./components/core/Dashboard/newStudentTable/NewStudentTable";
+import ExitStudentTableData from "./components/core/Dashboard/exitStudentTable/ExitStudentTableData";
+import JobDataTable from "./components/core/Dashboard/JobTableData/JobDataTable";
 
 function App() {
   const theme = useSelector((state) => state.theme.theme);
@@ -119,19 +122,7 @@ function App() {
       </button>
       <Routes>
         {/* <Route path="/dashboard" element={<Dashboard />} /> */}
-        <Route to="/" element={<Home />} />
-{/* nestade route */}
-        <Route
-          // path="dashboard/"
-          element={<BaseLayout />}
-        >
-          <Route path="dashboard/my-profile" element={<About />} />
-          <Route path="dashboard/feedback-form" element={<FeedbackForm />} />
-          <Route
-            path="dashboard/teacher-account"
-            element={<TeacherAccount />}
-          />
-        </Route>
+        <Route index element={<Home />} />
 
         <Route path="/about" element={<About />} />
         {/* User route */}
@@ -192,10 +183,10 @@ function App() {
           element={<ShowFormData isAdmin={isAdmin} />}
         />
 
-        <Route path="/new_addmission/:id" element={<Addmissiondata />} />
+        {/* <Route path="/new_addmission/:id" element={<Addmissiondata />} />
         <Route path="/exit_application/:id" element={<Exitdata />} />
         <Route path="/pg_application/:id" element={<Pgdata />} />
-        <Route path="/job_application/:id" element={<Jobdata />} />
+        <Route path="/job_application/:id" element={<Jobdata />} /> */}
         {/* Show Admin and teacher  */}
         <Route
           path="/all_new_addmission"
@@ -267,6 +258,40 @@ function App() {
         {/* Feedback */}
         <Route path="/feedback-form" element={<FeedbackForm />} />
         <Route path="/feedback-details" element={<Feedback />} />
+
+        {/* nestade route */}
+        <Route
+        
+          element={<BaseLayout />}
+        >
+          <Route
+            path="dashboard/all_new_addmission"
+            element={<AreaTable isAdmin={isAdmin} teacher={teacher} />}
+          />
+          <Route
+            path="dashboard/all_exit_student"
+            element={<ExitStudentTableData />}
+          />
+          <Route
+          path="dashboard/all_pg_student"
+          element={<ExitStudentTableData isAdmin={isAdmin} teacher={teacher} />}
+        />
+        <Route
+          path="dashboard/all_student_job"
+          element={<JobDataTable isAdmin={isAdmin} teacher={teacher} />}
+        />
+          {/* JobDataTable */}
+          <Route path="dashboard/new_addmission/:id" element={<Addmissiondata />} />
+          <Route path="dashboard/exit_application/:id" element={<Exitdata />} />
+          <Route path="dashboard/pg_application/:id" element={<Pgdata />} />
+          <Route path="dashboard/job_application/:id" element={<Jobdata />} />
+          <Route path="dashboard/my-profile" element={<About />} />
+          <Route path="dashboard/feedback-form" element={<FeedbackForm />} />
+          <Route
+            path="dashboard/teacher-account"
+            element={<TeacherAccount />}
+          />
+        </Route>
       </Routes>
 
       <Footer

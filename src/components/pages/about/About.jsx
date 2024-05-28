@@ -12,9 +12,9 @@ const About = () => {
         <section>
           <div className={style.about_content}>
             <div className={style.about_text}>
-              <h1 className={style.first_heading}>Universit of Kalyani,Wb</h1>
+              <h1 className={style.first_heading}>University of Kalyani,Wb</h1>
               <h2>
-                Driving Innovation in Honistely Education for a <br></br>
+                Driving Innovation in Honestly Education for a <br></br>
                 <span className={style.span_education}>Brighter Future</span>
               </h2>
               <p className={style.department_name}>

@@ -3,7 +3,8 @@
     border-radius: 5px;
     box-shadow: var(--light-shadow1);
     padding: 12px 16px;
-  
+    // overflow-x: auto;
+    width: 100vw;
     @media (max-width: 768px) {
       padding: 12px;
     }
@@ -129,3 +130,4 @@
       }
     }
   }
+  

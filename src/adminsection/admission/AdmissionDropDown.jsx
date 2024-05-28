@@ -1,79 +1,68 @@
-// AdmissionDropDown
-
-import "../../components/pages/profile/profile.css";
-import { useRef, useState } from "react";
-import { AiOutlineCaretDown } from "react-icons/ai";
-import { VscDashboard } from "react-icons/vsc";
+import { useEffect, useRef, useState } from "react";
+import { HiDotsHorizontal } from "react-icons/hi";
 import { Link } from "react-router-dom";
-import useOnClickOutside from "../../hooks/useOnClickOutside";
+
 const AdmissionDropDown = ({ id }) => {
-  const [open, setOpen] = useState(false);
-  const ref = useRef(null);
-  //  const {id} =useParams();
-  useOnClickOutside(ref, () => setOpen(false));
+  const [showDropdown, setShowDropdown] = useState(false);
+  const handleDropdown = () => {
+    setShowDropdown(!showDropdown);
+  };
+
+  const dropdownRef = useRef(null);
+
+  const handleClickOutside = (event) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      setShowDropdown(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.addEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
-    <div className="">
+    <>
       <button
-        className="user-image-logout"
         type="button"
-        id="dropdownMenuButton"
-        onClick={() => setOpen(true)}
+        className="action-dropdown-btn"
+        onClick={handleDropdown}
       >
-        <div className="user-image-logout">
-          <img
-            // src={user.image}
-            src="https://api.dicebear.com/6.x/initials/svg?seed=MD"
-            // alt={`profile-${user?.firstName}`}
-
-            className="user_img_drop"
-          />
-          <AiOutlineCaretDown className="text-sm text-richblack-100" />
-        </div>
+        <HiDotsHorizontal size={18} />
+        {showDropdown && (
+          <div className="action-dropdown-menu" ref={dropdownRef}>
+            <ul className="dropdown-menu-list">
+              <li className="dropdown-menu-item">
+                <Link
+                  to={`/newadmissiondataprint/${id}`}
+                  className="dropdown-menu-link"
+                >
+                  View
+                </Link>
+              </li>
+              <li className="dropdown-menu-item">
+                <Link
+                  to={`/editnewstudent/${id}`}
+                  className="dropdown-menu-link"
+                >
+                  Edit
+                </Link>
+              </li>
+              <li className="dropdown-menu-item">
+                <Link
+                  to={`/deleteNewstudent/${id}`}
+                  className="dropdown-menu-link"
+                >
+                  Delete
+                </Link>
+              </li>
+            </ul>
+          </div>
+        )}
       </button>
-      {open && (
-        <div
-          className="dropdown-menu show"
-          aria-labelledby="dropdownMenuButton"
-          ref={ref}
-        >
-          <Link
-            to={`/editnewstudent/${id}`}
-            className="dropdown-item"
-            onClick={() => setOpen(false)}
-          >
-            <VscDashboard className="text-lg" />
-            Update
-          </Link>
-          <Link
-            to={`/newadmissiondataprint/${id}`}
-            className="dropdown-item"
-            onClick={() => setOpen(false)}
-          >
-            <VscDashboard className="text-lg" />
-            See All
-          </Link>
-          <Link
-            to={`/deleteNewstudent/${id}`}
-            className="dropdown-item"
-            onClick={() => setOpen(false)}
-          >
-            <VscDashboard className="text-lg" />
-            Delete
-          </Link>
-
-          {/* <button
-             className="dropdown-item"
-             onClick={() => {
-               dispatch(logout(navigate));
-               setOpen(false);
-             }}
-           >
-             <VscSignOut className="text-lg" />
-             Logout
-           </button> */}
-        </div>
-      )}
-    </div>
+    </>
   );
 };
 
