@@ -13,10 +13,10 @@ import NewAdmission from "./routes/newstudent/newadmission/NewAdmission";
 import ExitFrom from "./routes/exitstudent/exit/ExitFrom";
 import PgCource from "./routes/pgcourse/pg/PgCource";
 import ShowFormData from "./form-data/see-details/ShowFormData";
-import Addmissiondata from "./form-data/applicationdata/Addmissiondata";
-import Exitdata from "./form-data/applicationdata/Exitdata";
-import Pgdata from "./form-data/applicationdata/Pgdata";
-import Jobdata from "./form-data/applicationdata/Jobdata";
+import Addmissiondata from "./containers/applicationdata/Addmissiondata";
+import Exitdata from "./containers/applicationdata/Exitdata";
+import Pgdata from "./containers/applicationdata/Pgdata";
+import Jobdata from "./containers/applicationdata/Jobdata";
 import Allnewstudent from "./admin/all-student/Allnewstudent";
 import Allexitstudent from "./admin/all-student/Allexitstudent";
 import Allpgstudent from "./admin/all-student/Allpgstudent";
@@ -28,8 +28,8 @@ import Newstudent from "./routes/newstudent/Newstudent";
 
 import Btechjob from "./routes/job/softwarejob/Btechjob";
 import Pgcourse from "./routes/pgcourse/Pgcourse";
-import PgCourseSumbitData from "./form-data/sumbitdata/PgCourseSumbitData";
-import Exitsumbitdata from "./form-data/sumbitdata/Exitsumbitdata";
+import PgCourseSumbitData from "./containers/sumbitdata/PgCourseSumbitData";
+import Exitsumbitdata from "./containers/sumbitdata/Exitsumbitdata";
 import StudentAllInfo from "./routes/StudentDetails/StudentAllInfo";
 
 import FeedbackFullContent from "./adminDashboard/FeedbackFullContent";
@@ -53,8 +53,8 @@ import DeleteAdmissin from "./adminsection/admission/DeleteAdmissin";
 import ExitEdit from "./adminsection/exitdata/ExitEdit";
 import ExitPrintData from "./adminsection/exitdata/ExitPrintData";
 import DeleteJob from "./adminsection/job/DeleteJob";
-import NewAdmissionData from "./form-data/sumbitdata/NewAdmission";
-import Jobsumbitdata from "./form-data/sumbitdata/Jobsumbitdata";
+import NewAdmissionData from "./containers/sumbitdata/NewAdmission";
+import Jobsumbitdata from "./containers/sumbitdata/Jobsumbitdata";
 
 import PgDataDelete from "./adminsection/pgadmission/PgDataDelete";
 import PgDataEdit from "./adminsection/pgadmission/PgDataEdit";

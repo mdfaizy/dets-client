@@ -1,4 +1,4 @@
-import "../../form-data/applicationdata/admissiondata.scss";
+// import "../../form-data/applicationdata/admissiondata.scss";
 import { useState, useEffect } from "react";
 import style from "./jobdata.module.css";
 // import axios from "axios";

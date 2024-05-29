@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import "../../form-data/applicationdata/admissiondata.scss";
+// import "../../form-data/applicationdata/admissiondata.scss";
 import style from "./jobdata.module.css";
 // import axios from "axios";
 import { useParams } from "react-router-dom";

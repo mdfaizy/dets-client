@@ -3,31 +3,21 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 
   .admission_table_contante {
-    background: "#f8f8fa url(https://i.ibb.co/VTk0B0B/pattern.png) repeat top left";
-    width: 800px;
-    color: #444444;
-    box-shadow: 0px 0 6px #ccc;
-    margin-top: 20px;
-    background: url(https://i.ibb.co/VTk0B0B/pattern.png);
-    background: no-repeat;
-    border: 0;
-    text-align: center;
-
+   
     .admission_top_tr_contante {
       width: 100%;
       border-collapse: collapse;
       .admission_top_tr2 {
-        width: 800px;
         display: grid;
-        width: 100%;
+        // width: 100%;
         border-collapse: collapse;
         .admission_top_tr3 {
           width: 800px;
           width: 100%;
-          background-color: white;
+          
           height: 100px;
           border-bottom: 3px solid #006cb5;
           .admission_top_td1 {
@@ -36,7 +26,7 @@
             vertical-align: middle;
             .admission_top_unive_name {
               margin-bottom: 0;
-              color: #006cb5;
+              color: #79b3da;
               font-size: 28px;
               font-weight: bold;
             }
@@ -51,7 +41,7 @@
         font-family: calibri, helvetica, arial, sans-serif;
         .table_table_data_contante {
           width: 760px;
-          // wordBreak: "break-all",
+          // wordBreak: "break-all";
           display: block;
           box-shadow: 0px 0 6px #ccc;
           background: #fff;
@@ -67,6 +57,7 @@
           }
           .tbody_contante {
             display: grid;
+            
             .table_contante_table {
               margin-bottom: 20px;
               width: 730px;
@@ -75,28 +66,26 @@
               background: #ffffff;
               border: 1px solid #cac2be;
               clear: both;
-              .thead_detail_info{
-                background-color: #5a5d5f;
+              
+              .thead_detail_info {
+                background-color: #289deb;
                 height: 20px;
                 color: white;
                 font-size: 20px;
-                .thead_heading_info{
-                              padding-left:10px;
-                              text-align: left;
-                               font-family: calibri,helvetica,arial,sans-serif;
+                .thead_heading_info {
+                  padding-left: 10px;
+                  text-align: left;
+                  font-family: calibri, helvetica, arial, sans-serif;
                 }
               }
 
-              .tbody_formData_info{
-
-                .tbody_formData_info_name{
-                  
+              .tbody_formData_info {
+                .tbody_formData_info_name {
                   padding-left: 10px;
                   width: 100px;
-font-family: calibri, helvetica, arial, sans-serif;
-
+                  font-family: calibri, helvetica, arial, sans-serif;
                 }
-                .tbody_fromData_and_info_dot{
+                .tbody_fromData_and_info_dot {
                   text-align: center;
                   width: 40px;
                 }
@@ -109,39 +98,18 @@ font-family: calibri, helvetica, arial, sans-serif;
   }
 }
 
-
-
-
-
-/* print button style */
 .job_form_data_print {
-  background-color: #800000;
-  border-radius: 5px;
-  padding: 5px 16px;
-  margin-bottom: 4px;
-  border: none;
-  color: white;
-  font-size: 20px;
-  display: flex;
-  align-items: center;
   margin: 0 auto;
-  margin-bottom: 10px;
+  text-align: center;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: center;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  cursor: pointer;
 }
 
-@media print {
-  .no-print {
-    display: none;
-  }
-  body {
-    font-size: 12pt;
-    line-height: 1;
-  }
-
-  header,
-  footer,
-  .sidebar {
-    display: none;
-  }
-  .print-only {
-  }
+.job_form_data_print:hover {
+  background-color: #45a049;
 }

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import "../../form-data/applicationdata/admissiondata.scss";
+// import "../../form-data/applicationdata/admissiondata.scss";
 import axios from "axios";
 import style from "./exitdata.module.css";
 import { deleteexitStudent } from "../../services/apiFunction/exitApi";

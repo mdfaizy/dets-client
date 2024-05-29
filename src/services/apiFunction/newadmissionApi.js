@@ -1,52 +1,53 @@
 import { toast } from "react-hot-toast";
-
-// import { updateCompletedLectures } from "../../slices/viewCourseSlice"
-import { setLoading } from "../../redux/slices/authSlice";
+const token = localStorage.getItem("token");
 import { apiConnector } from "../apiConnector.js";
-// import { newadmissionEndpoints } from "../apis"
 import { newadmissionEndpoints } from "../apis.js";
-
-// import { setLoading } from "./path-to-your-profile-slice";
-
+import axios from "axios";
 const {
-  POST_NEW_STUDENT_API,
   GET_NEW_ADMISSIOM_DATA,
   UPDATE_NEW_ADMISSION_FORM,
   GET_ALL_NEW_ADMISSION_DATA,
   DELETE_NEW_ADMISSION_DATA_BY_ID,
 } = newadmissionEndpoints;
 
-export const addNewStudent = async (data, token, dispatch) => {
-  let result = null;
+
+export const submitNewStudentForm = async (formData, navigate,token, setLoading) => {
+  const formDataToSend = new FormData();
+  const cleanToken = token ? token.replace(/^"|"$/g, "") : "";
+  // Append each form field to formDataToSend
+  for (let key in formData) {
+    formDataToSend.append(key, formData[key]);
+  }
   const toastId = toast.loading("Loading...");
   try {
-    dispatch(setLoading(true)); // Dispatch setLoading action to indicate loading state
-
-    const response = await apiConnector("POST", POST_NEW_STUDENT_API, data, {
-      "Content-Type": "multipart/form-data",
-      Authorization: `Bearer ${token}`,
-    });
-
-    console.log("CREATE COURSE API RESPONSE............", response);
-
-    if (!response?.data?.success) {
-      throw new Error("Could Not Add Course Details");
-    }
-
-    toast.success("Course Details Added Successfully");
-    result = response?.data?.data;
-  } catch (error) {
-    console.log("CREATE COURSE API ERROR............", error);
-    toast.error(error.message);
-  } finally {
-    dispatch(setLoading(false)); // Dispatch setLoading action to indicate loading state is false
+    setLoading(true);
+    const response = await axios.post(
+      // "http://localhost:8000/api/v1/student/newAdmission",
+      newadmissionEndpoints.SUMBIT_NEW_STUDENT_API,
+      formDataToSend,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${cleanToken}`,
+        },
+      }
+    );
+    setLoading(false);
     toast.dismiss(toastId);
+    navigate("/newAdmissiondata", { state: { apidata: response.data } });
+    toast.success("Form  Successfully", {
+      autoClose: 1500, 
+    });
+  } catch (error) {
+    setLoading(false);
+    toast.dismiss(toastId);
+    toast.error("Error submitting form");
+    console.error("Error occurred:", error);
   }
-  return result;
 };
 
-import axios from "axios";
-const token = localStorage.getItem("token");
+
+//get Find All Student
 export const getAllNewStudent = async () => {
   try {
     // const response = await axios.get(
@@ -67,47 +68,22 @@ export const getAllNewStudent = async () => {
     throw new Error(`Error fetching admission data: ${error.message}`);
   }
 };
-// get data new student a By Ka basic per
+// getData new student a By Ka basic per
 export const getnewadmissionId = async (id, token) => {
   try {
     const cleanToken = token ? token.replace(/^"|"$/g, "") : "";
     const API_Url = `${GET_NEW_ADMISSIOM_DATA}/${id}`;
-
-    const response = await axios.get(
-      API_Url,
-      // axios.get(`http://localhost:8000/api/v1/student/getnewadmissionId/${id}`,
-      {
-        headers: {
-          Authorization: `Bearer ${cleanToken}`,
-        },
-      }
-    );
-
-    console.log("response: " + response);
+    const response = await axios.get(API_Url, {
+      headers: {
+        Authorization: `Bearer ${cleanToken}`,
+      },
+    });
+    console.log("response: " + response.data.Newadmission);
     return response.data.Newadmission;
   } catch (error) {
     console.error("Failed to fetch new admission", error);
   }
 };
-// delete admission data  Id ka Basic per
-export const deleteNewAdmission = async (id) => {
-  try {
-    const api_Url = `${DELETE_NEW_ADMISSION_DATA_BY_ID}/${id}`;
-
-    const response = await axios.delete(
-      api_Url
-      // `http://localhost:8000/api/v1/student/delete_newadmission/${id}`
-    );
-    // console.log(response);
-    if (response.status === 200) {
-      console.log("responseDelete", response.data.data);
-      return response.data.data;
-    }
-  } catch (error) {
-    throw new Error(`Error deleting admission: ${error.message}`);
-  }
-};
-
 // updateNewAdmissionData
 export const updateNewAdmissionData = async (
   e,
@@ -132,5 +108,23 @@ export const updateNewAdmissionData = async (
     navigate("/newAdmissiondata", { state: { apidata: res } });
   } catch (error) {
     console.error("Error submitting form:", error);
+  }
+};
+// delete admission data  Id ka Basic per
+export const deleteNewAdmission = async (id) => {
+  try {
+    const api_Url = `${DELETE_NEW_ADMISSION_DATA_BY_ID}/${id}`;
+
+    const response = await axios.delete(
+      api_Url
+      // `http://localhost:8000/api/v1/student/delete_newadmission/${id}`
+    );
+    console.log(response.data.data);
+    if (response.status === 200) {
+      console.log("responseDelete", response.data.data);
+      return response.data.data;
+    }
+  } catch (error) {
+    throw new Error(`Error deleting admission: ${error.message}`);
   }
 };

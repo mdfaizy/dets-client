@@ -181,9 +181,9 @@ const AdmissionSummaryData = () => {
         </div>
       </div>
 
-      <div className="">
+      <div className="summeryData">
         <Table striped bordered hover>
-          <thead>
+          <thead className="summeryData">
             <tr
               style={{
                 fontSize: "12px",
@@ -198,16 +198,16 @@ const AdmissionSummaryData = () => {
               <th colSpan="2" className="">
                 Admission
               </th>
-              <th colSpan="3">Gender</th>
-              <th colSpan="3">SC</th>
-              <th colSpan="3">ST</th>
-              <th colSpan="3">OBC-A</th>
-              <th colSpan="3">OBC-B</th>
-              <th colSpan="3">EWS</th>
-              <th colSpan="3">GENERAL</th>
-              <th colSpan="3">PWD</th>
-              <th colSpan="1"> Admission Session</th>
-              <th colSpan="1">Total Admitted Student</th>
+              <th colSpan="2">Gender</th>
+              <th colSpan="2">SC</th>
+              <th colSpan="2">ST</th>
+              <th colSpan="2">OBC-A</th>
+              <th colSpan="2">OBC-B</th>
+              <th colSpan="2">EWS</th>
+              <th colSpan="2">GENERAL</th>
+              <th colSpan="2">PWD</th>
+              {/* <th colSpan="1"> Admission Session</th> */}
+              <th colSpan="2">Domicile</th>
             </tr>
           </thead>
 
@@ -230,32 +230,38 @@ const AdmissionSummaryData = () => {
               <td>M</td>
               <td>F</td>
 
-              <td>Domicile</td>
+              {/* <td>Domicile</td> */}
 
               <td>M</td>
               <td>F</td>
-              <td>Domicile</td>
+              {/* <td>Domicile</td> */}
 
               <td>M</td>
               <td>F</td>
-              <td>Domicile</td>
+              {/* <td>Domicile</td> */}
               <td>M</td>
               <td>F</td>
-              <td>Domicile</td>
+              {/* <td>Domicile</td> */}
               <td>M</td>
               <td>F</td>
-              <td>Domicile</td>
+              {/* <td>Domicile</td> */}
               <td>M</td>
               <td>F</td>
-              <td>Domicile</td>
+              {/* <td>Domicile</td> */}
 
               <td>M</td>
               <td>F</td>
-              <td>Domicile</td>
+              {/* <td>Domicile</td> */}
 
               <td>M</td>
               <td>F</td>
-              <td>Domicile</td>
+              {/* <td>Domicile</td> */}
+
+
+              <td>Yes</td>
+              <td>No</td>
+              {/* <td>Domicile</td> */}
+
             </tr>
           </tbody>
 
@@ -291,11 +297,11 @@ const AdmissionSummaryData = () => {
 
                 <td>{data.gender == "M" ? data.gender : ""}</td>
                 <td>{data.gender == "F" ? data.gender : ""}</td>
-                <td>
+                {/* <td>
                   {data.gender === "M" || data.gender === "F"
                     ? data.domicile
                     : ""}
-                </td>
+                </td> */}
 
                 <td>
                   {data.category === "SC" && data.gender === "M"
@@ -309,7 +315,7 @@ const AdmissionSummaryData = () => {
                     : ""}
                   ({categoryCount("SC", "F")})
                 </td>
-                <td>{data.category == "SC" ? data.domicile : ""}</td>
+                {/* <td>{data.category == "SC" ? data.domicile : ""}</td> */}
 
                 <td>
                   {data.category === "OBC-ST" && data.gender === "M"
@@ -323,7 +329,7 @@ const AdmissionSummaryData = () => {
                     : ""}
                   ({categoryCount("OBC-ST", "F")})
                 </td>
-                <td>{data.domicile == "ST" ? data.domicile : ""}</td>
+                {/* <td>{data.domicile == "ST" ? data.domicile : ""}</td> */}
 
                 <td>
                   {data.category === "OBC-A" && data.gender === "M"
@@ -337,7 +343,7 @@ const AdmissionSummaryData = () => {
                     : ""}
                   ({categoryCount("OBC-A", "F")})
                 </td>
-                <td>{data.category == "OBC-A" ? data.domicile : ""}</td>
+                {/* <td>{data.category == "OBC-A" ? data.domicile : ""}</td> */}
 
                 <td>
                   <td>
@@ -353,7 +359,7 @@ const AdmissionSummaryData = () => {
                     : ""}
                   ({categoryCount("OBC-B", "F")})
                 </td>
-                <td>{data.category == "OBC-B" ? data.domicile : ""}</td>
+                {/* <td>{data.category == "OBC-B" ? data.domicile : ""}</td> */}
 
                 <td>
                   {data.category === "EWS" && data.gender === "M"
@@ -367,7 +373,7 @@ const AdmissionSummaryData = () => {
                     : ""}
                   ({ewsCount("EWS", "F")})
                 </td>
-                <td>{data.category == "EWS" ? data.domicile : ""}</td>
+                {/* <td>{data.category == "EWS" ? data.domicile : ""}</td> */}
 
                 <td>
                   {data.category === "GENERAL" && data.gender === "M"
@@ -381,7 +387,7 @@ const AdmissionSummaryData = () => {
                     : ""}
                   ({generalCount("GENERAL", "F")})
                 </td>
-                <td>{data.category == "GENERAL" ? data.domicile : ""}</td>
+                {/* <td>{data.category == "GENERAL" ? data.domicile : ""}</td> */}
 
                 <td>
                   {data.category === "PWD" && data.gender === "M"
@@ -393,9 +399,10 @@ const AdmissionSummaryData = () => {
                     ? data.gender
                     : ""}
                 </td>
-                <td>{data.category == "PWD" ? data.domicile : ""}</td>
+                {/* <td>{data.category == "PWD" ? data.domicile : ""}</td> */}
 
-                <td>{data.admission_session}</td>
+                <td>{data.category == "PWD" ? data.domicile : ""}</td>
+                {/* <td>{data.admission_session}</td> */}
               </tr>
             ))}
           </tbody>

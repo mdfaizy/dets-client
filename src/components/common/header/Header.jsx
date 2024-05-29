@@ -14,177 +14,6 @@ import style from "./Header.module.css";
 import logImg from "../../../assets/log.jpg";
 import { useSelector } from "react-redux";
 import BaseLayout from "../../layout/BaseLayout";
-
-// const Header = (props) => {
-//   const { isAdmin } = props;
-//   // console.log("Teacher Prop Value:", teacher);
-//   const { token, accountType } = useSelector((state) => state.auth);
-//   // const { accountType } = useSelector((state) => state.auth);
-//   console.log("Header AccountType", accountType);
-//   console.log("Header Token", token);
-//   const [click, setClick] = useState(false);
-
-//   const handleClick = () => {
-//     setClick(!click);
-//   };
-
-//   const [show, setShow] = useState(false);
-// const showDropdown = ()=>{
-//     setShow(!show);
-// }
-// const hideDropdown = ()=> {
-//     setShow(false);
-// }
-//   return (
-//     <div className={style.header_top_content}>
-//       <Navbar collapseOnSelect expand="lg" className={style.header_content}>
-//         <Navbar.Brand>
-//           <img src={logImg} alt="" className={style.logoImage} />
-//         </Navbar.Brand>
-//         <div>
-
-//         {/* <Navbar.Toggle aria-controls="responsive-navbar-nav">
-//           {click ? "Close" : "Menu"}
-//         </Navbar.Toggle> */}
-//         <Navbar.Collapse
-//           id="responsive-navbar-nav"
-//           className={`${click ? "show" : ""} ${style.nav_menu}`}
-//           onClick={handleClick}
-//         >
-//           <Nav className={`ml-auto ${style.nav_links_container}`}>
-//             <Nav.Link to="/" className={style.nav_links} onClick={handleClick}>
-//               HOME
-//             </Nav.Link>
-//             <Nav.Link
-//               to="/about"
-//               className={style.nav_links}
-//               onClick={handleClick}
-//             >
-//               ABOUT
-//             </Nav.Link>
-
-//                 <NavDropdown title="Dropdown"
-//    id="collasible-nav-dropdown"
-//    className={style.nav_links}
-//    show={show}
-//    onMouseEnter={showDropdown}
-//    onMouseLeave={hideDropdown}
-//  >
-//                     <NavDropdown.Item to="#action/3.1">Action</NavDropdown.Item>
-//                     <NavDropdown.Item to="#action/3.2">Another action</NavDropdown.Item>
-//                     <NavDropdown.Item to="#action/3.3">Something</NavDropdown.Item>
-//                     <NavDropdown.Divider />
-//                     <NavDropdown.Item to="#action/3.4">Separated link</NavDropdown.Item>
-//                 </NavDropdown>
-
-// {!isAdmin && token !== null && accountType === "Student" && (
-//   // {/* {!isAdmin&& !teacher && isLoggedIn && ( */}
-//   <>
-//     <Nav.Link
-//       to="/newstudent"
-//       className={style.nav_links}
-//       onClick={handleClick}
-//     >
-//       ADMISSION
-//     </Nav.Link>
-//     <Nav.Link
-//       to="/exit"
-//       className={style.nav_links}
-//       onClick={handleClick}
-//     >
-//       EXIT STUDENT
-//     </Nav.Link>
-//     <li className={style.nav_links}>
-//       <Nav.Link
-//         to="/pgcourses"
-//         className={style.nav_links}
-//         onClick={handleClick}
-//       >
-//         POSTGRADUATE
-//       </Nav.Link>
-//     </li>
-//     <li className={style.nav_links}>
-//       <Nav.Link
-//         to="/btechjob"
-//         className={style.nav_links}
-//         onClick={handleClick}
-//       >
-//         JOB
-//       </Nav.Link>
-//     </li>
-//     <li className={style.nav_links} onClick={handleClick}>
-//       <Nav.Link to="/showFormData" className={style.nav_links}>
-//         SHOWFORMDATA
-//       </Nav.Link>
-//     </li>
-//   </>
-// )}
-
-//             {isAdmin && (
-//               <li className={style.nav_links} onClick={handleClick}>
-//                 <Nav.Link to="/showFormData" className={style.nav_links}>
-//                   A SHOWFORMDATA
-//                 </Nav.Link>
-//               </li>
-//             )}
-//             {/* {teacher && token!==null &&( */}
-//             {token !== null && accountType === "Instructor" && (
-//               <>
-//                 <Nav.Link
-//                   to="/studentallinfo"
-//                   className={style.nav_links}
-//                   onClick={handleClick}
-//                 >
-//                   STUDENT-INFO
-//                 </Nav.Link>
-
-//                 <Nav.Link className={style.nav_links} to="/createreport">
-//                   REPORT CREATE
-//                 </Nav.Link>
-
-//                 <Nav.Link className={style.nav_links} to="/filterdataall">
-//                   FILTER-DATA
-//                 </Nav.Link>
-//               </>
-//             )}
-
-//             <Nav
-//               className={`${style.nav_links_container} ${
-//                 click ? "mr-auto" : ""
-//               }`}
-//             >
-//               {token === null && (
-//                 <>
-//     <Nav.Link
-//       to="/loginfrom"
-//       className={style.nav_links}
-//       onClick={handleClick}
-//     >
-//       LOGIN
-//     </Nav.Link>
-//     <Nav.Link
-//       to="/signupfrom"
-//       className={style.nav_links}
-//       onClick={handleClick}
-//     >
-//       SIGN UP
-//     </Nav.Link>
-//   </>
-// )}
-
-// {token !== null && <ProfileDropdown />}
-//             </Nav>
-//           </Nav>
-//         </Navbar.Collapse>
-//         </div>
-
-//       </Navbar>
-//     </div>
-//   );
-// };
-
-// export default Header;
-
 const Header = (props) => {
   const { isAdmin } = props;
 
@@ -480,7 +309,7 @@ const accountType=localStorage.getItem("accountType");
                     </Nav.Link>
                     {/* <Nav> */}
 
-                    {/* {!accountType== "Instructor" &&( */}
+                    {accountType!== "Student" &&(
 
                       <>
                     <Nav.Link
@@ -516,18 +345,9 @@ const accountType=localStorage.getItem("accountType");
                       JOB
                     </Nav.Link>
                     </>
-                    
-                    {!isAdmin &&
-                      token !== null &&
-                      accountType === "Instructor" && (
-                        <>
-                       <BaseLayout/>
-                          {/* <Nav.Link as={Link} to="/newstudent" className={style.nav_links} onClick={handleClick}>ADMISSION</Nav.Link> */}
-                          {/* <Nav.Link as={Link} to="/exit" className={style.nav_links} onClick={handleClick}>EXIT STUDENT</Nav.Link>
-                      <Nav.Link as={Link} to="/pgcourses" className={style.nav_links} onClick={handleClick}>POSTGRADUATE</Nav.Link>
-                      <Nav.Link as={Link}  to="/btechjob" className={style.nav_links} onClick={handleClick}>JOB</Nav.Link> */}
-
-                          <NavDropdown
+                    )}
+                     <>
+                       <NavDropdown
                             title="REPORT"
                             id="collasible-nav-dropdown"
                             // className={style.nav_links}
@@ -540,11 +360,23 @@ const accountType=localStorage.getItem("accountType");
                               <Nav.Link as={Link} to="/feedback-form">
                                 Feedback Form
                               </Nav.Link>
-                              <Nav.Link as={Link} to="/feedback-details">
+                              <NavDropdown.Item as={Link} to="feedback-details">
                                 View Feedback
-                              </Nav.Link>
-                              <NavDropdown.Item to="#action/3.3">
-                                Something
+                              </NavDropdown.Item>
+                              <NavDropdown.Item as={Link} to="newstudentreport">
+                               New Admission
+                              </NavDropdown.Item>
+
+                              <NavDropdown.Item as={Link} to="createpgreport">
+                              Pg Report
+                              </NavDropdown.Item>
+
+                              <NavDropdown.Item as={Link} to="createjobreport">
+                               Job Report
+                              </NavDropdown.Item>
+
+                              <NavDropdown.Item as={Link} to="createexitreport">
+                               Exit Student
                               </NavDropdown.Item>
                               <NavDropdown.Divider />
                               <NavDropdown.Item to="#action/3.4">
@@ -552,6 +384,47 @@ const accountType=localStorage.getItem("accountType");
                               </NavDropdown.Item>
                             </NavDropdown.Item>
                           </NavDropdown>
+                      </>
+
+                    {/* {   !accountType== "Instructor" && (
+                      // <>
+                      //  <NavDropdown
+                      //       title="REPORT"
+                      //       id="collasible-nav-dropdown"
+                      //       // className={style.nav_links}
+                      //       className={`${style.nav_links}`}
+                      //       show={show}
+                      //       onMouseEnter={showDropdown}
+                      //       onMouseLeave={hideDropdown}
+                      //     >
+                      //       <NavDropdown.Item className={style.avDropdown_Item}>
+                      //         <Nav.Link as={Link} to="/feedback-form">
+                      //           Feedback Form
+                      //         </Nav.Link>
+                      //         <Nav.Link as={Link} to="/feedback-details">
+                      //           View Feedback
+                      //         </Nav.Link>
+                      //         <NavDropdown.Item to="#action/3.3">
+                      //           Something
+                      //         </NavDropdown.Item>
+                      //         <NavDropdown.Divider />
+                      //         <NavDropdown.Item to="#action/3.4">
+                      //           Separated link
+                      //         </NavDropdown.Item>
+                      //       </NavDropdown.Item>
+                      //     </NavDropdown>
+                      // </>
+                    )} */}
+                    {!isAdmin &&
+                      // !accountType== "Student" && 
+                      token !== null &&
+                      accountType=== "Instructor" && (
+                        <>
+                       <BaseLayout/>
+                          {/* <Nav.Link as={Link} to="/newstudent" className={style.nav_links} onClick={handleClick}>ADMISSION</Nav.Link> */}
+                          {/* <Nav.Link as={Link} to="/exit" className={style.nav_links} onClick={handleClick}>EXIT STUDENT</Nav.Link>
+                      <Nav.Link as={Link} to="/pgcourses" className={style.nav_links} onClick={handleClick}>POSTGRADUATE</Nav.Link>
+                      <Nav.Link as={Link}  to="/btechjob" className={style.nav_links} onClick={handleClick}>JOB</Nav.Link> */}
                         </>
                       )}
                   </Nav>

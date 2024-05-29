@@ -1,0 +1,41 @@
+
+.Accordion {
+  
+    background-color: gray;
+  
+   
+    .Header {
+      cursor: pointer;
+      font-weight: bold;
+      padding: 10px;
+      background-color: gray; 
+    }
+  
+   
+    .Body {
+      padding: 10px;
+      display: none;
+      background-color: white; 
+    }
+  
+    
+    &.open {
+      .Header {
+        background-color: green; 
+      }
+      .Body {
+        display: block;
+      }
+    }
+  
+    
+    &.closed {
+      .Header {
+        background-color: red;
+      .Body {
+        display: none;
+      }
+    }
+  }
+  
+}

@@ -22,7 +22,8 @@ export const Jobs = {
 };
 //all api for new Admission
 export const newadmissionEndpoints = {
-  POST_NEW_ADMISSION_API: BASE_URL + "/student/newAdmission",
+  SUMBIT_NEW_STUDENT_API:BASE_URL+'/student/newAdmission',
+  // POST_NEW_ADMISSION_API: BASE_URL + "/student/newAdmission",
   GET_PROFILE: BASE_URL + "/student/get_Profile",
   GET_NEW_ADMISSIOM_DATA: BASE_URL + "/student/getnewadmissionId",
   UPDATE_NEW_ADMISSION_FORM: BASE_URL + "/student/update_Admission_form_data",

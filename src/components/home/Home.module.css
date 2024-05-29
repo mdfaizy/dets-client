@@ -60,7 +60,7 @@
   /* margin-left: 20px; */
 }
 .programs_text h1 {
-  color: white;
+  color: rgb(221, 168, 168);
   font-size: 35px;
 }
 .programs_text p {
@@ -95,7 +95,7 @@
     color: rgb(77, 102, 214);
 }
 .about_section4_all p{
-    color: rgb(215, 203, 216);
+    color: rgb(160, 130, 163);
     font-size: 20px;
 }
 .about_section_team_details{
@@ -107,7 +107,7 @@
 width: 250px;
 height: 460px;
 border-radius: 5px;
-background-color: rgb(139, 148, 148);
+background-color: rgb(55, 58, 58);
 margin: 10px;
 
 }

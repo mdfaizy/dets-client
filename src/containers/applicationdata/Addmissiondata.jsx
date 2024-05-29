@@ -1,52 +1,28 @@
 import { useState, useEffect } from "react";
-// import "../../form-data/applicationdata/admissiondata.scss";
-// import axios from "axios";
-import style from "./newAdmission.module.css";
-
+import "./admissiondata.scss";
 import { useParams } from "react-router-dom";
-// import { newadmissionEndpoints } from "../../services/apis";
-import {
-  deleteNewAdmission,
-  getnewadmissionId,
-} from "../../services/apiFunction/newadmissionApi";
-const DeleteAdmissin = () => {
+import { getnewadmissionId } from "../../services/apiFunction/newadmissionApi";
+function Addmissiondata() {
   const [formData, setFormData] = useState({});
-
-  const [deleteButtons, setdeleteButtons] = useState(false);
-  const token = localStorage.getItem("token");
-  // const cleanToken = token ? token.replace(/^"|"$/g, "") : "";
   const { id } = useParams();
+  const token = localStorage.getItem("token");
   const fetchData = async () => {
     try {
-      // const API_Url = `${newadmissionEndpoints.GET_NEW_ADMISSIOM_DATA}/${id}`;
-      // const { data: res } = await axios.get(API_Url, {
-      //   headers: {
-      //     Authorization: `Bearer ${cleanToken}`,
-      //   },
-      // });
       const data = await getnewadmissionId(id, token);
-      console.log(data);
-
       setFormData(data);
+      console.log(data);
     } catch (error) {
       console.error("Error fetching form data:", error);
     }
   };
-
   useEffect(() => {
     fetchData();
   }, []);
-  //delete function call
-  const handleDelete = async (id) => {
-    try {
-      console.log(id);
-      await deleteNewAdmission(id);
-      console.log(id);
-      setFormData({});
-    } catch (error) {
-      console.error(error);
-    }
+
+  const handlePrint = () => {
+    window.print();
   };
+
   return (
     <>
       <div className="addmission_top_contante">
@@ -127,24 +103,17 @@ const DeleteAdmissin = () => {
                             </td>
                             <td>{formData.lastName}</td>
                           </tr>
+
                           <tr>
                             <td className="tbody_formData_info_name">
-                              Father Name
+                              Addhar Number
                             </td>
                             <td className="tbody_fromData_and_info_dot">
                               <b>:</b>
                             </td>
-                            <td>{formData.fatherName}</td>
+                            <td>{formData.addhar_number}</td>
                           </tr>
-                          <tr>
-                            <td className="tbody_formData_info_name">
-                              Mother Name
-                            </td>
-                            <td className="tbody_fromData_and_info_dot">
-                              <b>:</b>
-                            </td>
-                            <td>{formData.motherName}</td>
-                          </tr>
+
                           <tr>
                             <td className="tbody_formData_info_name">Email</td>
                             <td className="tbody_fromData_and_info_dot">
@@ -163,6 +132,96 @@ const DeleteAdmissin = () => {
                             <td>{formData.date_of_birth}</td>
                           </tr>
                           <tr>
+                            <td className="tbody_formData_info_name">Gender</td>
+                            <td className="tbody_fromData_and_info_dot">
+                              <b>:</b>
+                            </td>
+                            <td>{formData.gender}</td>
+                          </tr>
+                          <tr>
+                            <td className="tbody_formData_info_name">
+                              Category
+                            </td>
+                            <td className="tbody_fromData_and_info_dot">
+                              <b>:</b>
+                            </td>
+                            <td>{formData.category}</td>
+                          </tr>
+
+                          <tr>
+                            <td className="tbody_formData_info_name">
+                              Phone No
+                            </td>
+                            <td className="tbody_fromData_and_info_dot">
+                              <b>:</b>
+                            </td>
+                            <td>{formData.phone_no}</td>
+                          </tr>
+
+                          <tr>
+                            <td className="tbody_formData_info_name">
+                              Domicile
+                            </td>
+                            <td className="tbody_fromData_and_info_dot">
+                              <b>:</b>
+                            </td>
+                            <td>{formData.domicile}</td>
+                          </tr>
+
+                          {/* Admission details */}
+
+                          <tr>
+                            <td className="tbody_formData_info_name">
+                              Father Name
+                            </td>
+                            <td className="tbody_fromData_and_info_dot">
+                              <b>:</b>
+                            </td>
+                            <td>{formData.fatherName}</td>
+                          </tr>
+                          <tr>
+                            <td className="tbody_formData_info_name">
+                              Mother Name
+                            </td>
+                            <td className="tbody_fromData_and_info_dot">
+                              <b>:</b>
+                            </td>
+                            <td>{formData.motherName}</td>
+                          </tr>
+
+                          <tr>
+                            <td className="tbody_formData_info_name">
+                              Parent Occoupation
+                            </td>
+                            <td className="tbody_fromData_and_info_dot">
+                              <b>:</b>
+                            </td>
+                            <td>{formData.parent_occoupation}</td>
+                          </tr>
+
+                          <tr>
+                            <td className="tbody_formData_info_name">
+                              Parent Incom
+                            </td>
+                            <td className="tbody_fromData_and_info_dot">
+                              <b>:</b>
+                            </td>
+                            <td>{formData.parent_incom}</td>
+                          </tr>
+
+                          <tr>
+                            <td className="tbody_formData_info_name">
+                              Parent Phone No
+                            </td>
+                            <td className="tbody_fromData_and_info_dot">
+                              <b>:</b>
+                            </td>
+                            <td>{formData.parent_phone_no}</td>
+                          </tr>
+
+                          {/*Admission details */}
+                          <tr>Admission Details</tr>
+                          <tr>
                             <td className="tbody_formData_info_name">
                               Exame Type
                             </td>
@@ -174,13 +233,34 @@ const DeleteAdmissin = () => {
 
                           <tr>
                             <td className="tbody_formData_info_name">
-                              Category
+                              Counselling
                             </td>
                             <td className="tbody_fromData_and_info_dot">
                               <b>:</b>
                             </td>
-                            <td>{formData.category}</td>
+                            <td>{formData.counselling}</td>
                           </tr>
+
+                          <tr>
+                            <td className="tbody_formData_info_name">
+                              Start Session
+                            </td>
+                            <td className="tbody_fromData_and_info_dot">
+                              <b>:</b>
+                            </td>
+                            <td>{formData.start_session}</td>
+                          </tr>
+
+                          <tr>
+                            <td className="tbody_formData_info_name">
+                              End Session
+                            </td>
+                            <td className="tbody_fromData_and_info_dot">
+                              <b>:</b>
+                            </td>
+                            <td>{formData.end_session}</td>
+                          </tr>
+
                           <tr>
                             <td className="tbody_formData_info_name">
                               Application No
@@ -212,14 +292,56 @@ const DeleteAdmissin = () => {
                             <td>{formData.stream}</td>
                           </tr>
 
+                          {/* address details */}
+                          <tr>Address Details</tr>
                           <tr>
                             <td className="tbody_formData_info_name">
-                              Phone No
+                              Village
                             </td>
                             <td className="tbody_fromData_and_info_dot">
                               <b>:</b>
                             </td>
-                            <td>{formData.phone_no}</td>
+                            <td>{formData.village}</td>
+                          </tr>
+
+                          <tr>
+                            <td className="tbody_formData_info_name">
+                              Police Station
+                            </td>
+                            <td className="tbody_fromData_and_info_dot">
+                              <b>:</b>
+                            </td>
+                            <td>{formData.police_station}</td>
+                          </tr>
+
+                          <tr>
+                            <td className="tbody_formData_info_name">
+                              Distric
+                            </td>
+                            <td className="tbody_fromData_and_info_dot">
+                              <b>:</b>
+                            </td>
+                            <td>{formData.distric}</td>
+                          </tr>
+
+                          <tr>
+                            <td className="tbody_formData_info_name">
+                              Pin Code
+                            </td>
+                            <td className="tbody_fromData_and_info_dot">
+                              <b>:</b>
+                            </td>
+                            <td>{formData.pin_code}</td>
+                          </tr>
+
+                          <tr>
+                            <td className="tbody_formData_info_name">
+                              State Name
+                            </td>
+                            <td className="tbody_fromData_and_info_dot">
+                              <b>:</b>
+                            </td>
+                            <td>{formData.state_name}</td>
                           </tr>
 
                           <tr>10th Info</tr>
@@ -355,33 +477,11 @@ const DeleteAdmissin = () => {
         </table>
       </div>
 
-      {!deleteButtons && (
-        <button
-          onClick={() => setdeleteButtons(true)}
-          className={style.delete_button}
-        >
-          Show Delete
-        </button>
-      )}
-
-      {deleteButtons && (
-        <div className={style.delete_cancle_button}>
-          <button
-            onClick={() => handleDelete(id)}
-            className={style.delete_button}
-          >
-            Delete
-          </button>
-          <button
-            onClick={() => setdeleteButtons(false)}
-            className={style.cancle_button}
-          >
-            Cancel
-          </button>
-        </div>
-      )}
+      <button onClick={handlePrint} className="job_form_data_print">
+        Print
+      </button>
     </>
   );
-};
+}
 
-export default DeleteAdmissin;
+export default Addmissiondata;

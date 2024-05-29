@@ -34,7 +34,7 @@ const PrintNewStudent = () => {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [id]);
 
   const handlePrint = () => {
     window.print();
@@ -212,6 +212,17 @@ const PrintNewStudent = () => {
                             <td>{newAdmissionData.stream}</td>
                           </tr>
 
+
+                          <tr>
+                            <td className="tbody_newAdmissionData_info_name">
+                             Parent Incom
+                            </td>
+                            <td className="tbody_fromData_and_info_dot">
+                              <b>:</b>
+                            </td>
+                            <td>{newAdmissionData.parent_incom}</td>
+                          </tr>
+
                           <tr>
                             <td className="tbody_newAdmissionData_info_name">
                               Phone No
@@ -221,6 +232,8 @@ const PrintNewStudent = () => {
                             </td>
                             <td>{newAdmissionData.phone_no}</td>
                           </tr>
+
+
 
                           <tr>10th Info</tr>
 

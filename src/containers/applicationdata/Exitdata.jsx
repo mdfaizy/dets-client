@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import "./admissiondata.scss";
-import axios from "axios";
+// import axios from "axios";
 import { useSelector } from "react-redux";
 // import { exitStudentEndpoints } from "../../services/apis";
 import {getExitStudentByID} from "../../services/apiFunction/exitApi";

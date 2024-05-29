@@ -22,3 +22,8 @@
     pointer-events: none;
     color: #aaa;
 }
+
+.summeryData{
+    width:100vw;
+    overflow-x:auto;
+}

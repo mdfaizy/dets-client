@@ -2,7 +2,7 @@ import { useLocation } from "react-router-dom";
 const NewAdmissionData = () => {
   const location = useLocation();
   const { apidata } = location.state || {};
-  console.log("apidata", apidata);
+  console.log("apidata", apidata.newAdmission);
   return (
     <div className="addmission_top_contante">
       <table
@@ -72,7 +72,7 @@ const NewAdmissionData = () => {
                           <td className="tbody_fromData_and_info_dot">
                             <b>:</b>
                           </td>
-                          <td>{apidata.data.firstName}</td>
+                          <td>{apidata.newAdmission.firstName}</td>
                         </tr>
                         <tr>
                           <td className="tbody_formData_info_name">
@@ -81,7 +81,7 @@ const NewAdmissionData = () => {
                           <td className="tbody_fromData_and_info_dot">
                             <b>:</b>
                           </td>
-                          <td>{apidata.data.lastName}</td>
+                          <td>{apidata.newAdmission.lastName}</td>
                         </tr>
 
                         <tr>
@@ -91,7 +91,7 @@ const NewAdmissionData = () => {
                           <td className="tbody_fromData_and_info_dot">
                             <b>:</b>
                           </td>
-                          <td>{apidata.data.addhar_number}</td>
+                          <td>{apidata.newAdmission.addhar_number}</td>
                         </tr>
                         <tr>
                           <td className="tbody_formData_info_name">
@@ -100,7 +100,7 @@ const NewAdmissionData = () => {
                           <td className="tbody_fromData_and_info_dot">
                             <b>:</b>
                           </td>
-                          <td>{apidata.data.date_of_birth}</td>
+                          <td>{apidata.newAdmission.date_of_birth}</td>
                         </tr>
 
                         <tr>
@@ -108,7 +108,7 @@ const NewAdmissionData = () => {
                           <td className="tbody_fromData_and_info_dot">
                             <b>:</b>
                           </td>
-                          <td>{apidata.data.category}</td>
+                          <td>{apidata.newAdmission.category}</td>
                         </tr>
 
                         <tr>
@@ -116,7 +116,7 @@ const NewAdmissionData = () => {
                           <td className="tbody_fromData_and_info_dot">
                             <b>:</b>
                           </td>
-                          <td>{apidata.data.dimicile}</td>
+                          <td>{apidata.newAdmission.dimicile}</td>
                         </tr>
 
                         <tr>
@@ -124,7 +124,7 @@ const NewAdmissionData = () => {
                           <td className="tbody_fromData_and_info_dot">
                             <b>:</b>
                           </td>
-                          <td>{apidata.data.email}</td>
+                          <td>{apidata.newAdmission.email}</td>
                         </tr>
 
                         <tr>
@@ -132,7 +132,7 @@ const NewAdmissionData = () => {
                           <td className="tbody_fromData_and_info_dot">
                             <b>:</b>
                           </td>
-                          <td>{apidata.data.phone_no}</td>
+                          <td>{apidata.newAdmission.phone_no}</td>
                         </tr>
 
                         <tr>
@@ -140,7 +140,7 @@ const NewAdmissionData = () => {
                           <td className="tbody_fromData_and_info_dot">
                             <b>:</b>
                           </td>
-                          <td>{apidata.data.gender}</td>
+                          <td>{apidata.newAdmission.gender}</td>
                         </tr>
                         <tr>
                           <td className="tbody_formData_info_name">
@@ -149,7 +149,7 @@ const NewAdmissionData = () => {
                           <td className="tbody_fromData_and_info_dot">
                             <b>:</b>
                           </td>
-                          <td>{apidata.data.fatherName}</td>
+                          <td>{apidata.newAdmission.fatherName}</td>
                         </tr>
                         <tr>
                           <td className="tbody_formData_info_name">
@@ -158,7 +158,7 @@ const NewAdmissionData = () => {
                           <td className="tbody_fromData_and_info_dot">
                             <b>:</b>
                           </td>
-                          <td>{apidata.data.motherName}</td>
+                          <td>{apidata.newAdmission.motherName}</td>
                         </tr>
 
                         <tr>
@@ -168,7 +168,7 @@ const NewAdmissionData = () => {
                           <td className="tbody_fromData_and_info_dot">
                             <b>:</b>
                           </td>
-                          <td>{apidata.data.examType}</td>
+                          <td>{apidata.newAdmission.examType}</td>
                         </tr>
 
                         <tr>
@@ -178,21 +178,21 @@ const NewAdmissionData = () => {
                           <td className="tbody_fromData_and_info_dot">
                             <b>:</b>
                           </td>
-                          <td>{apidata.data.application_exam_no}</td>
+                          <td>{apidata.newAdmission.application_exam_no}</td>
                         </tr>
                         <tr>
                           <td className="tbody_formData_info_name">Rank</td>
                           <td className="tbody_fromData_and_info_dot">
                             <b>:</b>
                           </td>
-                          <td>{apidata.data.scoure_rank}</td>
+                          <td>{apidata.newAdmission.scoure_rank}</td>
                         </tr>
                         <tr>
                           <td className="tbody_formData_info_name">Cource</td>
                           <td className="tbody_fromData_and_info_dot">
                             <b>:</b>
                           </td>
-                          <td>{apidata.data.cource_name}</td>
+                          <td>{apidata.newAdmission.cource_name}</td>
                         </tr>
                         <tr>
                           <td className="tbody_formData_info_name">
@@ -201,7 +201,7 @@ const NewAdmissionData = () => {
                           <td className="tbody_fromData_and_info_dot">
                             <b>:</b>
                           </td>
-                          <td>{apidata.data.admission_session}</td>
+                          <td>{apidata.newAdmission.admission_session}</td>
                         </tr>
 
                         <tr>
@@ -209,7 +209,7 @@ const NewAdmissionData = () => {
                           <td className="tbody_fromData_and_info_dot">
                             <b>:</b>
                           </td>
-                          <td>{apidata.data.stream}</td>
+                          <td>{apidata.newAdmission.stream}</td>
                         </tr>
 
                         <tr>
@@ -219,7 +219,7 @@ const NewAdmissionData = () => {
                           <td className="tbody_fromData_and_info_dot">
                             <b>:</b>
                           </td>
-                          <td>{apidata.data.start_session}</td>
+                          <td>{apidata.newAdmission.start_session}</td>
                         </tr>
 
                         <tr>
@@ -229,7 +229,7 @@ const NewAdmissionData = () => {
                           <td className="tbody_fromData_and_info_dot">
                             <b>:</b>
                           </td>
-                          <td>{apidata.data.end_session}</td>
+                          <td>{apidata.newAdmission.end_session}</td>
                         </tr>
                         {/* */}
 
@@ -242,7 +242,7 @@ const NewAdmissionData = () => {
                           <td className="tbody_fromData_and_info_dot">
                             <b>:</b>
                           </td>
-                          <td>{apidata.data.schoolName_10th}</td>
+                          <td>{apidata.newAdmission.schoolName_10th}</td>
                         </tr>
 
                         <tr>
@@ -250,7 +250,7 @@ const NewAdmissionData = () => {
                           <td className="tbody_fromData_and_info_dot">
                             <b>:</b>
                           </td>
-                          <td>{apidata.data.roll_No_10th}</td>
+                          <td>{apidata.newAdmission.roll_No_10th}</td>
                         </tr>
 
                         <tr>
@@ -260,7 +260,7 @@ const NewAdmissionData = () => {
                           <td className="tbody_fromData_and_info_dot">
                             <b>:</b>
                           </td>
-                          <td>{apidata.data.regisration_No_10th}</td>
+                          <td>{apidata.newAdmission.regisration_No_10th}</td>
                         </tr>
 
                         <tr>
@@ -270,7 +270,7 @@ const NewAdmissionData = () => {
                           <td className="tbody_fromData_and_info_dot">
                             <b>:</b>
                           </td>
-                          <td>{apidata.data.board_Name_10th}</td>
+                          <td>{apidata.newAdmission.board_Name_10th}</td>
                         </tr>
 
                         <tr>
@@ -280,7 +280,7 @@ const NewAdmissionData = () => {
                           <td className="tbody_fromData_and_info_dot">
                             <b>:</b>
                           </td>
-                          <td>{apidata.data.year_of_passing_10th}</td>
+                          <td>{apidata.newAdmission.year_of_passing_10th}</td>
                         </tr>
                         <tr>
                           <td className="tbody_formData_info_name">
@@ -289,7 +289,7 @@ const NewAdmissionData = () => {
                           <td className="tbody_fromData_and_info_dot">
                             <b>:</b>
                           </td>
-                          <td>{apidata.data.persentage_10th}</td>
+                          <td>{apidata.newAdmission.persentage_10th}</td>
                         </tr>
 
                         <tr>12th Info</tr>
@@ -301,7 +301,7 @@ const NewAdmissionData = () => {
                           <td className="tbody_fromData_and_info_dot">
                             <b>:</b>
                           </td>
-                          <td>{apidata.data.schoolName_12th}</td>
+                          <td>{apidata.newAdmission.schoolName_12th}</td>
                         </tr>
 
                         <tr>
@@ -309,7 +309,7 @@ const NewAdmissionData = () => {
                           <td className="tbody_fromData_and_info_dot">
                             <b>:</b>
                           </td>
-                          <td>{apidata.data.roll_No_12th}</td>
+                          <td>{apidata.newAdmission.roll_No_12th}</td>
                         </tr>
 
                         <tr>
@@ -319,7 +319,7 @@ const NewAdmissionData = () => {
                           <td className="tbody_fromData_and_info_dot">
                             <b>:</b>
                           </td>
-                          <td>{apidata.data.regisration_No_12th}</td>
+                          <td>{apidata.newAdmission.regisration_No_12th}</td>
                         </tr>
 
                         <tr>
@@ -329,7 +329,7 @@ const NewAdmissionData = () => {
                           <td className="tbody_fromData_and_info_dot">
                             <b>:</b>
                           </td>
-                          <td>{apidata.data.board_Name_12th}</td>
+                          <td>{apidata.newAdmission.board_Name_12th}</td>
                         </tr>
 
                         <tr>
@@ -339,7 +339,7 @@ const NewAdmissionData = () => {
                           <td className="tbody_fromData_and_info_dot">
                             <b>:</b>
                           </td>
-                          <td>{apidata.data.year_of_passing_12th}</td>
+                          <td>{apidata.newAdmission.year_of_passing_12th}</td>
                         </tr>
 
                         <tr>
@@ -349,7 +349,7 @@ const NewAdmissionData = () => {
                           <td className="tbody_fromData_and_info_dot">
                             <b>:</b>
                           </td>
-                          <td>{apidata.data.persentage_12th}</td>
+                          <td>{apidata.newAdmission.persentage_12th}</td>
                         </tr>
                       </tbody>
                     </table>

@@ -129,7 +129,7 @@ const EditNewStudent = () => {
   //       },
   //     });
   //     console.log("Form submitted successfully:", res);
-  //     navigate("/newAdmissiondata");
+  //     navigate("/");
   //   } catch (error) {
   //     console.error("Error submitting form:", error);
   //   }

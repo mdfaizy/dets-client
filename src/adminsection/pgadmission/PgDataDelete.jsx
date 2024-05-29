@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import "../../form-data/applicationdata/admissiondata.scss";
+// import "../../form-data/applicationdata/admissiondata.scss";
 // import axios from "axios";
 import style from "./pgdata.module.css";
 import { deletePgStudent } from "../../services/apiFunction/pgApi";

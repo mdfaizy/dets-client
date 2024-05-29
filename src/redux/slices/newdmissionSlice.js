@@ -9,8 +9,8 @@ const newadmissionSlice = createSlice({
   name: "newadmission",
   initialState,
   reducers: {
-    setStep: (state, action) => {
-      state.step = action.payload
+    setLoading(state, value) {
+      state.loading = value.payload;
     },
     setNewAdmission: (state, action) => {
       state.course = action.payload
@@ -26,7 +26,7 @@ const newadmissionSlice = createSlice({
 })
 
 export const {
-  setStep,
+  setLoading,
   setNewAdmission,
   setEditNewAdmission,
   setDelteNewAdmission,
