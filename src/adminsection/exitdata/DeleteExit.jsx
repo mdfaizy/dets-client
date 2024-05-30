@@ -304,6 +304,14 @@ const DeleteExit = () => {
         </table>
       </div>
 
+      {!showDeleteButtons && (
+          <button
+            onClick={() => setShowDeleteButtons(true)}
+            className={style.delete_button}
+          >
+            Show Delete
+          </button>
+        )}
       {showDeleteButtons && (
         <div className={style.delete_cancle_button}>
           <button

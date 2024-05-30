@@ -1,6 +1,4 @@
 import { useState, useEffect } from "react";
-// import "../../form-data/applicationdata/admissiondata.scss";
-import axios from "axios";
 import style from "./exitdata.module.css";
 import {getExitStudentByID} from '../../services/apiFunction/exitApi'
 import { exitStudentEndpoints } from "../../services/apis";
@@ -10,17 +8,9 @@ const ExitPrintData = () => {
 
   const { id } = useParams();
   const token = localStorage.getItem("token");
-  const cleanToken = token ? token.replace(/^"|"$/g, "") : "";
-
   const fetchData = async () => {
     try {
-      // const API_Url = `${exitStudentEndpoints.GET_EXIT_STUDENT_BY_ID}/${id}`;
-      // const { data: res } = await axios.get(API_Url, {
-      //   headers: {
-      //     Authorization: `Bearer ${cleanToken}`,
-      //   },
-      // });
-      // console.log(res);
+    
     const data=await  getExitStudentByID(id,token);
     console.log(data);
       setFormData(data);

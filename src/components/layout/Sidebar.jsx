@@ -1,10 +1,10 @@
-import "./BaseLayout.scss";
-import Sidebar from "../Sidebar/Sidebar";
+import "./Sidebar.scss";
+import SidebarLink from "../Sidebar/Sidebar";
 import { Outlet } from "react-router-dom";
-const BaseLayout = () => {
+const Sidebar = () => {
   return (
     <div className="base-layout">
-      <Sidebar />
+      <SidebarLink />
       <div className="main-content">
         <Outlet />
       </div>
@@ -12,4 +12,4 @@ const BaseLayout = () => {
   );
 };
 
-export default BaseLayout;
+export default Sidebar;

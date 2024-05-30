@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
 import "./admissiondata.scss";
-// import axios from "axios";
 import { useSelector } from "react-redux";
-// import { exitStudentEndpoints } from "../../services/apis";
+
 import {getExitStudentByID} from "../../services/apiFunction/exitApi";
 import { useParams } from "react-router-dom";
 function Exitdata() {
@@ -11,14 +10,6 @@ function Exitdata() {
   const { id } = useParams();
   const fetchData = async () => {
     try {
-      // const cleanToken = token.replace(/^"|"$/g, "");
-      // const apiUrl = `${exitStudentEndpoints.GET_EXIT_STUDENT_BY_ID}/${id}`;
-      // const { data: res } = await axios.get(apiUrl, {
-      //   headers: {
-      //     Authorization: `Bearer ${cleanToken}`,
-      //   },
-      // });
-      // setFormData(res.data)
       const data=await getExitStudentByID(id,token);
       console.log(data);
       setFormData(data);
@@ -26,7 +17,6 @@ function Exitdata() {
       console.error("Error fetching form data:", error);
     }
   };
-
   useEffect(() => {
     fetchData();
   }, []);
@@ -98,151 +88,316 @@ function Exitdata() {
                           </th>
                         </tr>
                       </thead>
-                      <tbody className="tbody_formData_info">
-                        <tr>
-                          <td className="tbody_formData_info_name">
-                            First Name:
-                          </td>
-                          <td className="tbody_fromData_and_info_dot">
-                            <b>:</b>
-                          </td>
-                          <td>{formData.firstName}</td>
-                        </tr>
-                        <tr>
-                          <td className="tbody_formData_info_name">
-                            Last Name
-                          </td>
-                          <td className="tbody_fromData_and_info_dot">
-                            <b>:</b>
-                          </td>
-                          <td>{formData.lastName}</td>
-                        </tr>
-                        <tr>
-                          <td className="tbody_formData_info_name">
-                            Father Name
-                          </td>
-                          <td className="tbody_fromData_and_info_dot">
-                            <b>:</b>
-                          </td>
-                          <td>{formData.fatherName}</td>
-                        </tr>
-                        <tr>
-                          <td className="tbody_formData_info_name">
-                            Mother Name
-                          </td>
-                          <td className="tbody_fromData_and_info_dot">
-                            <b>:</b>
-                          </td>
-                          <td>{formData.motherName}</td>
-                        </tr>
-                        <tr>
-                          <td className="tbody_formData_info_name">Email</td>
-                          <td className="tbody_fromData_and_info_dot">
-                            <b>:</b>
-                          </td>
-                          <td>{formData.email}</td>
-                        </tr>
-                        <tr>
-                          <td className="tbody_formData_info_name">Roll No:</td>
-                          <td className="tbody_fromData_and_info_dot">
-                            <b>:</b>
-                          </td>
-                          <td>{formData.rollNo}</td>
-                        </tr>
-                        <tr>
-                          <td className="tbody_formData_info_name">
-                            Date of Birth
-                          </td>
-                          <td className="tbody_fromData_and_info_dot">
-                            <b>:</b>
-                          </td>
-                          <td>{formData.date_of_birth}</td>
-                        </tr>
-                        <tr>
-                          <td className="tbody_formData_info_name">Stream</td>
-                          <td className="tbody_fromData_and_info_dot">
-                            <b>:</b>
-                          </td>
-                          <td>{formData.stream}</td>
-                        </tr>
+                      <tbody>
+                              <tr>
+                                <td
+                                  width="100px"
+                                  style={{
+                                    fontFamily:
+                                      "calibri, helvetica, arial, sans-serif",
+                                  }}
+                                >
+                                  Frist Name:
+                                </td>
+                                <td width="40px" align="center">
+                                  <b>:</b>
+                                </td>
+                                <td>{formData.firstName}</td>
+                              </tr>
+                              <tr>
+                                <td
+                                  width="100px"
+                                  style={{
+                                    fontFamily:
+                                      "calibri, helvetica, arial, sans-serif",
+                                  }}
+                                >
+                                  Last Name
+                                </td>
+                                <td width="40px" align="center">
+                                  <b>:</b>
+                                </td>
+                                <td>{formData.lastName}</td>
+                              </tr>
 
-                        <tr>
-                          <td className="tbody_formData_info_name">Category</td>
-                          <td className="tbody_fromData_and_info_dot">
-                            <b>:</b>
-                          </td>
-                          <td>{formData.category}</td>
-                        </tr>
-                        <tr>
-                          <td className="tbody_formData_info_name">
-                            Registration No
-                          </td>
-                          <td className="tbody_fromData_and_info_dot">
-                            <b>:</b>
-                          </td>
-                          <td>{formData.registrationNo}</td>
-                        </tr>
-                        <tr>
-                          <td className="tbody_formData_info_name">Session</td>
-                          <td className="tbody_fromData_and_info_dot">
-                            <b>:</b>
-                          </td>
-                          <td>{formData.session}</td>
-                        </tr>
-                        <tr>
-                          <td className="tbody_formData_info_name">Phone No</td>
-                          <td className="tbody_fromData_and_info_dot">
-                            <b>:</b>
-                          </td>
-                          <td>{formData.Phone_no}</td>
-                        </tr>
-                        <tr>
-                          <td className="tbody_formData_info_name">Session</td>
-                          <td className="tbody_fromData_and_info_dot">
-                            <b>:</b>
-                          </td>
-                          <td>{formData.session}</td>
-                        </tr>
-                        <tr>
-                          <td className="tbody_formData_info_name">
-                            First Year
-                          </td>
-                          <td className="tbody_fromData_and_info_dot">
-                            <b>:</b>
-                          </td>
-                          <td>{formData.year_cgpa_1th}</td>
-                        </tr>
+                              <tr>
+                                <td
+                                  width="100px"
+                                  style={{
+                                    fontFamily:
+                                      "calibri, helvetica, arial, sans-serif",
+                                  }}
+                                >
+                                  Email
+                                </td>
+                                <td width="40px" align="center">
+                                  <b>:</b>
+                                </td>
+                                <td>{formData.email}</td>
+                              </tr>
+                              <tr>
+                                <td
+                                  width="100px"
+                                  style={{
+                                    fontFamily:
+                                      "calibri, helvetica, arial, sans-serif",
+                                  }}
+                                >
+                                  Date of Birth
+                                </td>
+                                <td width="40px" align="center">
+                                  <b>:</b>
+                                </td>
+                                <td>{formData.date_of_birth}</td>
+                              </tr>
+                              <tr>
+                                <td
+                                  width="100px"
+                                  style={{
+                                    fontFamily:
+                                      "calibri, helvetica, arial, sans-serif",
+                                  }}
+                                >
+                                  Gender
+                                </td>
+                                <td width="40px" align="center">
+                                  <b>:</b>
+                                </td>
+                                <td>{formData.gender}</td>
+                              </tr>
+                              <tr>
+                                <td
+                                  width="100px"
+                                  style={{
+                                    fontFamily:
+                                      "calibri, helvetica, arial, sans-serif",
+                                  }}
+                                >
+                                  Domicile
+                                </td>
+                                <td width="40px" align="center">
+                                  <b>:</b>
+                                </td>
+                                <td>{formData.domicile}</td>
+                              </tr>
+                              <tr>
+                                <td
+                                  width="100px"
+                                  style={{
+                                    fontFamily:
+                                      "calibri, helvetica, arial, sans-serif",
+                                  }}
+                                >
+                                  Category
+                                </td>
+                                <td width="40px" align="center">
+                                  <b>:</b>
+                                </td>
+                                <td>{formData.category}</td>
+                              </tr>
 
-                        <tr>
-                          <td className="tbody_formData_info_name">
-                            Second Year
-                          </td>
-                          <td className="tbody_fromData_and_info_dot">
-                            <b>:</b>
-                          </td>
-                          <td>{formData.year_cgpa_2nd}</td>
-                        </tr>
+                              <tr>
+                                <td
+                                  width="100px"
+                                  style={{
+                                    fontFamily:
+                                      "calibri, helvetica, arial, sans-serif",
+                                  }}
+                                >
+                                  Phone No
+                                </td>
+                                <td width="40px" align="center">
+                                  <b>:</b>
+                                </td>
+                                <td>{formData.phone_no}</td>
+                              </tr>
 
-                        <tr>
-                          <td className="tbody_formData_info_name">
-                            Third Year
-                          </td>
-                          <td className="tbody_fromData_and_info_dot">
-                            <b>:</b>
-                          </td>
-                          <td>{formData.year_cgpa_3rd}</td>
-                        </tr>
+                              <tr>
+                                <td
+                                  width="100px"
+                                  style={{
+                                    fontFamily:
+                                      "calibri, helvetica, arial, sans-serif",
+                                  }}
+                                >
+                                  Father Name
+                                </td>
+                                <td width="40px" align="center">
+                                  <b>:</b>
+                                </td>
+                                <td>{formData.fatherName}</td>
+                              </tr>
+                              <tr>
+                                <td
+                                  width="100px"
+                                  style={{
+                                    fontFamily:
+                                      "calibri, helvetica, arial, sans-serif",
+                                  }}
+                                >
+                                  Mother Name
+                                </td>
+                                <td width="40px" align="center">
+                                  <b>:</b>
+                                </td>
+                                <td>{formData.motherName}</td>
+                              </tr>
 
-                        <tr>
-                          <td className="tbody_formData_info_name">
-                            Fourthe Year
-                          </td>
-                          <td className="tbody_fromData_and_info_dot">
-                            <b>:</b>
-                          </td>
-                          <td>{formData.year_cgpa_4th}</td>
-                        </tr>
-                      </tbody>
+                              <tr>
+                                <td
+                                  width="100px"
+                                  style={{
+                                    fontFamily:
+                                      "calibri, helvetica, arial, sans-serif",
+                                  }}
+                                >
+                                  Stream
+                                </td>
+                                <td width="40px" align="center">
+                                  <b>:</b>
+                                </td>
+                                <td>{formData.stream}</td>
+                              </tr>
+                              <tr>
+                                <td
+                                  width="100px"
+                                  style={{
+                                    fontFamily:
+                                      "calibri, helvetica, arial, sans-serif",
+                                  }}
+                                >
+                                  Session
+                                </td>
+                                <td width="40px" align="center">
+                                  <b>:</b>
+                                </td>
+                                <td>{formData.session}</td>
+                              </tr>
+
+                              <tr>
+                                <td
+                                  width="100px"
+                                  style={{
+                                    fontFamily:
+                                      "calibri, helvetica, arial, sans-serif",
+                                  }}
+                                >
+                                  Roll No
+                                </td>
+                                <td width="40px" align="center">
+                                  <b>:</b>
+                                </td>
+                                <td>{formData.rollNo}</td>
+                              </tr>
+                              <tr>
+                                <td
+                                  width="100px"
+                                  style={{
+                                    fontFamily:
+                                      "calibri, helvetica, arial, sans-serif",
+                                  }}
+                                >
+                                  Registration No
+                                </td>
+                                <td width="40px" align="center">
+                                  <b>:</b>
+                                </td>
+                                <td>{formData.registrationNo}</td>
+                              </tr>
+
+                              <tr>
+                                <td
+                                  width="100px"
+                                  style={{
+                                    fontFamily:
+                                      "calibri, helvetica, arial, sans-serif",
+                                  }}
+                                >
+                                  Session
+                                </td>
+                                <td width="40px" align="center">
+                                  <b>:</b>
+                                </td>
+                                <td>{formData.session}</td>
+                              </tr>
+                              <tr>
+                                <td
+                                  width="100px"
+                                  style={{
+                                    fontFamily:
+                                      "calibri, helvetica, arial, sans-serif",
+                                  }}
+                                >
+                                  First Year
+                                </td>
+                                <td width="40px" align="center">
+                                  <b>:</b>
+                                </td>
+                                <td>{formData.year_cgpa_1th}</td>
+                              </tr>
+
+                              <tr>
+                                <td
+                                  width="100px"
+                                  style={{
+                                    fontFamily:
+                                      "calibri, helvetica, arial, sans-serif",
+                                  }}
+                                >
+                                  Second Year
+                                </td>
+                                <td width="40px" align="center">
+                                  <b>:</b>
+                                </td>
+                                <td>{formData.year_cgpa_2th}</td>
+                              </tr>
+
+                              <tr>
+                                <td
+                                  width="100px"
+                                  style={{
+                                    fontFamily:
+                                      "calibri, helvetica, arial, sans-serif",
+                                  }}
+                                >
+                                  Third Year
+                                </td>
+                                <td width="40px" align="center">
+                                  <b>:</b>
+                                </td>
+                                <td>{formData.year_cgpa_3rd}</td>
+                              </tr>
+                              <tr>
+                                <td
+                                  width="100px"
+                                  style={{
+                                    fontFamily:
+                                      "calibri, helvetica, arial, sans-serif",
+                                  }}
+                                >
+                                  Final Year
+                                </td>
+                                <td width="40px" align="center">
+                                  <b>:</b>
+                                </td>
+                                <td>{formData.year_cgpa_4th}</td>
+                              </tr>
+                              <tr>
+                                <td
+                                  width="100px"
+                                  style={{
+                                    fontFamily:
+                                      "calibri, helvetica, arial, sans-serif",
+                                  }}
+                                >
+                                  Total CGPA
+                                </td>
+                                <td width="40px" align="center">
+                                  <b>:</b>
+                                </td>
+                                <td>{formData.final_cgpa}</td>
+                              </tr>
+                            </tbody>
                     </table>
                   </td>
                 </tr>

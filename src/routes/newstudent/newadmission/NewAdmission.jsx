@@ -8,7 +8,7 @@ import {submitNewStudentForm} from "../../../services/apiFunction/newadmissionAp
 function NewAdmission() {
   const navigate = useNavigate();
   const { token } = useSelector((state) => state.auth);
-  const [data,setData]=useState([null])
+  // const [data,setData]=useState([null])
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     token: token,
@@ -873,7 +873,7 @@ function NewAdmission() {
                     >
                       Submit
                     </button> */}
-                     <button type="submit" className="text-denger px-4 py-2  border-0   rounded-md"   disabled={loading}>
+                     <button type="submit" className="text-denger px-4 py-2  border-0   rounded-md" style={{backgroundColor:'yellow'}}   disabled={loading}>
         {loading ? '' : 'Submit'}
       </button>
                   </Col>

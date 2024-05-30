@@ -1,37 +1,37 @@
 import { Container } from "react-bootstrap";
 import { useLocation } from "react-router-dom";
-
 const Jobsumbitdata = () => {
   const location = useLocation();
   const { apidata } = location.state || {};
-  console.log("apidata",apidata.data);
+  console.log("apidata", apidata.data);
+  const handlePrint = () => {
+    window.print();
+  };
   return (
     <div>
       <>
         <>
-          <Container>
+          <Container style={{ marginTop: "50px" }}>
             <table
               style={{
                 display: "block",
                 background:
                   "#f8f8fa url(https://i.ibb.co/VTk0B0B/pattern.png) repeat top left",
-                width: "800px",
+                width: "700px",
                 color: "#444444",
                 boxShadow: "0px 0 6px #ccc",
                 marginTop: "60px",
-                marginBottom:'40px',
-                margin:'0 auto'
+                marginBottom: "40px",
+                margin: "0 auto",
               }}
               cellSpacing="0"
               cellPadding="0"
               border="0"
               align="center"
             >
-
-
               <tr style={{ width: "100%", borderCollapse: "collapse" }}>
                 <tr
-                  width="800px"
+                  width="700px"
                   style={{
                     width: "100%",
                     display: "grid",
@@ -39,9 +39,8 @@ const Jobsumbitdata = () => {
                   }}
                 >
                   <tr
-                    width="800px"
                     style={{
-                      width: "800px",
+                      width: "700px",
                       backgroundColor: "white",
                       height: "100px",
                       borderBottom: "3px solid #006cb5",
@@ -49,7 +48,7 @@ const Jobsumbitdata = () => {
                   >
                     <td
                       style={{
-                        width: "800px",
+                        width: "700px",
                         textAlign: "center",
                         verticalAlign: "middle",
                       }}
@@ -83,7 +82,7 @@ const Jobsumbitdata = () => {
                 >
                   <table
                     style={{
-                      width: "760px",
+                      width: "660px",
                       display: "block",
                       wordBreak: "break-all",
                       boxShadow: "0px 0 6px #ccc",
@@ -103,7 +102,7 @@ const Jobsumbitdata = () => {
                           <table
                             style={{
                               marginBottom: "20px",
-                              width: "730px",
+                              width: "630px",
                               fontSize: "14px",
                               textAlign: "left",
                               background: "#ffffff",
@@ -115,7 +114,6 @@ const Jobsumbitdata = () => {
                             border="0"
                             align="left"
                           >
-                            {/* Your table content goes here */}
                             <thead>
                               <tr
                                 style={{
@@ -149,8 +147,8 @@ const Jobsumbitdata = () => {
                                 </th>
                               </tr>
                             </thead>
-                            <tbody style={{paddingLeft:'10px'}}>
-                              <tr >
+                            <tbody style={{ paddingLeft: "10px" }}>
+                              <tr>
                                 <td
                                   width="100px"
                                   style={{
@@ -165,7 +163,7 @@ const Jobsumbitdata = () => {
                                 </td>
                                 <td>{apidata.data.fullName}</td>
                               </tr>
-                             
+
                               <tr>
                                 <td
                                   width="100px"
@@ -179,8 +177,9 @@ const Jobsumbitdata = () => {
                                 <td width="40px" align="center">
                                   <b>:</b>
                                 </td>
-                                <td>{apidata.data.fatherName}</td>
+                                <td>{apidata.data.father_Name}</td>
                               </tr>
+
                               <tr>
                                 <td
                                   width="100px"
@@ -189,12 +188,12 @@ const Jobsumbitdata = () => {
                                       "calibri, helvetica, arial, sans-serif",
                                   }}
                                 >
-                                  Mother Name
+                                  Gender
                                 </td>
                                 <td width="40px" align="center">
                                   <b>:</b>
                                 </td>
-                                <td>{apidata.data.motherName}</td>
+                                <td>{apidata.data.gender}</td>
                               </tr>
                               <tr>
                                 <td
@@ -219,27 +218,12 @@ const Jobsumbitdata = () => {
                                       "calibri, helvetica, arial, sans-serif",
                                   }}
                                 >
-                                  Date of Birth
+                                  Categorie
                                 </td>
                                 <td width="40px" align="center">
                                   <b>:</b>
                                 </td>
-                                <td>{apidata.data.date_of_birth}</td>
-                              </tr>
-                              <tr>
-                                <td
-                                  width="100px"
-                                  style={{
-                                    fontFamily:
-                                      "calibri, helvetica, arial, sans-serif",
-                                  }}
-                                >
-                                  Gender
-                                </td>
-                                <td width="40px" align="center">
-                                  <b>:</b>
-                                </td>
-                                <td>{apidata.data.gender}</td>
+                                <td>{apidata.data.categorie}</td>
                               </tr>
 
                               <tr>
@@ -250,13 +234,14 @@ const Jobsumbitdata = () => {
                                       "calibri, helvetica, arial, sans-serif",
                                   }}
                                 >
-                                  Category
+                                  Date of Birth
                                 </td>
                                 <td width="40px" align="center">
                                   <b>:</b>
                                 </td>
-                                <td>{apidata.data.category}</td>
+                                <td>{apidata.data.date_of_birth}</td>
                               </tr>
+
                               <tr>
                                 <td
                                   width="100px"
@@ -265,7 +250,7 @@ const Jobsumbitdata = () => {
                                       "calibri, helvetica, arial, sans-serif",
                                   }}
                                 >
-                                 Home Town
+                                  Home Town
                                 </td>
                                 <td width="40px" align="center">
                                   <b>:</b>
@@ -280,7 +265,7 @@ const Jobsumbitdata = () => {
                                       "calibri, helvetica, arial, sans-serif",
                                   }}
                                 >
-                                 Companies Name
+                                  Companies Name
                                 </td>
                                 <td width="40px" align="center">
                                   <b>:</b>
@@ -325,7 +310,7 @@ const Jobsumbitdata = () => {
                                       "calibri, helvetica, arial, sans-serif",
                                   }}
                                 >
-                                  Package 
+                                  Package
                                 </td>
                                 <td width="40px" align="center">
                                   <b>:</b>
@@ -334,23 +319,52 @@ const Jobsumbitdata = () => {
                               </tr>
 
                               <tr>
-                              <td width="100px" style={{ fontFamily: 'calibri, helvetica, arial, sans-serif' }}>Selection</td>
-                              <td width="40px" align="center"><b>:</b></td>
-                              <td>{apidata.data.selectType}</td>
-                            </tr>
+                                <td
+                                  width="100px"
+                                  style={{
+                                    fontFamily:
+                                      "calibri, helvetica, arial, sans-serif",
+                                  }}
+                                >
+                                  Selection
+                                </td>
+                                <td width="40px" align="center">
+                                  <b>:</b>
+                                </td>
+                                <td>{apidata.data.selectType}</td>
+                              </tr>
 
-                            <tr>
-                              <td width="100px" style={{ fontFamily: 'calibri, helvetica, arial, sans-serif' }}>Apply For Job</td>
-                              <td width="40px" align="center"><b>:</b></td>
-                              <td>{apidata.data.totalApplyCompanies}</td>
-                            </tr>
+                              <tr>
+                                <td
+                                  width="100px"
+                                  style={{
+                                    fontFamily:
+                                      "calibri, helvetica, arial, sans-serif",
+                                  }}
+                                >
+                                  Apply For Job
+                                </td>
+                                <td width="40px" align="center">
+                                  <b>:</b>
+                                </td>
+                                <td>{apidata.data.totalApplyCompanies}</td>
+                              </tr>
 
-                            <tr>
-                              <td width="100px" style={{ fontFamily: 'calibri, helvetica, arial, sans-serif' }}>Companies Type</td>
-                              <td width="40px" align="center"><b>:</b></td>
-                              <td>{apidata.data.compainesType}</td>
-                            </tr>
-                             
+                              <tr>
+                                <td
+                                  width="100px"
+                                  style={{
+                                    fontFamily:
+                                      "calibri, helvetica, arial, sans-serif",
+                                  }}
+                                >
+                                  Companies Type
+                                </td>
+                                <td width="40px" align="center">
+                                  <b>:</b>
+                                </td>
+                                <td>{apidata.data.companiesType}</td>
+                              </tr>
                             </tbody>
                           </table>
                         </td>
@@ -360,8 +374,9 @@ const Jobsumbitdata = () => {
                 </td>
               </tr>
             </table>
-            <button>Ptint</button>
-
+            <button onClick={handlePrint} className="job_form_data_print">
+              Print
+            </button>
           </Container>
         </>
       </>

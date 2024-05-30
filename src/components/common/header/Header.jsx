@@ -13,7 +13,7 @@ import {
 import style from "./Header.module.css";
 import logImg from "../../../assets/log.jpg";
 import { useSelector } from "react-redux";
-import BaseLayout from "../../layout/BaseLayout";
+import Sidebar from "../../layout/Sidebar";
 const Header = (props) => {
   const { isAdmin } = props;
 
@@ -24,7 +24,7 @@ const Header = (props) => {
   // console.log("Header AccountType", accountType);
   console.log("Header Token", token);
   const [click, setClick] = useState(false);
-const accountType=localStorage.getItem("accountType");
+  const accountType = localStorage.getItem("accountType");
   const handleClick = () => {
     setClick(!click);
   };
@@ -309,118 +309,89 @@ const accountType=localStorage.getItem("accountType");
                     </Nav.Link>
                     {/* <Nav> */}
 
-                    {accountType!== "Student" &&(
-
+                    {accountType !== "Student" && (
                       <>
-                    <Nav.Link
-                      as={Link}
-                      to="/newstudent"
-                      className={style.nav_links}
-                      onClick={handleClick}
-                    >
-                      ADMISSION
-                    </Nav.Link>
-                    <Nav.Link
-                      as={Link}
-                      to="/exit"
-                      className={style.nav_links}
-                      onClick={handleClick}
-                    >
-                      EXIT STUDENT
-                    </Nav.Link>
-                    <Nav.Link
-                      as={Link}
-                      to="/pgcourses"
-                      className={style.nav_links}
-                      onClick={handleClick}
-                    >
-                      POSTGRADUATE
-                    </Nav.Link>
-                    <Nav.Link
-                      as={Link}
-                      to="/btechjob"
-                      className={style.nav_links}
-                      onClick={handleClick}
-                    >
-                      JOB
-                    </Nav.Link>
-                    </>
-                    )}
-                     <>
-                       <NavDropdown
-                            title="REPORT"
-                            id="collasible-nav-dropdown"
-                            // className={style.nav_links}
-                            className={`${style.nav_links}`}
-                            show={show}
-                            onMouseEnter={showDropdown}
-                            onMouseLeave={hideDropdown}
-                          >
-                            <NavDropdown.Item className={style.avDropdown_Item}>
-                              <Nav.Link as={Link} to="/feedback-form">
-                                Feedback Form
-                              </Nav.Link>
-                              <NavDropdown.Item as={Link} to="feedback-details">
-                                View Feedback
-                              </NavDropdown.Item>
-                              <NavDropdown.Item as={Link} to="newstudentreport">
-                               New Admission
-                              </NavDropdown.Item>
-
-                              <NavDropdown.Item as={Link} to="createpgreport">
-                              Pg Report
-                              </NavDropdown.Item>
-
-                              <NavDropdown.Item as={Link} to="createjobreport">
-                               Job Report
-                              </NavDropdown.Item>
-
-                              <NavDropdown.Item as={Link} to="createexitreport">
-                               Exit Student
-                              </NavDropdown.Item>
-                              <NavDropdown.Divider />
-                              <NavDropdown.Item to="#action/3.4">
-                                Separated link
-                              </NavDropdown.Item>
-                            </NavDropdown.Item>
-                          </NavDropdown>
+                        <Nav.Link
+                          as={Link}
+                          to="/newstudent"
+                          className={style.nav_links}
+                          onClick={handleClick}
+                        >
+                          ADMISSION
+                        </Nav.Link>
+                        <Nav.Link
+                          as={Link}
+                          to="/exit"
+                          className={style.nav_links}
+                          onClick={handleClick}
+                        >
+                          EXIT STUDENT
+                        </Nav.Link>
+                        <Nav.Link
+                          as={Link}
+                          to="/pgcourses"
+                          className={style.nav_links}
+                          onClick={handleClick}
+                        >
+                          POSTGRADUATE
+                        </Nav.Link>
+                        <Nav.Link
+                          as={Link}
+                          to="/btechjob"
+                          className={style.nav_links}
+                          onClick={handleClick}
+                        >
+                          JOB
+                        </Nav.Link>
                       </>
+                    )}
+                    <>
+                      <NavDropdown
+                        title="REPORT"
+                        id="collasible-nav-dropdown"
+                        // className={style.nav_links}
+                        className={`${style.nav_links}`}
+                        show={show}
+                        onMouseEnter={showDropdown}
+                        onMouseLeave={hideDropdown}
+                      >
+                        <NavDropdown.Item className={style.avDropdown_Item}>
+                          <Nav.Link as={Link} to="/feedback-form">
+                            Feedback Form
+                          </Nav.Link>
+                          <NavDropdown.Item as={Link} to="feedback-details">
+                            View Feedback
+                          </NavDropdown.Item>
+                          <NavDropdown.Item as={Link} to="newstudentreport">
+                            New Admission
+                          </NavDropdown.Item>
 
-                    {/* {   !accountType== "Instructor" && (
-                      // <>
-                      //  <NavDropdown
-                      //       title="REPORT"
-                      //       id="collasible-nav-dropdown"
-                      //       // className={style.nav_links}
-                      //       className={`${style.nav_links}`}
-                      //       show={show}
-                      //       onMouseEnter={showDropdown}
-                      //       onMouseLeave={hideDropdown}
-                      //     >
-                      //       <NavDropdown.Item className={style.avDropdown_Item}>
-                      //         <Nav.Link as={Link} to="/feedback-form">
-                      //           Feedback Form
-                      //         </Nav.Link>
-                      //         <Nav.Link as={Link} to="/feedback-details">
-                      //           View Feedback
-                      //         </Nav.Link>
-                      //         <NavDropdown.Item to="#action/3.3">
-                      //           Something
-                      //         </NavDropdown.Item>
-                      //         <NavDropdown.Divider />
-                      //         <NavDropdown.Item to="#action/3.4">
-                      //           Separated link
-                      //         </NavDropdown.Item>
-                      //       </NavDropdown.Item>
-                      //     </NavDropdown>
-                      // </>
-                    )} */}
+                          <NavDropdown.Item as={Link} to="createpgreport">
+                            Pg Report
+                          </NavDropdown.Item>
+
+                          <NavDropdown.Item as={Link} to="createjobreport">
+                            Job Report
+                          </NavDropdown.Item>
+
+                          <NavDropdown.Item as={Link} to="createexitreport">
+                            Exit Student
+                          </NavDropdown.Item>
+                          <NavDropdown.Divider />
+                          <NavDropdown.Item to="#action/3.4">
+                            Separated link
+                          </NavDropdown.Item>
+                        </NavDropdown.Item>
+                      </NavDropdown>
+                    </>
+
+        
                     {!isAdmin &&
-                      // !accountType== "Student" && 
+                      
                       token !== null &&
-                      accountType=== "Instructor" && (
+                      accountType === "Instructor" && (
                         <>
-                       <BaseLayout/>
+                          <Sidebar />
                           {/* <Nav.Link as={Link} to="/newstudent" className={style.nav_links} onClick={handleClick}>ADMISSION</Nav.Link> */}
                           {/* <Nav.Link as={Link} to="/exit" className={style.nav_links} onClick={handleClick}>EXIT STUDENT</Nav.Link>
                       <Nav.Link as={Link} to="/pgcourses" className={style.nav_links} onClick={handleClick}>POSTGRADUATE</Nav.Link>

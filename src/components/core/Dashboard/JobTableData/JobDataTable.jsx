@@ -21,6 +21,7 @@ const JobDataTable = () => {
   const fetchData = async () => {
     try {
       const data = await getAllJobStudents();
+      console.log(data);
       setFormData(data);
     } catch (error) {
       console.error("Error fetching admission data:", error);

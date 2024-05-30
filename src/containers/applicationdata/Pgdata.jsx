@@ -1,29 +1,14 @@
 import { useState, useEffect } from "react";
 import "./admissiondata.scss";
-// import axios from "axios";
-// import { useSelector } from "react-redux";
-// import { pgCourseEndpoints } from "../../services/apis";
 import {getPgCourseById} from "../../services/apiFunction/pgApi";
 import { useParams } from "react-router-dom";
 function Pgdata() {
-
   const [formData, setFormData] = useState({});
   // const { token } = useSelector((state) => state.auth);
-
   const { id } = useParams();
-  console.log(id);
    const token = localStorage.getItem("token");
-
   const fetchData = async () => {
     try {
-      // const cleanToken = token.replace(/^"|"$/g, "");
-      // const apiUrl = `${pgCourseEndpoints.GET_PG_COURSE_BY_ID}/${id}`;
-      // const { data: res } = await axios.get(apiUrl, {
-      //   headers: {
-      //     Authorization: `Bearer ${cleanToken}`,
-      //   },
-      // });
-      // setFormData(res.pgdata);
       const data = await getPgCourseById(id,token);
       setFormData(data);
       console.log(data);
@@ -34,8 +19,6 @@ function Pgdata() {
   useEffect(() => {
     fetchData();
   }, []);
-
-
   const handlePrint = () => {
     window.print();
   };
@@ -131,15 +114,7 @@ function Pgdata() {
                           </td>
                           <td>{formData.fatherName}</td>
                         </tr>
-                        <tr>
-                          <td className="tbody_formData_info_name">
-                            Mother Name
-                          </td>
-                          <td className="tbody_fromData_and_info_dot">
-                            <b>:</b>
-                          </td>
-                          <td>{formData.motherName}</td>
-                        </tr>
+                        
                         <tr>
                           <td className="tbody_formData_info_name">Email</td>
                           <td className="tbody_fromData_and_info_dot">

@@ -16,6 +16,9 @@ const Job = () => {
     email: "",
     date_of_birth: "",
     phone_no: "",
+    father_Name:"",
+    gender:"",
+    categorie:"",
     home_city: "",
     companies_city: "",
     package_lpa: "",
@@ -46,6 +49,7 @@ const Job = () => {
     e.preventDefault();
     dispatch(submitJobForm(formData, navigate));
   };
+
   return (
     <>
       <Col className="text-center">JOB</Col>
@@ -68,7 +72,7 @@ const Job = () => {
                             type="text"
                             name="fullName"
                             value={formData.fullName}
-                            placeholder="Enter Full Name.."
+                            placeholder="Enter Full Name..."
                             onChange={changeHandler}
                           />
                         </Form.Group>
@@ -81,7 +85,7 @@ const Job = () => {
                             name="email"
                             id="email"
                             value={formData.email}
-                            placeholder="Enter  Email..."
+                            placeholder="Enter Email..."
                             onChange={changeHandler}
                             className="rounded-2"
                           />
@@ -92,11 +96,71 @@ const Job = () => {
                             Phone<span className="text-danger">*</span>
                           </Form.Label>
                           <Form.Control
-                            type="text"
+                            type="number"
                             name="phone_no"
                             id="phone_no"
                             value={formData.phone_no}
-                            placeholder="Enter  Phone No..."
+                            placeholder="Enter Phone No..."
+                            onChange={changeHandler}
+                            className="rounded-2"
+                          />
+                        </Form.Group>
+                        
+                        <Form.Group as={Col} md="4">
+                          <Form.Label>
+                            DOB<span className="text-danger">*</span>
+                          </Form.Label>
+                          <Form.Control
+                            type="date"
+                            name="date_of_birth"
+                            id="date_of_birth"
+                            value={formData.date_of_birth}
+                            placeholder="Enter DOB..."
+                            onChange={changeHandler}
+                            className="rounded-2"
+                          />
+                        </Form.Group>
+                        <Form.Group as={Col} md="4">
+                          <Form.Label>
+                            Father Name<span className="text-danger">*</span>
+                          </Form.Label>
+                          <Form.Control
+                            type="text"
+                            name="father_Name"
+                            id="father_Name"
+                            value={formData.father_Name}
+                            placeholder="Enter Father Name..."
+                            onChange={changeHandler}
+                            className="rounded-2"
+                          />
+                        </Form.Group>
+
+
+                        <Form.Group as={Col} md="4">
+                          <Form.Label>
+                            Gender<span className="text-danger">*</span>
+                          </Form.Label>
+                          <Form.Control
+                            type="text"
+                            name="gender"
+                            id="gender"
+                            value={formData.gender}
+                            placeholder="Enter Gender..."
+                            onChange={changeHandler}
+                            className="rounded-2"
+                          />
+                        </Form.Group>
+                        
+                        <Form.Group as={Col} md="4">
+                          <Form.Label>
+                            Categoire<span className="text-danger">*</span>
+                          </Form.Label>
+                          <Form.Control
+                            type="text"
+                            name="categorie"
+                            id="categorie"
+                            value={formData.categorie}
+                            placeholder="Enter Categorie..."
                             onChange={changeHandler}
                             className="rounded-2"
                           />
@@ -148,11 +212,11 @@ const Job = () => {
                             <span className="text-danger">*</span>
                           </Form.Label>
                           <Form.Control
-                            type="text"
+                            type="number"
                             name="totalApplyCompanies"
                             id="totalApplyCompanies"
                             value={formData.totalApplyCompanies}
-                            placeholder=""
+                            placeholder="Total Apply Companies..."
                             onChange={changeHandler}
                             className="rounded-2"
                           />
@@ -164,11 +228,11 @@ const Job = () => {
                             <span className="text-danger">*</span>
                           </Form.Label>
                           <Form.Control
-                            type="text"
+                            type="number"
                             name="noOfSelectInterview"
                             id="noOfSelectInterview"
                             value={formData.noOfSelectInterview}
-                            placeholder="Enter No Of Select Interview"
+                            placeholder="Enter No Of Select Interview..."
                             onChange={changeHandler}
                             className="rounded-2"
                           />
@@ -181,16 +245,30 @@ const Job = () => {
                     <Accordion.Header>Companies Information</Accordion.Header>
                     <Accordion.Body>
                       <Row>
+                      <Form.Group as={Col} md="4">
+                  <Form.Label>
+                    Companies Name<span className="text-danger">*</span>
+                  </Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="companies_name"
+                    id="companies_name"
+                    value={formData.companies_name}
+                    placeholder="Enter  Companies Name..."
+                    onChange={changeHandler}
+                    className="rounded-2"
+                  />
+                </Form.Group>
                         <Form.Group as={Col} md="4">
                           <Form.Label>
-                            Phone<span className="text-danger">*</span>
+                          Companies City<span className="text-danger">*</span>
                           </Form.Label>
                           <Form.Control
                             type="text"
-                            name="phone_no"
-                            id="phone_no"
-                            value={formData.phone_no}
-                            placeholder="Enter  Phone No..."
+                            name="companies_city"
+                            id="companies_city"
+                            value={formData.companies_city}
+                            placeholder="Enter Companies City..."
                             onChange={changeHandler}
                             className="rounded-2"
                           />
@@ -201,11 +279,11 @@ const Job = () => {
                             Package lpa<span className="text-danger">*</span>
                           </Form.Label>
                           <Form.Control
-                            type="text"
+                            type="number"
                             name="package_lpa"
                             id="package_lpa"
                             value={formData.package_lpa}
-                            placeholder=""
+                            placeholder="Enter Lpa..."
                             onChange={changeHandler}
                             className="rounded-2"
                           />
@@ -248,190 +326,11 @@ const Job = () => {
                   </Accordion.Item>
                 </Accordion>
 
-                {/* <Form.Group as={Col} md="4">
-                  <Form.Label>
-                    Full Name<span className="text-danger">*</span>
-                  </Form.Label>
-                  <Form.Control
-                    type="text"
-                    name="fullName"
-                    value={formData.fullName}
-                    placeholder="Enter Full Name.."
-                    onChange={changeHandler}
-                  />
-                </Form.Group>
-                <Form.Group as={Col} md="4">
-                  <Form.Label>
-                    Companies Name<span className="text-danger">*</span>
-                  </Form.Label>
-                  <Form.Control
-                    type="text"
-                    name="companies_name"
-                    id="companies_name"
-                    value={formData.companies_name}
-                    placeholder="Enter  Companies Name..."
-                    onChange={changeHandler}
-                    className="rounded-2"
-                  />
-                </Form.Group>
-
-                <Form.Group as={Col} md="4">
-                  <Form.Label>
-                    Email<span className="text-danger">*</span>
-                  </Form.Label>
-                  <Form.Control
-                    type="text"
-                    name="email"
-                    id="email"
-                    value={formData.email}
-                    placeholder="Enter  Email..."
-                    onChange={changeHandler}
-                    className="rounded-2"
-                  />
-                </Form.Group>
-
-                <Form.Group as={Col} md="4">
-                  <Form.Label>
-                    Phone<span className="text-danger">*</span>
-                  </Form.Label>
-                  <Form.Control
-                    type="text"
-                    name="phone_no"
-                    id="phone_no"
-                    value={formData.phone_no}
-                    placeholder="Enter  Phone No..."
-                    onChange={changeHandler}
-                    className="rounded-2"
-                  />
-                </Form.Group>
-                  
-                <Form.Group as={Col} md="4">
-                  <Form.Label>
-                    Home City<span className="text-danger">*</span>
-                  </Form.Label>
-                  <Form.Control
-                    type="text"
-                    name="home_city"
-                    id="home_city"
-                    value={formData.home_city}
-                    placeholder="Enter Home City..."
-                    onChange={changeHandler}
-                    className="rounded-2"
-                  />
-                </Form.Group>
-
-                <Form.Group as={Col} md="4">
-                  <Form.Label>
-                    Companies City<span className="text-danger">*</span>
-                  </Form.Label>
-                  <Form.Control
-                    type="text"
-                    name="companies_city"
-                    id="companies_city"
-                    value={formData.companies_city}
-                    placeholder="Enter Companies ..."
-                    onChange={changeHandler}
-                    className="rounded-2"
-                  />
-                </Form.Group>
-
-                <Form.Group as={Col} md="4">
-                  <Form.Label>
-                    Package lpa<span className="text-danger">*</span>
-                  </Form.Label>
-                  <Form.Control
-                    type="text"
-                    name="package_lpa"
-                    id="package_lpa"
-                    value={formData.package_lpa}
-                    placeholder=""
-                    onChange={changeHandler}
-                    className="rounded-2"
-                  />
-                </Form.Group>
-
-                <Form.Group as={Col} md="4">
-                  <Form.Label>
-                    JOB ROLE<span className="text-danger">*</span>
-                  </Form.Label>
-                  <Form.Control
-                    type="text"
-                    name="job_role"
-                    id="job_role"
-                    value={formData.job_role}
-                    placeholder="Enter Your Role..."
-                    onChange={changeHandler}
-                    className="rounded-2"
-                  />
-                </Form.Group>
-
-                <Form.Group as={Col} md="4" className="mb-3">
-                  <Form.Label htmlFor="selectType">
-                    Select Companies <span className="text-danger">*</span>
-                  </Form.Label>
-                  <Form.Select
-                    id="selectType"
-                    name="selectType"
-                    className="rounded-0"
-                    value={formData.selectType}
-                    onChange={changeHandler}
-                  >
-                    <option value="">Select Exam</option>
-                    <option value="on">On Compuse</option>
-                    <option value="Off">Off Compuse</option>
-                  </Form.Select>
-                </Form.Group>
-                <Form.Group as={Col} md="4">
-                  <Form.Label>
-                    Apply Your Total Companies
-                    <span className="text-danger">*</span>
-                  </Form.Label>
-                  <Form.Control
-                    type="text"
-                    name="totalApplyCompanies"
-                    id="totalApplyCompanies"
-                    value={formData.totalApplyCompanies}
-                    placeholder=""
-                    onChange={changeHandler}
-                    className="rounded-2"
-                  />
-                </Form.Group>
-
-                <Form.Group as={Col} md="4">
-                  <Form.Label>
-                    No Of Select Interview<span className="text-danger">*</span>
-                  </Form.Label>
-                  <Form.Control
-                    type="text"
-                    name="noOfSelectInterview"
-                    id="noOfSelectInterview"
-                    value={formData.noOfSelectInterview}
-                    placeholder="Enter No Of Select Interview"
-                    onChange={changeHandler}
-                    className="rounded-2"
-                  />
-                </Form.Group>
-                <Form.Group as={Col} md="4" className="mb-3">
-                  <Form.Label htmlFor="companiesType">
-                    Type Of Companies <span className="text-danger">*</span>
-                  </Form.Label>
-                  <Form.Select
-                    id="companiesType"
-                    name="companiesType"
-                    className="rounded-0"
-                    value={formData.companiesType}
-                    onChange={changeHandler}
-                  >
-                    <option value="">Select Type Of Companies</option>
-                    <option value="Service">Service-based</option>
-                    <option value="Product">Product-based</option>
-                  </Form.Select>
-                </Form.Group> */}
-                {/* sumbit button */}
+               
                 <Row>
                   <Col md="12" className="text-center">
                     <button
-                      type="sumbit"
+                      type="sumbit" style={{backgroundColor:'yellow'}}
                       className="text-denger px-4 py-2 my-4 border-0   rounded-md"
                     >
                       SUMBIT

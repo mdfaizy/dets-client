@@ -3,7 +3,13 @@ const NewAdmissionData = () => {
   const location = useLocation();
   const { apidata } = location.state || {};
   console.log("apidata", apidata.newAdmission);
+
+  const handlePrint = () => {
+    window.print();
+  };
+
   return (
+    <>
     <div className="addmission_top_contante">
       <table
         className="admission_table_contante"
@@ -361,6 +367,10 @@ const NewAdmissionData = () => {
         </tr>
       </table>
     </div>
+     <button onClick={handlePrint} className="job_form_data_print">
+     Print
+   </button>
+   </>
   );
 };
 

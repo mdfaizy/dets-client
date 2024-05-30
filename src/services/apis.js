@@ -14,6 +14,7 @@ export const endpoints = {
 //Job
 
 export const Jobs = {
+  
   POST_JOIN_JOB_API: BASE_URL + "/job/job",
   GET_STUDENT_JOB_BY_ID_API: BASE_URL + "/job/getJob_ById",
   Get_User_Profile: BASE_URL + "/job/get_Profile",
@@ -41,6 +42,7 @@ export const JpbEndpoints = {
 };
 
 export const exitStudentEndpoints = {
+  SUMBIT_EXIT_STUDENT:BASE_URL + "/exit/exitStudent",
   GET_USER_EXIT_PROFILE: BASE_URL + "/exit/getStudent",
   GET_EXIT_STUDENT_BY_ID: BASE_URL + "/exit/getExitStudentByID",
   UPDATE_EXIT_STUDENT: BASE_URL + "/exit/updateExitStudentById",
@@ -53,5 +55,6 @@ export const pgCourseEndpoints = {
   UPDATE_PG_STUDENT_BY_ID: BASE_URL + "/pgcourse/update-pgCourse-By-id",
   ALL_GET_STUDENT_PG_COURSE_BY_ID:
     BASE_URL + "/pgcourse/get_all_pgcource_student",
-  DELETE_PG_STUDENT_BY_ID: BASE_URL + "pgcourse/delete_id_pgstudent",
+  DELETE_PG_STUDENT_BY_ID: BASE_URL + "/pgcourse/delete_id_pgstudent",
+  SUMBIT_PG_FORM_DATA:BASE_URL+"/pgcourse/pg_cource"
 };

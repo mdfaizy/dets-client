@@ -1,20 +1,63 @@
-import axios from "axios";
 
-// import { toast } from "react-hot-toast";
+
+import { toast } from "react-hot-toast";
 
 // import { updateCompletedLectures } from "../../slices/viewCourseSlice"
-// import { setLoading } from "../../redux/slices/authSlice";
+import { setLoading,setExitData } from "../../redux/slices/exitSlice.js";
 import { apiConnector } from "../apiConnector";
 
 import { exitStudentEndpoints } from "../apis.js";
 const {
   GET_DATA_ALL_EXIT_STUDENT,
   GET_EXIT_STUDENT_BY_ID,
-  GET_USER_EXIT_PROFILE,
+  // GET_USER_EXIT_PROFILE,
   UPDATE_EXIT_STUDENT,
   DELETE_JOB_DATA_BY_ID_API,
+  SUMBIT_EXIT_STUDENT
 } = exitStudentEndpoints;
 
+
+export function submitExitForm(formData, navigate, token) {
+  const cleanToken = token ? token.replace(/^"|"$/g, "") : "";
+  return async (dispatch) => {
+    const toastId = toast.loading("Loading...");
+    dispatch(setLoading(true));
+
+    try {
+      const response = await apiConnector(
+        "POST",
+        SUMBIT_EXIT_STUDENT,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${cleanToken}`,
+          },
+        }
+      );
+      console.log("response", response);
+
+      if (!response.data.success) {
+        throw new Error(response.data.message);
+      }
+
+      dispatch(setExitData(formData));
+      toast.success("Job application submitted successfully", {
+        duration: 2000,
+      });
+
+      const responseData = response.data;
+      navigate("/exitsumbitdata", { state: { apidata: responseData } });
+  
+    } catch (error) {
+      console.error("Error submitting job form:", error);
+      toast.error("Failed to submit job application");
+    } finally {
+      dispatch(setLoading(false));
+      toast.dismiss(toastId);
+    }
+  };
+}
 // all exit student fetch allData
 export const getAllExitStudent = async () => {
   // const API_URL=`${}`

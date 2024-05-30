@@ -4,7 +4,8 @@
   align-items: center;
   justify-content: center;
   margin-bottom: 10px;
-
+  
+  margin: 0 auto;
   .admission_table_contante {
    
     .admission_top_tr_contante {
@@ -15,11 +16,11 @@
         // width: 100%;
         border-collapse: collapse;
         .admission_top_tr3 {
-          width: 800px;
+          width: 700px;
           width: 100%;
           
           height: 100px;
-          border-bottom: 3px solid #006cb5;
+          border-bottom: 3px solid #8bc4eb;
           .admission_top_td1 {
             width: 800px;
             text-align: center;

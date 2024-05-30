@@ -1,5 +1,5 @@
 import "./App.scss";
-import { useState, useEffect } from "react";
+import { useState} from "react";
 import About from "./components/pages/about/About";
 import Home from "./components/home/Home";
 import Job from "./routes/job/Job";
@@ -17,10 +17,10 @@ import Addmissiondata from "./containers/applicationdata/Addmissiondata";
 import Exitdata from "./containers/applicationdata/Exitdata";
 import Pgdata from "./containers/applicationdata/Pgdata";
 import Jobdata from "./containers/applicationdata/Jobdata";
-import Allnewstudent from "./admin/all-student/Allnewstudent";
-import Allexitstudent from "./admin/all-student/Allexitstudent";
-import Allpgstudent from "./admin/all-student/Allpgstudent";
-import Allstudentjob from "./admin/all-student/Allstudentjob";
+// import Allnewstudent from "./admin/all-student/Allnewstudent";
+// import Allexitstudent from "./admin/all-student/Allexitstudent";
+// import Allpgstudent from "./admin/all-student/Allpgstudent";
+// import Allstudentjob from "./admin/all-student/Allstudentjob";
 import ForgatePassword from "./components/pages/forgatepassword/ForgatePassword";
 import ReasetPassword from "./components//pages/forgatepassword/resetPassword/ResetPassword";
 import Exit from "./routes/exitstudent/Exit";
@@ -42,9 +42,6 @@ import FetchUserData from "../data/FetchUserData";
 import AdmissionSummaryData from "./summaryData/AdmissionSummaryData";
 import FilterData from "./admin&teacher/data/FilterData";
 import VerifyOtp from "./components/pages/EmailVerify/verifyOtp";
-import Sidebar from "./admin/side-bar/Sidebar";
-
-import Dassboars from "./admin/dassbord/Dassboars";
 import EditJob from "./adminsection/job/EditJob";
 import JobDataPrint from "./adminsection/job/JobDataPrint";
 import PrintNewStudent from "./adminsection/admission/PrintNewStudent";
@@ -66,71 +63,37 @@ import Acoount from "./components/pages/createAccount/Acoount";
 import TeacherAccount from "./components/pages/teacherSignupAccount/TeacherAccoutn";
 import OpenRoute from "./components/core/Auth/OpenRoute";
 import PrivateRoute from "./components/core/Auth/PrivateRoute";
-import BaseLayout from "./components/layout/BaseLayout";
-
-import { toggleTheme } from "./redux/slices/theamSlice";
-import { useDispatch, useSelector } from "react-redux";
-import { LIGHT_THEME, DARK_THEME } from "./utils/constant";
-import MoonIcon from "./assets/Images/moon.svg";
-import SunIcon from "./assets/Images/sun.svg";
+import Sidebar from "./components/layout/Sidebar";
 import AreaTable from "./components/core/Dashboard/newStudentTable/NewStudentTable";
 import ExitStudentTableData from "./components/core/Dashboard/exitStudentTable/ExitStudentTableData";
 import JobDataTable from "./components/core/Dashboard/JobTableData/JobDataTable";
+import PgStudentDataTable from "./components/core/Dashboard/PgStudentDataTable/PgStudentDataTable";
 
 function App() {
-  const theme = useSelector((state) => state.theme.theme);
-  const dispatch = useDispatch();
+  
   const accountType = localStorage.getItem("accountType");
   console.log(accountType);
-  // Adding dark-mode class to the body tag if dark mode is set
-  useEffect(() => {
-    if (theme === DARK_THEME) {
-      document.body.classList.add("dark-mode");
-    } else {
-      document.body.classList.remove("dark-mode");
-    }
-  }, [theme]);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+ 
+
   const [isAdmin, setIsAdmin] = useState(false);
-  const [teacher, setTeacher] = useState(false);
-  const [sidebartoggle, setSidebartoggle] = useState(false);
+  
+
   return (
     // style={{ backgroundColor: "#000814" }}
     <div>
       <Header
         isAdmin={isAdmin}
         setIsAdmin={setIsAdmin}
-        teacher={teacher}
-        setTeacher={setTeacher}
+       
       />
-
-      {/* <div >
-      
-        <Dassboars  sidebartoggle={sidebartoggle}  setSidebartoggle={setSidebartoggle}/>
-      </div> */}
-
-      <button
-        type="button"
-        className="theme-toggle-btn"
-        onClick={() => dispatch(toggleTheme())}
-      >
-        <img
-          className="theme-icon"
-          src={theme === LIGHT_THEME ? SunIcon : MoonIcon}
-          alt="theme-icon"
-        />
-      </button>
       <Routes>
-        {/* <Route path="/dashboard" element={<Dashboard />} /> */}
         <Route index element={<Home />} />
-
         <Route path="/about" element={<About />} />
         {/* User route */}
-
         <Route path="/verify-email" element={<VerifyOtp />} />
         <Route
           path="/signupfrom"
-          element={<SignupFrom setIsLoggedIn={setIsLoggedIn} />}
+          element={<SignupFrom  />}
         />
         <Route
           path="/loginfrom"
@@ -188,25 +151,25 @@ function App() {
         <Route path="/pg_application/:id" element={<Pgdata />} />
         <Route path="/job_application/:id" element={<Jobdata />} /> */}
         {/* Show Admin and teacher  */}
-        <Route
+        {/* <Route
           path="/all_new_addmission"
-          element={<Allnewstudent isAdmin={isAdmin} teacher={teacher} />}
+          element={<Allnewstudent isAdmin={isAdmin}  />}
         />
         <Route
           path="/all_exit_student"
-          element={<Allexitstudent isAdmin={isAdmin} teacher={teacher} />}
+          element={<Allexitstudent isAdmin={isAdmin}  />}
         />
         <Route
           path="/all_pg_student"
-          element={<Allpgstudent isAdmin={isAdmin} teacher={teacher} />}
+          element={<Allpgstudent isAdmin={isAdmin}  />}
         />
         <Route
           path="/all_student_job"
-          element={<Allstudentjob isAdmin={isAdmin} teacher={teacher} />}
-        />
+          element={<Allstudentjob isAdmin={isAdmin}  />}
+        /> */}
 
         {/* from befor ui */}
-        <Route path="newstudent" element={<Newstudent />} />
+        <Route path="/newstudent" element={<Newstudent />} />
         <Route path="/exit" element={<Exit />} />
         <Route path="/btechjob" element={<Btechjob />} />
         <Route path="/pgcourses" element={<Pgcourse />} />
@@ -217,7 +180,7 @@ function App() {
         <Route path="/jobsumbitdata" element={<Jobsumbitdata />} />
         <Route
           path="/studentallinfo"
-          element={<StudentAllInfo teacher={teacher} />}
+          element={<StudentAllInfo  />}
         />
 
         {/* get data by ID */}
@@ -262,11 +225,11 @@ function App() {
         {/* nestade route */}
         <Route
         
-          element={<BaseLayout />}
+          element={<Sidebar />}
         >
           <Route
             path="dashboard/all_new_addmission"
-            element={<AreaTable isAdmin={isAdmin} teacher={teacher} />}
+            element={<AreaTable isAdmin={isAdmin}  />}
           />
           <Route
             path="dashboard/all_exit_student"
@@ -274,11 +237,11 @@ function App() {
           />
           <Route
           path="dashboard/all_pg_student"
-          element={<ExitStudentTableData isAdmin={isAdmin} teacher={teacher} />}
+          element={<PgStudentDataTable isAdmin={isAdmin}  />}
         />
         <Route
           path="dashboard/all_student_job"
-          element={<JobDataTable isAdmin={isAdmin} teacher={teacher} />}
+          element={<JobDataTable isAdmin={isAdmin}  />}
         />
           {/* JobDataTable */}
           <Route path="dashboard/new_addmission/:id" element={<Addmissiondata />} />
@@ -295,12 +258,11 @@ function App() {
       </Routes>
 
       <Footer
-        isLoggedIn={isLoggedIn}
-        setIsLoggedIn={setIsLoggedIn}
+       
         isAdmin={isAdmin}
         setIsAdmin={setIsAdmin}
-        teacher={teacher}
-        setTeacher={setTeacher}
+        
+        
       />
     </div>
   );

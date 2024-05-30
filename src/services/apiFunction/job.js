@@ -3,12 +3,10 @@ import { setLoading, setJobData } from "../../redux/slices/jobSlice";
 import { apiConnector } from "../apiConnector";
 import { Jobs } from "../apis";
 import axios from "axios";
-import { BASE_URL } from "../apis";
 const { POST_JOIN_JOB_API } = Jobs;
 import { JpbEndpoints } from "../apis";
-// const { Get_User_Data } = Jobs;
 const {
-  GET_USER_DETAILS_API,
+  // GET_USER_DETAILS_API,
   GET_STUDENT_JOB_BY_ID_API,
   DELETE_JOB_DETAIL_API,
   GET_ALL_STUDENT_FOR_JOB_API,
@@ -96,7 +94,7 @@ export const getStudentForJobById = async (id, token) => {
         Authorization: `Bearer ${cleanToken}`,
       },
     });
-    console.log(response);
+    console.log(response.data);
     return response.data.jobData;
   } catch (error) {
     console.error("Failed to fetch new admission", error);

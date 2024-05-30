@@ -1,14 +1,14 @@
 
 import { createSlice } from "@reduxjs/toolkit";
 const initialState ={
-    jobData: null,
+    pgFormData: null,
     loading: false,
 }
-const jobSlice =createSlice({
-    name:"job",
+const pgSlice =createSlice({
+    name:"PgStudent",
     initialState: initialState,
     reducers:{
-        setJobData(state, value) {
+        setPgData(state, value) {
             state.signupData = value.payload;
           },
           setLoading(state, value) {
@@ -17,5 +17,5 @@ const jobSlice =createSlice({
     }
 });
 
-export const {setJobData, setLoading}=jobSlice.actions;
-export default jobSlice.reducer;
+export const {setPgData, setLoading}=pgSlice.actions;
+export default pgSlice.reducer;

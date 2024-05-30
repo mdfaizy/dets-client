@@ -1,33 +1,69 @@
-import axios from 'axios';
+import axios from "axios";
+import { setLoading, setPgData } from "../../redux/slices/pgStudentSlice";
+import { pgCourseEndpoints } from "../apis";
+import { apiConnector } from "../apiConnector";
+import toast from "react-hot-toast";
+const {
+  ALL_GET_STUDENT_PG_COURSE_BY_ID,
+  DELETE_PG_STUDENT_BY_ID,
+  GET_PG_COURSE_BY_ID,
+  SUMBIT_PG_FORM_DATA,
+} = pgCourseEndpoints;
+export function submitPGForm(formData, navigate, token) {
+  const cleanToken = token ? token.replace(/^"|"$/g, "") : "";
+  return async (dispatch) => {
+    const toastId = toast.loading("Loading...");
+    dispatch(setLoading(true));
 
-import { pgCourseEndpoints } from '../apis';
-import { apiConnector } from '../apiConnector';
+    try {
+      const response = await apiConnector(
+        "POST",
+        SUMBIT_PG_FORM_DATA,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${cleanToken}`,
+          },
+        }
+      );
+      console.log("response", response);
 
-const {ALL_GET_STUDENT_PG_COURSE_BY_ID,DELETE_PG_STUDENT_BY_ID,GET_PG_COURSE_BY_ID}=pgCourseEndpoints;
+      if (!response.data.success) {
+        throw new Error(response.data.message);
+      }
 
+      dispatch(setPgData(formData));
+      toast.success("Job application submitted successfully", {
+        duration: 2000,
+      });
 
+      // Extract the necessary serializable data
+      const responseData = response.data;
 
-
-
-export const getAllPgStudentData=async()=>{
-  try{
-    const API_URL=`${ALL_GET_STUDENT_PG_COURSE_BY_ID}`;
-    const response= await apiConnector('GET',API_URL);
-    return response.data;
-
-  }catch(error){
+      navigate("/pgsumbitdata", { state: { apidata: responseData } });
+    } catch (error) {
+      console.error("Error submitting job form:", error);
+      toast.error("Failed to submit job application");
+    } finally {
+      dispatch(setLoading(false));
+      toast.dismiss(toastId);
+    }
+  };
+}
+export const getAllPgStudentData = async () => {
+  try {
+    const API_URL = `${ALL_GET_STUDENT_PG_COURSE_BY_ID}`;
+    const response = await apiConnector("GET", API_URL);
+    return response.data.data;
+  } catch (error) {
     throw new Error(`Error deleting PG student: ${error.message}`);
   }
-}
-
-
-
-
-
+};
 export const getPgCourseById = async (id, token) => {
   try {
     const cleanToken = token ? token.replace(/^"|"$/g, "") : "";
-    const API_URL=`${GET_PG_COURSE_BY_ID}/${id}`
+    const API_URL = `${GET_PG_COURSE_BY_ID}/${id}`;
 
     const response = await axios.get(
       API_URL,
@@ -46,16 +82,18 @@ export const getPgCourseById = async (id, token) => {
   }
 };
 export const deletePgStudent = async (id) => {
-    try {
-const API_URL =`${DELETE_PG_STUDENT_BY_ID}/${id}`;
-const response= await apiConnector('DELETE', API_URL)
-      // const response = await axios.delete(`http://localhost:8000/api/v1/pgcourse/delete_id_pgstudent/${id}`);
-      if (response.status === 200) {
-        return true;
-      } else {
-        throw new Error(`Failed to delete PG student. Status: ${response.status}`);
-      }
-    } catch (error) {
-      throw new Error(`Error deleting PG student: ${error.message}`);
+  try {
+    const API_URL = `${DELETE_PG_STUDENT_BY_ID}/${id}`;
+    const response = await apiConnector("DELETE", API_URL);
+    // const response = await axios.delete(`http://localhost:8000/api/v1/pgcourse/delete_id_pgstudent/${id}`);
+    if (response.status === 200) {
+      return true;
+    } else {
+      throw new Error(
+        `Failed to delete PG student. Status: ${response.status}`
+      );
     }
-  };
+  } catch (error) {
+    throw new Error(`Error deleting PG student: ${error.message}`);
+  }
+};
