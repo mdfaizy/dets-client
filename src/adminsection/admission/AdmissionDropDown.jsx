@@ -1,13 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import { HiDotsHorizontal } from "react-icons/hi";
-import { Link } from "react-router-dom";
-
+import { Link ,useSelector} from "react-router-dom";
+import { ACCOUNT_TYPE } from "../../utils/constant";
 const AdmissionDropDown = ({ id }) => {
   const [showDropdown, setShowDropdown] = useState(false);
   const handleDropdown = () => {
     setShowDropdown(!showDropdown);
   };
-
+  const user = useSelector((state) => state.profile.user);
   const dropdownRef = useRef(null);
 
   const handleClickOutside = (event) => {
@@ -51,12 +51,12 @@ const AdmissionDropDown = ({ id }) => {
                 </Link>
               </li>
               <li className="dropdown-menu-item">
-                <Link
+                {user?.accountType === ACCOUNT_TYPE.ADMIN && (<Link
                   to={`/deleteNewstudent/${id}`}
                   className="dropdown-menu-link"
                 >
                   Delete
-                </Link>
+                </Link>)}
               </li>
             </ul>
           </div>

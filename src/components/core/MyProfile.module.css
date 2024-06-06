@@ -1,0 +1,150 @@
+.profile_container {
+  margin: 0 auto;
+  width: 91.666667%;
+  max-width: 1000px;
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
+}
+
+.profile_header {
+  padding-top: 2.5rem;
+  color: #377bd9;
+}
+
+.profile_title {
+  margin-bottom: 3.5rem;
+  font-size: 1.875rem; 
+  font-weight: 500; 
+  color: #f9fafb; 
+}
+
+/* Section 1 */
+.profile_section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 0.375rem; 
+  border-width: 1px; 
+  border-color: #374151;
+  background-color: #1f2937; 
+  padding: 0.75rem; 
+}
+
+.profile_section-md {
+  padding: 2rem; 
+  padding-left: 3rem; 
+}
+
+.profile_details {
+  display: flex;
+  align-items: center;
+  gap: 1rem; 
+}
+
+.profile_image {
+  aspect-ratio: 1 / 1; 
+  width: 78px; 
+  border-radius: 50%; 
+  object-fit: cover; 
+}
+
+.profile_info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem; 
+}
+
+.profile_name {
+  font-size: 1.125rem; 
+  font-weight: 600; 
+  color: #f9fafb; 
+}
+
+.profile_email {
+  font-size: 0.6875rem; 
+  color: #9ca3af; 
+  max-width: 220px; 
+  word-break: break-word; 
+}
+
+.profile_email-md {
+  font-size: 0.875rem; 
+  max-width: none; 
+}
+
+/* Section 2 */
+.section {
+  margin-top: 2.5rem; 
+  margin-bottom: 2.5rem; 
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  border-radius: 0.375rem;
+  border-width: 1px;
+  border-color: #374151;
+  background-color: #1f2937;
+  padding: 0.75rem;
+}
+
+.section1_contant {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+}
+.section_md {
+  gap: 2.5rem; 
+  padding: 2rem; 
+  padding-left: 3rem; 
+}
+
+.section_title {
+  font-size: 1.125rem; 
+  font-weight: 600; 
+  color: #f9fafb; 
+}
+
+.section_text {
+  font-size: 0.875rem; 
+  font-weight: 500; 
+  color: #9ca3af; 
+}
+
+/* Section 3 */
+.personal_details {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem; 
+}
+
+.section3_top {
+  
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.personal_details-row {
+  display: flex;
+  gap: 1.25rem; 
+  flex-direction: column; 
+  max-width: 500px;
+  justify-content: space-between;
+}
+
+.personal_detail {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem; 
+}
+
+.detail_title {
+  margin-bottom: 0.5rem; 
+  font-size: 0.875rem; 
+  color: #f3f4f6; 
+}
+
+.detail_text {
+  font-size: 0.875rem; 
+  font-weight: 500; 
+  color: #f9fafb; 
+}

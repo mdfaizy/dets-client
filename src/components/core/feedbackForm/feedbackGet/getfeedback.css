@@ -1,0 +1,95 @@
+/* 
+
+
+   .allfeedbacktopcontainer{
+    width: 300px;
+    margin: 0 auto;
+   }
+
+   .review-content {
+    width: 300px;
+    margin: 0 auto;
+    background-color: black;
+   }
+   .get-review-content{
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+
+   }
+   .review-img-name{
+    padding-top: 10px;
+
+   }
+   .review-img-name img{
+  
+      width: 45px;
+      height: 45px;
+      border-radius:50%;
+   }
+   .post-by-user-name{
+    
+    margin: 0;
+    text-align: center;
+    font-size: 16px;
+    gap: 5px;
+   }
+   .rating-stars{
+    font-size: 30px;
+   }
+   .subject_feedback{
+    font-size: 20px;
+   }
+   .description{
+    font-size: 14px;
+   } */
+
+
+
+
+   /* Add your swiper styles and adjust existing styles if necessary */
+
+.allfeedbacktopcontainer {
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .review-content {
+    background-color: black;
+    padding: 20px;
+    border-radius: 10px;
+  }
+  
+  .get-review-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .review-img-name img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+  }
+  
+  .post-by-user-name {
+    margin: 0;
+    text-align: center;
+    font-size: 16px;
+    gap: 5px;
+  }
+  
+  .rating-stars {
+    font-size: 30px;
+  }
+  
+  .subject_feedback {
+    font-size: 20px;
+  }
+  
+  .description {
+    font-size: 14px;
+  }
+  

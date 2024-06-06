@@ -243,7 +243,7 @@ const DeleteExit = () => {
                             <td className="tbody_fromData_and_info_dot">
                               <b>:</b>
                             </td>
-                            <td>{formData.Phone_no}</td>
+                            <td>{formData.phone_no}</td>
                           </tr>
                           <tr>
                             <td className="tbody_formData_info_name">

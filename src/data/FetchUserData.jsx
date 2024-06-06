@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import NewAdmission from "../src/routes/newstudent/newadmission/NewAdmission"; // Assuming NewAdmission component is in the same directory
+// ../src/routes/newstudent/newadmission/NewAdmission"
+import NewAdmission from "../routes/newstudent/newadmission/NewAdmission"; // Assuming NewAdmission component is in the same directory
 
 function FetchUserData({ id }) {
     console.log("id",id)

@@ -1,8 +1,7 @@
 import { useState } from "react";
-import { Form, Button } from "react-bootstrap";
-import "./feedfrom.scss";
-import Col from "react-bootstrap/Col";
-import StarRating from "./StarRating";
+import { Form, Button, Col } from "react-bootstrap";
+import "./feedback.css";
+// import StarRating from "./StarRating";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 const FeedbackForm = () => {
@@ -11,7 +10,7 @@ const FeedbackForm = () => {
   const [formData, setFormData] = useState({
     title: "",
     description: "",
-    rating: 0,
+    rating: "",
   });
 
   const changeHandler = (event) => {
@@ -22,21 +21,15 @@ const FeedbackForm = () => {
     }));
   };
 
-  const handleRatingChange = (rating) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      rating: rating,
-    }));
-  };
+  // const handleRatingChange = (rating) => {
+  //   setFormData((prevData) => ({
+  //     ...prevData,
+  //     rating: rating,
+  //   }));
+  // };
 
   const submitHandler = async (event) => {
     event.preventDefault();
-
-    if (!token) {
-      console.error("Token is undefined");
-      return;
-    }
-
     try {
       const response = await fetch(
         "http://localhost:8000/api/v1/feedback/feedback",
@@ -81,32 +74,54 @@ const FeedbackForm = () => {
             />
           </Form.Group>
 
-          <Form.Group controlId="description" >
+          <Form.Group controlId="description">
             <Form.Label>
               Description<span className="text-danger">*</span>
             </Form.Label>
             <Form.Control
               as="textarea"
               name="description"
-              style={{ height: "180px" }}
+              style={{ height: "130px" }}
               value={formData.description}
               placeholder="Enter description.."
               onChange={changeHandler}
               required
-            
             />
           </Form.Group>
-
           <Form.Group controlId="rating">
             <Form.Label>Rating</Form.Label>
-            <StarRating className="w-25"
-              rating={formData.rating}
-              onRatingChange={handleRatingChange}
+
+            <Form.Control
+              type="number"
+              name="rating"
+              value={formData.rating}
+              placeholder="Enter Ratnig Point..."
+              onChange={changeHandler}
+              required
             />
           </Form.Group>
-          <Button type="submit" className="reviewButton">
+          {/* <Form.Group controlId="rating">
+            <Form.Label>Rating</Form.Label>
+            
+            <Form.Control
+              type="number"
+              name="rating"
+              value={formData.rating}
+              placeholder="Enter Ratnig Point..."
+              onChange={changeHandler}
+              required
+            />
+            //  <StarRating className="w-25"
+            //   rating={formData.rating}
+            //   onRatingChange={handleRatingChange}
+            // /> 
+          </Form.Group> */}
+          <div className="reviewButton">
+            <Button type="submit">Submit</Button>
+          </div>
+          {/* <Button type="submit" className="reviewButton">
             Submit
-          </Button>
+          </Button> */}
         </Form>
       </div>
     </div>
@@ -114,20 +129,3 @@ const FeedbackForm = () => {
 };
 
 export default FeedbackForm;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -8,6 +8,7 @@ const {
   UPDATE_NEW_ADMISSION_FORM,
   GET_ALL_NEW_ADMISSION_DATA,
   DELETE_NEW_ADMISSION_DATA_BY_ID,
+  GET_PROFILE,
 } = newadmissionEndpoints;
 
 
@@ -43,6 +44,25 @@ export const submitNewStudentForm = async (formData, navigate,token, setLoading)
     toast.dismiss(toastId);
     toast.error("Error submitting form");
     console.error("Error occurred:", error);
+  }
+};
+
+// 
+export const getNewAdmissionUserDetailsById = async () => {
+  const token = localStorage.getItem('token');
+  const cleanToken = token.replace(/^"|"$/g, "");
+  const api_URL=`${GET_PROFILE}`
+// const api_URL= "http://localhost:8000/api/v1/job/get_Profile"
+  try {
+    const response = await apiConnector(api_URL, {
+      headers: {
+        Authorization: `Bearer ${cleanToken}`,
+      },
+    });
+    console.log("Job Data",response.data);
+    return response;
+  } catch (error) {
+    throw new Error(`Error fetching job students data: ${error.message}`);
   }
 };
 

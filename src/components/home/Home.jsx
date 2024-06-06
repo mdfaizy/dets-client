@@ -1,30 +1,20 @@
 import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+
 import Carousel from "react-bootstrap/Carousel";
 import image from "../../assets/image1.jpg";
 import style from "./Home.module.css";
 import { FaArrowRight } from "react-icons/fa";
 import { AiFillCaretRight } from "react-icons/ai";
-import AdmissionSummaryData from "../../summaryData/AdmissionSummaryData";
-// import Feedback from "../../adminDashboard/feedback/Feedback";
-// import Feedbackfrom from "../../adminDashboard/feedback/feedbackfrom/Feedbackfrom";
+import AdmissionSummaryData from "../../summaryData/AdmissionSummaryData"
 import Homes from "../../summaryData/flowchart/Homes";
-import EditJob from "../../adminsection/job/EditJob";
-import { Link } from "react-router-dom";
-import { useNavigate, useParams } from "react-router-dom";
-import JobDataPrint from "../../adminsection/job/JobDataPrint";
 import studyVideo from "../../assets/Images/study1.mp4";
 import expmVideo1 from "../../assets/Images/classRomm.mp4";
-import aboutimage5 from "../../assets/Images/about-image5.png";
 import TimelineSection from "../core/HomePage/TimeLineSection";
 import aboutDouts1 from "../../assets/Images/about-douts1.png";
 import aboutCorprat from "../../assets/Images/about-corprat1.png";
 import aboutSession from "../../assets/Images/about-session1.png";
 import aboutWorkTeam from "../../assets/Images/about-work-team.png";
 function Home() {
-  const { id } = useParams();
-  console.log("id", id);
   return (
     <>
       <Carousel data-bs-theme="dark" className="">
@@ -69,60 +59,7 @@ function Home() {
         </Carousel.Item>
       </Carousel>
 
-      {/* <Container className={style.all_program_details} fluid>
-        <Row>
-          <Col>
-            <h1 className={style.program_text}>YOUR PROGRAM</h1>
-            <Col className={style.all_program_info}>
-              <Row>
-                <Col lg={12} className="text-center">
-            
-                </Col>
-                <Col lg={12} className="mb-2">
-                  <p className="mb-0">
-                    <b>Engineering Program</b>
-                  </p>
-                  <span className="py-2">
-                    <b>&#42;</b> B.Tech<b>(4Year)</b>
-                  </span>
-                  <span className="d-block">
-                    <b>&#42;</b> M.Tech<b>(2Year)</b>{" "}
-                  </span>
-                </Col>
-                <Col lg={12} className="mb-2">
-                  <p className="mb-0">
-                    <b>Engineering Branch</b>
-                  </p>
-                  <span className="d-block">
-                    <b>&#42;</b> B.Tech. in Electronics and Instrumentation
-                    Engineering{" "}
-                  </span>
-                  <span className="d-block">
-                    <b>&#42;</b> B.Tech. in Information Technology{" "}
-                  </span>
-                </Col>
-                <Col lg={12} className="mb-2">
-                  <p className="mb-0">
-                    <b>Student Conselling Program</b>
-                  </p>
-                  <span className="d-block">
-                    <b>&#42;</b> Lack of objective thinking leads students to
-                    not make independent dicisions{" "}
-                  </span>
-                  <span className="d-block">
-                    <b>&#42;</b> The main goal of our program is to help
-                    students become self-sufficient
-                  </span>
-                  <span className="d-block">
-                    <b>&#42;</b> Crafting future course of action through our
-                    scientific experience{" "}
-                  </span>
-                </Col>
-              </Row>
-            </Col>
-          </Col>
-        </Row>
-      </Container> */}
+    
 
       <Container className={style.home_contante}>
         {/* section 1  */}
@@ -256,13 +193,8 @@ function Home() {
           </div>
         </section>
       </Container>
-
       <AdmissionSummaryData />
       <Homes />
-
-      {/* <Feedback/>
-
-     <Feedbackfrom/> */}
     </>
   );
 }

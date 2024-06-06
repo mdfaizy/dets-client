@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 
 import {
-  Jobs,
+  JpbEndpoints,
   newadmissionEndpoints,
   exitStudentEndpoints,
   pgCourseEndpoints,
@@ -23,7 +23,7 @@ const UserFormData = () => {
 
   const fetchJobUser = async () => {
     try {
-      const { data: res } = await axios.get(Jobs.Get_User_Profile, { headers });
+      const { data: res } = await axios.get(JpbEndpoints.GET_USER_PROFILE_API, { headers });
       setJobUser(res.jobData);
     } catch (error) {
       console.log(error);

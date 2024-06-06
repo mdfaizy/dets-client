@@ -1,16 +1,17 @@
 import toast from "react-hot-toast";
 import { setLoading, setJobData } from "../../redux/slices/jobSlice";
 import { apiConnector } from "../apiConnector";
-import { Jobs } from "../apis";
+// import { Jobs } from "../apis";
 import axios from "axios";
-const { POST_JOIN_JOB_API } = Jobs;
+// const { POST_JOIN_JOB_API } = Jobs;
 import { JpbEndpoints } from "../apis";
 const {
-  // GET_USER_DETAILS_API,
+  GET_USER_PROFILE_API,
   GET_STUDENT_JOB_BY_ID_API,
   DELETE_JOB_DETAIL_API,
   GET_ALL_STUDENT_FOR_JOB_API,
   UODATE_JOB_DETAIL_BY_ID_API,
+  POST_FORM_DETAIL_BY_STUDENT_API,
 } = JpbEndpoints;
 export function submitJobForm(formData, navigate) {
   return async (dispatch) => {
@@ -18,7 +19,7 @@ export function submitJobForm(formData, navigate) {
     dispatch(setLoading(true));
 
     try {
-      const response = await apiConnector("POST", POST_JOIN_JOB_API, formData);
+      const response = await apiConnector("POST", POST_FORM_DETAIL_BY_STUDENT_API, formData);
       console.log("response", response);
 
       if (!response.data.success) {
@@ -37,41 +38,42 @@ export function submitJobForm(formData, navigate) {
     }
   };
 }
+
 //fetch student job form data FindById
-// const getToken = () => localStorage.getItem("token")?.replace(/^"|"$/g, "");
-// export const getStudentForJobById = async (id,token) => {
-//   // const token = getToken();
-//   const cleanToken = token ? token.replace(/^"|"$/g, "") : "";
-//   try {
-//     // const API_URL = `${BASE_URL}/job/getJob_ById/${id}`;
-//     const API_URL=`${GET_STUDENT_JOB_BY_ID_API}/${id}}`;
+// get user id
 
-//     const response = await ('GET',API_URL, {
-//       headers: {
-//         Authorization: `Bearer ${cleanToken}`,
-//       },
-//     });
 
-//     return response.data.jobData;
-//     // console.log("response.data", response);
-//     // if (response.status === 200) {
-//     //   return response.data.jobData;
-//     // }
-//   } catch (error) {
-//     console.error("Error fetching job data:", error);
-//     throw new Error(`Error fetching job data: ${error.message}`);
-//   }
-// };
+
+
+export const getJobUserDetailsById = async () => {
+  const token = localStorage.getItem('token');
+  const cleanToken = token.replace(/^"|"$/g, "");
+  const api_URL=`${GET_USER_PROFILE_API}`
+// const api_URL= "http://localhost:8000/api/v1/job/get_Profile"
+  try {
+    const response = await axios.get(api_URL, {
+      headers: {
+        Authorization: `Bearer ${cleanToken}`,
+      },
+    });
+    console.log("Job Data",response.data);
+    return response;
+  } catch (error) {
+    throw new Error(`Error fetching job students data: ${error.message}`);
+  }
+};
+
+
+
 // fetch all data in Job Student
 export const getAllJobStudents = async () => {
   try {
-  
     const API_URL = `${GET_ALL_STUDENT_FOR_JOB_API}`;
     const response = await apiConnector('GET',API_URL);
     // await axios.get(
     //   "http://localhost:8000/api/v1/job/get_all_Job_student"
     // );
-    console.log("response.data.datajobdss", response.data.data);
+    console.log("getAllJobStudents", response.data.data);
     if (response.status === 200) {
       return response.data.data;
     } else {

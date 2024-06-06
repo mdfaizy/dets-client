@@ -29,7 +29,7 @@ const ExitFrom = () => {
     stream: "",
     registrationNo: "",
     session: "",
-    Phone_no: "",
+    
     year_cgpa_1th: "",
     year_cgpa_2nd: "",
     year_cgpa_3rd: "",

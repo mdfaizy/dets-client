@@ -56,7 +56,7 @@ const ExitStudentTableData = () => {
 
                   <td>{dataItem.rollNo}</td>
                   <td>{dataItem.registrationNo}</td>
-                  <td>{dataItem.session}</td>
+                  <td>{dataItem.stream}</td>
                   <td>{dataItem.final_cgpa}</td>
                   <td className="dt-cell-action">
                     <ExitDropDown id={dataItem._id} />

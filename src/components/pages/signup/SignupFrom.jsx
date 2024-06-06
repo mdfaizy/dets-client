@@ -5,7 +5,9 @@ import {Container,Row,Col,Form,Button} from "react-bootstrap";
 import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { ACCOUNT_TYPE } from "../../../utils/constant";
 import { setSignupData } from "../../../redux/slices/authSlice";
+import Tab from "../../common/Table";
 // import { signUpFrom } from "../../../services/apiFunction/authApi";
 import { sendOtp } from "../../../services/apiFunction/authApi";
 const SignupForm = () => {
@@ -15,6 +17,7 @@ const SignupForm = () => {
     createPassword: false,
     confirmPassword: false,
   });
+  const [accountType, setAccountType] = useState(ACCOUNT_TYPE.STUDENT);
 
   const handleClick = (buttonName) => {
     setShowPassword({
@@ -31,7 +34,7 @@ const SignupForm = () => {
     lastName: "",
     confirmPassword: "",
     instructorKey: "",
-    accountType: "Student", // Default to Student
+    // accountType: "Student", // Default to Student
   });
 
   const {
@@ -41,7 +44,7 @@ const SignupForm = () => {
     password,
     confirmPassword,
     instructorKey,
-    accountType,
+    // accountType,
   } = formData;
 
   const changeHandler = (e) => {
@@ -73,9 +76,23 @@ const SignupForm = () => {
       lastName: "",
       confirmPassword: "",
       instructorKey: "",
-      accountType: "Student", // Reset accountType to Student
+      // accountType: "Student", // Reset accountType to Student
     });
+    setAccountType(ACCOUNT_TYPE.STUDENT);
   };
+
+
+
+  const tabData = [
+    {
+      id: 1,
+      tabName: "Student",
+      type: ACCOUNT_TYPE.STUDENT,
+    },
+
+  ];
+
+  
   return (
     <div className={style.sinnup_content}>
       <Container className={style.sinnup_all_content}>
@@ -83,18 +100,24 @@ const SignupForm = () => {
           <h1 className={style.create_account}>CREATE ACCOUNT</h1>
           <Row>
             <Col className="">
-              <div className="d-flex bg-richblack-800 max-w-max rounded-full p-1 gap-x-1">
+              {/* <div className="d-flex bg-richblack-800 max-w-max rounded-full p-1 gap-x-1">
                 <Button
                   variant={accountType === "Student" ? "dark" : "outline-dark"}
                   className="rounded-full"
                   onClick={() =>
-                    setFormData({ ...formData, accountType: "Student" })
+                    setFormData( setAccountType.STUDENT)
+                    
                   }
                 >
                   Student
                 </Button>
                 
-              </div>
+              </div> */}
+              <Tab
+            tabData={tabData}
+            field={accountType}
+            setField={setAccountType}
+          />
               <Form onSubmit={submitHandler}>
                 <Row>
                   <Col md={6}>

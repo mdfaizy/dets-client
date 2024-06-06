@@ -17,56 +17,74 @@ import { LIGHT_THEME } from "../../utils/constant";
 import LogoBlue from "../../assets/Images/logo_blue.svg";
 import LogoWhite from "../../assets/Images/logo_white.svg";
 import "./Sidebar.scss";
-import axios from "axios";
-
-import {
-  Jobs,
-  newadmissionEndpoints,
-  exitStudentEndpoints,
-  pgCourseEndpoints,
-} from "../../services/apis";
+import { ACCOUNT_TYPE } from "../../utils/constant";
+// import axios from "axios";
+import {getJobUserDetailsById} from "../../services/apiFunction/job";
+// import {
+//   Jobs,
+//   newadmissionEndpoints,
+//   exitStudentEndpoints,
+//   pgCourseEndpoints,
+// } from "../../services/apis";
+import {getPgUserDetailsById} from "../../services/apiFunction/pgApi";
+import {getExitUserDetailsById} from "../../services/apiFunction/exitApi";
+import {getNewAdmissionUserDetailsById} from "../../services/apiFunction/newadmissionApi";
 const Sidebar = () => {
   const theme = useSelector((state) => state.theme.theme);
   const isSidebarOpen = useSelector((state) => state.sidebar.isSidebarOpen);
   const dispatch = useDispatch();
   // const accountType = localStorage.getItem("accountType");
   const { id } = useParams();
-  const closeSidebar = () => {
-    dispatch({ type: "sidebar/closeSidebar" });
-  };
+  // const closeSidebar = () => {
+  //   dispatch({ type: "sidebar/closeSidebar" });
+  // };
 
   const toggleSidebar = () => {
     dispatch({
       type: isSidebarOpen ? "sidebar/closeSidebar" : "sidebar/openSidebar",
     });
   };
-
+  const user = useSelector((state) => state.profile.user);
   const token = localStorage.getItem("token");
   const [jobUser, setJobUser] = useState(null);
   const [newAdmissionUser, setNewAdmissionUser] = useState(null);
   const [exitUser, setExitUser] = useState(null);
   const [pgUser, setPgUser] = useState(null);
-  const cleanToken = token.replace(/^"|"$/g, "");
-  const headers = {
-    Authorization: `Bearer ${cleanToken}`,
-  };
-
+  // const cleanToken = token.replace(/^"|"$/g, "");
+  // const headers = {
+  //   Authorization: `Bearer ${cleanToken}`,
+  // };
   const fetchJobUser = async () => {
     try {
-      const { data: res } = await axios.get(Jobs.Get_User_Profile, { headers });
-      setJobUser(res.jobData);
+      const data = await getJobUserDetailsById();
+      console.log("Job user",data);
+      setJobUser(data);
     } catch (error) {
-      console.log(error);
+      console.error(error.message);
     }
   };
 
+  // getExitUserDetailsById
+  // const fetchJobUser = async () => {
+  //   try {
+  //     const { data: res } = await axios.get(Jobs.Get_User_Profile, { headers });
+  //     setJobUser(res.jobData);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
   const fetchNewAdmissionUser = async () => {
     try {
-      const { data: res } = await axios.get(newadmissionEndpoints.GET_PROFILE, {
-        headers,
-      });
-      console.log(res.data);
-      setNewAdmissionUser(res.Newadmission);
+      // const { data: res } = await axios.get(newadmissionEndpoints.GET_PROFILE, {
+      //   headers,
+      // });
+      // console.log(res.data);
+      const data=await getNewAdmissionUserDetailsById(token);
+      console.log("new Stue",data)
+      // setNewAdmissionUser(res.Newadmission);
+      setNewAdmissionUser(data);
+      
     } catch (error) {
       console.log(error);
     }
@@ -74,12 +92,15 @@ const Sidebar = () => {
 
   const fetchExitUser = async () => {
     try {
-      const { data: res } = await axios.get(
-        exitStudentEndpoints.GET_USER_EXIT_PROFILE,
-        { headers }
-      );
-      setExitUser(res.exitData);
-      console.log(res);
+  //     const { data: res } = await axios.get(
+  //       exitStudentEndpoints.GET_USER_EXIT_PROFILE,
+  //       { headers }
+  //     );
+  //     setExitUser(res.exitData);
+  //     console.log(res);
+  const data=await getExitUserDetailsById(token);
+      console.log("new admission",data._id);
+      setExitUser(data);
     } catch (error) {
       console.log(error);
     }
@@ -87,11 +108,14 @@ const Sidebar = () => {
 
   const fetchPGUser = async () => {
     try {
-      const { data: res } = await axios.get(
-        pgCourseEndpoints.GET_PG_USER_PROFILE,
-        { headers }
-      );
-      setPgUser(res.pgdata);
+      // const { data: res } = await axios.get(
+      //   pgCourseEndpoints.GET_PG_USER_PROFILE,
+      //   { headers }
+      // );
+      // setPgUser(res.pgdata)
+      const data=await getPgUserDetailsById(token);
+      console.log(data);
+      setPgUser(data)
     } catch (error) {
       console.log(error);
     }
@@ -132,7 +156,7 @@ const Sidebar = () => {
                 </Link>
               </li>
 {/* show data in student */}
-              {accountType === "Student" && (
+              {user?.accountType === ACCOUNT_TYPE.STUDENT && (
                  <>
               <li className="menu-item">
                 <Link
@@ -181,7 +205,7 @@ const Sidebar = () => {
               </>)}
               
 {/* teacher and admin data show */}
-              {accountType=== "Instructor" && (
+              {user?.accountType === ACCOUNT_TYPE.INSTRUCTOR && (
                 <>
                   <li className="menu-item">
                     <Link to="/dashboard/all_new_addmission" className="menu-link">
@@ -227,7 +251,7 @@ const Sidebar = () => {
           <div className="sidebar-menu sidebar-menu2">
             <ul className="menu-list">
               <li className="menu-item">
-                <Link to="/settings" className="menu-link">
+                <Link to="/dashboard/settings" className="menu-link">
                   <span className="menu-link-icon">
                     <MdOutlineSettings size={20} />
                   </span>

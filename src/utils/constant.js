@@ -1,7 +1,7 @@
 export const ACCOUNT_TYPE = {
     STUDENT: "Student",
     INSTRUCTOR: "Instructor",
-    // ADMIN: "Admin",
+    ADMIN: "Admin",
   }
   
   export const LIGHT_THEME = "light";

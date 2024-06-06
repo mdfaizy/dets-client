@@ -38,7 +38,7 @@ import ExitReport from "./admin&teacher/createReport/exit/ExitReport";
 import Report from "./admin&teacher/report/Report";
 import PgReport from "./admin&teacher/createReport/PgReport";
 import JobReport from "./admin&teacher/createReport/JobReport";
-import FetchUserData from "../data/FetchUserData";
+import FetchUserData from "./data/FetchUserData";
 import AdmissionSummaryData from "./summaryData/AdmissionSummaryData";
 import FilterData from "./admin&teacher/data/FilterData";
 import VerifyOtp from "./components/pages/EmailVerify/verifyOtp";
@@ -57,7 +57,7 @@ import PgDataDelete from "./adminsection/pgadmission/PgDataDelete";
 import PgDataEdit from "./adminsection/pgadmission/PgDataEdit";
 import PgPrint from "./adminsection/pgadmission/PgPrint";
 import DeleteExit from "./adminsection/exitdata/DeleteExit";
-import FeedbackForm from "./adminDashboard/feedback/feedbackfrom/Feedbackfrom";
+// import FeedbackForm from "./adminDashboard/feedback/feedbackfrom/Feedbackfrom";
 import Feedback from "./adminDashboard/feedback/Feedback";
 import Acoount from "./components/pages/createAccount/Acoount";
 import TeacherAccount from "./components/pages/teacherSignupAccount/TeacherAccoutn";
@@ -69,6 +69,10 @@ import ExitStudentTableData from "./components/core/Dashboard/exitStudentTable/E
 import JobDataTable from "./components/core/Dashboard/JobTableData/JobDataTable";
 import PgStudentDataTable from "./components/core/Dashboard/PgStudentDataTable/PgStudentDataTable";
 
+import FeedbackForm from "./components/core/feedbackForm/feedbackPost/FeedbackForm";
+import GetFeedback from "./components/core/feedbackForm/feedbackGet/GetFeedback";
+import MyProfile from "./components/core/MyProfile";
+import Settings from "./components/core/Settings";
 function App() {
   
   const accountType = localStorage.getItem("accountType");
@@ -80,7 +84,8 @@ function App() {
 
   return (
     // style={{ backgroundColor: "#000814" }}
-    <div>
+    <div style={{ backgroundColor: "#000814" }}>
+      
       <Header
         isAdmin={isAdmin}
         setIsAdmin={setIsAdmin}
@@ -219,8 +224,9 @@ function App() {
         <Route path="/delete-jobdata/:id" element={<DeleteJob />} />
 
         {/* Feedback */}
-        <Route path="/feedback-form" element={<FeedbackForm />} />
-        <Route path="/feedback-details" element={<Feedback />} />
+        <Route path="/feedback-post" element={<FeedbackForm />} />
+        {/* <Route path="/feedback-details" element={<Feedback />} /> */}
+        <Route path="/get-feedback" element={<GetFeedback/>}/>
 
         {/* nestade route */}
         <Route
@@ -248,7 +254,8 @@ function App() {
           <Route path="dashboard/exit_application/:id" element={<Exitdata />} />
           <Route path="dashboard/pg_application/:id" element={<Pgdata />} />
           <Route path="dashboard/job_application/:id" element={<Jobdata />} />
-          <Route path="dashboard/my-profile" element={<About />} />
+          <Route path="dashboard/my-profile" element={<MyProfile />} />
+          <Route path="dashboard/settings" element={<Settings />} />
           <Route path="dashboard/feedback-form" element={<FeedbackForm />} />
           <Route
             path="dashboard/teacher-account"

@@ -1,16 +1,12 @@
-
-
 import { toast } from "react-hot-toast";
-
-// import { updateCompletedLectures } from "../../slices/viewCourseSlice"
 import { setLoading,setExitData } from "../../redux/slices/exitSlice.js";
 import { apiConnector } from "../apiConnector";
-
 import { exitStudentEndpoints } from "../apis.js";
+import axios from "axios";
 const {
   GET_DATA_ALL_EXIT_STUDENT,
   GET_EXIT_STUDENT_BY_ID,
-  // GET_USER_EXIT_PROFILE,
+  GET_USER_EXIT_PROFILE,
   UPDATE_EXIT_STUDENT,
   DELETE_JOB_DATA_BY_ID_API,
   SUMBIT_EXIT_STUDENT
@@ -58,12 +54,33 @@ export function submitExitForm(formData, navigate, token) {
     }
   };
 }
+
+
+
+export const getExitUserDetailsById = async () => {
+  const token = localStorage.getItem('token');
+  const cleanToken = token.replace(/^"|"$/g, "");
+  try {
+    const response = await axios.get(GET_USER_EXIT_PROFILE, {
+      headers: {
+        Authorization: `Bearer ${cleanToken}`,
+      },
+    });
+
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    
+    throw new Error(`Error fetching job students data: ${error.message}`);
+  }
+};
+
 // all exit student fetch allData
 export const getAllExitStudent = async () => {
   // const API_URL=`${}`
   try {
     const response = await apiConnector("GET", GET_DATA_ALL_EXIT_STUDENT);
-    console.log("respose", response);
+    console.log("getAllExitStudent", response);
     return response.data.data;
   } catch (error) {
     throw new Error(`Error fetching admission data: ${error.message}`);

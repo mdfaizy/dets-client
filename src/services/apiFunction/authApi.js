@@ -1,6 +1,7 @@
 // import { toast } from "react-hot-toast";
 import toast from "react-hot-toast";
 // import { toast } from "react-toastify";
+import { setUser } from "../../redux/slices/profileSlice";
 import {
   setLoading,
   setToken,
@@ -93,17 +94,25 @@ export function signUp(
 }
 export function logout(navigate) {
   return (dispatch) => {
-    dispatch(setToken(null));
+    // dispatch(setToken(null));
 
+    // // dispatch(resetCart())
+    // localStorage.removeItem("token");
+    // localStorage.removeItem("accountType");
+    // toast.success("Logged Out");
+    // navigate("/");
+
+    dispatch(setToken(null))
+    dispatch(setUser(null))
     // dispatch(resetCart())
-    localStorage.removeItem("token");
-    localStorage.removeItem("accountType");
-    toast.success("Logged Out");
-    navigate("/");
+    localStorage.removeItem("token")
+    localStorage.removeItem("user")
+    toast.success("Logged Out")
+    navigate("/")
   };
 }
 
-export function login(email, password, setIsAdmin, setTeacher, navigate) {
+export function login(email, password, setIsAdmin, navigate) {
   return async (dispatch) => {
     const toastId = toast.loading("Logging in...");
     try {
@@ -122,25 +131,25 @@ export function login(email, password, setIsAdmin, setTeacher, navigate) {
       const { user } = response.data;
       // =======================
 
-      if (import.meta.env.VITE_REACT_APP_ADMIN_TOKEN === response.data.token) {
-        dispatch(setToken(response.data.token));
-        dispatch(setIsAdmin(true));
-        dispatch(setAccountType("Admin")); // Set account type as Admin
-        localStorage.setItem("token", JSON.stringify(response.data.token));
-      }
+      // if (import.meta.env.VITE_REACT_APP_ADMIN_TOKEN === response.data.token) {
+      //   dispatch(setToken(response.data.token));
+      //   dispatch(setIsAdmin(true));
+      //   dispatch(setAccountType("Admin")); // Set account type as Admin
+      //   localStorage.setItem("token", JSON.stringify(response.data.token));
+      // }
 
-      if (
-        user.instructorKey === "ukdets@#1234" &&
-        user.accountType === "Instructor"
-      ) {
-        dispatch(setToken(response.data.token));
-        console.log("AccountType", user.accountType);
+      // if (
+      //   user.instructorKey === "ukdets@#1234" &&
+      //   user.accountType === "Instructor"
+      // ) {
+      //   dispatch(setToken(response.data.token));
+      //   console.log("AccountType", user.accountType);
 
-        dispatch(setAccountType("Instructor")); // Set account type as Instructor
-        localStorage.setItem("token", JSON.stringify(response.data.token));
-      }
+      //   dispatch(setAccountType("Instructor")); // Set account type as Instructor
+      //   localStorage.setItem("token", JSON.stringify(response.data.token));
+      // }
 
-      console.log(user);
+      // console.log(user);
       dispatch(setToken(response.data.token));
       dispatch(setAccountType(response.data.accountType));
       console.log(user.accountType);
@@ -151,13 +160,18 @@ export function login(email, password, setIsAdmin, setTeacher, navigate) {
       const userImage = response.data?.user?.image
         ? response.data.user.image
         : `https://api.dicebear.com/5.x/initials/svg?seed=${response.data.user.firstName} ${response.data.user.lastName}`;
-      // dispatch(setUser({ ...response.data.user, image: userImage }));
+      dispatch(setUser({ ...response.data.user, image: userImage }));
       console.log("userImage", userImage);
 
-      localStorage.setItem("token", JSON.stringify(response.data.token));
-      localStorage.setItem("accountType", JSON.stringify(user.accountType));
 
-      navigate("/");
+      localStorage.setItem("token", JSON.stringify(response.data.token));
+      localStorage.setItem("user", JSON.stringify(response.data.user));
+      navigate("/dashboard/my-profile");
+
+      // localStorage.setItem("token", JSON.stringify(response.data.token));
+      // localStorage.setItem("accountType", JSON.stringify(user.accountType));
+
+      // navigate("/");
     } catch (error) {
       console.error("LOGIN API ERROR:", error);
       toast.error("Login Failed");
@@ -249,7 +263,3 @@ export function forgotPassword(email, setEmailSent) {
     dispatch(setLoading(false));
   };
 }
-
-
-
-

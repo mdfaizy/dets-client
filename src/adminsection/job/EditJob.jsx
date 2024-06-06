@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { Container, Row, Col, Form, Accordion } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
-import { Jobs } from "../../services/apis";
+// import { Jobs } from "../../services/apis";
 import { getStudentForJobById } from "../../services/apiFunction/job";
-import axios from "axios";
+// import axios from "axios";
 import style from "./jobdata.module.css";
 import { updateJobStudentData } from "../../services/apiFunction/job";
 

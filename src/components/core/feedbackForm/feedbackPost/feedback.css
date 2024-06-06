@@ -1,0 +1,22 @@
+.feedbaackTop-container {
+  width: 100%;
+  background-color: aqua;
+}
+.from-containt {
+  background-color: rgb(125, 238, 200);
+  width: 400px;
+  margin: 0 auto;
+  padding: 10px 20px;
+  border-radius: 10px;
+}
+.reviewButton {
+  display: flex;
+  justify-content: center;
+  margin: 0px auto;
+}
+.reviewButton Button {
+  margin-top: 20px;
+  background-color: aqua;
+  border: none;
+  border-radius: 5px;
+}

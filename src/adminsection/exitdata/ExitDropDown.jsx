@@ -1,84 +1,11 @@
-// import "../../components/pages/profile/profile.css";
-// import { useRef, useState } from "react";
-
-// import { VscDashboard } from "react-icons/vsc";
-// import { Link } from "react-router-dom";
-// import useOnClickOutside from "../../hooks/useOnClickOutside";
-// import { HiDotsHorizontal } from "react-icons/hi";
-// const ExitDropDown = ({ id }) => {
-//   const [open, setOpen] = useState(false);
-//   const ref = useRef(null);
-
-//   useOnClickOutside(ref, () => setOpen(false));
-//   return (
-//     <div className="">
-//       <button
-//         className="user-image-logout"
-//         type="button"
-//         id="dropdownMenuButton"
-//         onClick={() => setOpen(true)}
-//       >
-//         <div className="user-image-logout">
-//           <HiDotsHorizontal size={18} />
-//         </div>
-//       </button>
-//       {open && (
-//         <div
-//           className="dropdown-menu show"
-//           aria-labelledby="dropdownMenuButton"
-//           ref={ref}
-//         >
-//           <Link
-//             to={`/exit-data-edit/${id}`}
-//             className="dropdown-item"
-//             onClick={() => setOpen(false)}
-//           >
-//             <VscDashboard className="text-lg" />
-//             Update
-//           </Link>
-
-//           <Link
-//             
-//             className="dropdown-item"
-//             onClick={() => setOpen(false)}
-//           >
-//             <VscDashboard className="text-lg" />
-//             See All
-//           </Link>
-//           <Link
-//             to={`/exit-data-delete/${id}`}
-//             className="dropdown-item"
-//             onClick={() => setOpen(false)}
-//           >
-//             <VscDashboard className="text-lg" />
-//             Delete
-//           </Link>
-
-//           {/* <button
-//              className="dropdown-item"
-//              onClick={() => {
-//                dispatch(logout(navigate));
-//                setOpen(false);
-//              }}
-//            >
-//              <VscSignOut className="text-lg" />
-//              Logout
-//            </button> */}
-//         </div>
-//       )}
-//     </div>
-//   );
-// };
-
-// export default ExitDropDown;
-
-
 import { useEffect, useRef, useState } from "react";
 import { HiDotsHorizontal } from "react-icons/hi";
 import { Link } from "react-router-dom";
-
+import { useSelector } from "react-redux";
+import { ACCOUNT_TYPE } from "../../utils/constant";
 const ExitDropDown = ({ id }) => {
   const [showDropdown, setShowDropdown] = useState(false);
+  const user = useSelector((state) => state.profile.user);
   const handleDropdown = () => {
     setShowDropdown(!showDropdown);
   };
@@ -127,12 +54,16 @@ const ExitDropDown = ({ id }) => {
                 </Link>
               </li>
               <li className="dropdown-menu-item">
+                {
+                  user?.accountType === ACCOUNT_TYPE.ADMIN &&(
                 <Link
                  to={`/exit-data-delete/${id}`}
                   className="dropdown-menu-link"
                 >
                   Delete
                 </Link>
+                  )
+                }
               </li>
             </ul>
           </div>

@@ -1,11 +1,12 @@
 import { toast } from "react-hot-toast"
 
-import { setLoading, setUser } from "../../slices/profileSlice"
+import { setLoading, setUser } from "../../redux/slices/profileSlice"
 import { apiConnector } from "../apiconnector"
 import { profileEndpoints } from "../apis"
 import { logout } from "./authAPI"
+import {settingsEndpoints} from "../apis"
 
-const { GET_USER_DETAILS_API, GET_USER_ENROLLED_COURSES_API, GET_INSTRUCTOR_DATA_API } = profileEndpoints
+const { GET_USER_DETAILS_API, GET_INSTRUCTOR_DATA_API } = profileEndpoints
 
 export function getUserDetails(token, navigate) {
   return async (dispatch) => {
@@ -34,54 +35,63 @@ export function getUserDetails(token, navigate) {
   }
 }
 
-export async function getUserEnrolledCourses(token) {
-  const toastId = toast.loading("Loading...")
-  let result = []
-  try {
-    console.log("BEFORE Calling BACKEND API FOR ENROLLED COURSES");
-    const response = await apiConnector(
-      "GET",
-      GET_USER_ENROLLED_COURSES_API,
-      null,
-      {
-        Authorization: `Bearer ${token}`,
-      }
-    )
-    console.log("AFTER Calling BACKEND API FOR ENROLLED COURSES");
-    // console.log(
-    //   "GET_USER_ENROLLED_COURSES_API API RESPONSE............",
-    //   response
-    // )
 
+
+export async function updateAdditionalDetails(token,additionalDetails){
+  console.log("additionalDetails",additionalDetails);
+  const cleanToken = token.replace(/^"|"$/g, "");
+  const {firstName,lastName,dateOfBirth,gender,contactNumber,about}=additionalDetails;
+  console.log("additionalDetails",additionalDetails);
+  const toastId = toast.loading("Updating...");
+  try {
+    const response = await apiConnector("PUT", settingsEndpoints.UPDATE_PROFILE_API,{firstName,lastName,dateOfBirth,gender,contactNumber,about},
+    {
+        Authorization: `Bearer ${cleanToken}`,
+    }
+);
+    console.log("UPDATE_ADDITIONAL_DETAILS_API API RESPONSE............", response)
     if (!response.data.success) {
       throw new Error(response.data.message)
     }
-    result = response.data.data
+    toast.success("Additional Details Updated Successfully");
+    const user = JSON.parse(localStorage.getItem("user"));
+    user.firstName = firstName || user.firstName;
+    user.lastName = lastName || user.lastName;
+    user.additionalDetails.dateOfBirth = dateOfBirth  || user.additionalDetails.dateOfBirth;
+    user.additionalDetails.contactNumber = contactNumber || user.additionalDetails.contactNumber;
+    user.additionalDetails.about = about || user.additionalDetails.about;
+    user.additionalDetails.gender=gender
+    localStorage.setItem("user",JSON.stringify(user));
+
   } catch (error) {
-    console.log("GET_USER_ENROLLED_COURSES_API API ERROR............", error)
-    toast.error("Could Not Get Enrolled Courses")
-  }
-  toast.dismiss(toastId)
-  return result
-}
-
-export async function getInstructorData(token) {
-  const toastId = toast.loading("Loading...");
-  let result = [];
-  try{
-    const response = await apiConnector("GET", GET_INSTRUCTOR_DATA_API, null, 
-    {
-      Authorization: `Bearer ${token}`,
-    })
-
-    console.log("GET_INSTRUCTOR_API_RESPONSE", response);
-    result = response?.data?.courses
-
-  }
-  catch(error) {
-    console.log("GET_INSTRUCTOR_API ERROR", error);
-    toast.error("Could not Get Instructor Data")
+    console.log("UPDATE_ADDITIONAL_DETAILS_API API ERROR............", error)
+    toast.error(error.response.data.message)
   }
   toast.dismiss(toastId);
-  return result;
+}
+
+
+
+
+
+
+//deleteAccount
+export async function deleteAccount(token,dispatch,navigate){
+  const toastId = toast.loading("Deleting...");
+  try {
+    const response = await apiConnector("DELETE", settingsEndpoints.DELETE_PROFILE_API,null,{
+      Authorisation: `Bearer ${token}`,
+    });
+    console.log("DELETE_ACCOUNT_API API RESPONSE............", response)
+    if (!response.data.success) {
+      throw new Error(response.data.message)
+    }
+    toast.success("Account Deleted Successfully");
+    dispatch(logout(navigate))
+  }
+  catch (error) {
+    console.log("DELETE_ACCOUNT_API API ERROR............", error)
+    toast.error(error.response.data.message)
+  }
+  toast.dismiss(toastId);
 }

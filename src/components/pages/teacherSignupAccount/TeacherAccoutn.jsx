@@ -6,7 +6,8 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-
+import Tab from "../../common/Table";
+import { ACCOUNT_TYPE } from "../../../utils/constant";
 import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -16,6 +17,7 @@ import { sendOtp } from "../../../services/apiFunction/authApi";
 const SignupForm = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [accountType, setAccountType] = useState(ACCOUNT_TYPE.INSTRUCTOR);
   const [showPassword, setShowPassword] = useState({
     createPassword: false,
     confirmPassword: false,
@@ -46,7 +48,7 @@ const SignupForm = () => {
     password,
     confirmPassword,
     instructorKey,
-    accountType,
+    // accountType,
   } = formData;
 
   const changeHandler = (e) => {
@@ -78,9 +80,22 @@ const SignupForm = () => {
       lastName: "",
       confirmPassword: "",
       instructorKey: "",
-      accountType: "Instructor", // Reset accountType to Student
+      // accountType: "Instructor", // Reset accountType to Student
     });
+    setAccountType(ACCOUNT_TYPE.INSTRUCTOR);
   };
+
+
+
+
+  const tabData = [
+    
+    {
+      id: 1,
+      tabName: "Instructor",
+      type: ACCOUNT_TYPE.INSTRUCTOR,
+    },
+  ];
   return (
     <div className={style.sinnup_content}>
       <Container className={style.sinnup_all_content}>
@@ -98,7 +113,7 @@ const SignupForm = () => {
                 >
                   Student
                 </Button> */}
-                <Button
+                {/* <Button
                   variant={
                     accountType === "Instructor" ? "dark" : "outline-dark"
                   }
@@ -108,7 +123,12 @@ const SignupForm = () => {
                   }
                 >
                   Teacher
-                </Button>
+                    </Button> */}
+                    <Tab
+            tabData={tabData}
+            field={accountType}
+            setField={setAccountType}
+          />
               </div>
               <Form onSubmit={submitHandler}>
                 <Row>

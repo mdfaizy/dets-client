@@ -11,16 +11,33 @@ export const endpoints = {
   RESETPASSWORD_API: BASE_URL + "/auth/reset-password",
 };
 
+
+
+export const profileEndpoints = {
+  GET_USER_DETAILS_API: BASE_URL + "/profile/getUserDetails",
+  GET_USER_ENROLLED_COURSES_API: BASE_URL + "/profile/getEnrolledCourses",
+  GET_ALL_INSTRUCTOR_DASHBOARD_DETAILS_API:
+    BASE_URL + "/profile/getInstructorDashboardDetails",
+};
+
+
+export const settingsEndpoints = {
+  UPDATE_DISPLAY_PICTURE_API: BASE_URL + "/profile/updateDisplayPicture",
+  UPDATE_PROFILE_API: BASE_URL + "/profile/updateProfile",
+  CHANGE_PASSWORD_API: BASE_URL + "/auth/changepassword",
+  DELETE_PROFILE_API: BASE_URL + "/profile/deleteProfile",
+};
+
 //Job
 
-export const Jobs = {
+// export const Jobs = {
   
-  POST_JOIN_JOB_API: BASE_URL + "/job/job",
-  GET_STUDENT_JOB_BY_ID_API: BASE_URL + "/job/getJob_ById",
-  Get_User_Profile: BASE_URL + "/job/get_Profile",
-  UPDATE_JOB_FORM: BASE_URL + "/job/update_job_form",
-  // GET_INSTRUCTOR_DATA_API: BASE_URL + "/profile/instructorDashboard",
-};
+//   POST_JOIN_JOB_API: BASE_URL + "/job/job",
+//   GET_STUDENT_JOB_BY_ID_API: BASE_URL + "/job/getJob_ById",
+//   Get_User_Profile: BASE_URL + "/job/get_Profile",
+//   UPDATE_JOB_FORM: BASE_URL + "/job/update_job_form",
+//   // GET_INSTRUCTOR_DATA_API: BASE_URL + "/profile/instructorDashboard",
+// };
 //all api for new Admission
 export const newadmissionEndpoints = {
   SUMBIT_NEW_STUDENT_API:BASE_URL+'/student/newAdmission',
@@ -35,6 +52,7 @@ export const newadmissionEndpoints = {
 export const JpbEndpoints = {
   POST_FORM_DETAIL_BY_STUDENT_API: BASE_URL + "/job/job",
   GET_USER_DETAILS_API: BASE_URL + "/job/getUserDetails",
+  GET_USER_PROFILE_API: BASE_URL + "/job/get_Profile",
   GET_STUDENT_JOB_BY_ID_API: BASE_URL + "/job/getJob_ById",
   DELETE_JOB_DETAIL_API: BASE_URL + "/job/delete_id_jobstudent",
   GET_ALL_STUDENT_FOR_JOB_API: BASE_URL + "/job/get_all_Job_student",

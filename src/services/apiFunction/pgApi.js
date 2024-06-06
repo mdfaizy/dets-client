@@ -8,6 +8,7 @@ const {
   DELETE_PG_STUDENT_BY_ID,
   GET_PG_COURSE_BY_ID,
   SUMBIT_PG_FORM_DATA,
+  GET_PG_USER_PROFILE,
 } = pgCourseEndpoints;
 export function submitPGForm(formData, navigate, token) {
   const cleanToken = token ? token.replace(/^"|"$/g, "") : "";
@@ -51,6 +52,25 @@ export function submitPGForm(formData, navigate, token) {
     }
   };
 }
+
+export const getPgUserDetailsById = async () => {
+  const token = localStorage.getItem('token');
+  const cleanToken = token.replace(/^"|"$/g, "");
+  const api_URL=`${GET_PG_USER_PROFILE}`
+// const api_URL= "http://localhost:8000/api/v1/job/get_Profile"
+  try {
+    const response = await axios.get(api_URL, {
+      headers: {
+        Authorization: `Bearer ${cleanToken}`,
+      },
+    });
+    console.log("Job Data",response.data);
+    return response;
+  } catch (error) {
+    throw new Error(`Error fetching job students data: ${error.message}`);
+  }
+};
+
 export const getAllPgStudentData = async () => {
   try {
     const API_URL = `${ALL_GET_STUDENT_PG_COURSE_BY_ID}`;

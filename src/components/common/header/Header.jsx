@@ -1,6 +1,7 @@
 import ProfileDropdown from "../../pages/profile/ProfileDropdown";
 import { useState } from "react";
 import { NavLink, Link } from "react-router-dom";
+import { ACCOUNT_TYPE } from "../../../utils/constant";
 import {
   Navbar,
   Row,
@@ -13,22 +14,13 @@ import {
 import style from "./Header.module.css";
 import logImg from "../../../assets/log.jpg";
 import { useSelector } from "react-redux";
-import Sidebar from "../../layout/Sidebar";
-const Header = (props) => {
-  const { isAdmin } = props;
-
+const Header = () => {
   const { token } = useSelector((state) => state.auth);
-  // const accountType=localStorage.getItem('accountType');
-  // const token = localStorage.getItem("token");
-  // const { accountType } = useSelector((state) => state.auth);
-  // console.log("Header AccountType", accountType);
-  console.log("Header Token", token);
+  const user = useSelector((state) => state.profile.user);
   const [click, setClick] = useState(false);
-  const accountType = localStorage.getItem("accountType");
   const handleClick = () => {
     setClick(!click);
   };
-
   const [show, setShow] = useState(false);
   const showDropdown = () => {
     setShow(!show);
@@ -36,257 +28,6 @@ const Header = (props) => {
   const hideDropdown = () => {
     setShow(false);
   };
-  //   return (
-  //     <>
-  //       <Container fluid className={style.header_top_content}>
-  //         <Row>
-  //           <Col>
-  //             <Navbar expand="sm">
-  //               <Container expand="sm" bg='primary'   style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-  //                 <div>
-  //                 <Navbar.Brand>
-  //                   <img src={logImg} alt="" className={style.logoImage} />
-  //                 </Navbar.Brand>
-  //                 </div>
-  //                 <Navbar.Toggle aria-controls="my-nav" />
-
-  //                 <Navbar.Collapse id="my-nav">
-  //                   <Container className={style.nav_links} >
-  //                     <Nav  expand="sm" bg='primary'>
-  //                       <Nav.Link
-  //                       as={Link}
-  //                         to="/"
-  //                         className={style.nav_links}
-
-  //                       >
-  //                         HOME
-  //                       </Nav.Link>
-  //                       <Nav.Link
-  //                       as={Link}
-  //                         to="/about"
-  //                         className={style.nav_links}
-
-  //                       >
-  //                         ABOUT
-  //                       </Nav.Link>
-
-  // <NavDropdown
-  //   title="Dropdown"
-  //   id="collasible-nav-dropdown"
-  //   className={style.nav_links}
-  //   show={show}
-  //   onMouseEnter={showDropdown}
-  //   onMouseLeave={hideDropdown}
-  // >
-  //   <NavDropdown.Item to="#action/3.1">
-  //     Action
-  //   </NavDropdown.Item>
-  //   <NavDropdown.Item to="#action/3.2">
-  //     Another action
-  //   </NavDropdown.Item>
-  //   <NavDropdown.Item to="#action/3.3">
-  //     Something
-  //   </NavDropdown.Item>
-  //   <NavDropdown.Divider />
-  //   <NavDropdown.Item to="#action/3.4">
-  //     Separated link
-  //   </NavDropdown.Item>
-  // </NavDropdown>
-
-  //                       {!isAdmin &&
-  //                         token !== null &&
-  //                         accountType === "Student" && (
-  //                           <>
-  //                             <NavLink
-  //                               to="/newstudent"
-  //                               className={style.nav_links}
-  //                               onClick={handleClick}
-  //                             >
-  //                               ADMISSION
-  //                             </NavLink>
-  //                             <NavLink
-  //                               to="/exit"
-  //                               className={style.nav_links}
-  //                               onClick={handleClick}
-  //                             >
-  //                               EXIT STUDENT
-  //                             </NavLink>
-  //                             <li className={style.nav_links}>
-  //                               <NavLink
-  //                                 to="/pgcourses"
-  //                                 className={style.nav_links}
-  //                                 onClick={handleClick}
-  //                               >
-  //                                 POSTGRADUATE
-  //                               </NavLink>
-  //                             </li>
-  //                             <li className={style.nav_links}>
-  //                               <NavLink
-  //                                 to="/btechjob"
-  //                                 className={style.nav_links}
-  //                                 onClick={handleClick}
-  //                               >
-  //                                 JOB
-  //                               </NavLink>
-  //                             </li>
-  //                             <li
-  //                               className={style.nav_links}
-  //                               onClick={handleClick}
-  //                             >
-  //                               <NavLink
-  //                                 to="/showFormData"
-  //                                 className={style.nav_links}
-  //                               >
-  //                                 SHOWFORMDATA
-  //                               </NavLink>
-  //                             </li>
-  //                           </>
-  //                         )}
-
-  //                     </Nav>
-
-  //                     <Container className="p-2">
-
-  // {token === null && (
-  //   <Container>
-  //     <NavLink
-  //       to="/loginfrom"
-  //       className={style.nav_links}
-  //       onClick={handleClick}
-  //     >
-  //       LOGIN
-  //     </NavLink>
-  //     <NavLink
-  //       to="/signupfrom"
-  //       className={style.nav_links}
-  //       onClick={handleClick}
-  //     >
-  //       SIGN UP
-  //     </NavLink>
-  //   </Container>
-  // )}
-
-  // </Container>
-  // <Container>
-  // {token !== null && <ProfileDropdown />}
-  // </Container>
-  //                   </Container>
-
-  //                 </Navbar.Collapse>
-  //               </Container>
-  //             </Navbar>
-  //           </Col>
-  //         </Row>
-  //       </Container>
-  //     </>
-  //   );
-  // };
-
-  // export default Header;
-
-  //   return (
-  //     <>
-  //       <Container fluid className={style.header_top_content}>
-  //         <Row>
-  //           <Col>
-  //             <Navbar expand="md">
-  //               <Container>
-  //                 <Navbar.Brand>
-  //                   <img src={logImg} alt="Logo" className={style.logoImage} />
-  //                 </Navbar.Brand>
-  //                 <Navbar.Toggle aria-controls="my-nav" />
-  //                 <Navbar.Collapse id="my-nav" className="text-center">
-  //                   <Container className="text-center mx-auto">
-  //                     <Nav className="mx-auto">
-  //                       <NavLink to="/" className={style.nav_links}>
-  //                         HOME
-  //                       </NavLink>
-  //                       <NavLink to="/about" className={style.nav_links}>
-  //                         ABOUT
-  //                       </NavLink>
-  //                       <Nav.Link
-  //                         as={Link}
-  //                         to="/about"
-  //                         className={style.nav_links}
-  //                       >
-  //                         ABOUT!
-  //                       </Nav.Link>
-  //                       <Nav className=" text-center">
-  //                         {" "}
-  //                         {/* Aligning some Nav items to the left */}
-  //                         {!isAdmin &&
-  //                           token !== null &&
-  //                           accountType === "Student" && (
-  //                             <>
-  //                               <NavLink
-  //                                 to="/newstudent"
-  //                                 className={style.nav_links}
-  //                                 onClick={handleClick}
-  //                               >
-  //                                 ADMISSION
-  //                               </NavLink>
-  //                               <NavLink
-  //                                 to="/exit"
-  //                                 className={style.nav_links}
-  //                                 onClick={handleClick}
-  //                               >
-  //                                 EXIT STUDENT
-  //                               </NavLink>
-  //                               <NavLink
-  //                                 to="/pgcourses"
-  //                                 className={style.nav_links}
-  //                                 onClick={handleClick}
-  //                               >
-  //                                 POSTGRADUATE
-  //                               </NavLink>
-  //                               <NavLink
-  //                                 to="/btechjob"
-  //                                 className={style.nav_links}
-  //                                 onClick={handleClick}
-  //                               >
-  //                                 JOB
-  //                               </NavLink>
-  //                             </>
-  //                           )}
-  //                       </Nav>
-
-  //                       <Nav className="ms-auto">
-  //                         {" "}
-  //                         {/* Keeping login/signup or profile dropdown to the right */}
-  //                         {token === null ? (
-  //                           <>
-  //                             <NavLink
-  //                               to="/loginfrom"
-  //                               className={style.nav_links}
-  //                               onClick={handleClick}
-  //                             >
-  //                               LOGIN
-  //                             </NavLink>
-  //                             <NavLink
-  //                               to="/signupfrom"
-  //                               className={style.nav_links}
-  //                               onClick={handleClick}
-  //                             >
-  //                               SIGN UP
-  //                             </NavLink>
-  //                           </>
-  //                         ) : (
-  //                           <ProfileDropdown />
-  //                         )}
-  //                       </Nav>
-  //                     </Nav>
-  //                   </Container>
-  //                 </Navbar.Collapse>
-  //               </Container>
-  //             </Navbar>
-  //           </Col>
-  //         </Row>
-  //       </Container>
-  //     </>
-  //   );
-  // };
-
-  // export default Header;
 
   return (
     <>
@@ -307,9 +48,7 @@ const Header = (props) => {
                     <Nav.Link as={Link} to="/about" className={style.nav_links}>
                       ABOUT
                     </Nav.Link>
-                    {/* <Nav> */}
-
-                    {accountType !== "Student" && (
+                    {user?.accountType === ACCOUNT_TYPE.STUDENT && (
                       <>
                         <Nav.Link
                           as={Link}
@@ -356,27 +95,31 @@ const Header = (props) => {
                         onMouseLeave={hideDropdown}
                       >
                         <NavDropdown.Item className={style.avDropdown_Item}>
-                          <Nav.Link as={Link} to="/feedback-form">
+                          <Nav.Link as={Link} to="/feedback-post">
                             Feedback Form
                           </Nav.Link>
-                          <NavDropdown.Item as={Link} to="feedback-details">
+                          <NavDropdown.Item as={Link} to="get-feedback">
                             View Feedback
                           </NavDropdown.Item>
-                          <NavDropdown.Item as={Link} to="newstudentreport">
-                            New Admission
-                          </NavDropdown.Item>
+                          {user?.accountType === ACCOUNT_TYPE.INSTRUCTOR && (
+                            <>
+                              <NavDropdown.Item as={Link} to="newstudentreport">
+                                New Admission
+                              </NavDropdown.Item>
 
-                          <NavDropdown.Item as={Link} to="createpgreport">
-                            Pg Report
-                          </NavDropdown.Item>
+                              <NavDropdown.Item as={Link} to="createpgreport">
+                                Pg Report
+                              </NavDropdown.Item>
 
-                          <NavDropdown.Item as={Link} to="createjobreport">
-                            Job Report
-                          </NavDropdown.Item>
+                              <NavDropdown.Item as={Link} to="createjobreport">
+                                Job Report
+                              </NavDropdown.Item>
 
-                          <NavDropdown.Item as={Link} to="createexitreport">
-                            Exit Student
-                          </NavDropdown.Item>
+                              <NavDropdown.Item as={Link} to="createexitreport">
+                                Exit Student
+                              </NavDropdown.Item>
+                            </>
+                          )}
                           <NavDropdown.Divider />
                           <NavDropdown.Item to="#action/3.4">
                             Separated link
@@ -384,27 +127,10 @@ const Header = (props) => {
                         </NavDropdown.Item>
                       </NavDropdown>
                     </>
-
-        
-                    {!isAdmin &&
-                      
-                      token !== null &&
-                      accountType === "Instructor" && (
-                        <>
-                          <Sidebar />
-                          {/* <Nav.Link as={Link} to="/newstudent" className={style.nav_links} onClick={handleClick}>ADMISSION</Nav.Link> */}
-                          {/* <Nav.Link as={Link} to="/exit" className={style.nav_links} onClick={handleClick}>EXIT STUDENT</Nav.Link>
-                      <Nav.Link as={Link} to="/pgcourses" className={style.nav_links} onClick={handleClick}>POSTGRADUATE</Nav.Link>
-                      <Nav.Link as={Link}  to="/btechjob" className={style.nav_links} onClick={handleClick}>JOB</Nav.Link> */}
-                        </>
-                      )}
                   </Nav>
-
-                  {/* </Nav> */}
 
                   <Nav className="">
                     {" "}
-                    {/* Keeping login/signup or profile dropdown to the right */}
                     {token === null ? (
                       <>
                         <Nav.Link

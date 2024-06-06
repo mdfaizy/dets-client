@@ -1,8 +1,8 @@
-import axios from "axios";
+// import axios from "axios";
 import { useEffect, useState } from "react";
 import { Container, Row, Col, Form, Accordion } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
-import { newadmissionEndpoints } from "../../services/apis";
+// import { newadmissionEndpoints } from "../../services/apis";
 import {
   getnewadmissionId,
   updateNewAdmissionData,

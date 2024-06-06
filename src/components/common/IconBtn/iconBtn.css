@@ -1,0 +1,17 @@
+
+
+.iconBtn_contant{
+    /* flex items-center bg-yellow-50 cursor-pointer gap-x-2 rounded-md py-2 text-sm md:text-lg px-3 md:px-5 font-semibold text-richblack-900 undefined
+     */
+     display: flex;
+     align-items: center;
+     background-color: rgba(241, 241, 23, 0.919);
+     cursor: pointer;
+     padding: 5px 20px;
+     /* padding: ; */
+     border-radius: 30px;
+
+     /* padding-right: 10px; */
+
+
+}
