@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 // import style from './Newstudent.module.css';
 import style from './Job.module.css';
 
-const Btechjob = () => {
+const BtechJob = () => {
   return (
     <>
       <img src={softwarejob_jobimage} alt="" className={style.jobimage} />
@@ -35,4 +35,4 @@ const Btechjob = () => {
   );
 };
 
-export default Btechjob;
+export default BtechJob;

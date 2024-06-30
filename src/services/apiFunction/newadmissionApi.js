@@ -9,8 +9,8 @@ const {
   GET_ALL_NEW_ADMISSION_DATA,
   DELETE_NEW_ADMISSION_DATA_BY_ID,
   GET_PROFILE,
+  FETCH_SINGLE_STUDENT_APPLICATION_DATA,
 } = newadmissionEndpoints;
-
 
 export const submitNewStudentForm = async (formData, navigate,token, setLoading) => {
   const formDataToSend = new FormData();
@@ -46,15 +46,14 @@ export const submitNewStudentForm = async (formData, navigate,token, setLoading)
     console.error("Error occurred:", error);
   }
 };
-
-// 
-export const getNewAdmissionUserDetailsById = async () => {
+ 
+export const getNewAdmissionUserDetailsById = async (id) => {
   const token = localStorage.getItem('token');
   const cleanToken = token.replace(/^"|"$/g, "");
-  const api_URL=`${GET_PROFILE}`
-// const api_URL= "http://localhost:8000/api/v1/job/get_Profile"
+  const api_URL=`${GET_PROFILE}/${id}`
+// const api_URL= `http://localhost:8000/api/v1/student/get_Profile/${id}`
   try {
-    const response = await apiConnector(api_URL, {
+    const response = await axios.get(api_URL, {
       headers: {
         Authorization: `Bearer ${cleanToken}`,
       },
@@ -66,6 +65,23 @@ export const getNewAdmissionUserDetailsById = async () => {
   }
 };
 
+//fetch newAdmission Data single
+// FETCH_SINGLE_STUDENT_APPLICATION_DATA
+export const getnewadmissionByOne = async () => {
+  try {
+    // const cleanToken = token ? token.replace(/^"|"$/g, "") : "";
+    // const API_Url = `${GET_NEW_ADMISSIOM_DATA}/${id}`;
+    const response = await apiConnector("GET",FETCH_SINGLE_STUDENT_APPLICATION_DATA ,{
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    console.log("response: " + response.data.Newadmission);
+    return response.data.Newadmission;
+  } catch (error) {
+    console.error("Failed to fetch new admission", error);
+  }
+};
 
 //get Find All Student
 export const getAllNewStudent = async () => {
@@ -78,7 +94,7 @@ export const getAllNewStudent = async () => {
         Authorization: `Bearer ${token}`,
       },
     });
-    // console.log("responce", response);
+   
     if (response.data.success) {
       return response.data.data;
     } else {

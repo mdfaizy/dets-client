@@ -28,8 +28,8 @@ const EditNewStudent = () => {
     fatherName: "",
     motherName: "",
     parent_phone_no: "",
-    parent_incom: "",
-    parent_occoupation: "",
+    parent_income: "",
+    parent_occupation: "",
     //admission
     examType: "",
     counselling: "",
@@ -37,30 +37,30 @@ const EditNewStudent = () => {
     end_session: "",
 
     application_exam_no: "",
-    scoure_rank: "",
-    cource_name: "",
+    score_rank: "",
+    course_name: "",
     stream: "",
     //address details
     village: "",
     police_station: "",
-    distric: "",
+    district: "",
     pin_code: "",
     state_name: "",
     //10th details
 
     schoolName_10th: "",
     roll_No_10th: "",
-    regisration_No_10th: "",
+    registration_no_10th: "",
     board_Name_10th: "",
     year_of_passing_10th: "",
-    persentage_10th: "",
+    percentage_10th: "",
     //12th details
     schoolName_12th: "",
     roll_No_12th: "",
-    regisration_No_12th: "",
+    registration_no_12th: "",
     board_Name_12th: "",
     year_of_passing_12th: "",
-    persentage_12th: "",
+    percentage_12th: "",
     //file
     aadhar_card_file: "",
     rankcardFile: "",
@@ -364,9 +364,9 @@ const EditNewStudent = () => {
                             </Form.Label>
                             <Form.Control
                               type="text"
-                              name="parent_incom"
-                              id="parent_incom"
-                              value={formData.parent_incom}
+                              name="parent_income"
+                              id="parent_income"
+                              value={formData.parent_income}
                               placeholder="Parent Incom..."
                               onChange={changeHandler}
                               className="rounded-2"
@@ -380,9 +380,9 @@ const EditNewStudent = () => {
                             </Form.Label>
                             <Form.Control
                               type="text"
-                              name="parent_occoupation"
-                              id="parent_occoupation"
-                              value={formData.parent_occoupation}
+                              name="parent_occupation"
+                              id="parent_occupation"
+                              value={formData.parent_occupation}
                               placeholder="Parent Occupation..."
                               onChange={changeHandler}
                               className="rounded-2"
@@ -486,9 +486,9 @@ const EditNewStudent = () => {
                             </Form.Label>
                             <Form.Control
                               type="text"
-                              name="scoure_rank"
-                              id="scoure_rank"
-                              value={formData.scoure_rank}
+                              name="score_rank"
+                              id="score_rank"
+                              value={formData.score_rank}
                               placeholder="Enter Your Rank..."
                               onChange={changeHandler}
                               className="rounded-2"
@@ -500,9 +500,9 @@ const EditNewStudent = () => {
                             </Form.Label>
                             <Form.Control
                               type="text"
-                              name="cource_name"
-                              id="cource_name"
-                              value={formData.cource_name}
+                              name="course_name"
+                              id="course_name"
+                              value={formData.course_name}
                               placeholder="Enter Cource Name..."
                               onChange={changeHandler}
                               className="rounded-2"
@@ -562,14 +562,14 @@ const EditNewStudent = () => {
 
                           <Form.Group as={Col} md="4">
                             <Form.Label>
-                              Distric
+                              district
                               <span className="text-danger">*</span>
                             </Form.Label>
                             <Form.Control
                               type="text"
-                              name="distric"
-                              id="distric"
-                              value={formData.distric}
+                              name="district"
+                              id="district"
+                              value={formData.district}
                               placeholder="Enter Parent Phone No..."
                               onChange={changeHandler}
                               className="rounded-2"
@@ -645,9 +645,9 @@ const EditNewStudent = () => {
                             </Form.Label>
                             <Form.Control
                               type="text"
-                              name="regisration_No_10th"
-                              id="regisration_No_10th"
-                              value={formData.regisration_No_10th}
+                              name="registration_no_10th"
+                              id="registration_no_10th"
+                              value={formData.registration_no_10th}
                               placeholder="Enter Regisration No..."
                               onChange={changeHandler}
                               className="rounded-2"
@@ -688,9 +688,9 @@ const EditNewStudent = () => {
                             </Form.Label>
                             <Form.Control
                               type="text"
-                              name="persentage_10th"
-                              id="persentage_10th"
-                              value={formData.persentage_10th}
+                              name="percentage_10th"
+                              id="percentage_10th"
+                              value={formData.percentage_10th}
                               placeholder="Enter Persentage..."
                               onChange={changeHandler}
                               className="rounded-2"
@@ -741,9 +741,9 @@ const EditNewStudent = () => {
                             </Form.Label>
                             <Form.Control
                               type="text"
-                              name="regisration_No_12th"
-                              id="regisration_No_12th"
-                              value={formData.regisration_No_12th}
+                              name="registration_no_12th"
+                              id="registration_no_12th"
+                              value={formData.registration_no_12th}
                               placeholder="Enter Regisration No..."
                               onChange={changeHandler}
                               className="rounded-2"
@@ -784,9 +784,9 @@ const EditNewStudent = () => {
                             </Form.Label>
                             <Form.Control
                               type="text"
-                              name="persentage_12th"
-                              id="persentage_12th"
-                              value={formData.persentage_12th}
+                              name="percentage_12th"
+                              id="percentage_12th"
+                              value={formData.percentage_12th}
                               placeholder="Enter Persentage..."
                               onChange={changeHandler}
                               className="rounded-2"

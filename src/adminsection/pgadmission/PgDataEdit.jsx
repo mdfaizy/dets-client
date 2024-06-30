@@ -21,7 +21,7 @@ const PgDataEdit = () => {
     allIndiaRank: "",
     stream: "",
     session: "",
-    exameType: "",
+    examType: "",
     InstituteName: "",
     cource: "",
     InstituteCity: "",
@@ -98,7 +98,6 @@ const PgDataEdit = () => {
         <Row>
           <Form onSubmit={submitHandler}>
             <Row>
-              
               <Form.Group as={Col} md="4">
                 <Form.Label>
                   First Name<span className="text-danger">*</span>
@@ -203,10 +202,10 @@ const PgDataEdit = () => {
                   Exam Type <span className="text-danger">*</span>
                 </Form.Label>
                 <Form.Select
-                  id="exameType"
-                  name="exameType"
+                  id="examType"
+                  name="examType"
                   className="rounded-0"
-                  value={formData.exameType}
+                  value={formData.examType}
                   onChange={changeHandler}
                 >
                   <option value="">Select Exam</option>

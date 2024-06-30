@@ -1,47 +1,41 @@
-import "./App.scss";
-import { useState} from "react";
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { useState } from "react";
+import { Route, Routes } from "react-router-dom";
 import About from "./components/pages/about/About";
 import Home from "./components/home/Home";
-import Job from "./routes/job/Job";
-import "bootstrap/dist/css/bootstrap.min.css";
-import LoginFrom from "./components/pages/login/LoginFrom";
 import Footer from "./components/common/footer/Footer";
 import Header from "./components/common/header/Header";
-import { Route, Routes } from "react-router-dom";
-import SignupFrom from "./components/pages/signup/SignupFrom";
+import LoginForm from "./components/pages/login/LoginForm";
+import SignupForm from "./components/pages/signup/SignupForm";
+import VerifyOtp from "./components/pages/EmailVerify/VerifyOtp"
 import NewAdmission from "./routes/newstudent/newadmission/NewAdmission";
-import ExitFrom from "./routes/exitstudent/exit/ExitFrom";
-import PgCource from "./routes/pgcourse/pg/PgCource";
-import ShowFormData from "./form-data/see-details/ShowFormData";
-import Addmissiondata from "./containers/applicationdata/Addmissiondata";
-import Exitdata from "./containers/applicationdata/Exitdata";
-import Pgdata from "./containers/applicationdata/Pgdata";
-import Jobdata from "./containers/applicationdata/Jobdata";
-// import Allnewstudent from "./admin/all-student/Allnewstudent";
-// import Allexitstudent from "./admin/all-student/Allexitstudent";
-// import Allpgstudent from "./admin/all-student/Allpgstudent";
-// import Allstudentjob from "./admin/all-student/Allstudentjob";
+import ExitForm from "./routes/exitstudent/exit/ExitForm";
+import PgCourse from "./routes/pgcourse/pg/PgCourse";
+import Job from "./routes/job/Job";
+
+import AdmissionData from "./components/core/Dashboard/studentDashboard/ugApplicationData/AdmissionData";
+import ExitData from "./components/core/Dashboard/studentDashboard/ugApplicationData/ExitData";
+import PgData from "./components/core/Dashboard/studentDashboard/ugApplicationData/PgData";
+import JobData from "./components/core/Dashboard/studentDashboard/ugApplicationData/JobData";
+
 import ForgatePassword from "./components/pages/forgatepassword/ForgatePassword";
 import ReasetPassword from "./components//pages/forgatepassword/resetPassword/ResetPassword";
 import Exit from "./routes/exitstudent/Exit";
-import Newstudent from "./routes/newstudent/Newstudent";
+import NewStudent from "./routes/newstudent/NewStudent";
 
-import Btechjob from "./routes/job/softwarejob/Btechjob";
-import Pgcourse from "./routes/pgcourse/Pgcourse";
-import PgCourseSumbitData from "./containers/sumbitdata/PgCourseSumbitData";
-import Exitsumbitdata from "./containers/sumbitdata/Exitsumbitdata";
-import StudentAllInfo from "./routes/StudentDetails/StudentAllInfo";
+import BtechJob from "./routes/job/softwarejob/BtechJob";
+import Pgcourse from "./routes/pgcourse/PgCourse";
+import PgCourseSubmitData from "./containers/sumbitdata/PgCourseSubmitData";
+import ExitSubmitData from "./containers/sumbitdata/ExitSubmitData";
 
-import FeedbackFullContent from "./adminDashboard/FeedbackFullContent";
-import NewStudentReport from "./admin&teacher/createReport/newStudent/NewStudentReport";
-import ExitReport from "./admin&teacher/createReport/exit/ExitReport";
-import Report from "./admin&teacher/report/Report";
-import PgReport from "./admin&teacher/createReport/PgReport";
-import JobReport from "./admin&teacher/createReport/JobReport";
+import NewStudentReport from "./components/core/Report/newStudent/NewStudentReport";
+import ExitReport from "./components/core/Report/exit/ExitReport";
+import Report from "./components/core/ReportPage/ReportPageLink/Report";
+import PgReport from "./components/core/Report/PgReport";
+import JobReport from "./components/core/Report/JobReport";
 import FetchUserData from "./data/FetchUserData";
-import AdmissionSummaryData from "./summaryData/AdmissionSummaryData";
-import FilterData from "./admin&teacher/data/FilterData";
-import VerifyOtp from "./components/pages/EmailVerify/verifyOtp";
+
 import EditJob from "./adminsection/job/EditJob";
 import JobDataPrint from "./adminsection/job/JobDataPrint";
 import PrintNewStudent from "./adminsection/admission/PrintNewStudent";
@@ -51,20 +45,19 @@ import ExitEdit from "./adminsection/exitdata/ExitEdit";
 import ExitPrintData from "./adminsection/exitdata/ExitPrintData";
 import DeleteJob from "./adminsection/job/DeleteJob";
 import NewAdmissionData from "./containers/sumbitdata/NewAdmission";
-import Jobsumbitdata from "./containers/sumbitdata/Jobsumbitdata";
+import JobSubmitData from "./containers/sumbitdata/ExitSubmitData";
 
 import PgDataDelete from "./adminsection/pgadmission/PgDataDelete";
 import PgDataEdit from "./adminsection/pgadmission/PgDataEdit";
 import PgPrint from "./adminsection/pgadmission/PgPrint";
 import DeleteExit from "./adminsection/exitdata/DeleteExit";
-// import FeedbackForm from "./adminDashboard/feedback/feedbackfrom/Feedbackfrom";
-import Feedback from "./adminDashboard/feedback/Feedback";
+
 import Acoount from "./components/pages/createAccount/Acoount";
 import TeacherAccount from "./components/pages/teacherSignupAccount/TeacherAccoutn";
 import OpenRoute from "./components/core/Auth/OpenRoute";
 import PrivateRoute from "./components/core/Auth/PrivateRoute";
 import Sidebar from "./components/layout/Sidebar";
-import AreaTable from "./components/core/Dashboard/newStudentTable/NewStudentTable";
+import NewStudentTable from "./components/core/Dashboard/newStudentTable/NewStudentTable";
 import ExitStudentTableData from "./components/core/Dashboard/exitStudentTable/ExitStudentTableData";
 import JobDataTable from "./components/core/Dashboard/JobTableData/JobDataTable";
 import PgStudentDataTable from "./components/core/Dashboard/PgStudentDataTable/PgStudentDataTable";
@@ -73,38 +66,27 @@ import FeedbackForm from "./components/core/feedbackForm/feedbackPost/FeedbackFo
 import GetFeedback from "./components/core/feedbackForm/feedbackGet/GetFeedback";
 import MyProfile from "./components/core/MyProfile";
 import Settings from "./components/core/Settings";
+import AllShortDetails from "./components/core/Dashboard/adminDashboard/AllShortDetails";
+import AdminContent from "./components/core/Dashboard/adminDashboard/AdminContent";
 function App() {
-  
-  const accountType = localStorage.getItem("accountType");
-  console.log(accountType);
- 
+  // const accountType = localStorage.getItem("accountType");
 
   const [isAdmin, setIsAdmin] = useState(false);
-  
 
   return (
-    // style={{ backgroundColor: "#000814" }}
     <div style={{ backgroundColor: "#000814" }}>
-      
-      <Header
-        isAdmin={isAdmin}
-        setIsAdmin={setIsAdmin}
-       
-      />
+      <Header isAdmin={isAdmin} setIsAdmin={setIsAdmin} />
       <Routes>
         <Route index element={<Home />} />
         <Route path="/about" element={<About />} />
         {/* User route */}
-        <Route path="/verify-email" element={<VerifyOtp />} />
-        <Route
-          path="/signupfrom"
-          element={<SignupFrom  />}
-        />
+        <Route path="/verify-email" element={<VerifyOtp/>} />
+        <Route path="/signupfrom" element={<SignupForm />} />
         <Route
           path="/loginfrom"
           element={
             <OpenRoute>
-              <LoginFrom setIsAdmin={setIsAdmin} />
+              <LoginForm setIsAdmin={setIsAdmin} />
             </OpenRoute>
           }
         />
@@ -125,7 +107,7 @@ function App() {
           path="/exitfrom"
           element={
             <PrivateRoute>
-              <ExitFrom />
+              <ExitForm />
             </PrivateRoute>
           }
         />
@@ -133,7 +115,7 @@ function App() {
           path="/pgcource"
           element={
             <PrivateRoute>
-              <PgCource />
+              <PgCourse />
             </PrivateRoute>
           }
         />
@@ -145,63 +127,19 @@ function App() {
             </PrivateRoute>
           }
         />
-        {/*Show Application  */}
-        <Route
-          path="/showFormData"
-          element={<ShowFormData isAdmin={isAdmin} />}
-        />
-
-        {/* <Route path="/new_addmission/:id" element={<Addmissiondata />} />
-        <Route path="/exit_application/:id" element={<Exitdata />} />
-        <Route path="/pg_application/:id" element={<Pgdata />} />
-        <Route path="/job_application/:id" element={<Jobdata />} /> */}
-        {/* Show Admin and teacher  */}
-        {/* <Route
-          path="/all_new_addmission"
-          element={<Allnewstudent isAdmin={isAdmin}  />}
-        />
-        <Route
-          path="/all_exit_student"
-          element={<Allexitstudent isAdmin={isAdmin}  />}
-        />
-        <Route
-          path="/all_pg_student"
-          element={<Allpgstudent isAdmin={isAdmin}  />}
-        />
-        <Route
-          path="/all_student_job"
-          element={<Allstudentjob isAdmin={isAdmin}  />}
-        /> */}
 
         {/* from befor ui */}
-        <Route path="/newstudent" element={<Newstudent />} />
+        <Route path="/newstudent" element={<NewStudent />} />
         <Route path="/exit" element={<Exit />} />
-        <Route path="/btechjob" element={<Btechjob />} />
+        <Route path="/btechjob" element={<BtechJob />} />
         <Route path="/pgcourses" element={<Pgcourse />} />
         {/* Sumbit after show data */}
         <Route path="/newAdmissiondata" element={<NewAdmissionData />} />
-        <Route path="/exitsumbitdata" element={<Exitsumbitdata />} />
-        <Route path="/pgsumbitdata" element={<PgCourseSumbitData />} />
-        <Route path="/jobsumbitdata" element={<Jobsumbitdata />} />
-        <Route
-          path="/studentallinfo"
-          element={<StudentAllInfo  />}
-        />
-
-        {/* get data by ID */}
-        {/* <Route path="/new_addmission/:id" element */}
-        {/* <Route exact path="/feedback/: component={Feedback} /> */}
-        {/* student by feedback*/}
-        <Route path="/feedback/:id" element={<FeedbackFullContent />} />
-        <Route path="/newstudentreport" element={<NewStudentReport />} />
-        <Route path="/createreport" element={<Report />} />
-        <Route path="/createexitreport" element={<ExitReport />} />
-        <Route path="/createpgreport" element={<PgReport />} />
-        <Route path="/createjobreport" element={<JobReport />} />
+        <Route path="/exitsumbitdata" element={<ExitSubmitData />} />
+        <Route path="/pgsumbitdata" element={<PgCourseSubmitData />} />
+        <Route path="/jobsumbitdata" element={<JobSubmitData />} />
 
         <Route path="/fetchuserdata/:id" element={<FetchUserData />} />
-        <Route path="/filterdataall" element={<FilterData />} />
-        <Route path="/admissionfilterdata" element={<AdmissionSummaryData />} />
 
         {/* print and edit ,delete route new admission */}
         <Route
@@ -226,51 +164,60 @@ function App() {
         {/* Feedback */}
         <Route path="/feedback-post" element={<FeedbackForm />} />
         {/* <Route path="/feedback-details" element={<Feedback />} /> */}
-        <Route path="/get-feedback" element={<GetFeedback/>}/>
+        <Route path="/get-feedback" element={<GetFeedback />} />
 
         {/* nestade route */}
-        <Route
-        
-          element={<Sidebar />}
-        >
+        <Route element={<Sidebar />}>
           <Route
             path="dashboard/all_new_addmission"
-            element={<AreaTable isAdmin={isAdmin}  />}
+            element={<NewStudentTable isAdmin={isAdmin} />}
           />
           <Route
             path="dashboard/all_exit_student"
             element={<ExitStudentTableData />}
           />
           <Route
-          path="dashboard/all_pg_student"
-          element={<PgStudentDataTable isAdmin={isAdmin}  />}
-        />
-        <Route
-          path="dashboard/all_student_job"
-          element={<JobDataTable isAdmin={isAdmin}  />}
-        />
-          {/* JobDataTable */}
-          <Route path="dashboard/new_addmission/:id" element={<Addmissiondata />} />
-          <Route path="dashboard/exit_application/:id" element={<Exitdata />} />
-          <Route path="dashboard/pg_application/:id" element={<Pgdata />} />
-          <Route path="dashboard/job_application/:id" element={<Jobdata />} />
+            path="dashboard/all_pg_student"
+            element={<PgStudentDataTable isAdmin={isAdmin} />}
+          />
+          <Route
+            path="dashboard/all_student_job"
+            element={<JobDataTable isAdmin={isAdmin} />}
+          />
+          <Route
+            path="dashboard/view-all-info-short"
+            element={<AllShortDetails />}
+          />
+          {/*view Data in user and Teacher , Dashboard in show the all navlink*/}
+          <Route
+            path="dashboard/new_admission"
+            element={<AdmissionData />}
+          />
+          <Route path="dashboard/exit_application" element={<ExitData />} />
+          <Route path="dashboard/pg_application" element={<PgData />} />
+          <Route path="dashboard/job_application" element={<JobData />} />
           <Route path="dashboard/my-profile" element={<MyProfile />} />
+          <Route path="dashboard/admin-content" element={<AdminContent />} />
           <Route path="dashboard/settings" element={<Settings />} />
           <Route path="dashboard/feedback-form" element={<FeedbackForm />} />
+          <Route path="dashboard/feedback-post" element={<FeedbackForm />} />
           <Route
             path="dashboard/teacher-account"
             element={<TeacherAccount />}
           />
+          {/* Filter Data  */}
+          <Route
+            path="dashboard/newstudentreport"
+            element={<NewStudentReport />}
+          />
+          <Route path="dashboard/createreport" element={<Report />} />
+          <Route path="dashboard/createexitreport" element={<ExitReport />} />
+          <Route path="dashboard/createpgreport" element={<PgReport />} />
+          <Route path="dashboard/createjobreport" element={<JobReport />} />
         </Route>
       </Routes>
 
-      <Footer
-       
-        isAdmin={isAdmin}
-        setIsAdmin={setIsAdmin}
-        
-        
-      />
+      <Footer  />
     </div>
   );
 }

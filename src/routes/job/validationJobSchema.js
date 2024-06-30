@@ -8,9 +8,9 @@
 //   .min(2, "Full  name should be at least 2 characters")
 //   .max(50, "Full  name should not exceed 50 characters"),
 //   companies_name: yup.string().
-//   required('Companies Name is required')
-//   .min(2, "Companies Name should be at least 2 characters")
-//   .max(50, "Companies Name should not exceed 50 characters"),
+//   required('Company's Name is required')
+//   .min(2, "Company's Name should be at least 2 characters")
+//   .max(50, "Company's Name should not exceed 50 characters"),
 //   email: yup.string().email('Invalid email address').required('Email is required'),
 //   phone_no: yup
 //     .string()
@@ -27,7 +27,7 @@
 //   selectType: yup.string().required('Select Type is required'),
 //   totalApplyCompanies: yup.string().required('Total Apply Companies is required'),
 //   noOfSelectInterview: yup.string().required('No Of Select Interview is required'),
-//   companiesType: yup.string().required('Companies Type is required'),
+//   companiesType: yup.string().required('Company's Type is required'),
 // });
 
 // export default jobValidationSchema;
@@ -48,9 +48,9 @@ import * as yup from 'yup';
     .min(2, "Full name should be at least 2 characters")
     .max(50, "Full name should not exceed 50 characters"),
   companies_name: yup.string()
-    .required('Companies Name is required')
-    .min(2, "Companies Name should be at least 2 characters")
-    .max(50, "Companies Name should not exceed 50 characters"),
+    .required('Company's Name is required')
+    .min(2, "Company's Name should be at least 2 characters")
+    .max(50, "Company's Name should not exceed 50 characters"),
   email: yup.string().email('Invalid email address').required('Email is required'),
   phone_no: yup
     .string()
@@ -66,7 +66,7 @@ import * as yup from 'yup';
   selectType: yup.string().required('Select Type is required'),
   totalApplyCompanies: yup.string().required('Total Apply Companies is required'),
   noOfSelectInterview: yup.string().required('No Of Select Interview is required'),
-  companiesType: yup.string().required('Companies Type is required'),
+  companiesType: yup.string().required('Company's Type is required'),
 });
 
 export default jobValidationSchema;

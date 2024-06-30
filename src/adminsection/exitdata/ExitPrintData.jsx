@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import style from "./exitdata.module.css";
-import {getExitStudentByID} from '../../services/apiFunction/exitApi'
+import { getExitStudentByID } from "../../services/apiFunction/exitApi";
 // import { exitStudentEndpoints } from "../../services/apis";
 import { useParams } from "react-router-dom";
 const ExitPrintData = () => {
@@ -10,9 +10,8 @@ const ExitPrintData = () => {
   const token = localStorage.getItem("token");
   const fetchData = async () => {
     try {
-    
-    const data=await  getExitStudentByID(id,token);
-    console.log(data);
+      const data = await getExitStudentByID(id, token);
+      console.log(data);
       setFormData(data);
     } catch (error) {
       console.error("Error fetching form data:", error);
@@ -28,20 +27,20 @@ const ExitPrintData = () => {
   };
   return (
     <>
-      <div className="addmission_top_contante">
+      <div className="admission_top_content">
         <table
-          className="admission_table_contante"
+          className="admission_table_content"
           cellSpacing="0"
           cellPadding="0"
           border="0"
           align="center"
         >
-          <tr className="admission_top_tr_contante">
+          <tr className="admission_top_tr_content">
             <tr className="admission_top_tr2">
               <tr className="admission_top_tr3">
                 <td className="admission_top_td1">
                   <span>
-                    <b className="admission_top_unive_name">
+                    <b className="admission_top_univ_name">
                       UNIVERSITY OF KALYANI
                     </b>
                     <br />
@@ -53,23 +52,23 @@ const ExitPrintData = () => {
               </tr>
             </tr>
           </tr>
-          <tr className="table_contante">
-            <td className="table_contante_td">
+          <tr className="table_content">
+            <td className="table_content_td">
               <table
-                className="table_table_data_contante"
+                className="table_table_data_content"
                 cellSpacing="0"
                 cellPadding="0"
               >
                 <tbody>
-                  <tr className="table_tbody_hading">
+                  <tr className="table_tbody_heading">
                     Department of Engineering and Technological Studies <br />
                     Exit Student
                   </tr>
 
-                  <tr className="tbody_contante">
+                  <tr className="tbody_content">
                     <td colSpan={3}>
                       <table
-                        className="table_contante_table"
+                        className="table_content_table"
                         cellSpacing="0"
                         cellPadding="5"
                         border="0"
@@ -210,7 +209,7 @@ const ExitPrintData = () => {
                             <td className="tbody_fromData_and_info_dot">
                               <b>:</b>
                             </td>
-                            <td>{formData.year_cgpa_1th}</td>
+                            <td>{formData.year_cgpa_1st}</td>
                           </tr>
 
                           <tr>

@@ -2,7 +2,7 @@ import { Container, Col, Row } from 'react-bootstrap';
 import neadmission_student from '../../assets/neadmission.png';
 import { NavLink } from 'react-router-dom';
 import style from './Newstudent.module.css';
-const Newstudent = () => {
+const NewStudent = () => {
   return (
     <>
       <img src={neadmission_student} alt="" className={style.newimage} />
@@ -36,4 +36,4 @@ const Newstudent = () => {
   );
 };
 
-export default Newstudent;
+export default NewStudent;

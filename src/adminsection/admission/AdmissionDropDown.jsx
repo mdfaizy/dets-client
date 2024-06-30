@@ -1,13 +1,18 @@
 import { useEffect, useRef, useState } from "react";
 import { HiDotsHorizontal } from "react-icons/hi";
-import { Link ,useSelector} from "react-router-dom";
+// import { Link} from "react-router-dom";
+import {Link} from "react-router-dom";
 import { ACCOUNT_TYPE } from "../../utils/constant";
+import {useSelector} from "react-redux"
+
+
 const AdmissionDropDown = ({ id }) => {
   const [showDropdown, setShowDropdown] = useState(false);
   const handleDropdown = () => {
     setShowDropdown(!showDropdown);
   };
   const user = useSelector((state) => state.profile.user);
+  // const user=useSelector((state)=>state.pro)
   const dropdownRef = useRef(null);
 
   const handleClickOutside = (event) => {

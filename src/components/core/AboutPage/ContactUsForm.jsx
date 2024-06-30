@@ -5,7 +5,7 @@ import { useEffect } from "react";
 // import { contactusEndpoint } from '../../services/apis';
 import toast from "react-hot-toast";
 // import countryCode from "../../data/countrycode.json";
-
+import style from "./contact.module.css"
 const ContactUsForm = () => {
   const [loading, setloading] = useState(false);
   const {
@@ -52,11 +52,11 @@ const ContactUsForm = () => {
       <div className="custom-loader"></div>
     </div>
   ) : (
-    <div>
+    <div className={style.conact_conatiner}>
       <form onSubmit={handleSubmit(onSubmit)} className={"flex flex-col gap-7"}>
         <div className="flex flex-col gap-5 lg:flex-row">
-          <div className="flex flex-col gap-2 lg:w-[48%]">
-            <label htmlFor="firstname" className="lable-style">
+          <div className="flex flex-col gap-2 lg:w-[38%]">
+            <label htmlFor="firstname" className="lable-style text-white">
               First Name
             </label>
             <input
@@ -68,13 +68,13 @@ const ContactUsForm = () => {
               className="form-style"
             />
             {errors.firstName && (
-              <span className=" text-yellow-25">Enter Firstname *</span>
+              <span className=" text-danger">Enter Firstname *</span>
             )}
           </div>
 
 
           <div className="flex flex-col gap-2 lg:w-[48%]">
-            <label htmlFor="firstname" className="lable-style">
+            <label htmlFor="firstname" className="lable-style text-white">
               Last Name
             </label>
             <input
@@ -86,7 +86,7 @@ const ContactUsForm = () => {
               className="form-style"
             />
             {errors.lastName && (
-              <span className=" text-yellow-25">Enter lastname *</span>
+              <span className=" text-danger">Enter lastname *</span>
             )}
           </div>
 
@@ -94,7 +94,7 @@ const ContactUsForm = () => {
         </div>
 
         <div className="flex flex-col gap-2">
-          <label htmlFor="email" className="lable-style">
+          <label htmlFor="email" className="lable-style text-white">
             Email Address
           </label>
           <input
@@ -106,15 +106,15 @@ const ContactUsForm = () => {
             {...register("email", { required: true })}
           />
           {errors.email && (
-            <span className=" text-yellow-25">Enter Email *</span>
+            <span className="text-danger">Enter Email *</span>
           )}
         </div>
 
         <div className="flex flex-col gap-2">
-          <label htmlFor="phoneNo" className="lable-style">
+          <label htmlFor="phoneNo" className="lable-style text-white">
             Phone Number
           </label>
-          <div className="flex gap-5">
+          <div className="d-flex gap-5">
             <div className="flex w-[81px] flex-col gap-2">
               <select
                 type="text"
@@ -138,7 +138,7 @@ const ContactUsForm = () => {
                 name="phoneNo"
                 id="phonenumber"
                 placeholder="12345 67890"
-                className="form-style"
+                className="form-style "
                 {...register("phoneNo", {
                   required: {
                     value: true,
@@ -155,7 +155,7 @@ const ContactUsForm = () => {
                 })}
               />
               {errors.phoneNo && (
-                <span className=" text-yellow-25">
+                <span className=" text-danger">
                   {errors.phoneNo.message}
                 </span>
               )}
@@ -164,7 +164,7 @@ const ContactUsForm = () => {
         </div>
 
         <div className="flex flex-col gap-2">
-          <label htmlFor="message" className="lable-style">
+          <label htmlFor="message" className="lable-style text-white">
             Message
           </label>
           <textarea
@@ -177,13 +177,15 @@ const ContactUsForm = () => {
             {...register("message", { required: true })}
           />
           {errors.message && (
-            <span className=" text-yellow-25">Enter your message *</span>
+            <span className="text-danger">Enter your message *</span>
           )}
         </div>
 
         <button
           type="submit"
           className="rounded-md bg-yellow-50 px-6 py-3 text-center text-[13px] font-bold text-black shadow-[2px_2px_0px_0px_rgba(255,255,255,0.18)] transition-all duration-200 hover:scale-95 hover:shadow-none  disabled:bg-richblack-500 sm:text-[16px] "
+        style={{textAlign: 'center',backgroundColor:"yellow",
+          padding:'10px', marginBottom:'10px',borderRadius:'20px',margin:"0 auto",display:"flex"}}
         >
           Send Message
         </button>

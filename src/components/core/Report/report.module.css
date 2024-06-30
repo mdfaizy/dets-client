@@ -1,0 +1,48 @@
+.heading {
+    text-align: center;
+    color: rgb(114, 147, 147);
+    text-shadow: 0 0 3px #ff0000, 1px 0 5px #0000ff;
+    font-size: 25px;
+  }
+  .filter_data_box{
+    overflow:hidden;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    margin: 10px;
+    padding: 10px;
+  }
+  .teacher_verify {
+    width: 100vw;
+  }
+  .content_area_table{
+    background:#8993a3;
+    border-radius: 5px;
+    box-shadow:#85a7d9;
+    padding: 12px 16px;
+    width: 100vw;
+    
+    overflow-x: auto;
+  }
+  .data_table_diagram {
+    border-radius: 6px;
+    overflow-x: scroll;
+
+  }
+  .report_data_td tr th{
+    width: 100%;
+    color: #0000ff;
+  }
+  .data_table_diagram  table {
+    min-width: 900px;
+    width: 100%;
+    border: 1px solid;
+    padding: 5px;
+    border-collapse: collapse;
+    color: rgb(249, 252, 252)
+  }
+  .data_table_diagram  table td,
+    th {
+      padding: 14px 12px;
+      width: 100%;
+    } 
+

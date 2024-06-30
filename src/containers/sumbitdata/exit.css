@@ -1,0 +1,74 @@
+/* styles.css */
+
+.custom-container {
+  margin-top: 40px;
+  margin-bottom: 30px;
+}
+
+.custom-table {
+  margin: 0 auto;
+  display: block;
+  background: #f8f8fa url(https://i.ibb.co/VTk0B0B/pattern.png) repeat top left;
+  width: 800px;
+  color: #444444;
+  box-shadow: 0px 0 6px #ccc;
+}
+.top-heading {
+  align-items: center;
+  text-align: center;
+}
+.custom-header {
+  margin-bottom: 0px;
+  color: #006cb5;
+  font-size: 28px;
+  text-align: center;
+  font-weight: bold;
+  margin: 0 auto;
+}
+
+.table-row {
+  width: 760px;
+  padding: 10px;
+  border-collapse: collapse;
+}
+
+.table-cell {
+  width: 760px;
+  display: grid;
+  border-collapse: collapse;
+}
+
+.inner-table {
+  display: block;
+  word-break: break-all;
+  box-shadow: 0px 0 6px #ccc;
+  background: #fffdfd;
+  padding: 0px 15px;
+  border-radius: 5px;
+  font-size: 14px;
+}
+.inner-table tbody tr td {
+  padding: 0px;
+}
+.field-name {
+  font-family: calibri, helvetica, arial, sans-serif;
+}
+
+.print-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #006cb5;
+  color: white;
+  border: none;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.print-button:hover {
+  background-color: #00518b;
+}

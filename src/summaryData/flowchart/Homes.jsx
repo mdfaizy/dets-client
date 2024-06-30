@@ -118,33 +118,3 @@ const Homes = () => {
 };
 
 export default Homes;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

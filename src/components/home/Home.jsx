@@ -5,8 +5,8 @@ import image from "../../assets/image1.jpg";
 import style from "./Home.module.css";
 import { FaArrowRight } from "react-icons/fa";
 import { AiFillCaretRight } from "react-icons/ai";
-import AdmissionSummaryData from "../../summaryData/AdmissionSummaryData"
-import Homes from "../../summaryData/flowchart/Homes";
+
+// import Homes from "../../summaryData/flowchart/Homes";
 import studyVideo from "../../assets/Images/study1.mp4";
 import expmVideo1 from "../../assets/Images/classRomm.mp4";
 import TimelineSection from "../core/HomePage/TimeLineSection";
@@ -193,8 +193,8 @@ function Home() {
           </div>
         </section>
       </Container>
-      <AdmissionSummaryData />
-      <Homes />
+     
+      {/* <Homes /> */}
     </>
   );
 }

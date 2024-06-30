@@ -37,20 +37,20 @@ const JobDataPrint = () => {
   };
   return (
     <>
-      <div className="addmission_top_contante">
+      <div className="admission_top_content">
         <table
-          className="admission_table_contante"
+          className="admission_table_content"
           cellSpacing="0"
           cellPadding="0"
           border="0"
           align="center"
         >
-          <tr className="admission_top_tr_contante">
+          <tr className="admission_top_tr_content">
             <tr className="admission_top_tr2">
               <tr className="admission_top_tr3">
                 <td className="admission_top_td1">
                   <span>
-                    <b className="admission_top_unive_name">
+                    <b className="admission_top_univ_name">
                       UNIVERSITY OF KALYANI
                     </b>
                     <br />
@@ -62,23 +62,23 @@ const JobDataPrint = () => {
               </tr>
             </tr>
           </tr>
-          <tr className="table_contante">
-            <td className="table_contante_td">
+          <tr className="table_content">
+            <td className="table_content_td">
               <table
-                className="table_table_data_contante"
+                className="table_table_data_content"
                 cellSpacing="0"
                 cellPadding="0"
               >
                 <tbody>
-                  <tr className="table_tbody_hading">
+                  <tr className="table_tbody_heading">
                     Department of Engineering and Technological Studies <br />
                     JOB DETAILS
                   </tr>
 
-                  <tr className="tbody_contante">
+                  <tr className="tbody_content">
                     <td colSpan={3}>
                       <table
-                        className="table_contante_table"
+                        className="table_content_table"
                         cellSpacing="0"
                         cellPadding="5"
                         border="0"
@@ -109,7 +109,7 @@ const JobDataPrint = () => {
                           </tr>
                           <tr>
                             <td className="tbody_jobData_info_name">
-                              Companies Name
+                              Company's Name
                             </td>
                             <td className="tbody_fromData_and_info_dot">
                               <b>:</b>
@@ -213,7 +213,7 @@ const JobDataPrint = () => {
                           </tr>
                           <tr>
                             <td className="tbody_jobData_info_name">
-                              Companies Type
+                              Company's Type
                             </td>
                             <td className="tbody_fromData_and_info_dot">
                               <b>:</b>

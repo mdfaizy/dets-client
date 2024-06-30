@@ -1,0 +1,162 @@
+:root {
+  --secondary-color: #f5f5f5;
+  --light-shadow1: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --xl-text-color: #333;
+  --xl-headint-color:#e77272;
+  --text-t-head:rgba(112, 60, 180, 0.618);
+  --tbl-border-color: #ddd;
+  --scroll-track-bg-color: #f1f1f1;
+  --thead-bg-color: #f8f8f8;
+  --text-color-inverted: #fff;
+  --orange-color: #ff9800;
+  --red-color: #f44336;
+  --green-color: #4caf50;
+  --border-color-inverted: #ccc;
+  --default-transition: all 0.3s ease;
+}
+
+.contentAreaTable {
+  background: var(--secondary-color);
+  border-radius: 5px;
+  box-shadow: var(--light-shadow1);
+  padding: 12px 16px;
+  width: 100vw;
+}
+.new_pg_student_td tr th {
+  margin: 0;
+  width: auto;
+  color: var(--text-t-head);
+}
+@media (max-width: 768px) {
+  .contentAreaTable {
+    padding: 12px;
+  }
+}
+
+.dataTableTitle {
+  font-size: 18px;
+  color: var(--xl-headint-color);
+  margin-bottom: 12px;
+  text-align: center;
+
+}
+
+
+.dataTableDiagram {
+  border-radius: 6px;
+  border: 1px solid var(--tbl-border-color) !important;
+  overflow-x: scroll;
+}
+
+.dataTableDiagram::-webkit-scrollbar {
+  height: 6px;
+  width: 6px;
+}
+
+.dataTableDiagram::-webkit-scrollbar-track {
+  background-color: var(--scroll-track-bg-color);
+}
+
+.dataTableDiagram::-webkit-scrollbar-thumb {
+  border-radius: 100vh !important;
+  background-color: #e9e9e9;
+  outline: 1px solid rgba(0, 0, 0, 0.02);
+  outline-offset: -1px;
+}
+
+table {
+  min-width: 900px;
+  width: 100%;
+  border-collapse: collapse;
+  color: var(--text-color-inverted);
+}
+
+td,
+th {
+  padding: 14px 12px;
+}
+
+@media (max-width: 768px) {
+  td,
+  th {
+    font-size: 15px;
+    padding: 12px 10px;
+  }
+}
+
+thead {
+  text-align: left;
+  font-size: 17px;
+  background-color: var(--thead-bg-color);
+}
+
+th:last-child {
+  text-align: center;
+}
+
+.dtCellAction {
+  text-align: center;
+}
+
+.dtStatus {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  column-gap: 6px;
+}
+
+.dtStatusDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 100%;
+}
+
+.dotPending {
+  background-color: var(--orange-color);
+}
+
+.dotCanceled {
+  background-color: var(--red-color);
+}
+
+.dotDelivered {
+  background-color: var(--green-color);
+}
+
+.dtStatusText {
+  text-transform: capitalize;
+}
+
+.actionDropdownBtn {
+  color: var(--text-color-inverted);
+  position: relative;
+}
+
+.actionDropdownMenu {
+  position: absolute;
+  top: 100%;
+  right: 50%;
+  transform: translateX(50%);
+  min-width: 80px;
+  background-color: var(--secondary-color);
+  padding: 6px 10px;
+  z-index: 1;
+  border-radius: 8px;
+  border: 1px solid var(--border-color-inverted);
+  text-align: left;
+  box-shadow: rgba(100, 100, 111, 0.1) 0px 1px 4px 0px;
+}
+
+.dropdownMenuItem {
+  margin: 8px 0;
+}
+
+.dropdownMenuLink {
+  color: var(--text-color-inverted);
+  font-weight: 600;
+  transition: var(--default-transition);
+}
+
+.dropdownMenuLink:hover {
+  opacity: 0.9;
+}

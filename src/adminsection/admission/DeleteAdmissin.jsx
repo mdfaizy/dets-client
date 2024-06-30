@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 // import "../../form-data/applicationdata/admissiondata.scss";
 // import axios from "axios";
 import style from "./newAdmission.module.css";
-
+import {useNavigate} from "react-router-dom";
 import { useParams } from "react-router-dom";
 // import { newadmissionEndpoints } from "../../services/apis";
 import {
@@ -11,7 +11,7 @@ import {
 } from "../../services/apiFunction/newadmissionApi";
 const DeleteAdmissin = () => {
   const [formData, setFormData] = useState({});
-
+const navigate=useNavigate();
   const [deleteButtons, setdeleteButtons] = useState(false);
   const token = localStorage.getItem("token");
   // const cleanToken = token ? token.replace(/^"|"$/g, "") : "";
@@ -42,6 +42,7 @@ const DeleteAdmissin = () => {
       console.log(id);
       await deleteNewAdmission(id);
       console.log(id);
+      navigate("/")
       setFormData({});
     } catch (error) {
       console.error(error);
@@ -49,18 +50,18 @@ const DeleteAdmissin = () => {
   };
   return (
     <>
-      <div className="addmission_top_contante">
+      <div className="admission_top_content">
         <table
-          className="admission_table_contante"
+          className="admission_table_content"
           cellSpacing="0"
           cellPadding="0"
         >
-          <tr className="admission_top_tr_contante">
+          <tr className="admission_top_tr_content">
             <tr className="admission_top_tr2">
               <tr className="admission_top_tr3">
                 <td className="admission_top_td1">
                   <span>
-                    <b className="admission_top_unive_name">
+                    <b className="admission_top_univ_name">
                       UNIVERSITY OF KALYANI
                     </b>
                     <br />
@@ -73,23 +74,23 @@ const DeleteAdmissin = () => {
             </tr>
           </tr>
 
-          <tr className="table_contante">
-            <td className="table_contante_td">
+          <tr className="table_content">
+            <td className="table_content_td">
               <table
-                className="table_table_data_contante"
+                className="table_table_data_content"
                 cellSpacing="0"
                 cellPadding="0"
               >
                 <tbody>
-                  <tr className="table_tbody_hading">
+                  <tr className="table_tbody_heading">
                     Department of Engineering and Technological Studies <br />
                     New Admission Student
                   </tr>
 
-                  <tr className="tbody_contante">
+                  <tr className="tbody_content">
                     <td colSpan={3}>
                       <table
-                        className="table_contante_table"
+                        className="table_content_table"
                         cellSpacing="0"
                         cellPadding="5"
                         border="0"
@@ -195,14 +196,14 @@ const DeleteAdmissin = () => {
                             <td className="tbody_fromData_and_info_dot">
                               <b>:</b>
                             </td>
-                            <td>{formData.scoure_rank}</td>
+                            <td>{formData.score_rank}</td>
                           </tr>
                           <tr>
                             <td className="tbody_formData_info_name">Cource</td>
                             <td className="tbody_fromData_and_info_dot">
                               <b>:</b>
                             </td>
-                            <td>{formData.cource_name}</td>
+                            <td>{formData.course_name}</td>
                           </tr>
                           <tr>
                             <td className="tbody_formData_info_name">Stream</td>
@@ -251,7 +252,7 @@ const DeleteAdmissin = () => {
                             <td className="tbody_fromData_and_info_dot">
                               <b>:</b>
                             </td>
-                            <td>{formData.regisration_No_10th}</td>
+                            <td>{formData.registration_no_10th}</td>
                           </tr>
 
                           <tr>
@@ -280,7 +281,7 @@ const DeleteAdmissin = () => {
                             <td className="tbody_fromData_and_info_dot">
                               <b>:</b>
                             </td>
-                            <td>{formData.persentage_10th}</td>
+                            <td>{formData.percentage_10th}</td>
                           </tr>
 
                           <tr>12th Info</tr>
@@ -312,7 +313,7 @@ const DeleteAdmissin = () => {
                             <td className="tbody_fromData_and_info_dot">
                               <b>:</b>
                             </td>
-                            <td>{formData.regisration_No_12th}</td>
+                            <td>{formData.registration_no_12th}</td>
                           </tr>
 
                           <tr>
@@ -342,7 +343,7 @@ const DeleteAdmissin = () => {
                             <td className="tbody_fromData_and_info_dot">
                               <b>:</b>
                             </td>
-                            <td>{formData.persentage_12th}</td>
+                            <td>{formData.percentage_12th}</td>
                           </tr>
                         </tbody>
                       </table>

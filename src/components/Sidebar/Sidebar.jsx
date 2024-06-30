@@ -18,7 +18,7 @@ import LogoBlue from "../../assets/Images/logo_blue.svg";
 import LogoWhite from "../../assets/Images/logo_white.svg";
 import "./Sidebar.scss";
 import { ACCOUNT_TYPE } from "../../utils/constant";
-// import axios from "axios";
+import axios from "axios";
 import {getJobUserDetailsById} from "../../services/apiFunction/job";
 // import {
 //   Jobs,
@@ -45,24 +45,12 @@ const Sidebar = () => {
     });
   };
   const user = useSelector((state) => state.profile.user);
-  const token = localStorage.getItem("token");
   const [jobUser, setJobUser] = useState(null);
   const [newAdmissionUser, setNewAdmissionUser] = useState(null);
   const [exitUser, setExitUser] = useState(null);
   const [pgUser, setPgUser] = useState(null);
-  // const cleanToken = token.replace(/^"|"$/g, "");
-  // const headers = {
-  //   Authorization: `Bearer ${cleanToken}`,
-  // };
-  const fetchJobUser = async () => {
-    try {
-      const data = await getJobUserDetailsById();
-      console.log("Job user",data);
-      setJobUser(data);
-    } catch (error) {
-      console.error(error.message);
-    }
-  };
+  const token=localStorage.getItem('token');
+  
 
   // getExitUserDetailsById
   // const fetchJobUser = async () => {
@@ -80,8 +68,9 @@ const Sidebar = () => {
       //   headers,
       // });
       // console.log(res.data);
+      console.log("getNewAdmissionUserDetailsByIdBefore")
       const data=await getNewAdmissionUserDetailsById(token);
-      console.log("new Stue",data)
+      console.log("getNewAdmissionUserDetailsById",data)
       // setNewAdmissionUser(res.Newadmission);
       setNewAdmissionUser(data);
       
@@ -99,7 +88,7 @@ const Sidebar = () => {
   //     setExitUser(res.exitData);
   //     console.log(res);
   const data=await getExitUserDetailsById(token);
-      console.log("new admission",data._id);
+      console.log("getExitUserDetailsById",data);
       setExitUser(data);
     } catch (error) {
       console.log(error);
@@ -114,20 +103,30 @@ const Sidebar = () => {
       // );
       // setPgUser(res.pgdata)
       const data=await getPgUserDetailsById(token);
-      console.log(data);
+      console.log("getPgUserDetailsById",data);
       setPgUser(data)
     } catch (error) {
       console.log(error);
     }
   };
 
+  const fetchJobUser = async () => {
+    try {
+      const data = await getJobUserDetailsById();
+      console.log("Job user",data);
+      setJobUser(data);
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
   useEffect(() => {
-    fetchJobUser();
+  
     fetchNewAdmissionUser();
     fetchExitUser();
     fetchPGUser();
+    fetchJobUser();
   }, []);
-  const { accountType } = useSelector((state) => state.auth);
+  // const { accountType } = useSelector((state) => state.auth);
   return (
     <>
       <button className="sidebar-toggle-btn bar" onClick={toggleSidebar}>
@@ -160,7 +159,7 @@ const Sidebar = () => {
                  <>
               <li className="menu-item">
                 <Link
-                  to={`/dashboard/new_addmission/${newAdmissionUser?._id || ""}`}
+                  to={`/dashboard/new_admission`}
                   className="menu-link"
                 >
                   <span className="menu-link-icon">
@@ -171,7 +170,7 @@ const Sidebar = () => {
               </li>
 
               <li className="">
-                <Link to={`/dashboard/exit_application/${exitUser?._id || ""}`} className="menu-link">
+                <Link to={`/dashboard/exit_application`} className="menu-link">
                   <span className="menu-link-icon">
                     <MdOutlineAttachMoney size={20} />
                   </span>
@@ -179,7 +178,7 @@ const Sidebar = () => {
                 </Link>
               </li>
               <li className="menu-item">
-                <Link to={`/dashboard/pg_application/${pgUser?._id || ""}`} className="menu-link">
+                <Link to={`/dashboard/pg_application`} className="menu-link">
                   <span className="menu-link-icon">
                     <MdOutlineCurrencyExchange size={18} />
                   </span>
@@ -187,7 +186,7 @@ const Sidebar = () => {
                 </Link>
               </li>
               <li className="menu-item">
-                <Link to={`/dashboard/job_application/${jobUser?._id || ""}`} className="menu-link">
+                <Link to={`/dashboard/job_application`} className="menu-link">
                   <span className="menu-link-icon">
                     <MdOutlineShoppingBag size={20} />
                   </span>
@@ -195,7 +194,7 @@ const Sidebar = () => {
                 </Link>
               </li>
               <li className="menu-item">
-                <Link to="/" className="menu-link">
+                <Link to="/dashboard/feedback-post" className="menu-link">
                   <span className="menu-link-icon">
                     <MdOutlinePeople size={20} />
                   </span>
@@ -204,47 +203,68 @@ const Sidebar = () => {
               </li>
               </>)}
               
-{/* teacher and admin data show */}
-              {user?.accountType === ACCOUNT_TYPE.INSTRUCTOR && (
-                <>
-                  <li className="menu-item">
-                    <Link to="/dashboard/all_new_addmission" className="menu-link">
-                      <span className="menu-link-icon">
-                        <MdOutlineMessage size={18} />
-                      </span>
-                      <span className="menu-link-text">All Student</span>
-                    </Link>
-                  </li>
 
-                  <li className="menu-item">
-                    <Link to="/dashboard/all_exit_student" className="menu-link">
-                      <span className="menu-link-icon">
-                        <MdOutlineMessage size={18} />
-                      </span>
-                      <span className="menu-link-text">All Exit Student</span>
-                    </Link>
-                  </li>
-                  {/*  */}
-                  
-                  <li className="menu-item">
-                    <Link to="/dashboard/all_pg_student" className="menu-link">
-                      <span className="menu-link-icon">
-                        <MdOutlineMessage size={18} />
-                      </span>
-                      <span className="menu-link-text">All Pg Student</span>
-                    </Link>
-                  </li>
 
-                  <li className="menu-item">
-                    <Link to="/dashboard/all_student_job" className="menu-link">
-                      <span className="menu-link-icon">
-                        <MdOutlineMessage size={18} />
-                      </span>
-                      <span className="menu-link-text">All Job Student</span>
-                    </Link>
-                  </li>
-                </>
-              )}
+
+{(user?.accountType === ACCOUNT_TYPE.INSTRUCTOR || user?.accountType === ACCOUNT_TYPE.ADMIN) && (
+  <>
+    <li className="menu-item">
+      <Link to="/dashboard/all_new_addmission" className="menu-link">
+        <span className="menu-link-icon">
+          <MdOutlineMessage size={18} />
+        </span>
+        <span className="menu-link-text">All Student</span>
+      </Link>
+    </li>
+
+    <li className="menu-item">
+      <Link to="/dashboard/all_exit_student" className="menu-link">
+        <span className="menu-link-icon">
+          <MdOutlineMessage size={18} />
+        </span>
+        <span className="menu-link-text">All Exit Student</span>
+      </Link>
+    </li>
+   
+    
+    <li className="menu-item">
+      <Link to="/dashboard/all_pg_student" className="menu-link">
+        <span className="menu-link-icon">
+          <MdOutlineMessage size={18} />
+        </span>
+        <span className="menu-link-text">All Pg Student</span>
+      </Link>
+    </li>
+
+    <li className="menu-item">
+      <Link to="/dashboard/all_student_job" className="menu-link">
+        <span className="menu-link-icon">
+          <MdOutlineMessage size={18} />
+        </span>
+        <span className="menu-link-text">All Job Student</span>
+      </Link>
+    </li>
+
+    <li className="menu-item">
+      <Link to="/dashboard/view-all-info-short" className="menu-link">
+        <span className="menu-link-icon">
+          <MdOutlineMessage size={18} />
+        </span>
+        <span className="menu-link-text">All Info</span>
+      </Link>
+      </li>
+      <li className="menu-item">
+      <Link to="/dashboard/admin-content" className="menu-link">
+        <span className="menu-link-icon">
+          <MdOutlineMessage size={18} />
+        </span>
+        <span className="menu-link-text">All Page's</span>
+      </Link>
+      
+    </li>
+  </>
+)}
+
             </ul>
           </div>
 
@@ -275,3 +295,25 @@ const Sidebar = () => {
 };
 
 export default Sidebar;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -55,7 +55,21 @@ export function submitExitForm(formData, navigate, token) {
   };
 }
 
-
+// export const getexitStudentByOne = async () => {
+//   try {
+//     // const cleanToken = token ? token.replace(/^"|"$/g, "") : "";
+//     // const API_Url = `${GET_NEW_ADMISSIOM_DATA}/${id}`;
+//     const response = await apiConnector("GET",FETCH_SINGLE_STUDENT_APPLICATION_DATA ,{
+//       headers: {
+//         Authorization: `Bearer ${token}`,
+//       },
+//     });
+//     console.log("response: " + response.data.Newadmission);
+//     return response.data.Newadmission;
+//   } catch (error) {
+//     console.error("Failed to fetch new admission", error);
+//   }
+// };
 
 export const getExitUserDetailsById = async () => {
   const token = localStorage.getItem('token');

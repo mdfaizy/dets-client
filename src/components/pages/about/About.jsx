@@ -98,9 +98,9 @@ const About = () => {
           <div className={style.location_details}>
             <h2>LOCATION</h2>
             <p>
-              Kalyani is situated in the Southern part of Nadia District in West
-              Bengal. The University is located near Kalyani Ghoshpara Railway
-              Station, which is 53 kms from Kolkata. The University can
+              Kalyani is situated in the Southern part of Nadia districtt in
+              West Bengal. The University is located near Kalyani Ghoshpara
+              Railway Station, which is 53 kms from Kolkata. The University can
               conveniently be accessed by rail or road. Local trains from
               Sealdah to Kalyani Ghoshpara are available in every hour. Apart
               from Kalyani Simanta local, one can also reach Kalyani Station by
@@ -118,6 +118,7 @@ const About = () => {
         </div>
 
         {/* section  */}
+      
         <section>
           <div className={style.responsive_map}>
             <iframe

@@ -100,7 +100,8 @@
 }
 .about_section_team_details{
     display: flex;
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
+    /* marin-buttom:20px; */
 }
 
 .about_team_text_img{

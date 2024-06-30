@@ -1,4 +1,4 @@
-import "./PgStudentDataTable.scss";
+import styles from "./PgStudentDataTable.module.css";
 import { getAllPgStudentData } from "../../../../services/apiFunction/pgApi";
 import { useEffect, useState } from "react";
 import PgDropDown from "../../../../adminsection/pgadmission/PgDropDown";
@@ -31,23 +31,22 @@ const PgStudentDataTable = () => {
       setLoading(false);
     }
   };
-
   useEffect(() => {
     fetchData();
   }, []);
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+  // if (loading) {
+  //   return <div>Loading...</div>;
+  // }
 
   return (
-    <section className="content-area-table">
-      <div className="data-table-info">
-        <h4 className="data-table-title">All New Student Data</h4>
+    <section className={styles.contentAreaTable}>
+      <div className={styles.dataTableInfo}>
+        <h4 className={styles.dataTableTitle}>All PG STUDENT DATA</h4>
       </div>
-      <div className="data-table-diagram">
+      <div className={styles.dataTableDiagram}>
         <table>
-          <thead>
+          <thead className={styles.new_pg_student_td}>
             <tr>
               {TABLE_HEADS.map((th, index) => (
                 <th key={index}>{th}</th>
@@ -66,7 +65,7 @@ const PgStudentDataTable = () => {
                 <td>{dataItem.allIndiaRank}</td>
                 <td>{dataItem.stream}</td>
                 <td>{dataItem.session}</td>
-                <td className="dt-cell-action">
+                <td className={styles.dtCellAction}>
                   <PgDropDown id={dataItem._id} />
                 </td>
               </tr>
@@ -79,4 +78,3 @@ const PgStudentDataTable = () => {
 };
 
 export default PgStudentDataTable;
-

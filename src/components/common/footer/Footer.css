@@ -1,18 +1,11 @@
 .linkStyle {
-    text-decoration: none; 
-    color: white; 
-  }
-  
-
-
-
-
-   
+  text-decoration: none;
+  color: white;
+}
 .bg-gray-100 {
   background-color: #0f0e122e;
-padding-top: 20px;
+  padding-top: 20px;
 }
-
 .border-bottom {
   border-bottom: 1px solid #d1d5db;
 }

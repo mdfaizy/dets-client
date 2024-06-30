@@ -1,0 +1,14 @@
+
+.input_otp{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin: 0 auto;
+    max-width: 500px;
+}
+
+.button{
+  color: white;
+  background-color: black;
+  border-color:1pz solid  aqua;
+}

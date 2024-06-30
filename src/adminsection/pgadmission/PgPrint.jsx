@@ -317,7 +317,7 @@ const PgPrint = () => {
                                 <td width="40px" align="center">
                                   <b>:</b>
                                 </td>
-                                <td>{formData.exameType}</td>
+                                <td>{formData.examType}</td>
                               </tr>
                               <tr>
                                 <td

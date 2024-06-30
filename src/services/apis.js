@@ -9,6 +9,7 @@ export const endpoints = {
   GET_USER: BASE_URL + "/auth/Get_Profile",
   RESETPASSTOKEN_API: BASE_URL + "/auth/reset-password-token",
   RESETPASSWORD_API: BASE_URL + "/auth/reset-password",
+  GET_ALL_USER_ACCOUNT: BASE_URL + "/auth/get_all_user",
 };
 
 
@@ -43,6 +44,7 @@ export const newadmissionEndpoints = {
   SUMBIT_NEW_STUDENT_API:BASE_URL+'/student/newAdmission',
   // POST_NEW_ADMISSION_API: BASE_URL + "/student/newAdmission",
   GET_PROFILE: BASE_URL + "/student/get_Profile",
+  FETCH_SINGLE_STUDENT_APPLICATION_DATA:BASE_URL+"/student/get_admission_form",
   GET_NEW_ADMISSIOM_DATA: BASE_URL + "/student/getnewadmissionId",
   UPDATE_NEW_ADMISSION_FORM: BASE_URL + "/student/update_Admission_form_data",
   GET_ALL_NEW_ADMISSION_DATA: BASE_URL + "/student/get_new_admission",

@@ -64,7 +64,7 @@ export const getPgUserDetailsById = async () => {
         Authorization: `Bearer ${cleanToken}`,
       },
     });
-    console.log("Job Data",response.data);
+    console.log("Pg Data",response.data);
     return response;
   } catch (error) {
     throw new Error(`Error fetching job students data: ${error.message}`);

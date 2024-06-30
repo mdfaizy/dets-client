@@ -305,14 +305,14 @@ const EditJob = () => {
                 </Form.Group>
                 <Form.Group as={Col} md="4">
                   <Form.Label>
-                    Companies Name<span className="text-danger">*</span>
+                    Company's Name<span className="text-danger">*</span>
                   </Form.Label>
                   <Form.Control
                     type="text"
                     name="companies_name"
                     id="companies_name"
                     value={formData.companies_name}
-                    placeholder="Enter  Companies Name..."
+                    placeholder="Enter  Company's Name..."
                     onChange={changeHandler}
                     className="rounded-2"
                   />

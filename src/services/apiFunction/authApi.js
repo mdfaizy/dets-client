@@ -1,12 +1,8 @@
 // import { toast } from "react-hot-toast";
 import toast from "react-hot-toast";
-// import { toast } from "react-toastify";
+
 import { setUser } from "../../redux/slices/profileSlice";
-import {
-  setLoading,
-  setToken,
-  setAccountType,
-} from "../../redux/slices/authSlice";
+import {setLoading,setToken,setAccountType,} from "../../redux/slices/authSlice";
 import { apiConnector } from "../apiConnector";
 import { endpoints } from "../apis";
 
@@ -16,6 +12,7 @@ const {
   SENDOTP_API,
   RESETPASSTOKEN_API,
   RESETPASSWORD_API,
+  GET_ALL_USER_ACCOUNT,
 } = endpoints;
 
 export function sendOtp(email, navigate) {
@@ -27,7 +24,7 @@ export function sendOtp(email, navigate) {
         checkUserPresent: true,
       });
 
-      console.log("SENDOTP API RESPONSE............", response);
+      // console.log("SENDOTP API RESPONSE............", response);
 
       if (!response.data.success) {
         throw new Error(response.data.message);
@@ -94,17 +91,8 @@ export function signUp(
 }
 export function logout(navigate) {
   return (dispatch) => {
-    // dispatch(setToken(null));
-
-    // // dispatch(resetCart())
-    // localStorage.removeItem("token");
-    // localStorage.removeItem("accountType");
-    // toast.success("Logged Out");
-    // navigate("/");
-
     dispatch(setToken(null))
     dispatch(setUser(null))
-    // dispatch(resetCart())
     localStorage.removeItem("token")
     localStorage.removeItem("user")
     toast.success("Logged Out")
@@ -112,7 +100,7 @@ export function logout(navigate) {
   };
 }
 
-export function login(email, password, setIsAdmin, navigate) {
+export function login(email, password, navigate) {
   return async (dispatch) => {
     const toastId = toast.loading("Logging in...");
     try {
@@ -126,51 +114,21 @@ export function login(email, password, setIsAdmin, navigate) {
         throw new Error(response.data.message);
       }
       toast.success("Login Successful");
-
       // Dispatch actions based on user role
       const { user } = response.data;
-      // =======================
-
-      // if (import.meta.env.VITE_REACT_APP_ADMIN_TOKEN === response.data.token) {
-      //   dispatch(setToken(response.data.token));
-      //   dispatch(setIsAdmin(true));
-      //   dispatch(setAccountType("Admin")); // Set account type as Admin
-      //   localStorage.setItem("token", JSON.stringify(response.data.token));
-      // }
-
-      // if (
-      //   user.instructorKey === "ukdets@#1234" &&
-      //   user.accountType === "Instructor"
-      // ) {
-      //   dispatch(setToken(response.data.token));
-      //   console.log("AccountType", user.accountType);
-
-      //   dispatch(setAccountType("Instructor")); // Set account type as Instructor
-      //   localStorage.setItem("token", JSON.stringify(response.data.token));
-      // }
-
-      // console.log(user);
       dispatch(setToken(response.data.token));
-      dispatch(setAccountType(response.data.accountType));
+      dispatch(setAccountType(response.data.user.accountType));
       console.log(user.accountType);
       console.log(response.data.token);
-      // dispatch(setUser(user));
-
-      // dispatch(setToken(response.data.token));
+  
       const userImage = response.data?.user?.image
         ? response.data.user.image
         : `https://api.dicebear.com/5.x/initials/svg?seed=${response.data.user.firstName} ${response.data.user.lastName}`;
       dispatch(setUser({ ...response.data.user, image: userImage }));
       console.log("userImage", userImage);
-
-
       localStorage.setItem("token", JSON.stringify(response.data.token));
       localStorage.setItem("user", JSON.stringify(response.data.user));
       navigate("/dashboard/my-profile");
-
-      // localStorage.setItem("token", JSON.stringify(response.data.token));
-      // localStorage.setItem("accountType", JSON.stringify(user.accountType));
-
       // navigate("/");
     } catch (error) {
       console.error("LOGIN API ERROR:", error);
@@ -262,4 +220,26 @@ export function forgotPassword(email, setEmailSent) {
     // toast.dismiss(toastId)
     dispatch(setLoading(false));
   };
+}
+
+
+export const  getAllUserDataFetch=async()=>{
+  try{
+    const token = localStorage.getItem('token');
+    const cleanToken = token.replace(/^"|"$/g, "");
+    const response = await apiConnector("GET",GET_ALL_USER_ACCOUNT, {
+      headers: {
+        Authorization: `Bearer ${cleanToken}`,
+      },
+    });
+    if (response.data.success) {
+      return response.data.data;
+    } else {
+      throw new Error("Failed to fetch user data");
+    }
+    // const responce=apiConnector ("GET",GET_ALL_USER_ACCOUNT)
+  }catch(error){
+    console.log(error)
+  }
+
 }

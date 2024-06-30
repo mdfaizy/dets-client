@@ -2,20 +2,11 @@ import { BiChevronRight } from "react-icons/bi";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "./Footer.css";
+// import PrivateRoute
+import PrivateRoute from "../../core/Auth/PrivateRoute"
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
-const Footer = (props) => {
-  // Function to scroll to the top of the page
-  const {
-    isLoggedIn,
-    setIsLoggedIn,
-    isAdmin,
-    setIsAdmin,
-    teacher,
-    setTeacher,
-  } = props;
-  console.log("Teacher Prop Value:", teacher);
-
+const Footer = () => {
   const { token } = useSelector((state) => state.auth);
   const scrollToTop = () => {
     window.scrollTo({
@@ -62,47 +53,47 @@ const Footer = (props) => {
               style={{ listStyleType: "none", color: "white" }}
             >
               <h2 className="mb-4">Useful Links</h2>
-              {token!==null&&
-<>
-<p>
-                <i>
-                  <BiChevronRight />
-                </i>
-                <Link to="/newadmission" className="linkStyle">
-                  New Admission
-                </Link>
-              </p>
-              <p>
-                <i>
-                  <BiChevronRight />
-                </i>
-                <Link to="/exitfrom" className="linkStyle">
-                  EXIT STUDENT
-                </Link>
-              </p>
-              <p>
-                <i>
-                  <BiChevronRight />
-                </i>
-                <Link to="/pgcource" className="linkStyle">
-                  PG PROGRAM
-                </Link>
-              </p>
-              <p>
-                <i>
-                  <BiChevronRight />
-                </i>
-                <Link to="/job" className="linkStyle">
-                  JOB
-                </Link>
-              </p>
-</>
-              }
+             
+                  <p>
+                    <i>
+                      <BiChevronRight />
+                    </i>
+                    
+                    
+                    <Link to="/newadmission" className="linkStyle">
+                      New Admission
+                    </Link>
+                  </p>
+                
+                  <p>
+                    <i>
+                      <BiChevronRight />
+                    </i>
+                    <Link to="/exitfrom" className="linkStyle">
+                      EXIT STUDENT
+                    </Link>
+                  </p>
+                  <p>
+                    <i>
+                      <BiChevronRight />
+                    </i>
+                    <Link to="/pgcource" className="linkStyle">
+                      PG PROGRAM
+                    </Link>
+                  </p>
+                  <p>
+                    <i>
+                      <BiChevronRight />
+                    </i>
+                    <Link to="/job" className="linkStyle">
+                      JOB
+                    </Link>
+                  </p>
             </div>
           </Col>
           <Col lg={3} md={6} sm={6} xs={12} className="mb-4">
             <div className="service">
-              <h2 className="mb-4">Categories</h2>
+              <h2 className="mb-4">Categorys</h2>
               <p>
                 <i>
                   <BiChevronRight />

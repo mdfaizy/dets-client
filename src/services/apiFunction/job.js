@@ -39,12 +39,6 @@ export function submitJobForm(formData, navigate) {
   };
 }
 
-//fetch student job form data FindById
-// get user id
-
-
-
-
 export const getJobUserDetailsById = async () => {
   const token = localStorage.getItem('token');
   const cleanToken = token.replace(/^"|"$/g, "");
@@ -96,7 +90,7 @@ export const getStudentForJobById = async (id, token) => {
         Authorization: `Bearer ${cleanToken}`,
       },
     });
-    console.log(response.data);
+    console.log(response.data.jobData);
     return response.data.jobData;
   } catch (error) {
     console.error("Failed to fetch new admission", error);
