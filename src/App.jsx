@@ -23,7 +23,8 @@ import ForgatePassword from "./components/pages/forgatepassword/ForgatePassword"
 import ReasetPassword from "./components//pages/forgatepassword/resetPassword/ResetPassword";
 import Exit from "./routes/exitstudent/Exit";
 // import NewStudent from "./routes/newstudent/NewStudent";
-import NewStudent from "./routes/newstudent/NewStudent.jsx"; 
+// import PageNewStudent from "./routes/newstudent/PageNewStudent.jsx";
+import NewStudent from "./routes/newstudent/PageNewStudent.jsx"; 
 import BtechJob from "./routes/job/softwarejob/BtechJob";
 import Pgcourse from "./routes/pgcourse/PgCourse";
 import PgCourseSubmitData from "./containers/sumbitdata/PgCourseSubmitData";
