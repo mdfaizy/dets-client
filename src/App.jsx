@@ -25,7 +25,9 @@ import Exit from "./routes/exitstudent/Exit";
 // import NewStudent from "./routes/newstudent/NewStudent";
 // import PageNewStudent from "./routes/newstudent/PageNewStudent.jsx";
 import NewStudent from "./routes/newstudent/PageNewStudent.jsx"; 
-import BtechJob from "./routes/job/softwarejob/BtechJob";
+// import BtechJob from "./routes/job/pagesSoftwarejobUi/PageBtechJob.jsx";
+// import BtechJob from "./routes/job/pagesSoftwarejobUi/PageBtechJob.jsx";
+import PageBtechJob from "./routes/job/pagesSoftwarejobUi/PageBtechJob.jsx";
 import Pgcourse from "./routes/pgcourse/PgCourse";
 import PgCourseSubmitData from "./containers/sumbitdata/PgCourseSubmitData";
 import ExitSubmitData from "./containers/sumbitdata/ExitSubmitData";
@@ -132,7 +134,7 @@ function App() {
         {/* from befor ui */}
         <Route path="/newstudent" element={<NewStudent />} />
         <Route path="/exit" element={<Exit />} />
-        <Route path="/btechjob" element={<BtechJob />} />
+        <Route path="/btechjob" element={<PageBtechJob />} />
         <Route path="/pgcourses" element={<Pgcourse />} />
         {/* Sumbit after show data */}
         <Route path="/newAdmissiondata" element={<NewAdmissionData />} />
