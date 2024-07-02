@@ -1,6 +1,6 @@
 import toast from "react-hot-toast";
 import { setLoading, setJobData } from "../../redux/slices/jobSlice";
-import { apiConnector } from "../apiConnector";
+import { apiConnector } from "../apiConnectors.js";
 // import { Jobs } from "../apis";
 import axios from "axios";
 // const { POST_JOIN_JOB_API } = Jobs;
@@ -19,7 +19,11 @@ export function submitJobForm(formData, navigate) {
     dispatch(setLoading(true));
 
     try {
-      const response = await apiConnector("POST", POST_FORM_DETAIL_BY_STUDENT_API, formData);
+      const response = await apiConnector(
+        "POST",
+        POST_FORM_DETAIL_BY_STUDENT_API,
+        formData
+      );
       console.log("response", response);
 
       if (!response.data.success) {
@@ -40,30 +44,28 @@ export function submitJobForm(formData, navigate) {
 }
 
 export const getJobUserDetailsById = async () => {
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem("token");
   const cleanToken = token.replace(/^"|"$/g, "");
-  const api_URL=`${GET_USER_PROFILE_API}`
-// const api_URL= "http://localhost:8000/api/v1/job/get_Profile"
+  const api_URL = `${GET_USER_PROFILE_API}`;
+  // const api_URL= "http://localhost:8000/api/v1/job/get_Profile"
   try {
     const response = await axios.get(api_URL, {
       headers: {
         Authorization: `Bearer ${cleanToken}`,
       },
     });
-    console.log("Job Data",response.data);
+    console.log("Job Data", response.data);
     return response;
   } catch (error) {
     throw new Error(`Error fetching job students data: ${error.message}`);
   }
 };
 
-
-
 // fetch all data in Job Student
 export const getAllJobStudents = async () => {
   try {
     const API_URL = `${GET_ALL_STUDENT_FOR_JOB_API}`;
-    const response = await apiConnector('GET',API_URL);
+    const response = await apiConnector("GET", API_URL);
     // await axios.get(
     //   "http://localhost:8000/api/v1/job/get_all_Job_student"
     // );
@@ -99,7 +101,7 @@ export const getStudentForJobById = async (id, token) => {
 
 export const deleteJobStudent = async (id) => {
   try {
-    const API_URL=`${DELETE_JOB_DETAIL_API}/${id}`;
+    const API_URL = `${DELETE_JOB_DETAIL_API}/${id}`;
     const response = await axios.delete(
       // `http://localhost:8000/api/v1/job/delete_id_jobstudent/${id}`
       API_URL
@@ -115,8 +117,6 @@ export const deleteJobStudent = async (id) => {
     throw new Error(`Error deleting PG student: ${error.message}`);
   }
 };
-
-
 
 // UODATE_JOB_DETAIL_BY_ID_API
 

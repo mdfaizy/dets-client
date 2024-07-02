@@ -1,6 +1,6 @@
 import { toast } from "react-hot-toast";
 const token = localStorage.getItem("token");
-import { apiConnector } from "../apiConnector.js";
+import { apiConnector } from "../apiConnectors.js";
 import { newadmissionEndpoints } from "../apis.js";
 import axios from "axios";
 const {
@@ -12,7 +12,12 @@ const {
   FETCH_SINGLE_STUDENT_APPLICATION_DATA,
 } = newadmissionEndpoints;
 
-export const submitNewStudentForm = async (formData, navigate,token, setLoading) => {
+export const submitNewStudentForm = async (
+  formData,
+  navigate,
+  token,
+  setLoading
+) => {
   const formDataToSend = new FormData();
   const cleanToken = token ? token.replace(/^"|"$/g, "") : "";
   // Append each form field to formDataToSend
@@ -37,7 +42,7 @@ export const submitNewStudentForm = async (formData, navigate,token, setLoading)
     toast.dismiss(toastId);
     navigate("/newAdmissiondata", { state: { apidata: response.data } });
     toast.success("Form  Successfully", {
-      autoClose: 1500, 
+      autoClose: 1500,
     });
   } catch (error) {
     setLoading(false);
@@ -46,19 +51,19 @@ export const submitNewStudentForm = async (formData, navigate,token, setLoading)
     console.error("Error occurred:", error);
   }
 };
- 
+
 export const getNewAdmissionUserDetailsById = async (id) => {
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem("token");
   const cleanToken = token.replace(/^"|"$/g, "");
-  const api_URL=`${GET_PROFILE}/${id}`
-// const api_URL= `http://localhost:8000/api/v1/student/get_Profile/${id}`
+  const api_URL = `${GET_PROFILE}/${id}`;
+  // const api_URL= `http://localhost:8000/api/v1/student/get_Profile/${id}`
   try {
     const response = await axios.get(api_URL, {
       headers: {
         Authorization: `Bearer ${cleanToken}`,
       },
     });
-    console.log("Job Data",response.data);
+    console.log("Job Data", response.data);
     return response;
   } catch (error) {
     throw new Error(`Error fetching job students data: ${error.message}`);
@@ -71,11 +76,15 @@ export const getnewadmissionByOne = async () => {
   try {
     // const cleanToken = token ? token.replace(/^"|"$/g, "") : "";
     // const API_Url = `${GET_NEW_ADMISSIOM_DATA}/${id}`;
-    const response = await apiConnector("GET",FETCH_SINGLE_STUDENT_APPLICATION_DATA ,{
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const response = await apiConnector(
+      "GET",
+      FETCH_SINGLE_STUDENT_APPLICATION_DATA,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
     console.log("response: " + response.data.Newadmission);
     return response.data.Newadmission;
   } catch (error) {
@@ -94,7 +103,7 @@ export const getAllNewStudent = async () => {
         Authorization: `Bearer ${token}`,
       },
     });
-   
+
     if (response.data.success) {
       return response.data.data;
     } else {

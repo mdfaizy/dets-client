@@ -1,7 +1,7 @@
 import axios from "axios";
 import { setLoading, setPgData } from "../../redux/slices/pgStudentSlice";
 import { pgCourseEndpoints } from "../apis";
-import { apiConnector } from "../apiConnector";
+import { apiConnector } from "../apiConnectors.js";
 import toast from "react-hot-toast";
 const {
   ALL_GET_STUDENT_PG_COURSE_BY_ID,
@@ -54,17 +54,17 @@ export function submitPGForm(formData, navigate, token) {
 }
 
 export const getPgUserDetailsById = async () => {
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem("token");
   const cleanToken = token.replace(/^"|"$/g, "");
-  const api_URL=`${GET_PG_USER_PROFILE}`
-// const api_URL= "http://localhost:8000/api/v1/job/get_Profile"
+  const api_URL = `${GET_PG_USER_PROFILE}`;
+  // const api_URL= "http://localhost:8000/api/v1/job/get_Profile"
   try {
     const response = await axios.get(api_URL, {
       headers: {
         Authorization: `Bearer ${cleanToken}`,
       },
     });
-    console.log("Pg Data",response.data);
+    console.log("Pg Data", response.data);
     return response;
   } catch (error) {
     throw new Error(`Error fetching job students data: ${error.message}`);

@@ -2,8 +2,13 @@
 import toast from "react-hot-toast";
 
 import { setUser } from "../../redux/slices/profileSlice";
-import {setLoading,setToken,setAccountType,} from "../../redux/slices/authSlice";
-import { apiConnector } from "../apiConnector";
+import {
+  setLoading,
+  setToken,
+  setAccountType,
+} from "../../redux/slices/authSlice";
+// import { apiConnector } from "../apiConnectors";
+import { apiConnector } from "../apiConnectors.js";
 import { endpoints } from "../apis";
 
 const {
@@ -91,12 +96,12 @@ export function signUp(
 }
 export function logout(navigate) {
   return (dispatch) => {
-    dispatch(setToken(null))
-    dispatch(setUser(null))
-    localStorage.removeItem("token")
-    localStorage.removeItem("user")
-    toast.success("Logged Out")
-    navigate("/")
+    dispatch(setToken(null));
+    dispatch(setUser(null));
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    toast.success("Logged Out");
+    navigate("/");
   };
 }
 
@@ -120,7 +125,7 @@ export function login(email, password, navigate) {
       dispatch(setAccountType(response.data.user.accountType));
       console.log(user.accountType);
       console.log(response.data.token);
-  
+
       const userImage = response.data?.user?.image
         ? response.data.user.image
         : `https://api.dicebear.com/5.x/initials/svg?seed=${response.data.user.firstName} ${response.data.user.lastName}`;
@@ -222,12 +227,11 @@ export function forgotPassword(email, setEmailSent) {
   };
 }
 
-
-export const  getAllUserDataFetch=async()=>{
-  try{
-    const token = localStorage.getItem('token');
+export const getAllUserDataFetch = async () => {
+  try {
+    const token = localStorage.getItem("token");
     const cleanToken = token.replace(/^"|"$/g, "");
-    const response = await apiConnector("GET",GET_ALL_USER_ACCOUNT, {
+    const response = await apiConnector("GET", GET_ALL_USER_ACCOUNT, {
       headers: {
         Authorization: `Bearer ${cleanToken}`,
       },
@@ -238,8 +242,7 @@ export const  getAllUserDataFetch=async()=>{
       throw new Error("Failed to fetch user data");
     }
     // const responce=apiConnector ("GET",GET_ALL_USER_ACCOUNT)
-  }catch(error){
-    console.log(error)
+  } catch (error) {
+    console.log(error);
   }
-
-}
+};

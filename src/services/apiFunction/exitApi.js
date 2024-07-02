@@ -1,6 +1,6 @@
 import { toast } from "react-hot-toast";
-import { setLoading,setExitData } from "../../redux/slices/exitSlice.js";
-import { apiConnector } from "../apiConnector";
+import { setLoading, setExitData } from "../../redux/slices/exitSlice.js";
+import { apiConnector } from "../apiConnectors.js";
 import { exitStudentEndpoints } from "../apis.js";
 import axios from "axios";
 const {
@@ -9,9 +9,8 @@ const {
   GET_USER_EXIT_PROFILE,
   UPDATE_EXIT_STUDENT,
   DELETE_JOB_DATA_BY_ID_API,
-  SUMBIT_EXIT_STUDENT
+  SUMBIT_EXIT_STUDENT,
 } = exitStudentEndpoints;
-
 
 export function submitExitForm(formData, navigate, token) {
   const cleanToken = token ? token.replace(/^"|"$/g, "") : "";
@@ -44,7 +43,6 @@ export function submitExitForm(formData, navigate, token) {
 
       const responseData = response.data;
       navigate("/exitsumbitdata", { state: { apidata: responseData } });
-  
     } catch (error) {
       console.error("Error submitting job form:", error);
       toast.error("Failed to submit job application");
@@ -72,7 +70,7 @@ export function submitExitForm(formData, navigate, token) {
 // };
 
 export const getExitUserDetailsById = async () => {
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem("token");
   const cleanToken = token.replace(/^"|"$/g, "");
   try {
     const response = await axios.get(GET_USER_EXIT_PROFILE, {
@@ -84,7 +82,6 @@ export const getExitUserDetailsById = async () => {
     console.log(response.data);
     return response.data;
   } catch (error) {
-    
     throw new Error(`Error fetching job students data: ${error.message}`);
   }
 };
