@@ -3,7 +3,7 @@ import pgcourseadmission_image from '../../assets/pgcourseadmission.png';
 import { NavLink } from 'react-router-dom';
 import style from './pgcourse.module.css';
 
-const PgCourse = () => {
+const PgCoursePage = () => {
   return (
     <>
       <img src={pgcourseadmission_image} alt="" className={style.pgcourseimage} />
@@ -30,4 +30,4 @@ const PgCourse = () => {
   );
 };
 
-export default PgCourse;
+export default PgCoursePage;

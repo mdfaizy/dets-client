@@ -28,7 +28,8 @@ import NewStudent from "./routes/newstudent/PageNewStudent.jsx";
 // import BtechJob from "./routes/job/pagesSoftwarejobUi/PageBtechJob.jsx";
 // import BtechJob from "./routes/job/pagesSoftwarejobUi/PageBtechJob.jsx";
 import PageBtechJob from "./routes/job/pagesSoftwarejobUi/PageBtechJob.jsx";
-import Pgcourse from "./routes/pgcourse/PgCourse";
+// import Pgcourse from "./routes/pgcourse/PgCoursePage.jsx";
+import PgCoursePage from "./routes/pgcourse/PgCoursePage.jsx";
 import PgCourseSubmitData from "./containers/sumbitdata/PgCourseSubmitData";
 import ExitSubmitData from "./containers/sumbitdata/ExitSubmitData";
 
@@ -135,7 +136,7 @@ function App() {
         <Route path="/newstudent" element={<NewStudent />} />
         <Route path="/exit" element={<Exit />} />
         <Route path="/btechjob" element={<PageBtechJob />} />
-        <Route path="/pgcourses" element={<Pgcourse />} />
+        <Route path="/pgcourses" element={<PgCoursePage />} />
         {/* Sumbit after show data */}
         <Route path="/newAdmissiondata" element={<NewAdmissionData />} />
         <Route path="/exitsumbitdata" element={<ExitSubmitData />} />
