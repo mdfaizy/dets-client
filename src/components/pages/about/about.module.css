@@ -2,8 +2,7 @@
   background-color: #2d3b50;
 }
 
-.about_main_text{
-
+.about_main_text {
 }
 .about_content {
   max-width: 80%;
@@ -79,47 +78,72 @@
   border-radius: 4em 0 0 4em;
 }
 
-
-.about_last_heading_section2{
-    font-size: 30px;
-    color: #d6e1e2;
-    max-width: 80%;
-    margin: 0 auto;
-    text-align: center;
-    padding: 20px 0px;
+.about_last_heading_section2 {
+  font-size: 30px;
+  color: #d6e1e2;
+  max-width: 80%;
+  margin: 0 auto;
+  text-align: center;
+  padding: 20px 0px;
 }
-.about_last_heading_section2 .combines{
-    color: #e5d891;
+.about_last_heading_section2 .combines {
+  color: #e5d891;
 }
-.location_details{
-    max-width: 80%;
-    margin: 0 auto;
-    padding-top: 40px;
+.location_details {
+  max-width: 80%;
+  margin: 0 auto;
+  padding-top: 40px;
 }
-.location_details h2{
-    font-size: 25px;
-    color: #10d2ec;
-    text-align: center;
+.location_details h2 {
+  font-size: 25px;
+  color: #10d2ec;
+  text-align: center;
 }
-.location_details p{
-    color: white;
-    font-size: 1rem;
-    text-align: center;
+.location_details p {
+  color: white;
+  font-size: 1rem;
+  text-align: center;
 }
 
 /* map */
-.responsive_map{
+.responsive_map {
   overflow-x: hidden;
   height: 0;
   padding-bottom: 30%;
   position: relative;
-
 }
-.responsive_map iframe{
+.responsive_map iframe {
   border: 0;
   height: 100%;
   width: 100%;
   left: 0;
   top: 0;
   position: absolute;
+}
+
+@media (max-width: 800px) {
+  .about_content {
+    width: 100%;
+  }
+  .about_text h1 {
+    font-size: 25px;
+  }
+  .about_text h2 {
+    font-size: 20px;
+  }
+  .about_text p {
+    font-size: 20px;
+  }
+  .university_text {
+    font-size: 16px;
+    text-align: justify;
+  }
+  .section2_content {
+    flex-direction: column;
+  }
+
+  .about1_image img {
+    width: 100%;
+    height: 100%;
+  }
 }

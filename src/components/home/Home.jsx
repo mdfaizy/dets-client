@@ -1,5 +1,5 @@
 import Container from "react-bootstrap/Container";
-
+import Row from "react-bootstrap/Row";
 import Carousel from "react-bootstrap/Carousel";
 import image from "../../assets/image1.jpg";
 import style from "./Home.module.css";
@@ -59,24 +59,23 @@ function Home() {
         </Carousel.Item>
       </Carousel>
 
-    
-
       <Container className={style.home_contante}>
         {/* section 1  */}
-
-        <section>
-          <div className={style.video_container}>
-            <div className={style.section1_top_img}>
-              <video
-                className={style.video_element}
-                autoPlay
-                muted
-                loop
-                src={studyVideo}
-              ></video>
+        <Row>
+          <section>
+            <div className={style.video_container}>
+              <div className={style.section1_top_img}>
+                <video
+                  className={style.video_element}
+                  autoPlay
+                  muted
+                  loop
+                  src={studyVideo}
+                ></video>
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+        </Row>
 
         {/* section 2 */}
 
@@ -134,7 +133,9 @@ function Home() {
 
         <section>
           <div className={style.about_section4_all}>
-            <h1>You have the right to reclaim <span>your dreams!</span></h1>
+            <h1>
+              You have the right to reclaim <span>your dreams!</span>
+            </h1>
             <p>
               Now, imagine this…Waking up every morning excited and motivated,
               ready to take on the world because you no longer let fear, or
@@ -193,7 +194,7 @@ function Home() {
           </div>
         </section>
       </Container>
-     
+
       {/* <Homes /> */}
     </>
   );

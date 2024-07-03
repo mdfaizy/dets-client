@@ -248,12 +248,12 @@ const SignupForm = () => {
                 </Button>
               </Form>
             </Col>
-            <Col xs={12} sm={6} md={6} lg={6}>
+            <Col xs={12} sm={6} md={6} lg={6} className={style.signupaccount_img}>
               <img
                 src="https://img.freepik.com/premium-vector/business-data-information-illustration_251005-479.jpg"
                 alt=""
                 loading="lazy"
-                style={{ width: "600px", height: "400px", paddingLeft: "20px" }}
+                // style={{ width: "600px", height: "400px", paddingLeft: "20px" }}
               />
             </Col>
           </Row>

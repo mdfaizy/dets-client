@@ -111,17 +111,17 @@ const LoginForm = ({ setIsAdmin, setTeacher }) => {
               </Col>
             </Form>
           </Col>
-          <Col xs={12} sm={6} md={6} lg={6}>
+          <Col xs={12} sm={6} md={6} lg={6} className={style.signinaccount_img}>
             <img
               src="https://img.freepik.com/premium-vector/business-data-information-illustration_251005-479.jpg"
               alt=""
               loading="lazy"
-              style={{
-                width: "600px",
-                height: "400px",
-                paddingLeft: "20px",
-                borderRadius: "10px",
-              }}
+              // style={{
+              //   width: "600px",
+              //   height: "400px",
+              //   paddingLeft: "20px",
+              //   borderRadius: "10px",
+              // }}
             />
           </Col>
         </Row>

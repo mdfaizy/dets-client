@@ -63,3 +63,11 @@
     color: inherit;
   }
   
+
+
+  @media (max-width:800px) {
+    .account-signup-login{
+      flex-direction: column;
+    }
+    
+  }

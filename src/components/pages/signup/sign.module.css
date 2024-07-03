@@ -33,6 +33,18 @@
 }
 
 
+
+@media (max-width:800px) {
+  .signupaccount_img img{
+    width: 100%;
+    margin-top: 20px;
+    height: 100%;
+    padding-bottom: 20px;
+    border-radius: 5px;
+  }
+  
+}
+
 /* .sign_content {
   flex-wrap: wrap;
 }

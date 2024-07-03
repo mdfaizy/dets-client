@@ -59,3 +59,11 @@
   text-decoration: none;
   color: inherit;
 }
+
+
+@media (max-width:800px) {
+  .account_signup_login{
+    flex-direction: column;
+  }
+  
+}

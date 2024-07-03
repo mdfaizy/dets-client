@@ -5,14 +5,15 @@ import about3 from "../../../assets/Images/about-image3.png";
 import about4 from "../../../assets/Images/about-image4.png";
 import StatsComponent from "../../core/AboutPage/Stats/Stats";
 import ContactUsForm from "../../core/AboutPage/ContactUsForm";
+import Container from "react-bootstrap/Container";
 const About = () => {
   return (
-    <div className={style.about_main_content}>
+    <Container className={style.about_main_content}>
       <div className={style.about_main_text}>
         <section>
           <div className={style.about_content}>
             <div className={style.about_text}>
-              <h1 className={style.first_heading}>University of Kalyani,Wb</h1>
+              <h1 className={style.first_heading}>University of Kalyani,WB</h1>
               <h2>
                 Driving Innovation in Honestly Education for a <br></br>
                 <span className={style.span_education}>Brighter Future</span>
@@ -133,7 +134,7 @@ const About = () => {
           </div>
         </section>
       </div>
-    </div>
+    </Container>
   );
 };
 
