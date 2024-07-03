@@ -1,4 +1,4 @@
-export const BASE_URL = "https://dets-server.vercel.app/api/v1"
+export const BASE_URL = "https://dets-server-1.onrender.com/api/v1"
 // "http://localhost:8000/api/v1";
 
 // AUTH ENDPOINTS
