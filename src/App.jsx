@@ -82,9 +82,9 @@ function App() {
   return (
     <div style={{ backgroundColor: "#000814" }}>
       
-      {  user?.accountType === ACCOUNT_TYPE.STUDENT &(
+      {/* {  user?.accountType === ACCOUNT_TYPE.STUDENT &( */}
         <Header isAdmin={isAdmin} setIsAdmin={setIsAdmin} />
-      )}
+      {/* )} */}
       {/* <Header isAdmin={isAdmin} setIsAdmin={setIsAdmin} /> */}
       <Routes>
         <Route index element={<Home />} />
