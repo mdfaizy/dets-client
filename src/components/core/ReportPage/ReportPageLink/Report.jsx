@@ -17,7 +17,7 @@ const Report = () => {
               
             </Row>
             <Col
-              className="text-center custom-col my-2 "
+              className= {style.report_link_text}
               direction="horizontal"
             >
               <Link to="/dashboard/newstudentreport" className={style.custom_link}>

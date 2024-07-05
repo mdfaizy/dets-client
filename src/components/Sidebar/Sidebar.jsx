@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useParams } from "react-router-dom";
+import ProfileDropdown from "../../components/pages/profile/ProfileDropdown";
 import {
   MdOutlineAttachMoney,
   MdOutlineBarChart,
@@ -10,8 +11,11 @@ import {
   MdOutlineMessage,
   MdOutlinePeople,
   MdOutlineSettings,
+  MdOutlineClose,
   MdOutlineShoppingBag,
+  MdOutlineBattery0Bar,
 } from "react-icons/md";
+import { FaBars } from "react-icons/fa";
 import { LIGHT_THEME } from "../../utils/constant";
 import LogoBlue from "../../assets/Images/logo_blue.svg";
 import LogoWhite from "../../assets/Images/logo_white.svg";
@@ -31,7 +35,7 @@ const Sidebar = () => {
   const [newAdmissionUser, setNewAdmissionUser] = useState(null);
   const [exitUser, setExitUser] = useState(null);
   const [pgUser, setPgUser] = useState(null);
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem("token");
   const [showText, setShowText] = useState(true); // Default to show text initially
 
   const fetchNewAdmissionUser = async () => {
@@ -83,17 +87,22 @@ const Sidebar = () => {
 
   return (
     <>
-      <button className="sidebar-toggle-btn" onClick={toggleText}>
-        <MdOutlineGridView size={44} />
-      </button>
-
-      <nav className={`sidebar ${showText ? 'show-text' : ''}`}>
+      <nav className={`sidebar ${showText ? "show-text" : ""}`}>
         <div className="sidebar-top">
           <div className="sidebar-brand">
-            <img src={theme === LIGHT_THEME ? LogoBlue : LogoWhite} alt="" />
+            
             {showText && <span className="sidebar-brand-text">Profile</span>}
           </div>
+          {
+            showText?<button className="sidebar-close-btn" onClick={toggleText}>
+            <MdOutlineClose size={24} />
+          </button>: <button className="sidebar-toggle-btn" onClick={toggleText}>
+            <FaBars size={30} />
+          </button>
+          }
+          
         </div>
+
         <div className="sidebar-body">
           <div className="sidebar-menu">
             <ul className="menu-list">
@@ -102,7 +111,9 @@ const Sidebar = () => {
                   <span className="menu-link-icon">
                     <MdOutlineGridView size={18} />
                   </span>
-                  {showText && <span className="menu-link-text">My Profile</span>}
+                  {showText && (
+                    <span className="menu-link-text">My Profile</span>
+                  )}
                 </Link>
               </li>
               {user?.accountType === ACCOUNT_TYPE.STUDENT && (
@@ -112,31 +123,48 @@ const Sidebar = () => {
                       <span className="menu-link-icon">
                         <MdOutlineBarChart size={20} />
                       </span>
-                      {showText && <span className="menu-link-text">Admission Data</span>}
+                      {showText && (
+                        <span className="menu-link-text">Admission Data</span>
+                      )}
                     </Link>
                   </li>
                   <li className="menu-item">
-                    <Link to={`/dashboard/exit_application`} className="menu-link">
+                    <Link
+                      to={`/dashboard/exit_application`}
+                      className="menu-link"
+                    >
                       <span className="menu-link-icon">
                         <MdOutlineAttachMoney size={20} />
                       </span>
-                      {showText && <span className="menu-link-text">Exit Data</span>}
+                      {showText && (
+                        <span className="menu-link-text">Exit Data</span>
+                      )}
                     </Link>
                   </li>
                   <li className="menu-item">
-                    <Link to={`/dashboard/pg_application`} className="menu-link">
+                    <Link
+                      to={`/dashboard/pg_application`}
+                      className="menu-link"
+                    >
                       <span className="menu-link-icon">
                         <MdOutlineCurrencyExchange size={18} />
                       </span>
-                      {showText && <span className="menu-link-text">Pg Data</span>}
+                      {showText && (
+                        <span className="menu-link-text">Pg Data</span>
+                      )}
                     </Link>
                   </li>
                   <li className="menu-item">
-                    <Link to={`/dashboard/job_application`} className="menu-link">
+                    <Link
+                      to={`/dashboard/job_application`}
+                      className="menu-link"
+                    >
                       <span className="menu-link-icon">
                         <MdOutlineShoppingBag size={20} />
                       </span>
-                      {showText && <span className="menu-link-text">Job Data</span>}
+                      {showText && (
+                        <span className="menu-link-text">Job Data</span>
+                      )}
                     </Link>
                   </li>
                   <li className="menu-item">
@@ -144,27 +172,40 @@ const Sidebar = () => {
                       <span className="menu-link-icon">
                         <MdOutlinePeople size={20} />
                       </span>
-                      {showText && <span className="menu-link-text">Feedback Form</span>}
+                      {showText && (
+                        <span className="menu-link-text">Feedback Form</span>
+                      )}
                     </Link>
                   </li>
                 </>
               )}
-              {(user?.accountType === ACCOUNT_TYPE.INSTRUCTOR || user?.accountType === ACCOUNT_TYPE.ADMIN) && (
+              {(user?.accountType === ACCOUNT_TYPE.INSTRUCTOR ||
+                user?.accountType === ACCOUNT_TYPE.ADMIN) && (
                 <>
                   <li className="menu-item">
-                    <Link to="/dashboard/all_new_addmission" className="menu-link">
+                    <Link
+                      to="/dashboard/all_new_addmission"
+                      className="menu-link"
+                    >
                       <span className="menu-link-icon">
                         <MdOutlineMessage size={18} />
                       </span>
-                      {showText && <span className="menu-link-text">All Student</span>}
+                      {showText && (
+                        <span className="menu-link-text">All Student</span>
+                      )}
                     </Link>
                   </li>
                   <li className="menu-item">
-                    <Link to="/dashboard/all_exit_student" className="menu-link">
+                    <Link
+                      to="/dashboard/all_exit_student"
+                      className="menu-link"
+                    >
                       <span className="menu-link-icon">
                         <MdOutlineMessage size={18} />
                       </span>
-                      {showText && <span className="menu-link-text">All Exit Student</span>}
+                      {showText && (
+                        <span className="menu-link-text">All Exit Student</span>
+                      )}
                     </Link>
                   </li>
                   <li className="menu-item">
@@ -172,7 +213,9 @@ const Sidebar = () => {
                       <span className="menu-link-icon">
                         <MdOutlineMessage size={18} />
                       </span>
-                      {showText && <span className="menu-link-text">All Pg Student</span>}
+                      {showText && (
+                        <span className="menu-link-text">All Pg Student</span>
+                      )}
                     </Link>
                   </li>
                   <li className="menu-item">
@@ -180,15 +223,22 @@ const Sidebar = () => {
                       <span className="menu-link-icon">
                         <MdOutlineMessage size={18} />
                       </span>
-                      {showText && <span className="menu-link-text">All Job Student</span>}
+                      {showText && (
+                        <span className="menu-link-text">All Job Student</span>
+                      )}
                     </Link>
                   </li>
                   <li className="menu-item">
-                    <Link to="/dashboard/view-all-info-short" className="menu-link">
+                    <Link
+                      to="/dashboard/view-all-info-short"
+                      className="menu-link"
+                    >
                       <span className="menu-link-icon">
                         <MdOutlineMessage size={18} />
                       </span>
-                      {showText && <span className="menu-link-text">All Info</span>}
+                      {showText && (
+                        <span className="menu-link-text">All Info</span>
+                      )}
                     </Link>
                   </li>
                   <li className="menu-item">
@@ -196,7 +246,9 @@ const Sidebar = () => {
                       <span className="menu-link-icon">
                         <MdOutlineMessage size={18} />
                       </span>
-                      {showText && <span className="menu-link-text">All Page's</span>}
+                      {showText && (
+                        <span className="menu-link-text">All Page's</span>
+                      )}
                     </Link>
                   </li>
                 </>
@@ -214,12 +266,12 @@ const Sidebar = () => {
                 </Link>
               </li>
               <li className="menu-item">
-                <Link to="/" className="menu-link">
-                  <span className="menu-link-icon">
+                <span className="menu-link profileImglogout">
+                  {/* <span className="menu-link-icon">
                     <MdOutlineLogout size={18} />
-                  </span>
-                  {showText && <span className="menu-link-text">Log Out</span>}
-                </Link>
+                  </span> */}
+                  <ProfileDropdown />
+                </span>
               </li>
             </ul>
           </div>
@@ -230,3 +282,22 @@ const Sidebar = () => {
 };
 
 export default Sidebar;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

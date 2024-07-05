@@ -1,4 +1,4 @@
-import "./App.css";
+import "./App.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
@@ -72,14 +72,20 @@ import MyProfile from "./components/core/MyProfile";
 import Settings from "./components/core/Settings";
 import AllShortDetails from "./components/core/Dashboard/adminDashboard/AllShortDetails";
 import AdminContent from "./components/core/Dashboard/adminDashboard/AdminContent";
+import { ACCOUNT_TYPE } from "./utils/constant.js";
+import { useSelector } from "react-redux";
 function App() {
   // const accountType = localStorage.getItem("accountType");
-
+  const user = useSelector((state) => state.profile.user);
   const [isAdmin, setIsAdmin] = useState(false);
 
   return (
     <div style={{ backgroundColor: "#000814" }}>
-      <Header isAdmin={isAdmin} setIsAdmin={setIsAdmin} />
+      
+      {  user?.accountType === ACCOUNT_TYPE.STUDENT &(
+        <Header isAdmin={isAdmin} setIsAdmin={setIsAdmin} />
+      )}
+      {/* <Header isAdmin={isAdmin} setIsAdmin={setIsAdmin} /> */}
       <Routes>
         <Route index element={<Home />} />
         <Route path="/about" element={<About />} />

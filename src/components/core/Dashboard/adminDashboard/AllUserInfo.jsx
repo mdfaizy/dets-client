@@ -1,18 +1,11 @@
 
 
-// const AllUserInfo = () => {
-//   return (
-//     <div>AllUserInfo</div>
-//   )
-// }
 
-// export default AllUserInfo
-
-import { getAllUserDataFetch } from "../../../../services/apiFunction/authApi";
-import styles from './teachAndUser.module.css'
+import './allInfo.scss'
 // import { getAllJobStudents } from "../../../../services/apiFunction/job";
 // import JobDropDown from "../../../../adminsection/job/JobDropDown";
 import { useEffect, useState } from "react";
+
 const TABLE_HEADS = [
   // "User ID",
   "No",
@@ -21,30 +14,33 @@ const TABLE_HEADS = [
   "Action",
 ];
 
-const AllUserInfo = () => {
+const JobDataTable = () => {
   const [formData, setFormData] = useState([]);
+  const [error, setError] = useState(null);
 
-  const fetchData = async () => {
-    try {
-      const data = await getAllUserDataFetch();
-      console.log(data);
-      setFormData(data);
-    } catch (error) {
-      console.error("Error fetching admission data:", error);
-    }
-  };
+  // const fetchData = async () => {
+  //   try {
+  //     const data = await getAllJobStudents();
+  //     console.log(data);
+  //     setFormData(data);
+  //   } catch (error) {
+  //     setError("Error fetching admission data");
+  //     console.error("Error fetching admission data:", error);
+  //   }
+  // };
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+  // useEffect(() => {
+  //   fetchData();
+  // }, []);
+
   return (
-    <section className={styles.content_area_table}>
-      <div className={styles.data_table_info}>
-        <h4 className={styles.data_table_title}>All New Student Data</h4>
+    <section className="content-area-table">
+      <div className="data-table-info">
+        <h4 className="data-table-title">ALL USER ACCOUNT DETAILS</h4>
       </div>
-      <div className={styles.data_table_diagram}>
+      <div className="data-table-diagram">
         <table>
-          <thead className={styles.data_table_th}>
+          <thead className="new_admission_td">
             <tr>
               {TABLE_HEADS?.map((th, index) => (
                 <th key={index}>{th}</th>
@@ -52,22 +48,24 @@ const AllUserInfo = () => {
             </tr>
           </thead>
           <tbody>
-            {formData?.map((dataItem, index) => {
+            {/* {formData?.map((dataItem, index) => { */}
               return (
-                // <tr key={dataItem.id}>
-                <tr key={index}>
-                  <td>{index + 1}</td>
-                  <td>{`${dataItem.fullName}`}</td>
+                <>
+                </>
+                {/* // <tr key={dataItem.id}> */}
+                {/* <tr key={index}>
+                  <td>{index + 1}</td> */}
+                  {/* <td>{dataItem.fullName}</td>
                   <td>{dataItem.companies_name}</td>
                   <td>{dataItem.email}</td>
-                  
-
-                  <td className="dt-cell-action">
+                  <td>{dataItem.home_city}</td>
+                  <td>{dataItem.selectType}</td> */}
+                  {/* <td className={"dtCellAction"}> */}
                     {/* <JobDropDown id={dataItem._id} /> */}
-                  </td>
-                </tr>
+                  {/* </td> */}
+                {/* </tr> */}
               );
-            })}
+            {/* })} */}
           </tbody>
         </table>
       </div>
@@ -75,4 +73,4 @@ const AllUserInfo = () => {
   );
 };
 
-export default AllUserInfo;
+export default JobDataTable;

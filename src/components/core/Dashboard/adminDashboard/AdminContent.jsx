@@ -5,6 +5,7 @@ import ExitStudentTableData from "../exitStudentTable/ExitStudentTableData"
 import PgStudentDataTable from "../PgStudentDataTable/PgStudentDataTable"
 import JobDataTable from "../JobTableData/JobDataTable"
 import AllUserInfo from "./AllUserInfo"
+import AllTeactherInfo from "./AllTeactherInfo"
 const AdminContent = () => {
   return (
     <div className="p-4">
@@ -18,6 +19,7 @@ const AdminContent = () => {
       <Report/>
 
       <AllUserInfo/>
+      <AllTeactherInfo/>
     </div>
   )
 }

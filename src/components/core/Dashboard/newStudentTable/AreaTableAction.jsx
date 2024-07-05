@@ -7,7 +7,6 @@ const AreaTableAction = () => {
   const handleDropdown = () => {
     setShowDropdown(!showDropdown);
   };
-
   const dropdownRef = useRef(null);
 
   const handleClickOutside = (event) => {
