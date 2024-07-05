@@ -96,6 +96,9 @@ th:last-child {
 
 .dtCellAction {
   text-align: center;
+  border: none;
+  text-decoration: none;
+  list-style: none;
 }
 
 .dtStatus {

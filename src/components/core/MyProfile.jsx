@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 import IconBtn from "../common/IconBtn/IconBtn";
 // import {FiEdit} from "react-icons/fi"
 import style from "./MyProfile.module.css";
-import { FiEdit } from "react-icons/fi";
-// import './MyProfile.css';
+// import { FiEdit } from "react-icons/fi";
+
 
 const MyProfile = () => {
   const { user } = useSelector((state) => state.profile);

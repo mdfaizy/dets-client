@@ -1,3 +1,90 @@
+.custom_container {
+  margin-top: 40px;
+  margin-bottom: 30px;
+}
+.custom_table {
+  margin: 0 auto;
+  display: block;
+  background: #fdfdff;
+  width: 900px;
+  color: #444444;
+  padding-bottom: 10px;
+}
+.inner_table tr{
+  border: 1px solid rgb(10, 10, 10);
+  color: black;
+  max-width: 400px;
+  padding: 0;
+}
+.inner_table tr td{
+  border: 1px solid rgb(10, 10, 10);
+  color: black;
+
+  padding: 0;
+}
+.inner_table{
+  display: block;
+  border-collapse: collapse;
+  width: 600px;
+  /* box-shadow: 0px 0 6px #ccc; */
+  /* background: #fffdfd; */
+  padding: 10px 15px;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.inner-table tr{
+  display: block;
+ 
+  /* background: #fffdfd; */
+  width:auto;
+  padding-left: 30px;
+  padding-right: 30px;
+  border-radius: 5px;
+  font-size: 14px;
+}
+.inner-table tr {
+  border: 1px solid rgb(13, 13, 13);
+  padding: 0px;
+}
+.inner-table tr td {
+  padding-left: 2px;
+  color: #444444;
+}
+.inner-table tbody tr td {
+  padding: 0px;
+  color: black;
+  width: 100%;
+}
+.field-name {
+  font-family: calibri, helvetica, arial, sans-serif;
+}
+.data_info_row {
+  background-color: #006cb5;
+  color: #fdfdff;
+}
+.data_info_row td {
+  color: white;
+  padding: 10px;
+}
+
+.top_heading {
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  justify-content: center;
+  display: flex;
+}
+
+.custom_header {
+  margin-bottom: 0px;
+  color: #006cb5;
+  font-size: 28px;
+  text-align: center;
+  font-weight: bold;
+  margin: 0 auto;
+}
+
 .delete_button {
   background-color: #800000;
   border-radius: 5px;
@@ -15,6 +102,7 @@
   border: none;
   color: white;
   font-size: 20px;
+ 
 }
 .delete_cancle_button button {
   padding: 5px 16px;

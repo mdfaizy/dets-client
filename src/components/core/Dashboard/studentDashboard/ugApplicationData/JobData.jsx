@@ -6,12 +6,12 @@ function JobData() {
   const [formData, setFormData] = useState({});
   const { id } = useParams();
   console.log(id);
-  // const token = localStorage.getItem("token");
   const token = localStorage.getItem("token");
   const fetchData = async () => {
     try {
       const data = await getStudentForJobById(id, token);
-      console.log("job data name", data.fullName);
+      console.log("job data name", data.JobData.email);
+      console.log("job data name", data.JobData);
       setFormData(data);
     } catch (error) {
       console.error("Error fetching form data:", error);
@@ -26,24 +26,15 @@ function JobData() {
   };
   return (
     <>
-    {formData?(
+      {/* {formData?( */}
       <div>
-      <div className="admission_top_content">
-        <table
-          className="admission_table_content"
-          cellSpacing="0"
-          cellPadding="0"
-          border="0"
-          align="center"
-        >
-          <tr className="admission_top_tr_content">
-            <tr className="admission_top_tr2">
-              <tr className="admission_top_tr3">
-                <td className="admission_top_td1">
+        <div className="custom_container">
+          <table className="custom_table">
+            <tbody>
+              <tr>
+                <td className="top_heading">
                   <span>
-                    <b className="admission_top_univ_name">
-                      UNIVERSITY OF KALYANI
-                    </b>
+                    <b className="custom_header">UNIVERSITY OF KALYANI</b>
                     <br />
                     ( Department of Engineering and Technological Studies(DETS))
                     <br />
@@ -51,280 +42,144 @@ function JobData() {
                   </span>
                 </td>
               </tr>
-            </tr>
-          </tr>
-          <tr className="table_content">
-            <td className="table_content_td">
-              <table
-                className="table_table_data_content"
-                cellSpacing="0"
-                cellPadding="0"
-              >
-                <tbody>
-                  <tr className="table_tbody_heading">
-                    Department of Engineering and Technological Studies <br />
-                    JOB DETAILS
-                  </tr>
-
-                  <tr className="tbody_content">
-                    <td colSpan={3}>
-                      <table
-                        className="table_content_table"
-                        cellSpacing="0"
-                        cellPadding="5"
-                        border="0"
-                        align="left"
-                      >
-                        <thead>
-                          <tr className="thead_detail_info">
-                            <th className="thead_heading_info" width="20%">
-                              Info
-                            </th>
-                            <th width="5%">
-                              <br />
-                            </th>
-                            <th className="thead_heading_info" width="65%">
-                              Details
-                            </th>
-                          </tr>
-                        </thead>
-                        <tbody style={{ paddingLeft: "20px" }}>
-                          <tr>
-                            <td
-                              width="100px"
-                              style={{
-                                fontFamily:
-                                  "calibri, helvetica, arial, sans-serif",
-                              }}
-                            >
-                              Full Name:
-                            </td>
-                            <td width="40px" align="center">
-                              <b>:</b>
-                            </td>
-                            <td>{formData.fullName}</td>
-                          </tr>
-
-                          <tr>
-                            <td
-                              width="100px"
-                              style={{
-                                fontFamily:
-                                  "calibri, helvetica, arial, sans-serif",
-                              }}
-                            >
-                              Father Name
-                            </td>
-                            <td width="40px" align="center">
-                              <b>:</b>
-                            </td>
-                            <td>{formData.father_Name}</td>
-                          </tr>
-
-                          <tr>
-                            <td
-                              width="100px"
-                              style={{
-                                fontFamily:
-                                  "calibri, helvetica, arial, sans-serif",
-                              }}
-                            >
-                              Gender
-                            </td>
-                            <td width="40px" align="center">
-                              <b>:</b>
-                            </td>
-                            <td>{formData.gender}</td>
-                          </tr>
-                          <tr>
-                            <td
-                              width="100px"
-                              style={{
-                                fontFamily:
-                                  "calibri, helvetica, arial, sans-serif",
-                              }}
-                            >
-                              Email
-                            </td>
-                            <td width="40px" align="center">
-                              <b>:</b>
-                            </td>
-                            <td>{formData.email}</td>
-                          </tr>
-                          <tr>
-                            <td
-                              width="100px"
-                              style={{
-                                fontFamily:
-                                  "calibri, helvetica, arial, sans-serif",
-                              }}
-                            >
-                              Category
-                            </td>
-                            <td width="40px" align="center">
-                              <b>:</b>
-                            </td>
-                            <td>{formData.Category}</td>
-                          </tr>
-
-                          <tr>
-                            <td
-                              width="100px"
-                              style={{
-                                fontFamily:
-                                  "calibri, helvetica, arial, sans-serif",
-                              }}
-                            >
-                              Date of Birth
-                            </td>
-                            <td width="40px" align="center">
-                              <b>:</b>
-                            </td>
-                            <td>{formData.date_of_birth}</td>
-                          </tr>
-
-                          <tr>
-                            <td
-                              width="100px"
-                              style={{
-                                fontFamily:
-                                  "calibri, helvetica, arial, sans-serif",
-                              }}
-                            >
-                              Home Town
-                            </td>
-                            <td width="40px" align="center">
-                              <b>:</b>
-                            </td>
-                            <td>{formData.home_city}</td>
-                          </tr>
-                          <tr>
-                            <td
-                              width="100px"
-                              style={{
-                                fontFamily:
-                                  "calibri, helvetica, arial, sans-serif",
-                              }}
-                            >
-                              Company's Name
-                            </td>
-                            <td width="40px" align="center">
-                              <b>:</b>
-                            </td>
-                            <td>{formData.companies_name}</td>
-                          </tr>
-                          <tr>
-                            <td
-                              width="100px"
-                              style={{
-                                fontFamily:
-                                  "calibri, helvetica, arial, sans-serif",
-                              }}
-                            >
-                              Companies Loacation
-                            </td>
-                            <td width="40px" align="center">
-                              <b>:</b>
-                            </td>
-                            <td>{formData.companies_city}</td>
-                          </tr>
-                          <tr>
-                            <td
-                              width="100px"
-                              style={{
-                                fontFamily:
-                                  "calibri, helvetica, arial, sans-serif",
-                              }}
-                            >
-                              Job Role
-                            </td>
-                            <td width="40px" align="center">
-                              <b>:</b>
-                            </td>
-                            <td>{formData.job_role}</td>
-                          </tr>
-                          <tr>
-                            <td
-                              width="100px"
-                              style={{
-                                fontFamily:
-                                  "calibri, helvetica, arial, sans-serif",
-                              }}
-                            >
-                              Package
-                            </td>
-                            <td width="40px" align="center">
-                              <b>:</b>
-                            </td>
-                            <td>{formData.package_lpa}</td>
-                          </tr>
-
-                          <tr>
-                            <td
-                              width="100px"
-                              style={{
-                                fontFamily:
-                                  "calibri, helvetica, arial, sans-serif",
-                              }}
-                            >
-                              Selection
-                            </td>
-                            <td width="40px" align="center">
-                              <b>:</b>
-                            </td>
-                            <td>{formData.selectType}</td>
-                          </tr>
-
-                          <tr>
-                            <td
-                              width="100px"
-                              style={{
-                                fontFamily:
-                                  "calibri, helvetica, arial, sans-serif",
-                              }}
-                            >
-                              Applied For Jobs
-                            </td>
-                            <td width="40px" align="center">
-                              <b>:</b>
-                            </td>
-                            <td>{formData.totalApplyCompanies}</td>
-                          </tr>
-
-                          <tr>
-                            <td
-                              width="100px"
-                              style={{
-                                fontFamily:
-                                  "calibri, helvetica, arial, sans-serif",
-                              }}
-                            >
-                              Company's Type
-                            </td>
-                            <td width="40px" align="center">
-                              <b>:</b>
-                            </td>
-                            <td>{formData.companiesType}</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </td>
-          </tr>
-        </table>
+              <tr className="table-row">
+                <td className="table-cell">
+                  <table className="inner-table">
+                    <tr className="data_info_row">
+                      <td width="20%">Info</td>
+                      <td>
+                        <b>:</b>
+                      </td>
+                      <td width="80%">Details</td>
+                    </tr>
+                    <tbody className="tbody_jobData_info">
+                      <tr>
+                        <td width="20%">Full Name:</td>
+                        <td width="50px">
+                          <b>:</b>
+                        </td>
+                        <td width="60%">{formData.fullName}</td>
+                      </tr>
+                      <tr>
+                        <td width="150px">Company's Name</td>
+                        <td>
+                          <b>:</b>
+                        </td>
+                        <td>{formData.companies_name}</td>
+                      </tr>
+                      <tr>
+                        <td width="150px">Email</td>
+                        <td>
+                          <b>:</b>
+                        </td>
+                        <td>{formData.email}</td>
+                      </tr>
+                      <tr>
+                        <td width="150px">Date of Birth</td>
+                        <td>
+                          <b>:</b>
+                        </td>
+                        <td>{formData.date_of_birth}</td>
+                      </tr>
+                      <tr>
+                        <td width="150px">Phone No</td>
+                        <td>
+                          <b>:</b>
+                        </td>
+                        <td>{formData.phone_no}</td>
+                      </tr>
+                      <tr>
+                        <td width="150px">Home City</td>
+                        <td>
+                          <b>:</b>
+                        </td>
+                        <td>{formData.home_city}</td>
+                      </tr>
+                      <tr>
+                        <td width="150px">Companies City</td>
+                        <td>
+                          <b>:</b>
+                        </td>
+                        <td>{formData.companies_city}</td>
+                      </tr>
+                      <tr>
+                        <td width="150px">Package lpa</td>
+                        <td>
+                          <b>:</b>
+                        </td>
+                        <td>{formData.package_lpa}</td>
+                      </tr>
+                      <tr>
+                        <td width="150px">Job Role</td>
+                        <td>
+                          <b>:</b>
+                        </td>
+                        <td>{formData.job_role}</td>
+                      </tr>
+                      <tr>
+                        <td width="150px">Selection Type</td>
+                        <td>
+                          <b>:</b>
+                        </td>
+                        <td>{formData.selectType}</td>
+                      </tr>
+                      <tr>
+                        <td
+                          width="100px"
+                          style={{
+                            fontFamily: "calibri, helvetica, arial, sans-serif",
+                            paddingLeft: "10px",
+                          }}
+                        >
+                          Total Apply Companies
+                        </td>
+                        <td>
+                          <b>:</b>
+                        </td>
+                        <td>{formData.totalApplyCompanies}</td>
+                      </tr>
+                      <tr>
+                        <td width="150px">No Of Select Interview</td>
+                        <td>
+                          <b>:</b>
+                        </td>
+                        <td>{formData.noOfSelectInterview}</td>
+                      </tr>
+                      <tr>
+                        <td width="150px">Company's Type</td>
+                        <td>
+                          <b>:</b>
+                        </td>
+                        <td>{formData.companiesType}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+            </tbody>
+            <p
+              style={{
+                fontSize: "12px",
+                color: "#444444",
+                textAlign: "center",
+              }}
+            >
+              Block C, Nadia, Kalyani, West Bengal 741245
+              <br />
+              UNIVERSITY OF KALYANI, E-mail:
+            </p>
+          </table>
+        </div>
       </div>
 
       <button onClick={handlePrint} className="job_form_data_print">
         Print
       </button>
 
-      </div>
-    ) : (
+      {/* </div> */}
+      {/* ) : (
   <div className="text-center text-xl">Data not found</div>
-)}
+)} */}
     </>
   );
 }

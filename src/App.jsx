@@ -49,7 +49,7 @@ import ExitEdit from "./adminsection/exitdata/ExitEdit";
 import ExitPrintData from "./adminsection/exitdata/ExitPrintData";
 import DeleteJob from "./adminsection/job/DeleteJob";
 import NewAdmissionData from "./containers/sumbitdata/NewAdmission";
-import JobSubmitData from "./containers/sumbitdata/ExitSubmitData";
+import JobSubmitData from "./containers/sumbitdata/Jobsumbitdata.jsx";
 
 import PgDataDelete from "./adminsection/pgadmission/PgDataDelete";
 import PgDataEdit from "./adminsection/pgadmission/PgDataEdit";

@@ -1,3 +1,88 @@
+.custom_container {
+  margin-top: 40px;
+  margin-bottom: 30px;
+}
+
+.custom_table {
+  margin: 0 auto;
+  display: block;
+  background: #f8f8fa;
+  max-width: 900px;
+  color: #444444;
+  box-shadow: 0px 0 6px #ccc;
+}
+.top_heading {
+  align-items: center;
+  text-align: center;
+  /* margin: 0 auto; */
+  width: 100%;
+  margin-left: 50px;
+  justify-content: center;
+  display: flex;
+}
+
+.custom_header {
+  margin-bottom: 0px;
+  color: #006cb5;
+  font-size: 28px;
+  text-align: center;
+  font-weight: bold;
+  margin: 0 auto;
+}
+
+.data_info_row {
+  background-color: #006cb5;
+  /* width: 200px; */
+  /* margin-left: 200px; */
+  padding: 4px;
+}
+.data_info_row td {
+  padding: 5px;
+  color: white;
+  font-size: 16px;
+}
+.table_row {
+  width: 760px;
+
+  padding: 10px;
+  border-collapse: collapse;
+}
+
+.table_cell {
+  width: 760px;
+  display: grid;
+
+  padding-right: 170px;
+  border-collapse: collapse;
+}
+
+.inner_table {
+  display: block;
+  border-collapse: collapse;
+
+  width: 400px;
+  /* box-shadow: 0px 0 6px #ccc; */
+  /* background: #fffdfd; */
+  padding: 10px 15px;
+  border-radius: 5px;
+  font-size: 14px;
+}
+.tbody_newAdmissionData_info tr {
+  border: 1px solid black;
+}
+.inner_table tbody tr td {
+  padding: 0px;
+  border: 1px solid #ccc;
+  margin-right: 20px;
+}
+.inner_table tr .formDataName td {
+  width: 500px;
+}
+
+.field_name {
+  font-family: calibri, helvetica, arial, sans-serif;
+}
+
 .delete_button {
   background-color: #800000;
   border-radius: 5px;

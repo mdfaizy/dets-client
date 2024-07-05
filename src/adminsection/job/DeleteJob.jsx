@@ -46,219 +46,180 @@ const DeleteJob = () => {
   };
 
   return (
-    <div className="admission_top_content">
-      <table
-        className="admission_table_content"
-        cellSpacing="0"
-        cellPadding="0"
-        border="0"
-        align="center"
-      >
-        <tr className="admission_top_tr_content">
-          <tr className="admission_top_tr2">
-            <tr className="admission_top_tr3">
-              <td className="admission_top_td1">
-                <span>
-                  <b className="admission_top_univ_name">
-                    UNIVERSITY OF KALYANI
-                  </b>
-                  <br />
-                  ( Department of Engineering and Technological Studies(DETS))
-                  <br />
-                  (Kalyani, West Bengal,741235)
-                </span>
-              </td>
-            </tr>
-          </tr>
-        </tr>
-        <tr className="table_content">
-          <td className="table_content_td">
-            <table
-              className="table_table_data_content"
-              cellSpacing="0"
-              cellPadding="0"
-            >
-              <tbody>
-                <tr className="table_tbody_heading">
-                  Department of Engineering and Technological Studies <br />
-                  JOB DETAILS
-                </tr>
-
-                <tr className="tbody_content">
-                  <td colSpan={3}>
-                    <table
-                      className="table_content_table"
-                      cellSpacing="0"
-                      cellPadding="5"
-                      border="0"
-                      align="left"
-                    >
-                      <thead>
-                        <tr className="thead_detail_info">
-                          <th className="thead_heading_info" width="20%">
-                            Info
-                          </th>
-                          <th width="5%">
-                            <br />
-                          </th>
-                          <th className="thead_heading_info" width="65%">
-                            Details
-                          </th>
-                        </tr>
-                      </thead>
-                      <tbody className="tbody_jobData_info">
-                        <tr>
-                          <td className="tbody_jobData_info_name">
-                            Full Name:
-                          </td>
-                          <td className="tbody_fromData_and_info_dot">
-                            <b>:</b>
-                          </td>
-                          <td>{jobData.fullName}</td>
-                        </tr>
-                        <tr>
-                          <td className="tbody_jobData_info_name">
-                            Company's Name
-                          </td>
-                          <td className="tbody_fromData_and_info_dot">
-                            <b>:</b>
-                          </td>
-                          <td>{jobData.companies_name}</td>
-                        </tr>
-                        <tr>
-                          <td className="tbody_jobData_info_name">Email</td>
-                          <td className="tbody_fromData_and_info_dot">
-                            <b>:</b>
-                          </td>
-                          <td>{jobData.email}</td>
-                        </tr>
-                        <tr>
-                          <td className="tbody_jobData_info_name">
-                            Date of Birth
-                          </td>
-                          <td className="tbody_fromData_and_info_dot">
-                            <b>:</b>
-                          </td>
-                          <td>{jobData.date_of_birth}</td>
-                        </tr>
-                        <tr>
-                          <td className="tbody_jobData_info_name">Phone No</td>
-                          <td className="tbody_fromData_and_info_dot">
-                            <b>:</b>
-                          </td>
-                          <td>{jobData.phone_no}</td>
-                        </tr>
-                        <tr>
-                          <td className="tbody_jobData_info_name">Home City</td>
-                          <td className="tbody_fromData_and_info_dot">
-                            <b>:</b>
-                          </td>
-                          <td>{jobData.home_city}</td>
-                        </tr>
-                        <tr>
-                          <td className="tbody_jobData_info_name">
-                            Companies City
-                          </td>
-                          <td className="tbody_fromData_and_info_dot">
-                            <b>:</b>
-                          </td>
-                          <td>{jobData.companies_city}</td>
-                        </tr>
-                        <tr>
-                          <td className="tbody_jobData_info_name">
-                            Package lpa
-                          </td>
-                          <td className="tbody_fromData_and_info_dot">
-                            <b>:</b>
-                          </td>
-                          <td>{jobData.package_lpa}</td>
-                        </tr>
-                        <tr>
-                          <td className="tbody_jobData_info_name">Job Role</td>
-                          <td className="tbody_fromData_and_info_dot">
-                            <b>:</b>
-                          </td>
-                          <td>{jobData.job_role}</td>
-                        </tr>
-                        <tr>
-                          <td className="tbody_jobData_info_name">
-                            Selection Type
-                          </td>
-                          <td className="tbody_fromData_and_info_dot">
-                            <b>:</b>
-                          </td>
-                          <td>{jobData.selectType}</td>
-                        </tr>
-                        <tr>
-                          <td
-                            width="100px"
-                            style={{
-                              fontFamily:
-                                "calibri, helvetica, arial, sans-serif",
-                              paddingLeft: "10px",
-                            }}
-                          >
-                            Total Apply Companies
-                          </td>
-                          <td className="tbody_fromData_and_info_dot">
-                            <b>:</b>
-                          </td>
-                          <td>{jobData.totalApplyCompanies}</td>
-                        </tr>
-                        <tr>
-                          <td className="tbody_jobData_info_name">
-                            No Of Select Interview
-                          </td>
-                          <td className="tbody_fromData_and_info_dot">
-                            <b>:</b>
-                          </td>
-                          <td>{jobData.noOfSelectInterview}</td>
-                        </tr>
-                        <tr>
-                          <td className="tbody_jobData_info_name">
-                            Company's Type
-                          </td>
-                          <td className="tbody_fromData_and_info_dot">
-                            <b>:</b>
-                          </td>
-                          <td>{jobData.companiesType}</td>
-                        </tr>
-                      </tbody>
-                    </table>
+    <>
+      <table>
+        <>
+          <div>
+            <div className={style.custom_container}>
+              <table className={style.custom_table}>
+                <tr>
+                  <td className={style.top_heading}>
+                    <span>
+                      <b className={style.custom_header}>
+                        UNIVERSITY OF KALYANI
+                      </b>
+                      <br />
+                      ( Department of Engineering and Technological
+                      Studies(DETS))
+                      <br />
+                      (Kalyani, West Bengal,741235)
+                    </span>
                   </td>
                 </tr>
-                {/* <button onClick={() => handleDelete(id)} className={style.delete_button}>Delete</button> */}
-              </tbody>
-            </table>
-          </td>
-        </tr>
-        {!showDeleteButtons && (
-          <button
-            onClick={() => setShowDeleteButtons(true)}
-            className={style.delete_button}
-          >
-            Show Delete
-          </button>
-        )}
 
-        {showDeleteButtons && (
-          <div className={style.delete_cancle_button}>
-            <button
-              onClick={() => handleDelete(id)}
-              className={style.delete_button}
-            >
-              Delete
-            </button>
-            <button
-              onClick={() => setShowDeleteButtons(false)}
-              className={style.cancle_button}
-            >
-              Cancel
-            </button>
+                <tr>
+                  <tr className={style.table_row}>
+                    <td className={style.table_cell}>
+                      <table width="60px" className={style.inner_table}>
+                        <tr className={style.data_info_row}>
+                          <td width="20%">Info</td>
+                          <td width="5%">
+                            <b>:</b>
+                          </td>
+                          <td width="60%">Details</td>
+                        </tr>
+
+                        <tbody className="tbody_jobData_info">
+                          <tr>
+                            <td width="20%">Full Name:</td>
+                            <td width="40px" align="center">
+                              <b>:</b>
+                            </td>
+                            <td width="60%">{jobData.fullName}</td>
+                          </tr>
+                          <tr>
+                            <td width="20%">Company's Name</td>
+                            <td width="40px" align="center">
+                              <b>:</b>
+                            </td>
+                            <td>{jobData.companies_name}</td>
+                          </tr>
+                          <tr>
+                            <td width="20%">Email</td>
+                            <td width="40px" align="center">
+                              <b>:</b>
+                            </td>
+                            <td>{jobData.email}</td>
+                          </tr>
+                          <tr>
+                            <td width="20%">Date of Birth</td>
+                            <td width="40px" align="center">
+                              <b>:</b>
+                            </td>
+                            <td>{jobData.date_of_birth}</td>
+                          </tr>
+                          <tr>
+                            <td width="20%">Phone No</td>
+                            <td width="40px" align="center">
+                              <b>:</b>
+                            </td>
+                            <td>{jobData.phone_no}</td>
+                          </tr>
+                          <tr>
+                            <td width="20%">Home City</td>
+                            <td width="40px" align="center">
+                              <b>:</b>
+                            </td>
+                            <td>{jobData.home_city}</td>
+                          </tr>
+                          <tr>
+                            <td width="20%">Companies City</td>
+                            <td width="40px" align="center">
+                              <b>:</b>
+                            </td>
+                            <td>{jobData.companies_city}</td>
+                          </tr>
+                          <tr>
+                            <td width="20%">Package lpa</td>
+                            <td width="40px" align="center">
+                              <b>:</b>
+                            </td>
+                            <td>{jobData.package_lpa}</td>
+                          </tr>
+                          <tr>
+                            <td width="20%">Job Role</td>
+                            <td width="40px" align="center">
+                              <b>:</b>
+                            </td>
+                            <td>{jobData.job_role}</td>
+                          </tr>
+                          <tr>
+                            <td width="20%">Selection Type</td>
+                            <td width="40px" align="center">
+                              <b>:</b>
+                            </td>
+                            <td>{jobData.selectType}</td>
+                          </tr>
+                          <tr>
+                            <td width="20%">Total Apply Companies</td>
+                            <td width="40px" align="center">
+                              <b>:</b>
+                            </td>
+                            <td>{jobData.totalApplyCompanies}</td>
+                          </tr>
+                          <tr>
+                            <td width="20%">No Of Select Interview</td>
+                            <td width="40px" align="center">
+                              <b>:</b>
+                            </td>
+                            <td>{jobData.noOfSelectInterview}</td>
+                          </tr>
+                          <tr>
+                            <td width="20%">Company's Type</td>
+                            <td width="40px" align="center">
+                              <b>:</b>
+                            </td>
+                            <td>{jobData.companiesType}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </td>
+                  </tr>
+                </tr>
+
+                <p
+                  style={{
+                    fontSize: "12px",
+                    color: "#444444",
+                    textAlign: "center",
+                  }}
+                >
+                  Block C, Nadia, Kalyani, West Bengal 741245
+                  <br />
+                  UNIVERSITY OF KALYANI, E-mail:
+                </p>
+              </table>
+            </div>
+            <div className="text-center">
+              {!showDeleteButtons && (
+                <button
+                  onClick={() => setShowDeleteButtons(true)}
+                  className={style.delete_button}
+                >
+                  Show Delete
+                </button>
+              )}
+              {showDeleteButtons && (
+                <div className={style.delete_cancle_button}>
+                  <button
+                    onClick={() => handleDelete(id)}
+                    className={style.delete_button}
+                  >
+                    Delete
+                  </button>
+                  <button
+                    onClick={() => setShowDeleteButtons(false)}
+                    className={style.cancle_button}
+                  >
+                    Cancel
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
-        )}
+        </>
       </table>
-    </div>
+    </>
   );
 };
 
