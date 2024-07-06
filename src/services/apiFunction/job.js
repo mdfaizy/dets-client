@@ -1,7 +1,7 @@
 import toast from "react-hot-toast";
 import { setLoading, setJobData } from "../../redux/slices/jobSlice";
 import { apiConnector } from "../apiConnectors.js";
-// import { Jobs } from "../apis";
+const token = localStorage.getItem("token");
 import axios from "axios";
 // const { POST_JOIN_JOB_API } = Jobs;
 import { JpbEndpoints } from "../apis";
@@ -12,6 +12,7 @@ const {
   GET_ALL_STUDENT_FOR_JOB_API,
   UODATE_JOB_DETAIL_BY_ID_API,
   POST_FORM_DETAIL_BY_STUDENT_API,
+  GET_JOB_APPLICATION_DATA_FINDBY_ONE
 } = JpbEndpoints;
 export function submitJobForm(formData, navigate) {
   return async (dispatch) => {
@@ -58,6 +59,25 @@ export const getJobUserDetailsById = async () => {
     return response;
   } catch (error) {
     throw new Error(`Error fetching job students data: ${error.message}`);
+  }
+};
+export const getJobStudentByOne = async () => {
+  try {
+    // const cleanToken = token ? token.replace(/^"|"$/g, "") : "";
+    // const API_Url = ` GE_DATA_ONLY_USER_EXIT_DATA_API`;
+    const response = await apiConnector(
+      "GET",
+      GET_JOB_APPLICATION_DATA_FINDBY_ONE,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    console.log("exit dataa",response);
+    return response.data
+  } catch (error) {
+    console.error("Failed to fetch job data", error);
   }
 };
 

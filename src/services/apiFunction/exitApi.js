@@ -2,6 +2,7 @@ import { toast } from "react-hot-toast";
 import { setLoading, setExitData } from "../../redux/slices/exitSlice.js";
 import { apiConnector } from "../apiConnectors.js";
 import { exitStudentEndpoints } from "../apis.js";
+const token = localStorage.getItem("token");
 import axios from "axios";
 const {
   GET_DATA_ALL_EXIT_STUDENT,
@@ -10,6 +11,7 @@ const {
   UPDATE_EXIT_STUDENT,
   DELETE_JOB_DATA_BY_ID_API,
   SUMBIT_EXIT_STUDENT,
+  GE_DATA_ONLY_USER_EXIT_DATA_API
 } = exitStudentEndpoints;
 
 export function submitExitForm(formData, navigate, token) {
@@ -53,21 +55,29 @@ export function submitExitForm(formData, navigate, token) {
   };
 }
 
-// export const getexitStudentByOne = async () => {
-//   try {
-//     // const cleanToken = token ? token.replace(/^"|"$/g, "") : "";
-//     // const API_Url = `${GET_NEW_ADMISSIOM_DATA}/${id}`;
-//     const response = await apiConnector("GET",FETCH_SINGLE_STUDENT_APPLICATION_DATA ,{
-//       headers: {
-//         Authorization: `Bearer ${token}`,
-//       },
-//     });
-//     console.log("response: " + response.data.Newadmission);
-//     return response.data.Newadmission;
-//   } catch (error) {
-//     console.error("Failed to fetch new admission", error);
-//   }
-// };
+
+
+
+
+export const getexitStudentByOne = async () => {
+  try {
+    // const cleanToken = token ? token.replace(/^"|"$/g, "") : "";
+    // const API_Url = ` GE_DATA_ONLY_USER_EXIT_DATA_API`;
+    const response = await apiConnector(
+      "GET",
+      GE_DATA_ONLY_USER_EXIT_DATA_API,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    console.log("exit dataa",response.data);
+    return response.data
+  } catch (error) {
+    console.error("Failed to fetch new admission", error);
+  }
+};
 
 export const getExitUserDetailsById = async () => {
   const token = localStorage.getItem("token");
@@ -88,7 +98,6 @@ export const getExitUserDetailsById = async () => {
 
 // all exit student fetch allData
 export const getAllExitStudent = async () => {
-  // const API_URL=`${}`
   try {
     const response = await apiConnector("GET", GET_DATA_ALL_EXIT_STUDENT);
     console.log("getAllExitStudent", response);

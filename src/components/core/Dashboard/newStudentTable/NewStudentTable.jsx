@@ -46,7 +46,7 @@ const NewStudentTable = () => {
               ))}
             </tr>
           </thead>
-          <tbody>
+          <tbody className="text-color">
             {formData?.map((dataItem, index) => {
               return (
                 // <tr key={dataItem.id}>
@@ -56,9 +56,9 @@ const NewStudentTable = () => {
                   <td>{dataItem.email}</td>
                   <td>{dataItem.date_of_birth}</td>
                   <td>{dataItem.gender}</td>
-                  {/* <td>{dataItem.addhar_number}</td> */}
+
                   <td>{dataItem.stream}</td>
-                  <td>{dataItem.session}</td>
+                  <td>{`${dataItem.start_session}-${dataItem.end_session}`}</td>
 
                   <td className={"dtCellAction"}>
                     <AdmissionDropDown id={dataItem._id} />

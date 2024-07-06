@@ -35,7 +35,7 @@ const JobDataTable = () => {
   return (
     <section className="content-area-table">
       <div className="data-table-info">
-        <h4 className="data-table-title">ALL EXISTING DATA</h4>
+        <h4 className="data-table-title">ALL JOB DATA</h4>
       </div>
       <div className="data-table-diagram">
         <table>
@@ -46,10 +46,9 @@ const JobDataTable = () => {
               ))}
             </tr>
           </thead>
-          <tbody>
+          <tbody className="text-color">
             {formData?.map((dataItem, index) => {
               return (
-                // <tr key={dataItem.id}>
                 <tr key={index}>
                   <td>{index + 1}</td>
                   <td>{dataItem.fullName}</td>

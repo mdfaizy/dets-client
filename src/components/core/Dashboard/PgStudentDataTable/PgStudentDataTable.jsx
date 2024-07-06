@@ -122,7 +122,7 @@ const PgStudentDataTable = () => {
   return (
     <section className="content-area-table">
       <div className="data-table-info">
-        <h4 className="data-table-title">All New Student Data</h4>
+        <h4 className="data-table-title">ALL PG STDENT DATA</h4>
       </div>
       <div className="data-table-diagram">
         <table>
@@ -133,7 +133,7 @@ const PgStudentDataTable = () => {
               ))}
             </tr>
           </thead>
-          <tbody>
+          <tbody className="text-color">
             {formData?.map((dataItem, index) => {
               return (
                 // <tr key={dataItem.id}>

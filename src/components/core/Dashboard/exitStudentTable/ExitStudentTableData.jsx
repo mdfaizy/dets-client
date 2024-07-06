@@ -224,7 +224,7 @@ const PgStudentDataTable = () => {
               ))}
             </tr>
           </thead>
-          <tbody>
+          <tbody className="text-color">
             {formData?.map((dataItem, index) => {
               return (
                 // <tr key={dataItem.id}>

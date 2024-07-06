@@ -55,6 +55,7 @@ export const newadmissionEndpoints = {
 export const JpbEndpoints = {
   POST_FORM_DETAIL_BY_STUDENT_API: BASE_URL + "/job/job",
   GET_USER_DETAILS_API: BASE_URL + "/job/getUserDetails",
+  GET_JOB_APPLICATION_DATA_FINDBY_ONE:BASE_URL+"/job/getJobStudentByOne)",
   GET_USER_PROFILE_API: BASE_URL + "/job/get_Profile",
   GET_STUDENT_JOB_BY_ID_API: BASE_URL + "/job/getJob_ById",
   DELETE_JOB_DETAIL_API: BASE_URL + "/job/delete_id_jobstudent",
@@ -65,6 +66,7 @@ export const JpbEndpoints = {
 export const exitStudentEndpoints = {
   SUMBIT_EXIT_STUDENT:BASE_URL + "/exit/exitStudent",
   GET_USER_EXIT_PROFILE: BASE_URL + "/exit/getStudent",
+  GE_DATA_ONLY_USER_EXIT_DATA_API:BASE_URL +"/exit/getExitStudentByOne",
   GET_EXIT_STUDENT_BY_ID: BASE_URL + "/exit/getExitStudentByID",
   UPDATE_EXIT_STUDENT: BASE_URL + "/exit/updateExitStudentById",
   DELETE_JOB_DATA_BY_ID_API: BASE_URL + "/exit/delete_id_exitstudent",
@@ -73,6 +75,7 @@ export const exitStudentEndpoints = {
 export const pgCourseEndpoints = {
   GET_PG_USER_PROFILE: BASE_URL + "/pgcourse/getstudent_profile",
   GET_PG_COURSE_BY_ID: BASE_URL + "/pgcourse/getPgCourseById",
+  GET_PG_APPLICATION_DATA_FINDBY_ONE:BASE_URL+"/pgcourse/getPgStudentByOne",
   UPDATE_PG_STUDENT_BY_ID: BASE_URL + "/pgcourse/update-pgCourse-By-id",
   ALL_GET_STUDENT_PG_COURSE_BY_ID:
     BASE_URL + "/pgcourse/get_all_pgcource_student",

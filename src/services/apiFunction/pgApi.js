@@ -9,7 +9,9 @@ const {
   GET_PG_COURSE_BY_ID,
   SUMBIT_PG_FORM_DATA,
   GET_PG_USER_PROFILE,
+  GET_PG_APPLICATION_DATA_FINDBY_ONE
 } = pgCourseEndpoints;
+const token = localStorage.getItem("token");
 export function submitPGForm(formData, navigate, token) {
   const cleanToken = token ? token.replace(/^"|"$/g, "") : "";
   return async (dispatch) => {
@@ -52,6 +54,27 @@ export function submitPGForm(formData, navigate, token) {
     }
   };
 }
+
+
+export const getpgStudentByOne = async () => {
+  try {
+    // const cleanToken = token ? token.replace(/^"|"$/g, "") : "";
+    // const API_Url = ` GE_DATA_ONLY_USER_EXIT_DATA_API`;
+    const response = await apiConnector(
+      "GET",
+      GET_PG_APPLICATION_DATA_FINDBY_ONE,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    console.log("exit dataa",response.data);
+    return response.data
+  } catch (error) {
+    console.error("Failed to fetch new admission", error);
+  }
+};
 
 export const getPgUserDetailsById = async () => {
   const token = localStorage.getItem("token");

@@ -211,6 +211,7 @@ th:last-child {
 
     &::-webkit-scrollbar-track {
       background-color: var(--scroll-track-bg-color);
+      
     }
     &::-webkit-scrollbar-thumb {
       border-radius: 100vh !important;
@@ -326,3 +327,7 @@ th:last-child {
   }
 }
 
+.text-color tr{
+  color: white;
+  font-size: 14px;
+}

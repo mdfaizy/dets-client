@@ -164,20 +164,20 @@
 
 
 :root {
-  --secondary-color: #781616;
+  --secondary-color: #e2dada;
   --light-shadow1: 0 2px 4px rgba(0, 0, 0, 0.1);
   --xl-text-color: #333;
   --text-t-head: rgba(112, 60, 180, 0.618);
   --tbl-border-color: #ddd;
   --scroll-track-bg-color: #de5c5c;
-  --thead-bg-color: #5a0d0d;
-  --text-color-inverted: #000;
+  --thead-bg-color: #d7cece;
+  --text-color-inverted: #f2eded;
   --orange-color: #ff9800;
   --red-color: #f44336;
   --green-color: #4caf50;
   --border-color-inverted: #ccc;
   --default-transition: all 0.3s ease;
-  --scroll-thumb-color: #8e2424;
+  --scroll-thumb-color: #eadddd;
 }
 
 .content-area-table {
@@ -282,7 +282,8 @@
     }
     .new_admission_td tr th {
  
-      color: var(--text-t-head);
+      // color: var(--text-t-head);
+color: white;
       width: auto;
     }
   }
@@ -321,4 +322,10 @@
       opacity: 0.9;
     }
   }
+}
+
+
+.text-color tr{
+  color: white;
+  font-size: 14px;
 }
