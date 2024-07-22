@@ -297,7 +297,7 @@ import MyProfile from "./components/core/MyProfile";
 import Settings from "./components/core/Settings";
 import AllShortDetails from "./components/core/Dashboard/adminDashboard/AllShortDetails";
 import AdminContent from "./components/core/Dashboard/adminDashboard/AdminContent";
-import { ACCOUNT_TYPE } from "./utils/constant.js";
+// import { ACCOUNT_TYPE } from "./utils/constant.js"
 import { useSelector } from "react-redux";
 
 function App() {

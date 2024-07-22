@@ -1,8 +1,8 @@
-
 // LoginFrom.jsx
 import style from "./login.module.css";
 import { useState } from "react";
-import { FcGoogle } from "react-icons/fc";
+// import { FcGoogle } from "react-icons/fc";
+import loginsignupImg from "../../../assets/login-signupImg.png"
 import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
 import Container from "react-bootstrap/Container";
@@ -48,7 +48,7 @@ const LoginForm = ({ setIsAdmin, setTeacher }) => {
       <Container>
         <Row className={style.login_content}>
           <h1 className={style.login_heading_text}>SIGN IN</h1>
-          <Col>
+          <Col className="mt-4">
             <Form onSubmit={submitHandler}>
               <Form.Group as={Col} md="12">
                 <Form.Label className="text-white">
@@ -100,7 +100,7 @@ const LoginForm = ({ setIsAdmin, setTeacher }) => {
                   Sign in
                 </Button>
               </Col>
-              <Col md={16} lg={12}>
+              {/* <Col md={16} lg={12}>
                 <Button className={style.google_signin} type="submit">
                   <FcGoogle
                     className="px-1"
@@ -108,20 +108,24 @@ const LoginForm = ({ setIsAdmin, setTeacher }) => {
                   />
                   Sign in with Google
                 </Button>
-              </Col>
+              </Col> */}
             </Form>
+
+            <div className={style.flexCenter}>
+              <p className={style.accountText}>
+                Don't have an account?
+                <Link to="/signupfrom" className={style.signInLink}>
+                  Sign Up
+                </Link>
+              </p>
+            </div>
           </Col>
           <Col xs={12} sm={6} md={6} lg={6} className={style.signinaccount_img}>
             <img
-              src="https://img.freepik.com/premium-vector/business-data-information-illustration_251005-479.jpg"
+              src={loginsignupImg}
               alt=""
               loading="lazy"
-              // style={{
-              //   width: "600px",
-              //   height: "400px",
-              //   paddingLeft: "20px",
-              //   borderRadius: "10px",
-              // }}
+
             />
           </Col>
         </Row>

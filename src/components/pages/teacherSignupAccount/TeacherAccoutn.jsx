@@ -1,5 +1,5 @@
 import style from "../signup/sign.module.css";
-import { FcGoogle } from "react-icons/fc";
+// import { FcGoogle } from "react-icons/fc";
 import { useState } from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -247,7 +247,7 @@ const SignupForm = () => {
                   Create Account
                 </Button>
 
-                <Button
+                {/* <Button
                   className={style.create_signup_google_button}
                   type="submit"
                   style={{ fontSize: "17px" }}
@@ -257,7 +257,7 @@ const SignupForm = () => {
                     style={{ width: "50px", height: "25px" }}
                   />
                   Sign in with Google
-                </Button>
+                </Button> */}
               </Form>
             </Col>
             <Col xs={12} sm={6} md={6} lg={6} className={style.signupaccount_img}>

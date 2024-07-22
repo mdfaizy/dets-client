@@ -8,6 +8,7 @@
 }
 .login_content{
   padding: 20px;
+  column-gap: 50px;
 }
 .login_heading_text{
   text-align: center;
@@ -51,7 +52,38 @@
 }
 
 
+ .signinaccount_img img{
+  width: 500px;
+  height: 370px;
+  border-radius: 10px;
+ }
+
+
+
  
+.flexCenter {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.accountText {
+  font-size: 20px;
+  font-weight: 500;
+  color: #ffffff;
+}
+
+.signInLink {
+  padding-left: 0.25rem;
+  font-weight: 400;
+  line-height: 1.25;
+  color: #fe8c00;
+  font-size: 20px;
+  /* list-style: none; */
+  text-decoration: none !important;
+}
+
 
 @media (max-width:800px) {
   .signinaccount_img img{

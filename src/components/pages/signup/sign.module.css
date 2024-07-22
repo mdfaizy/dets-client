@@ -1,17 +1,17 @@
-.sinnup_content{
+.sinnup_content {
   background-color: darkslategray;
   height: 100%;
 }
-.sinnup_all_content{
+.sinnup_all_content {
   padding: 20px;
 }
-.create_account{
+.create_account {
   text-align: center;
   color: white;
   font-size: 2rem;
   padding: 10px;
 }
-.create_signup_button{
+.create_signup_button {
   background-color: #00d9ff;
   color: #ffffff;
   border-color: #00d9ff;
@@ -21,10 +21,10 @@
   padding: 6px;
   font-size: 1rem;
 }
-.create_signup_google_button{
+.create_signup_google_button {
   background-color: #d685dd;
   color: #ffffff;
-  border-color:#d685dd;
+  border-color: #d685dd;
   width: 100%;
   border-radius: 20px;
   margin-top: 25px;
@@ -32,17 +32,59 @@
   font-size: 1rem;
 }
 
+.signinaccount_img img {
+  width: 500px;
+  height: 370px;
+  border-radius: 10px;
+  box-shadow: #ffffff gray yellowgreen 1px;
+}
+
+.flexCenter {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.accountText {
+  font-size: 20px;
+  font-weight: 500;
+  color: #ffffff;
+}
+
+.signInLink {
+  padding-left: 0.25rem;
+  font-weight: 400;
+  line-height: 1.25;
+  color: #fe8c00;
+  font-size: 20px;
+  list-style: none;
+  text-decoration: none !important;
+}
+
+.accountType_name{
+  color:white;
+  font:20px;
+
+}
 
 
-@media (max-width:800px) {
-  .signupaccount_img img{
+
+  .signinaccount_img img{
+    width: 500px;
+    height: 370px;
+    border-radius: 10px;
+   }
+
+
+@media (max-width: 800px) {
+  .signupaccount_img img {
     width: 100%;
     margin-top: 20px;
     height: 100%;
     padding-bottom: 20px;
     border-radius: 5px;
   }
-  
 }
 
 /* .sign_content {
